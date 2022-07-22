@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('google2fa_secret')->nullable();
+            $table->boolean("2fa_verified")->default(false);
+
+            
             $table->rememberToken();
             $table->timestamps();
         });
