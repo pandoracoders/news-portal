@@ -25,3 +25,10 @@ Route::get('/1234', function () {
 
 Route::get('/login', [AuthController::class, "login"])->name("login");
 Route::post("/login", [AuthController::class, "postLogin"])->name("post-login");
+
+Route::get("/2fa/enable", [AuthController::class, "enableTwoFactor"])->name("2fa-enable")->middleware("auth");
+// Route::post("/2fa/enable", [AuthController::class, "postEnableTwoFactor"])->name("2fa-enable-post");
+
+
+Route::get('/2fa/validate', [AuthController::class, "validate2FA"])->name("validate-2fa")->middleware("auth");
+Route::post("/2fa/validate", [AuthController::class, "postValidate2FA"])->name("post-validate-2fa")->middleware(["throttle:5", "auth"]);
