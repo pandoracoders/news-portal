@@ -81,7 +81,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="{{ route('backend.logout') }}">
+                            <a class="dropdown-item" href="{{ route("logout") }}">
                                 <div class="d-flex align-items-center">
                                     <div class="">
                                         <ion-icon name="log-out-outline"></ion-icon>
@@ -90,6 +90,7 @@
                                 </div>
                             </a>
                         </li>
+                        
                     </ul>
                 </li>
 

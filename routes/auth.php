@@ -26,6 +26,8 @@ Route::get('/1234', function () {
 Route::get('/login', [AuthController::class, "login"])->name("login");
 Route::post("/login", [AuthController::class, "postLogin"])->name("post-login");
 
+Route::get("/logout", [AuthController::class, "logout"])->name("logout");
+
 Route::get("/2fa/enable", [AuthController::class, "enableTwoFactor"])->name("2fa-enable")->middleware("auth");
 // Route::post("/2fa/enable", [AuthController::class, "postEnableTwoFactor"])->name("2fa-enable-post");
 

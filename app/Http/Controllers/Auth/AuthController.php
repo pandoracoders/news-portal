@@ -11,13 +11,13 @@ use PragmaRX\Google2FAQRCode\Google2FA;
 class AuthController extends Controller
 {
 
-    protected $redirectTo = '/dashbooard';
+    protected $redirectTo = '/backend/dashbooard';
 
 
 
     public function login()
     {
-        
+
         if (!request()->hasValidSignature() || !session()->has("valid-user")) {
             abort(404);
         }
@@ -96,5 +96,14 @@ class AuthController extends Controller
             return redirect()->route("validate-2fa")->withErrors(["otp" => "Invalid OTP"]);
         }
         return redirect()->route("2fa-enable");
+    }
+
+
+
+    public function logout()
+    {
+        auth()->logout();
+        session()->flush();
+        return redirect()->route("home");
     }
 }
