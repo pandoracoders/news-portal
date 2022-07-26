@@ -13,21 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('table_fields', function (Blueprint $table) {
             $table->id();
-
+            $table->foreignId("table_set_id")->constrained("table_sets");
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->boolean("status")->default(true);
-            $table->integer("order")->default(0);
-
-            $table->foreignId("parent_id")->nullable()->constrained("categories");
-
+            $table->string('type');
+            $table->boolean('searchable')->default(false);
             $table->timestamps();
-            $table->softDeletes();
-
         });
     }
 
@@ -38,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('table_fields');
     }
 };
