@@ -68,7 +68,8 @@ class TableSetController extends Controller
     public function edit(TableSet $table_set)
     {
         return view($this->path . "crud", [
-            "table_set" => $table_set
+            "table_set" => $table_set,
+            "categories" => Category::all()
         ]);
     }
 

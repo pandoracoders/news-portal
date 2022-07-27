@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory , SeoTrait;
+    use HasFactory, SeoTrait;
 
     protected $fillable = [
         'title',
@@ -19,4 +19,16 @@ class Category extends Model
         'order'
     ];
 
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    // tabel
+
+    public function tables()
+    {
+        return $this->belongsToMany(TableSet::class, TableSetCategory::class);
+    }
 }

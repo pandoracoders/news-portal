@@ -11,7 +11,7 @@ use PragmaRX\Google2FAQRCode\Google2FA;
 class AuthController extends Controller
 {
 
-    protected $redirectTo = '/backend/dashbooard';
+    protected $redirectTo = '/backend/dashboard';
 
 
 

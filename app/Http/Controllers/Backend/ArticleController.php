@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Backend\ArticleRequest;
+use App\Models\Backend\Article;
+use App\Services\ImageUpload;
 
 class ArticleController extends Controller
 {
+    private $path = "backend.pages.article.";
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view($this->path . "index", [
+            "articles" => Article::orderBy("id", "desc")->get()
+        ]);
     }
 
     /**
@@ -24,7 +29,11 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->path . "crud", [
+            "categories" => \App\Models\Backend\Category::all(),
+            "tags" => \App\Models\Backend\Tag::all(),
+
+        ]);
     }
 
     /**
@@ -33,21 +42,13 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        Article::create($request->validated());
+        return redirect()->route("backend.article-index")->with("success", "Article created successfully.");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +56,13 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return view($this->path . "crud", [
+            "article" => $article,
+            "categories" => \App\Models\Backend\Category::all(),
+            "tags" => \App\Models\Backend\Tag::all(),
+        ]);
     }
 
     /**
@@ -67,9 +72,29 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+
+        // dd($request->validated());
+
+        if ($request->hasFile("image")) {
+            $articleArray = array_merge(
+                collect($request->validated())->except(["tags"])->toArray(),
+                [
+                    "image" => ImageUpload::upload($request->image),
+                ]
+            );
+        } else {
+            $articleArray =
+                collect($request->validated())->except(["tags"])->toArray();
+        }
+
+        $article->update($articleArray);
+
+        $article->tags()->sync($request->tags);
+
+
+        return redirect()->route("backend.article-index")->with("success", "Article updated successfully.");
     }
 
     /**
@@ -78,8 +103,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article?->delete();
+        return redirect()->route("backend.article-index")->with("success", "Article deleted successfully.");
     }
 }

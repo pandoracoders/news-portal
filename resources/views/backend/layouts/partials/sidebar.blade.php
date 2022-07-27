@@ -29,7 +29,7 @@
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
-                <div class="menu-title">category-index</div>
+                <div class="menu-title">category</div>
             </a>
         </li>
 
@@ -38,7 +38,7 @@
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
-                <div class="menu-title">tag-index</div>
+                <div class="menu-title">tag</div>
             </a>
         </li>
 
@@ -47,7 +47,16 @@
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
-                <div class="menu-title">table_set-index</div>
+                <div class="menu-title">table_set</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('backend.article_title-index') }}">
+                <div class="parent-icon">
+                    <i class="bi bi-house-door"></i>
+                </div>
+                <div class="menu-title">article_title</div>
             </a>
         </li>
 
@@ -56,7 +65,7 @@
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
-                <div class="menu-title">article-index</div>
+                <div class="menu-title">article</div>
             </a>
         </li>
     </ul>

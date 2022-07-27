@@ -17,7 +17,7 @@ class TableSet extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class, TableSetCategory::class);
+        return $this->belongsToMany(Category::class, TableSetCategory::class);
     }
 
     public function tableSetCategories()

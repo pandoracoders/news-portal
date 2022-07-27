@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('article_tags', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
-            $table->string('slug')->unique();
-
-            $table->string('description')->nullable();
-            $table->boolean("status")->default(true);
+            $table->foreignId('article_id')->constrained();
+            $table->foreignId('tag_id')->constrained();
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('article_tags');
     }
 };

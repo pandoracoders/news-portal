@@ -41,8 +41,10 @@
                             <th>Title</th>
                             <th>Image</th>
                             <th>Slug</th>
-                            <th>Order</th>
-
+                            <th>Category</th>
+                            <th>Tags</th>
+                            <th>Info</th>
+                            <th>Task Status</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -59,7 +61,47 @@
                                     {{ $article->slug }}
                                 </td>
                                 <td>
-                                    {{ $article->order }}
+                                    {{ $article->category->title }}
+                                </td>
+                                <td>
+                                    <span class="badge badge-pill btn-primary mr-3">
+                                        {!! implode(
+                                            "</span><span class='badge badge-pill btn-primary mr-3'>",
+                                            $article->tags->pluck('title')->toArray(),
+                                        ) !!}
+                                    </span>
+
+                                </td>
+                                <td>
+                                    <div>
+                                        <span>Writer :</span> <span>{{ $article->writer->name }}</span>
+                                    </div>
+
+                                    @if ($article->editor)
+                                        <div>
+                                            <span>Editor :</span> <span>{{ $article->editor->name }}</span>
+                                        </div>
+                                    @endif
+                                    @if ($article->editor)
+                                        <div>
+                                            <span>Editor :</span> <span>{{ $article->editor->name }}</span>
+                                        </div>
+                                    @endif
+                                    <div>
+                                        <span>Created at :</span> <span>{{ $article->created_at }}</span>
+                                    </div>
+                                    <div>
+                                        <span>Updated at :</span> <span>{{ $article->updated_at }}</span>
+                                    </div>
+
+                                </td>
+
+                                <td>
+                                    @if ($article->published_at)
+                                        <span class="badge badge-pill btn-success">{{ $article->published_at }}</span>
+                                    @else
+                                        <a href="#" class="badge badge-pill btn-danger">Request to publish</a>
+                                    @endif
                                 </td>
 
                                 <td>

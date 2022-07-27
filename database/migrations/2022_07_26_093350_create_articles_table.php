@@ -18,17 +18,19 @@ return new class extends Migration
 
             $table->string("title");
             $table->string("slug")->unique();
-            $table->text("summary");
-            $table->longText("description");
+            $table->text("summary")->nullable();
+            $table->longText("body")->nullable();
             $table->string("image")->nullable();
 
             $table->foreignId("category_id")->constrained();
 
-            $table->foreignId("writer_id")->constrained("users");
-            $table->foreignId("editor_id")->constrained("users");
+            $table->foreignId("writer_id")->nullable()->constrained("users");
+            $table->foreignId("editor_id")->nullable()->constrained("users");
 
             $table->dateTime("published_at")->nullable();
             $table->boolean("status")->default(true);
+
+            $table->string("task_status")->default("writting");
 
             $table->json("tables")->nullable();
 

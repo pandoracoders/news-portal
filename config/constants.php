@@ -8,6 +8,7 @@ return [
     ],
     "table_field_types" => [
         "text",
-        "date"
+        "date",
+        "url"
     ]
 ];

@@ -30,9 +30,16 @@
         td {
             vertical-align: middle;
         }
+
+        .menu-title {
+            text-transform: capitalize !important;
+        }
+        .mr-3{
+            margin-right: .25rem;
+        }
     </style>
 
-    <title>Blackdash - Bootstrap5 Admin Template</title>
+    <title>News - Backend </title>
 </head>
 
 <body>

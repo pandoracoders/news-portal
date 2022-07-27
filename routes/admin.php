@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\Backend\ArticleTitleController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\TableSetController;
@@ -55,11 +57,29 @@ Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
 
 
 Route::group(['prefix' => 'article', "as" => "article-"], function () {
-    Route::get("/", [TagController::class, "index"])->name("index");
-    Route::get("/create", [TagController::class, "create"])->name("create");
-    Route::post("/store", [TagController::class, "store"])->name("store");
-    Route::get("/edit/{article}", [TagController::class, "edit"])->name("edit");
-    Route::post("/update/{article}", [TagController::class, "update"])->name("update");
-    Route::get("/delete/{article}", [TagController::class, "destroy"])->name("delete");
-    Route::get("/status-update/{article}", [TagController::class, "updateStatus"])->name("update_status");
+    Route::get("/", [ArticleController::class, "index"])->name("index");
+    Route::get("/create", [ArticleController::class, "create"])->name("create");
+    Route::post("/store", [ArticleController::class, "store"])->name("store");
+    Route::get("/edit/{article}", [ArticleController::class, "edit"])->name("edit");
+    Route::post("/update/{article}", [ArticleController::class, "update"])->name("update");
+    Route::get("/delete/{article}", [ArticleController::class, "destroy"])->name("delete");
+    Route::get("/status-update/{article}", [ArticleController::class, "updateStatus"])->name("update_status");
+});
+
+
+Route::group(['prefix' => 'article-title', "as" => "article_title-"], function () {
+    Route::get("/", [ArticleTitleController::class, "index"])->name("index");
+    Route::get("/create", [ArticleTitleController::class, "create"])->name("create");
+    Route::post("/store", [ArticleTitleController::class, "store"])->name("store");
+    Route::get("/edit/{article_title}", [ArticleTitleController::class, "edit"])->name("edit");
+    Route::post("/update/{article_title}", [ArticleTitleController::class, "update"])->name("update");
+    Route::get("/delete/{article_title}", [ArticleTitleController::class, "destroy"])->name("delete");
+
+    Route::get("/status-update/{article_title}", [ArticleTitleController::class, "updateStatus"])->name("update_status");
+
+    Route::get("/pick/{article_title}", [ArticleTitleController::class, "pick"])->name("pick");
+
+    // import xlsx
+
+    Route::get("/import", [ArticleTitleController::class, "import"])->name("import");
 });

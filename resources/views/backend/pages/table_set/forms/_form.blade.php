@@ -26,13 +26,17 @@
                             @endif
                         </div>
 
+                        {{-- {{ dd($table_set->categories()->first()->id) }} --}}
+
                         {{-- multiple select --}}
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Title *</label>
                             <select name="categories[]" id="" class="form-control">
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    <option
+                                        {{ isset($table_set) && $table_set->categories()->first()->id == $category->id ? 'selected=selected' : '' }}
+                                        value="{{ $category->id }}">{{ $category->title }}</option>
                                 @endforeach
                             </select>
 
@@ -90,34 +94,60 @@
                                 </tr>
                             </thead>
                             <tbody class="field-container">
-                                <tr>
+                                @forelse (isset($table_set) ? $table_set->tableFields : [] as $field)
+                                    {{-- {{ dd($field) }} --}}
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="fields[]" class="form-control mr-2"
+                                                value="{{ $field->title }}">
+                                        </td>
+                                        <td>
+                                            <select name="field_type[]" id="" class="form-control">
+                                                @foreach (config('constants.table_field_types') as $key => $type)
+                                                    <option {{ $field->type == $type ? "selected=selected" : '' }}  value="{{ $type }}">
+                                                        {{ ucwords($type) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="searchable[]"
+                                                    value="1" {{ $field->searchable ? "checked=checked" : "" }} >
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="fields[]" class="form-control mr-2">
+                                        </td>
+                                        <td>
+                                            <select name="field_type[]" id="" class="form-control">
+                                                @foreach (config('constants.table_field_types') as $key => $type)
+                                                    <option value="{{ $type }}">
+                                                        {{ ucwords($type) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="searchable[]"
+                                                    value="1">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforelse
 
-                                    <td>
-                                        <input type="text" name="fields[]" class="form-control mr-2">
-                                    </td>
-
-
-                                    <td>
-                                        <select name="field_type[]" id="" class="form-control">
-                                            @foreach (config('constants.table_field_types') as $key => $type)
-                                                <option value="{{ $type }}">
-                                                    {{ ucwords($type) }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="searchable[]"
-                                                value="1">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         {{-- <div class="field-container">
