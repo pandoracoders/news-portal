@@ -155,7 +155,7 @@
                                     <button type="submit" class="btn btn-primary btn-block">
                                         {{ isset($article) ? 'Update' : 'Save' }}
                                     </button>
-                                    <a href="{{ route('backend.article-index') }}" class="btn btn-danger btn-block">
+                                    <a href="{{ route('backend.article-list') }}" class="btn btn-danger btn-block">
                                         Cancel
                                     </a>
                                 </div>

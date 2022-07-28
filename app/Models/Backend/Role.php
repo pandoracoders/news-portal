@@ -5,19 +5,16 @@ namespace App\Models\Backend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ArticleTitle extends Model
+class Role extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         "title",
-        "article_id",
-        "status",
-        "category_id",
+        "permissions",
     ];
 
-    public function article()
-    {
-        return $this->belongsTo(Article::class);
-    }
+    protected $casts = [
+        "permissions" => "json",
+    ];
 }

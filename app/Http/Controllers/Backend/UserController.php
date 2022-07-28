@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\CategoryRequest;
-use App\Models\Backend\Category;
+use App\Http\Requests\Backend\UserRequest;
+use App\Models\Backend\User;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
-    private $path = "backend.pages.category.";
+    private $path = "backend.pages.user.";
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view($this->path . "index", [
-            "categories" => Category::orderBy("id", "desc")->get()
+            "users" => User::orderBy("id", "desc")->get()
         ]);
     }
 
@@ -29,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view($this->path . "crud");
+        
+        return view($this->path . "crud", compact("permissions"));
     }
 
     /**
@@ -38,10 +39,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(UserRequest $request)
     {
-        Category::create($request->validated());
-        return redirect()->route("backend.category-list")->with("success", "Category created successfully.");
+        // dd($request->validated());
+        User::create($request->validated());
+        return redirect()->route("backend.user-list")->with("success", "User created successfully.");
     }
 
 
@@ -52,10 +54,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(User $user)
     {
         return view($this->path . "crud", [
-            "category" => $category
+            "user" => $user
         ]);
     }
 
@@ -66,10 +68,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(UserRequest $request, User $user)
     {
-        $category->update($request->validated());
-        return redirect()->route("backend.category-list")->with("success", "Category updated successfully.");
+        $user->update($request->validated());
+        return redirect()->route("backend.user-list")->with("success", "User updated successfully.");
     }
 
     /**
@@ -78,9 +80,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(User $user)
     {
-        $category?->delete();
-        return redirect()->route("backend.category-list")->with("success", "Category deleted successfully.");
+        $user?->delete();
+        return redirect()->route("backend.user-list")->with("success", "User deleted successfully.");
     }
 }

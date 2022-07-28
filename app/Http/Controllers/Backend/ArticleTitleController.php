@@ -47,7 +47,7 @@ class ArticleTitleController extends Controller
     public function store(ArticleTitleRequest $request)
     {
         ArticleTitle::create($request->validated());
-        return redirect()->route("backend.article_title-index")->with("success", "ArticleTitle created successfully.");
+        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle created successfully.");
     }
 
 
@@ -76,7 +76,7 @@ class ArticleTitleController extends Controller
     public function update(ArticleTitleRequest $request, ArticleTitle $article_title)
     {
         $article_title->update($request->validated());
-        return redirect()->route("backend.article_title-index")->with("success", "ArticleTitle updated successfully.");
+        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle updated successfully.");
     }
 
     /**
@@ -88,7 +88,7 @@ class ArticleTitleController extends Controller
     public function destroy(ArticleTitle $article_title)
     {
         $article_title?->delete();
-        return redirect()->route("backend.article_title-index")->with("success", "ArticleTitle deleted successfully.");
+        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle deleted successfully.");
     }
 
 
@@ -133,6 +133,6 @@ class ArticleTitleController extends Controller
             }
             fclose($open);
         }
-        return redirect()->route("backend.article_title-index")->with("success", "ArticleTitle Imported successfully.");
+        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle Imported successfully.");
     }
 }

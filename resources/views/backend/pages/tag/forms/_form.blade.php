@@ -9,18 +9,18 @@
             <div class="card mb-2">
                 <div class="card-body">
                     <div class="border p-3 rounded">
-                        <h6 class="mb-0 text-uppercase">{{ (isset($tag) ? 'Update' : 'Create') . ' Category' }}</h6>
+                        <h6 class="mb-0 text-uppercase">{{ (isset($role) ? 'Update' : 'Create') . ' Category' }}</h6>
                         <hr>
                         @csrf
 
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Title *</label>
                             <input type="text"
-                                class="form-control {{ isset($errors) && $errors->has('title') ? 'is-invalid' : '' }}"
-                                name="title" value="{{ isset($tag) ? $tag->title : old('title') }}">
-                            @if (isset($errors) && $errors->has('title'))
+                                class="form-control {{ isset($errors) && $errors->has('permission') ? 'is-invalid' : '' }}"
+                                name="permission" value="{{ isset($role) ? $role->permission : old('permission') }}">
+                            @if (isset($errors) && $errors->has('permission'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('title') }}
+                                    {{ $errors->first('permission') }}
                                 </div>
                             @endif
                         </div>
@@ -41,7 +41,7 @@
                         <button type="submit" class="btn btn-primary btn-block">
                             {{ isset($tag) ? 'Update' : 'Save' }}
                         </button>
-                        <a href="{{ route('backend.tag-index') }}" class="btn btn-danger btn-block">
+                        <a href="{{ route('backend.tag-list') }}" class="btn btn-danger btn-block">
                             Cancel
                         </a>
                     </div>

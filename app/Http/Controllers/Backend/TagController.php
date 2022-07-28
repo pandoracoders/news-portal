@@ -42,7 +42,7 @@ class TagController extends Controller
     public function store(TagRequest $request)
     {
         Tag::create($request->validated());
-        return redirect()->route("backend.tag-index")->with("success", "Tag created successfully.");
+        return redirect()->route("backend.tag-list")->with("success", "Tag created successfully.");
     }
 
 
@@ -70,7 +70,7 @@ class TagController extends Controller
     public function update(TagRequest $request, Tag $tag)
     {
         $tag->update($request->validated());
-        return redirect()->route("backend.tag-index")->with("success", "Tag updated successfully.");
+        return redirect()->route("backend.tag-list")->with("success", "Tag updated successfully.");
     }
 
     /**
@@ -82,6 +82,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag?->delete();
-        return redirect()->route("backend.tag-index")->with("success", "Tag deleted successfully.");
+        return redirect()->route("backend.tag-list")->with("success", "Tag deleted successfully.");
     }
 }

@@ -45,7 +45,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         Article::create($request->validated());
-        return redirect()->route("backend.article-index")->with("success", "Article created successfully.");
+        return redirect()->route("backend.article-list")->with("success", "Article created successfully.");
     }
 
 
@@ -94,7 +94,7 @@ class ArticleController extends Controller
         $article->tags()->sync($request->tags);
 
 
-        return redirect()->route("backend.article-index")->with("success", "Article updated successfully.");
+        return redirect()->route("backend.article-list")->with("success", "Article updated successfully.");
     }
 
     /**
@@ -106,6 +106,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article?->delete();
-        return redirect()->route("backend.article-index")->with("success", "Article deleted successfully.");
+        return redirect()->route("backend.article-list")->with("success", "Article deleted successfully.");
     }
 }

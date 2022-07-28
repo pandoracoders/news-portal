@@ -54,7 +54,7 @@ class TableSetController extends Controller
         foreach ($request->table_fields as $field) {
             $table_set->tableFields()->create($field);
         }
-        return redirect()->route("backend.table_set-index")->with("success", "TableSet created successfully.");
+        return redirect()->route("backend.table_set-list")->with("success", "TableSet created successfully.");
     }
 
 
@@ -83,7 +83,7 @@ class TableSetController extends Controller
     public function update(TableSetRequest $request, TableSet $table_set)
     {
         $table_set->update($request->validated());
-        return redirect()->route("backend.table_set-index")->with("success", "TableSet updated successfully.");
+        return redirect()->route("backend.table_set-list")->with("success", "TableSet updated successfully.");
     }
 
     /**
@@ -95,6 +95,6 @@ class TableSetController extends Controller
     public function destroy(TableSet $table_set)
     {
         $table_set?->delete();
-        return redirect()->route("backend.table_set-index")->with("success", "TableSet deleted successfully.");
+        return redirect()->route("backend.table_set-list")->with("success", "TableSet deleted successfully.");
     }
 }

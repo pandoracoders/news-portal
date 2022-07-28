@@ -4,8 +4,10 @@ use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\Backend\ArticleTitleController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\TableSetController;
 use App\Http\Controllers\Backend\TagController;
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::redirect('/', 'dashboard', 301);
 
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
 
 Route::group(['prefix' => 'category', "as" => "category-"], function () {
-    Route::get("/", [CategoryController::class, "index"])->name("index");
+    Route::get("/", [CategoryController::class, "index"])->name("list");
     Route::get("/create", [CategoryController::class, "create"])->name("create");
     Route::post("/store", [CategoryController::class, "store"])->name("store");
     Route::get("/edit/{category}", [CategoryController::class, "edit"])->name("edit");
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'category', "as" => "category-"], function () {
 });
 
 Route::group(['prefix' => 'table_set', "as" => "table_set-"], function () {
-    Route::get("/", [TableSetController::class, "index"])->name("index");
+    Route::get("/", [TableSetController::class, "index"])->name("list");
     Route::get("/create", [TableSetController::class, "create"])->name("create");
     Route::post("/store", [TableSetController::class, "store"])->name("store");
     Route::get("/edit/{table_set}", [TableSetController::class, "edit"])->name("edit");
@@ -46,7 +47,7 @@ Route::group(['prefix' => 'table_set', "as" => "table_set-"], function () {
 });
 
 Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
-    Route::get("/", [TagController::class, "index"])->name("index");
+    Route::get("/", [TagController::class, "index"])->name("list");
     Route::get("/create", [TagController::class, "create"])->name("create");
     Route::post("/store", [TagController::class, "store"])->name("store");
     Route::get("/edit/{tag}", [TagController::class, "edit"])->name("edit");
@@ -57,7 +58,7 @@ Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
 
 
 Route::group(['prefix' => 'article', "as" => "article-"], function () {
-    Route::get("/", [ArticleController::class, "index"])->name("index");
+    Route::get("/", [ArticleController::class, "index"])->name("list");
     Route::get("/create", [ArticleController::class, "create"])->name("create");
     Route::post("/store", [ArticleController::class, "store"])->name("store");
     Route::get("/edit/{article}", [ArticleController::class, "edit"])->name("edit");
@@ -68,7 +69,7 @@ Route::group(['prefix' => 'article', "as" => "article-"], function () {
 
 
 Route::group(['prefix' => 'article-title', "as" => "article_title-"], function () {
-    Route::get("/", [ArticleTitleController::class, "index"])->name("index");
+    Route::get("/", [ArticleTitleController::class, "index"])->name("list");
     Route::get("/create", [ArticleTitleController::class, "create"])->name("create");
     Route::post("/store", [ArticleTitleController::class, "store"])->name("store");
     Route::get("/edit/{article_title}", [ArticleTitleController::class, "edit"])->name("edit");
@@ -82,4 +83,25 @@ Route::group(['prefix' => 'article-title', "as" => "article_title-"], function (
     // import xlsx
 
     Route::get("/import", [ArticleTitleController::class, "import"])->name("import");
+});
+
+Route::group(['prefix' => 'user', "as" => "user-"], function () {
+    Route::get("/", [UserController::class, "index"])->name("list");
+    Route::get("/create", [UserController::class, "create"])->name("create");
+    Route::post("/store", [UserController::class, "store"])->name("store");
+    Route::get("/edit/{user}", [UserController::class, "edit"])->name("edit");
+    Route::post("/update/{user}", [UserController::class, "update"])->name("update");
+    Route::get("/delete/{user}", [UserController::class, "destroy"])->name("delete");
+    Route::get("/status-update/{user}", [UserController::class, "updateStatus"])->name("update_status");
+});
+
+
+Route::group(['prefix' => 'role', "as" => "role-"], function () {
+    Route::get("/", [RoleController::class, "index"])->name("list");
+    Route::get("/create", [RoleController::class, "create"])->name("create");
+    Route::post("/store", [RoleController::class, "store"])->name("store");
+    Route::get("/edit/{role}", [RoleController::class, "edit"])->name("edit");
+    Route::post("/update/{role}", [RoleController::class, "update"])->name("update");
+    Route::get("/delete/{role}", [RoleController::class, "destroy"])->name("delete");
+    Route::get("/status-update/{role}", [RoleController::class, "updateStatus"])->name("update_status");
 });

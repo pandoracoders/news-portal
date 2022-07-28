@@ -25,7 +25,7 @@
         <li class="menu-label">Sections</li>
 
         <li>
-            <a href="{{ route('backend.category-index') }}">
+            <a href="{{ route('backend.category-list') }}">
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
@@ -34,7 +34,7 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.tag-index') }}">
+            <a href="{{ route('backend.tag-list') }}">
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
@@ -43,7 +43,7 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.table_set-index') }}">
+            <a href="{{ route('backend.table_set-list') }}">
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
@@ -52,7 +52,7 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.article_title-index') }}">
+            <a href="{{ route('backend.article_title-list') }}">
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
@@ -61,13 +61,25 @@
         </li>
 
         <li>
-            <a href="{{ route('backend.article-index') }}">
+            <a href="{{ route('backend.article-list') }}">
                 <div class="parent-icon">
                     <i class="bi bi-house-door"></i>
                 </div>
                 <div class="menu-title">article</div>
             </a>
         </li>
+
+        <li class="menu-label">System Settings</li>
+
+        <li>
+            <a href="{{ route('backend.role-list') }}">
+                <div class="parent-icon">
+                    <i class="bi bi-house-door"></i>
+                </div>
+                <div class="menu-title">role</div>
+            </a>
+        </li>
+
     </ul>
     <!--end navigation-->
 </aside>
