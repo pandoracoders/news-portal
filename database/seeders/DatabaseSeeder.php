@@ -9,7 +9,7 @@ use App\Models\Backend\ArticleTitle;
 use App\Models\Backend\Role;
 use App\Models\Backend\TableSet;
 use App\Models\Backend\Tag;
-use App\Models\User;
+use App\Models\Backend\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
