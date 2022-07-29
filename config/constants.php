@@ -10,5 +10,24 @@ return [
         "text",
         "date",
         "url"
+    ],
+    "writer_permissions" => [
+        "backend.category-list",
+        "backend.tag-list",
+        "backend.tag-create",
+        "backend.tag-edit",
+        "backend.article-list",
+        "backend.article_title-list",
+        "backend.article_title-pick"
+    ],
+    "editor_permissions" => [
+        "backend.category-list",
+        "backend.tag-list",
+        "backend.tag-create",
+        "backend.tag-edit",
+        "backend.article-list",
+        "backend.article_title-list",
+        "backend.article_title-pick"
     ]
+
 ];

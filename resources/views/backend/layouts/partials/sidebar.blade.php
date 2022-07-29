@@ -80,6 +80,15 @@
             </a>
         </li>
 
+        <li>
+            <a href="{{ route('backend.user-list') }}">
+                <div class="parent-icon">
+                    <i class="bi bi-house-door"></i>
+                </div>
+                <div class="menu-title">user</div>
+            </a>
+        </li>
+
     </ul>
     <!--end navigation-->
 </aside>

@@ -19,6 +19,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return response()->json(Role::find(request()->role_id)?->permissions);
+        }
         return view($this->path . "index", [
             "roles" => Role::orderBy("id", "desc")->get()
         ]);
@@ -31,7 +34,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = ($this->getRouteArray());
+        $permissions = (self::getRouteArray());
         // dd($permissions);
         return view($this->path . "crud", compact("permissions"));
     }
@@ -60,7 +63,8 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         return view($this->path . "crud", [
-            "role" => $role
+            "role" => $role,
+            "permissions" => (self::getRouteArray())
         ]);
     }
 
@@ -73,6 +77,7 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
+        // dd($request->validated());
         $role->update($request->validated());
         return redirect()->route("backend.role-list")->with("success", "Role updated successfully.");
     }
@@ -90,25 +95,28 @@ class RoleController extends Controller
     }
 
 
-    public function getRouteArray()
+    public static function getRouteArray()
     {
         $routeCollection = Route::getRoutes();
         $routes = [];
-
         foreach ($routeCollection as $route) {
             if (str_contains($route->getName(), "backend.") && in_array("GET", $route->methods)) {
                 $arr = explode(".", $route->getName());
                 if (count($arr) > 1 && $arr[1] != "dashboard") {
                     $names = explode("-", $arr[1]);
                     $routes[$names[0]][] =  [
-
                         "name" => $route->getName(),
                         "title" =>  $names[1]
                     ];
                 }
             }
         }
-
         return $routes;
+    }
+
+
+    public static function getSuperAdminPermission()
+    {
+        return (call_user_func_array('array_merge', collect(self::getRouteArray())->pluck("*.name")->toArray()));
     }
 }

@@ -6,15 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +15,22 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required|string|max:255",
+            "email" => "required|string|email|max:255|unique:users,email," . $this->route("user")?->id,
+            "password" => "required_without:id|min:6",
+            "alias_name" => "required|string|max:255",
+            "slug" => "required|string|max:255|unique:users,slug," . $this->route("user")?->id,
+            "role_id" => "required|exists:roles,id",
+            "permissions" => "required|array",
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            "slug" => $this->route("user")?->slug ?? \Str::slug($this->name),
+            "id" => $this->route("user")?->id ?? null,
+            "password" => bcrypt($this->password) ?? null,
+        ]);
     }
 }

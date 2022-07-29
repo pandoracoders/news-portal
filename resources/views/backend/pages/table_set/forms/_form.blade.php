@@ -32,7 +32,7 @@
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Title *</label>
                             <select name="categories[]" id="" class="form-control">
-                                <option value="">Select Category</option>
+                                <option value="" disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option
                                         {{ isset($table_set) && $table_set->categories()->first()->id == $category->id ? 'selected=selected' : '' }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\UserRequest;
+use App\Models\Backend\Role;
 use App\Models\Backend\User;
 use Illuminate\Http\Request;
 
@@ -29,8 +30,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        
-        return view($this->path . "crud", compact("permissions"));
+
+
+        return view($this->path . "crud", [
+            "permissions" => (RoleController::getRouteArray()),
+            "roles" => Role::orderBy("id", "desc")->get()
+        ]);
     }
 
     /**
@@ -41,8 +46,11 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        // dd($request->validated());
-        User::create($request->validated());
+        $user = User::create(array_filter($request->validated()));
+        $user->permission()->updateOrCreate(
+            ["role_id" => $request->role_id],
+            ["permissions" => $request->permissions]
+        );
         return redirect()->route("backend.user-list")->with("success", "User created successfully.");
     }
 
@@ -57,7 +65,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view($this->path . "crud", [
-            "user" => $user
+            "user" => $user,
+            "permissions" => (RoleController::getRouteArray()),
+            "roles" => Role::orderBy("id", "desc")->get()
         ]);
     }
 
@@ -70,7 +80,12 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        // dd($request->validated());
+        $user->update(array_filter($request->validated()));
+        $user->permission()->updateOrCreate(
+            ["role_id" => $request->role_id],
+            ["permissions" => $request->permissions]
+        );
         return redirect()->route("backend.user-list")->with("success", "User updated successfully.");
     }
 

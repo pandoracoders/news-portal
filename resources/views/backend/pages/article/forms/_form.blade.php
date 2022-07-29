@@ -66,9 +66,9 @@
                                     <label class="form-label">Category *</label>
                                     <select name="category_id" class="form-control"
                                         {{ isset($article) ? 'disabled=disabled' : '' }}>
-                                        <option value="">Select Category</option>
+                                        <option value="" disabled>Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="">Select Category</option>
+                                            <option value="" disabled>Select Category</option>
                                             <option value="{{ $category->id }}"
                                                 {{ isset($article) && $article->category_id == $category->id ? 'selected' : '' }}>
                                                 {{ $category->title }}

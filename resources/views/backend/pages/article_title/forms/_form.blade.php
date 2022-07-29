@@ -27,7 +27,7 @@
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Category *</label>
                             <select name="category_id" class="form-control">
-                                <option value="">Select Category</option>
+                                <option value="" disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
                                         {{ isset($article_title) && $article_title->category_id == $category->id ? 'selected' : '' }}>

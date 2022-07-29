@@ -35,10 +35,11 @@ function getTitle($str)
 
 
                         <div class="col-12 mb-2 ">
+
                             <label class="form-label">Permission *</label>
 
-                            <select class="form-control tag-select" id="permission" multiple="multiple" name="permissions[]"
-                                aria-placeholder="Enter  Tags">
+                            <select class="form-control tag-select" id="permission" multiple="multiple"
+                                name="permissions[]" aria-placeholder="Enter  Tags">
                                 @foreach ($permissions as $key => $permission_array)
                                     <optgroup label="{{ customUcwords($key) }}">
                                         @foreach ($permission_array as $permission)
@@ -79,6 +80,8 @@ function getTitle($str)
 
 @push('scripts')
     <script>
+        window.data = @json(isset($role) ? $role->permissions : [])
+
         function formatState(item) {
             opt = $(item.element);
             //console.log(opt.);
@@ -86,10 +89,16 @@ function getTitle($str)
             return og + ' | ' + item.text;
         };
 
-        $('#permission').select2({
-            placeholder: 'Select Permission',
-            templateSelection: formatState,
-            tokenSeparators: [',', ' ']
+        $(document).ready(function() {
+            $('#permission').select2({
+                placeholder: 'Select Permission',
+                allowClear: true,
+                templateResult: formatState,
+                templateSelection: formatState,
+
+            });
         });
+
+        $('#permission').select2().val(data).trigger('change');
     </script>
 @endpush
