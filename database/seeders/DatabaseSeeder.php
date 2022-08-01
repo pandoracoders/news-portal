@@ -5,11 +5,13 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Http\Controllers\Backend\RoleController;
+use App\Models\Backend\Article;
 use App\Models\Backend\ArticleTitle;
 use App\Models\Backend\Role;
 use App\Models\Backend\TableSet;
 use App\Models\Backend\Tag;
 use App\Models\Backend\User;
+use Database\Factories\ArticleFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ["Biography", "Fiction", "Non-Fiction", "Poetry", "Short Story"];
+        $tags = ["Biography", "Fiction", "Non-Fiction", "Poetry", "Short Story", "Poem", "Normal", "Long Story", "fact"];
         // $roles = ["Super Admin", "Writer", "Editor"];
         $roles = [
             [
@@ -84,7 +86,7 @@ class DatabaseSeeder extends Seeder
         foreach ($tags as $tag) {
             Tag::create([
                 'title' => $tag,
-                'slug' => \Str::slug($tag),
+                'slug' => str_slug($tag),
             ]);
         }
 
@@ -124,5 +126,17 @@ class DatabaseSeeder extends Seeder
             "title" => "Facebook",
             "category_id" => 1,
         ]);
+
+        Article::factory(100)->create()->each(function ($article) {
+            $this->articleTag($article);
+        });
+    }
+
+
+
+    protected function articleTag($article)
+    {
+        $tags = Tag::all()->random(3);
+        $article->tags()->attach($tags);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,5 @@ Route::get('/', function () {
 
 
 Route::redirect('/backend', 'dashboard', 301)->middleware("auth");
+
+Route::get("/news/search/{field}/{value}", [FrontendController::class, "searchByTableField"])->name("news.search");

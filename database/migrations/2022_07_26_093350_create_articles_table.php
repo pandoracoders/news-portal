@@ -30,7 +30,11 @@ return new class extends Migration
             $table->dateTime("published_at")->nullable();
             $table->boolean("status")->default(true);
 
+            $table->boolean("is_featured")->default(false);
+
             $table->string("task_status")->default("writting");
+
+            $table->integer("views")->default(0);
 
             $table->json("tables")->nullable();
 

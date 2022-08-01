@@ -15,23 +15,23 @@
                             <h6 class="mb-0 text-uppercase"> Tables
                             </h6>
                             <hr>
-                            @foreach ($article->category->tables as $table)
+                            {{-- {{ dd(getArticleTables($article)) }} --}}
+
+                            @foreach (getArticleTables($article) ?? [] as $key => $table)
                                 <div class="mb-2">
-                                    <h3 class="text-center"> {{ $table->title }} </h3>
+                                    <h3 class="text-center"> {{ $key }} </h3>
                                     <hr>
 
-                                    @foreach ($table->tableFields as $field)
+                                    @foreach ($table as $field)
                                         <div class="form-group mb-1">
-                                            <label for="">{{ $field->title }}</label>
-
-                                            <input type="{{ $field->type ?? 'text' }}" class="form-control"
-                                                name="{{ \Str::slug($field->title) }}">
+                                            <label for="">{{ $field['title'] }}</label>
+                                            <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
+                                                name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
+                                                value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
                                         </div>
                                     @endforeach
                                 </div>
                             @endforeach
-
-
                         </div>
                     </div>
                 </div>
@@ -175,9 +175,26 @@
 
 @push('scripts')
     <script>
-        $(".tag-select").select2({
-            tags: true,
-            tokenSeparators: [',', ' ']
-        })
+        $(document).ready(function() {
+            var tags = @json(
+    $article
+        ->tags()
+        ->select('tag_id as id', 'title')
+        ->get()
+        ->toArray() ?? [],
+);
+            $('.tag-select').select2({
+                placeholder: 'Enter Tags',
+                tags: true,
+            });
+
+            console.log(tags);
+            $('.tag-select').select2().val(tags.map(function(tag) {
+                return {
+                    id: tag.id,
+                    text: tag.title,
+                };
+            }), ).trigger('change');
+        });
     </script>
 @endpush

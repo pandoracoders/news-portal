@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Backend;
 
-use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -41,22 +40,29 @@ class ArticleRequest extends FormRequest
 
         $tables = [];
         $tags = [];
-        foreach ($category->tables as $key => $table) {
-            // dd($table);
-            foreach ($table->tableFields as $field) {
-                // dd($field);
-                $tables[$table->title][$field->title] = $this->{\Str::slug($field->title)};
+        // dd(getArticleTables($this->route("article")));
+        foreach (getArticleTables($this->route("article")) as $key => $table) {
+            foreach ($table as $field) {
+                $form_key = str_slug($key) . "_" . str_slug($field["title"]);
+                if ($this->$form_key) {
+                    $tables[$key][str_slug(str_slug($field['title']))] = getTableFieldArray(json_decode(json_encode($field)), $this->$form_key);
+                }
             }
         }
+
+        // delete all old tags
+        $this->route("article")->tags()->detach();
+
+        // dd("hello");
         foreach ($this->tags as $key => $tag) {
             if (intval($tag) == 0) {
                 $tag = Tag::updateOrCreate(
                     [
-                        "slug" => \Str::slug($tag),
+                        "slug" => str_slug($tag),
                     ],
                     [
                         "title" => $tag,
-                        "slug" => \Str::slug($tag),
+                        "slug" => str_slug($tag),
                     ]
                 );
             } else {
@@ -66,6 +72,6 @@ class ArticleRequest extends FormRequest
                 $tags[] = $tag->id;
             }
         }
-        $this->merge(["tables" => $tables, "tags" => $tags, "category_id" => $category->id, "slug" => $this->slug ?? \Str::slug($this->route("article")->title)]);
+        $this->merge(["tables" => $tables, "tags" => $tags, "category_id" => $category->id, "slug" => $this->slug ?? str_slug($this->route("article")->title)]);
     }
 }
