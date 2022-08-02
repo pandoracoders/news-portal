@@ -1,8 +1,9 @@
 <?php
 
+use App\Jobs\HomePageCache;
+use App\Models\Backend\Category;
 use Carbon\Carbon;
-
-
+use Illuminate\Support\Facades\Cache;
 
 if (!function_exists("str_slug")) {
     function str_slug($str)
@@ -12,10 +13,11 @@ if (!function_exists("str_slug")) {
 }
 
 
+
 if (!function_exists("carbon")) {
-    function carbon($date)
+    function carbon($date = null)
     {
-        return Carbon::parse($date);
+        return $date ? Carbon::parse($date) ?? Carbon::now() : Carbon::now();
     }
 }
 
@@ -73,4 +75,35 @@ function getTableFieldArray($field, $value = null)
             "html" => $value && $field->searchable ? ("<a href='" . route("news.search", ["field" => str_slug($field->title), "value" => $value]) . "'>" . $value . "</a>")   : $value,
 
         ];
+}
+
+
+if (!function_exists("getFirstCategoryArticle")) {
+    function getFirstCategoryArticle($ids = [])
+    {
+        $category = Category::first();
+        $articles = $category->articles()->limit(config("constants.article_limit", 8));
+        if (count($ids)) {
+            $articles = $articles->whereNotIn("id", $ids);
+        }
+        return $articles->get();
+    }
+}
+
+
+// cache
+
+if (!function_exists("getHomePageCache")) {
+    function getHomePageCache()
+    {
+        return HomePageCache::getCache();
+    }
+}
+
+if (!function_exists("clearHomePageCache")) {
+    function clearHomePageCache()
+    {
+        Cache::forget(config("constants.home_page_cache_key"));
+        // return HomePageCache::getCache();
+    }
 }

@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend/index');
-})->name("home");
+Route::redirect("/home", "/", 301);
+
+Route::redirect("/index", "/", 301);
+
+Route::get("/", [FrontendController::class, "index"])->name("home");
+
+Route::get("{slug}", [FrontendController::class, "singlePage"])->name("singlePage");
+
 
 
 

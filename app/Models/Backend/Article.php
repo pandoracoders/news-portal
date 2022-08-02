@@ -2,13 +2,16 @@
 
 namespace App\Models\Backend;
 
+use App\Jobs\HomePageCache;
 use App\Models\Backend\User;
+use App\Models\Traits\SeoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory;
+    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
+    use HasFactory, SeoTrait;
 
     protected $fillable = [
         'title',
@@ -26,7 +29,7 @@ class Article extends Model
     ];
 
     protected $casts = [
-        'tables' => 'json',
+        'tables' => 'array',
     ];
 
 
@@ -48,5 +51,16 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, ArticleTag::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            HomePageCache::dispatchAfterResponse();
+        });
+        static::updated(function ($model) {
+            HomePageCache::dispatchAfterResponse();
+        });
     }
 }

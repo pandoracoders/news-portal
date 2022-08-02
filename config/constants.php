@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "article_limit" => 8,
     "seo_validation" => [
         "meta_title" => "nullable|max:255",
         "meta_description" => "nullable",
@@ -28,6 +29,7 @@ return [
         "backend.article-list",
         "backend.article_title-list",
         "backend.article_title-pick"
-    ]
+    ],
+    "home_page_cache_key" => "HOME_PAGE_CACHE",
 
 ];
