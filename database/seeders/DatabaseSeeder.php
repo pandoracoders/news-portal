@@ -52,6 +52,17 @@ class DatabaseSeeder extends Seeder
             "role_id" => Role::where("title", "Super Admin")->first()->id,
             "permissions" => RoleController::getSuperAdminPermission(),
         ]);
+        $user = User::create([
+            'name' => 'Sandip Dangal',
+            'email' => 'sandipdangal77@gmail.com',
+            'password' => bcrypt('password'),
+            "alias_name" => "Ray",
+            "slug" => "ray",
+        ])->permission()->create([
+            "role_id" => Role::where("title", "Super Admin")->first()->id,
+            "permissions" => RoleController::getSuperAdminPermission(),
+        ]);
+
 
 
         User::create([
