@@ -13,7 +13,7 @@ class ImageUpload
             mkdir($path, 0777, true);
         }
 
-        $filename = \Str::slug(explode(".", $file->getClientOriginalName())[0]);
+        $filename = str_slug(explode(".", $file->getClientOriginalName())[0]);
         // Intervention
         $path = $path . time() . "_" .  $filename . '.webp';
         Image::make($file)->encode('webp', 90)->save(($path));

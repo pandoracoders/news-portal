@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            "slug" => $this->route("user")?->slug ?? \Str::slug($this->name),
+            "slug" => $this->route("user")?->slug ?? str_slug($this->name),
             "id" => $this->route("user")?->id ?? null,
             "password" => bcrypt($this->password) ?? null,
         ]);

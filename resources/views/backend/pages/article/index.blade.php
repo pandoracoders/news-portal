@@ -25,10 +25,10 @@
         <h6 class="mb-0 text-uppercase">article List</h6>
         {{-- </div> --}}
         {{-- <div class="left"> --}}
-        <a href="{{ route('backend.article-create') }}" class="btn btn-primary btn-sm">
+        {{-- <a href="{{ route('backend.article-create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
             Add article
-        </a>
+        </a> --}}
         {{-- </div> --}}
     </div>
 
@@ -64,6 +64,7 @@
                                     {{ $article->category->title }}
                                 </td>
                                 <td>
+
                                     <span class="badge badge-pill btn-primary mr-3">
                                         {!! implode(
                                             "</span><span class='badge badge-pill btn-primary mr-3'>",

@@ -58,6 +58,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // dd("hi");
         return view($this->path . "crud", [
             "article" => $article,
             "categories" => \App\Models\Backend\Category::all(),
