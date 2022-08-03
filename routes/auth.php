@@ -23,14 +23,17 @@ Route::get('/1234', function () {
     return redirect()->away($url);
 });
 
-Route::get('/login', [AuthController::class, "login"])->name("login");
+Route::get('/login', [AuthController::class, "login"])->name("login")->middleware(["throttle:5"]);;
 Route::post("/login", [AuthController::class, "postLogin"])->name("post-login");
 
-Route::get("/logout", [AuthController::class, "logout"])->name("logout");
+Route::group(["middleware" => "auth"], function () {
 
-Route::get("/2fa/enable", [AuthController::class, "enableTwoFactor"])->name("2fa-enable")->middleware("auth");
-// Route::post("/2fa/enable", [AuthController::class, "postEnableTwoFactor"])->name("2fa-enable-post");
+    Route::get("/logout", [AuthController::class, "logout"])->name("logout");
+
+    Route::get("/2fa/enable", [AuthController::class, "enableTwoFactor"])->name("2fa-enable");
+    // Route::post("/2fa/enable", [AuthController::class, "postEnableTwoFactor"])->name("2fa-enable-post");
 
 
-Route::get('/2fa/validate', [AuthController::class, "validate2FA"])->name("validate-2fa")->middleware("auth");
-Route::post("/2fa/validate", [AuthController::class, "postValidate2FA"])->name("post-validate-2fa")->middleware(["throttle:5", "auth"]);
+    Route::get('/2fa/validate', [AuthController::class, "validate2FA"])->name("validate-2fa");
+    Route::post("/2fa/validate", [AuthController::class, "postValidate2FA"])->name("post-validate-2fa")->middleware(["throttle:5", "auth"]);
+});

@@ -1,6 +1,4 @@
 @extends('auth.layouts')
-
-
 @section('content')
     <div class="login-cover-wrapper">
         <div class="card shadow-none">
@@ -10,14 +8,14 @@
                     <p>Open up your 2FA mobile app and scan the following QR barcode:</p>
                 </div>
                 <div class="row">
-                    <div class="image-holder">
+                    <div class="image-holder d-flex" style="justify-content:center">
                         {!! $image !!}
                     </div>
                     <div>
                         <div class="alert">
                             <div class="alert-info">
                                 <div class="alert-message">
-                                    <p>
+                                    <p class="juctify-content p-3">
                                         If your 2FA mobile app does not support QR barcodes,
                                         enter in the following number: <code>{{ $secret }}</code>
                                     </p>

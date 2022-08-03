@@ -107,3 +107,20 @@ if (!function_exists("clearHomePageCache")) {
         // return HomePageCache::getCache();
     }
 }
+
+
+// permission check
+
+if (!function_exists("hasPermission")) {
+    function hasPermission($permission)
+    {
+        $permissions = Cache::rememberForever("permissions_" . auth()->id(), function () {
+            return auth()->user()->permissions;
+        });
+
+        if (in_array($permission, $permissions)) {
+            return true;
+        }
+        return false;
+    }
+}

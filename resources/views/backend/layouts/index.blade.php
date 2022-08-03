@@ -34,7 +34,8 @@
         .menu-title {
             text-transform: capitalize !important;
         }
-        .mr-3{
+
+        .mr-3 {
             margin-right: .25rem;
         }
     </style>
@@ -76,6 +77,8 @@
     <!--end wrapper-->
 
 
+    @include('notification')
+
     <!-- JS Files-->
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
@@ -89,6 +92,8 @@
     <script src="{{ asset('backend') }}/assets/js/main.js"></script>
 
     @stack('scripts')
+
+
 
 
 </body>

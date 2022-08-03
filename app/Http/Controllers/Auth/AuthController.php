@@ -13,8 +13,6 @@ class AuthController extends Controller
 
     protected $redirectTo = '/backend/dashboard';
 
-
-
     public function login()
     {
 
@@ -78,7 +76,11 @@ class AuthController extends Controller
 
     public function validate2FA()
     {
-        return view("auth.pages.2favalidate");
+        if(auth()->user()->google2fa_secret) {
+            return view("auth.pages.2favalidate");
+        } else {
+            return redirect()->route("2fa-enable");
+        }
     }
 
 

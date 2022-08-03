@@ -1,6 +1,5 @@
 @extends('backend.layouts.index')
 
-
 @push('styles')
     <!--plugins-->
     <link href="{{ asset('backend') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />

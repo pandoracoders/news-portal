@@ -1,8 +1,4 @@
-
-
 @extends('auth.layouts')
-
-
 @section('content')
     <div class="login-cover-wrapper">
         <div class="card shadow-none">
