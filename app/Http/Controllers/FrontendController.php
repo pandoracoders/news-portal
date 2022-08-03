@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
+use App\Models\Backend\Tag;
 
 class FrontendController extends Controller
 {
@@ -12,8 +13,6 @@ class FrontendController extends Controller
 
     public function index()
     {
-
-
         clearHomePageCache();
 
         return view("frontend.pages.home.index", [

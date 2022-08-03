@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use \Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
     use HasFactory, SeoTrait;
 
     protected $fillable = [

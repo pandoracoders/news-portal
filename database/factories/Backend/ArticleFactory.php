@@ -20,11 +20,12 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            "title" => $this->faker->sentence,
+            "title" => $this->faker->title,
             "slug" => $this->faker->slug,
             "summary" => $this->faker->text,
             "body" => $this->faker->text,
             "image" => $this->faker->imageUrl,
+            "editor_choice" => $this->faker->boolean,
             "category_id" => function () {
                 return Category::first()->id;
             },

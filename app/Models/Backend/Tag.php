@@ -15,4 +15,14 @@ class Tag extends Model
         "description",
         "status",
     ];
+
+    public function articles(){
+       return $this->belongsToMany(Article::class,ArticleTag::class);
+
+    }
+
+
+    public function getTitleAttribute(){
+        return $this->original['title'] .  "(".$this->articles->count().")";
+    }
 }

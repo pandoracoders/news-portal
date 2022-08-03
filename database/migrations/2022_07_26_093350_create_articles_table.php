@@ -34,6 +34,8 @@ return new class extends Migration
 
             $table->string("task_status")->default("writting");
 
+            $table->boolean(("editor_choice"))->default(false);
+
             $table->integer("views")->default(0);
 
             $table->json("tables")->nullable();
