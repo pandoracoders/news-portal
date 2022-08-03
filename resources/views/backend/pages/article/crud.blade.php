@@ -43,6 +43,8 @@
 
             /* enable title field in the Image dialog*/
             image_title: true,
+
+            image_caption: true,
             /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
             /*
