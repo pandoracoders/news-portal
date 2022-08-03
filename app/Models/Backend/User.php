@@ -66,4 +66,10 @@ class User extends Authenticatable
     {
         return $this->role()->first();
     }
+
+
+    public function getPermissionsAttribute()
+    {
+        return $this->permission->permissions;
+    }
 }

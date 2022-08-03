@@ -41,9 +41,12 @@
                             <th>Title</th>
 
                             <th>Slug</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.tag-update_status'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.tag-edit') || hasPermission('backend.tag-delete'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -55,33 +58,44 @@
                                     {{ $tag->slug }}
                                 </td>
 
-                                <td>
-                                    <a href="{{ route('backend.tag-update_status', $tag->id) }}" target="_blank"
-                                        class="btn btn-sm btn-{{ $tag->status == 1 ? 'success' : 'danger' }}">
-                                        {{ $tag->status == 1 ? 'Active' : 'InActive' }}
-                                    </a>
+                                @if (hasPermission('backend.tag-update_status'))
+                                    <td>
+                                        <a href="{{ route('backend.tag-update_status', $tag->id) }}" target="_blank"
+                                            class="btn btn-sm btn-{{ $tag->status == 1 ? 'success' : 'danger' }}">
+                                            {{ $tag->status == 1 ? 'Active' : 'InActive' }}
+                                        </a>
 
-                                </td>
+                                    </td>
+                                @endif
 
-                                <td>
-                                    <a href="{{ route('backend.tag-edit', $tag->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('backend.tag-delete', $tag->id) }}"
-                                        class="btn btn-danger btn-sm">Delete</a>
-                                </td>
+                                @if (hasPermission('backend.tag-edit') || hasPermission('backend.tag-delete'))
+                                    <td>
+                                        <div class="btn-group">
+                                            @if (hasPermission('backend.tag-edit'))
+                                                <a href="{{ route('backend.tag-edit', $tag->id) }}"
+                                                    class="btn btn-primary btn-sm">Edit</a>
+                                            @endif
+                                            @if (hasPermission('backend.tag-delete'))
+                                                <a href="{{ route('backend.tag-delete', $tag->id) }}"
+                                                    class="btn btn-danger btn-sm">Delete</a>
+                                            @endif
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
-
-
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>Title</th>
 
                             <th>Slug</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.tag-update_status'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.tag-edit') || hasPermission('backend.tag-delete'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </tfoot>
                 </table>

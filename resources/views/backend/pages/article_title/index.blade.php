@@ -23,13 +23,13 @@
     <div class="d-flex justify-content-between mb-2" style="align-items: baseline">
         {{-- <div class="col-"> --}}
         <h6 class="mb-0 text-uppercase">Article Title</h6>
-        {{-- </div> --}}
-        {{-- <div class="left"> --}}
-        <a href="{{ route('backend.article_title-create') }}" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus"></i>
-            Add Title
-        </a>
-        {{-- </div> --}}
+
+        @if (hasPermission('backend.article_title-create'))
+            <a href="{{ route('backend.article_title-create') }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i>
+                Add Article Title
+            </a>
+        @endif
     </div>
 
     <div class="card">
@@ -40,8 +40,14 @@
                         <tr>
                             <th>Title</th>
                             <th>Picked By</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.article_title-update_status'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.article_title-edit') ||
+                                hasPermission('backend.article_title-delete') ||
+                                hasPermission('backend.article_title-pick'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -53,28 +59,41 @@
                                     {{ $article_title->article?->writer->name }}
                                 </td>
 
-                                {{-- only with update and delete permission --}}
-                                <td>
-                                    <a href="{{ route('backend.article_title-update_status', $article_title->id) }}"
-                                        target="_blank"
-                                        class="btn btn-sm btn-{{ $article_title->status == 1 ? 'success' : 'danger' }}">
-                                        {{ $article_title->status == 1 ? 'Active' : 'InActive' }}
-                                    </a>
+                                @if (hasPermission('backend.article_title-update_status'))
+                                    <td>
+                                        <a href="{{ route('backend.article_title-update_status', $article_title->id) }}"
+                                            target="_blank"
+                                            class="btn btn-sm btn-{{ $article_title->status == 1 ? 'success' : 'danger' }}">
+                                            {{ $article_title->status == 1 ? 'Active' : 'InActive' }}
+                                        </a>
+                                    </td>
+                                @endif
 
-                                </td>
+                                @if (hasPermission('backend.article_title-edit') ||
+                                    hasPermission('backend.article_title-delete') ||
+                                    hasPermission('backend.article_title-pick'))
+                                    <td>
+                                        <div class="btn-group">
+                                            @if (hasPermission('backend.article_title-edit'))
+                                                <a href="{{ route('backend.article_title-edit', $article_title->id) }}"
+                                                    class="btn btn-primary btn-sm">Edit</a>
+                                            @endif
+                                            @if (hasPermission('backend.article_title-delete'))
+                                                <a href="{{ route('backend.article_title-delete', $article_title->id) }}"
+                                                    class="btn btn-danger btn-sm">Delete</a>
+                                            @endif
 
-                                <td>
-                                    <a href="{{ route('backend.article_title-edit', $article_title->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('backend.article_title-delete', $article_title->id) }}"
-                                        class="btn btn-danger btn-sm">Delete</a>
-                                    @if (!$article_title->article_id)
-                                        <a href="{{ route('backend.article_title-pick', $article_title->id) }}"
-                                            class="btn btn-primary btn-sm">Pick Topic</a>
-                                    @else
-                                    @endif
-
-                                </td>
+                                            @if (hasPermission('backend.article_title-pick'))
+                                                @if (!$article_title->article_id)
+                                                    <a href="{{ route('backend.article_title-pick', $article_title->id) }}"
+                                                        class="btn btn-primary btn-sm">Pick Topic</a>
+                                                @else
+                                                    <span class="btn btn-success btn-sm">Picked</span>
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 
@@ -84,8 +103,14 @@
                         <tr>
                             <th>Title</th>
                             <th>Picked By</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.article_title-update_status'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.article_title-edit') ||
+                                hasPermission('backend.article_title-delete') ||
+                                hasPermission('backend.article_title-pick'))
+                                <th>Action 1</th>
+                            @endif
                         </tr>
                     </tfoot>
                 </table>

@@ -22,14 +22,15 @@
 @section('content')
     <div class="d-flex justify-content-between mb-2" style="align-items: baseline">
         {{-- <div class="col-"> --}}
-            <h6 class="mb-0 text-uppercase">Category List</h6>
+        <h6 class="mb-0 text-uppercase">Category List</h6>
         {{-- </div> --}}
-        {{-- <div class="left"> --}}
+        @if (hasPermission('backend.category-create'))
             <a href="{{ route('backend.category-create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i>
                 Add Category
             </a>
-        {{-- </div> --}}
+        @endif
+
     </div>
 
     <div class="card">
@@ -42,9 +43,12 @@
                             <th>Image</th>
                             <th>Slug</th>
                             <th>Order</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.category-update_status'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.category-edit') || hasPermission('backend.category-delete'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -61,25 +65,31 @@
                                 <td>
                                     {{ $category->order }}
                                 </td>
+                                @if (hasPermission('backend.category-update_status'))
+                                    <td>
+                                        <a href="{{ route('backend.category-update_status', $category->id) }}"
+                                            target="_blank"
+                                            class="btn btn-sm btn-{{ $category->status == 1 ? 'success' : 'danger' }}">
+                                            {{ $category->status == 1 ? 'Active' : 'InActive' }}
+                                        </a>
+                                    </td>
+                                @endif
 
-                                <td>
-                                    <a href="{{ route('backend.category-update_status', $category->id) }}" target="_blank"
-                                        class="btn btn-sm btn-{{ $category->status == 1 ? 'success' : 'danger' }}">
-                                        {{ $category->status == 1 ? 'Active' : 'InActive' }}
-                                    </a>
-
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('backend.category-edit', $category->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('backend.category-delete', $category->id) }}"
-                                        class="btn btn-danger btn-sm">Delete</a>
-                                </td>
+                                @if (hasPermission('backend.category-edit') || hasPermission('backend.category-delete'))
+                                    <td>
+                                        <div class="btn-group">
+                                            @if (hasPermission('backend.category-edit'))
+                                                <a href="{{ route('backend.category-edit', $category->id) }}"
+                                                    class="btn btn-primary btn-sm">Edit</a>
+                                            @endif
+                                            @if (hasPermission('backend.category-delete'))
+                                                <a href="{{ route('backend.category-delete', $category->id) }}"
+                                                    class="btn btn-danger btn-sm">Delete</a>
+                                            @endif
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
-
-
                     </tbody>
                     <tfoot>
                         <tr>
@@ -87,9 +97,12 @@
                             <th>Image</th>
                             <th>Slug</th>
                             <th>Order</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
+                            @if (hasPermission('backend.category-edit'))
+                                <th>Status</th>
+                            @endif
+                            @if (hasPermission('backend.category-edit') || hasPermission('backend.category-delete'))
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </tfoot>
                 </table>

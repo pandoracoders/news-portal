@@ -26,6 +26,10 @@
     <link href="{{ asset('backend') }}/assets/css/semi-dark.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/css/header-colors.css" rel="stylesheet" />
 
+
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/plugins/notifications/css/lobibox.min.css" />
+
+    
     <style>
         td {
             vertical-align: middle;
@@ -39,6 +43,8 @@
             margin-right: .25rem;
         }
     </style>
+
+    @yield('styles')
 
     <title>News - Backend </title>
 </head>

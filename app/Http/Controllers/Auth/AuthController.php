@@ -76,7 +76,7 @@ class AuthController extends Controller
 
     public function validate2FA()
     {
-        if(auth()->user()->google2fa_secret) {
+        if (auth()->user()->google2fa_secret) {
             return view("auth.pages.2favalidate");
         } else {
             return redirect()->route("2fa-enable");
@@ -93,7 +93,7 @@ class AuthController extends Controller
         $secret = $user->google2fa_secret;
         $valid = $google2fa->verifyKey($secret, $request->otp);
         if ($valid) {
-            return redirect()->intended($this->redirectTo);
+            return redirect()->intended($this->redirectTo)->with("success", "Logged in Successfully.");
         } else {
             return redirect()->route("validate-2fa")->withErrors(["otp" => "Invalid OTP"]);
         }

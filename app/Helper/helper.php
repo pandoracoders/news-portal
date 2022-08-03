@@ -118,6 +118,8 @@ if (!function_exists("hasPermission")) {
             return auth()->user()->permissions;
         });
 
+        // dd($permissions);
+
         if (in_array($permission, $permissions)) {
             return true;
         }
