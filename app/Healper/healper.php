@@ -47,7 +47,7 @@ if (!function_exists("getArticleTables")) {
     function getArticleTables($article)
     {
         $cat = getCategoryTables($article->category);
-        $tables = $article->tables;
+        $tables = $article->tables ?? [];
         return (array_merge_recursive_distinct($cat, $tables));
     }
 }
