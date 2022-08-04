@@ -19,6 +19,7 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+        $category = Category::find(random_int(1, Category::count()));
         return [
             "title" => $this->faker->title,
             "slug" => $this->faker->slug,
@@ -26,9 +27,7 @@ class ArticleFactory extends Factory
             "body" => $this->faker->text,
             "image" => $this->faker->imageUrl,
             "editor_choice" => $this->faker->boolean,
-            "category_id" => function () {
-                return Category::first()->id;
-            },
+            "category_id" => $category->id,
             "writer_id" => function () {
                 return User::where("slug", "writer")->first()->id;
             },
@@ -38,25 +37,28 @@ class ArticleFactory extends Factory
             "published_at" => $this->faker->dateTime,
             "is_featured" => $this->faker->boolean,
             "views" => $this->faker->numberBetween(100, 10000),
-            "tables" => function () {
-                $tables = [];
-                foreach (Category::first()->tables as $table) {
-                    foreach ($table->tableFields as $field) {
-                        if ($field->type == "url") {
-                            $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->url);
-                        } else if ($field->type == "date") {
-                            $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, Carbon::parse($this->faker->date)->format("M d, Y"));
-                        } else
+            "tables" => function () use ($category) {
+                if ($category->id == 1) {
+                    $tables = [];
+                    foreach (Category::first()->tables as $table) {
+                        foreach ($table->tableFields as $field) {
+                            if ($field->type == "url") {
+                                $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->url);
+                            } else if ($field->type == "date") {
+                                $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, Carbon::parse($this->faker->date)->format("M d, Y"));
+                            } else
                             if ($field->title == "Full Name") {
-                            $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->name);
-                        } else if ($field->title == "Country") {
-                            $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->country);
-                        } else {
-                            $tables[$table->title][str_slug($field->title)] = $this->faker->text;
+                                $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->name);
+                            } else if ($field->title == "Country") {
+                                $tables[$table->title][str_slug($field->title)] = getTableFieldArray($field, $this->faker->country);
+                            } else {
+                                $tables[$table->title][str_slug($field->title)] = $this->faker->text;
+                            }
                         }
                     }
+                    return $tables;
                 }
-                return $tables;
+                return null;
             }
         ];
     }

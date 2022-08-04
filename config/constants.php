@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "enable_2fa" => false,
     "article_limit" => 8,
     "seo_validation" => [
         "meta_title" => "nullable|max:255",
@@ -24,10 +25,7 @@ return [
         "backend.category-list",
         "backend.tag-list",
         "backend.tag-create",
-        "backend.tag-edit",
         "backend.article-list",
-        "backend.article_title-list",
-        "backend.article_title-pick"
     ],
     "home_page_cache_key" => "HOME_PAGE_CACHE",
 
