@@ -174,7 +174,7 @@
 
 
 @push('scripts')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             var tags = @json(
     $article
@@ -195,6 +195,38 @@
                     text: tag.title,
                 };
             })).trigger('change');
+        });
+    </script> --}}
+
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            // window.data = @json(isset($user) ? $user->permission?->permissions : []);
+
+            var data = @json(
+    $article
+        ->tags()
+        ->select('tag_id as id', 'title as text')
+        ->get()
+        ->toArray() ?? [],
+);
+
+            function formatState(item) {
+                return item.text.trim();
+            }
+
+            const select2 = $('.tag-select').select2({
+                placeholder: 'Select Tags',
+                allowClear: true,
+                // tags: true,
+                templateResult: formatState,
+                templateSelection: formatState,
+                data
+            });
+            console.log(select2.val(data).trigger('change'));
         });
     </script>
 @endpush

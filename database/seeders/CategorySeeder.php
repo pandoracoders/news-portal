@@ -19,5 +19,11 @@ class CategorySeeder extends Seeder
             'title' => 'Biography',
             "slug" => "biography",
         ]);
+
+
+        Category::create([
+            "title" => "Entertainment",
+            "slug" => "entertainment",
+        ]);
     }
 }

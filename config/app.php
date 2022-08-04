@@ -213,6 +213,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+        // "SssMin" => HTMLMin\HTMLMin\Facades\HTMLMin::class,
     ])->toArray(),
 
 ];
