@@ -1,0 +1,218 @@
+
+
+.outer-section {
+    border: 1px solid rgba(182, 178, 178, 0.5);
+    box-shadow: 1px 1px rgba(202, 199, 199, 0.6);
+    margin: 10px 0px;
+    border-radius: 6px;
+    background-color: rgba(237, 237, 237,0.3);
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------- Landing Page--------------------------------------------------------------------------------------- */
+
+/* Trending section */
+.trending-single {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.trending-single .image {
+    width: 30%;
+    height: 30%;
+    margin-right: 10px;
+}
+.trending-single .image_img{
+    border-radius: 5px;
+}
+.trending-single .trending-title {
+    width: 70%;
+}
+
+.trending-single .trending-title h2 {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Biography Section */
+
+.biography-left .biography-single {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.biography-left .biography-single .image {
+    width: 30%;
+    height: 30%;
+    margin-right: 10px;
+}
+.biography-left .biography-single .image_img{
+    border-radius: 5px;
+}
+
+.biography-left .biography-single .biography-title {
+    width: 70%;
+}
+
+.biography-left .biography-single .biography-title h2 {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.biography-right .biography-single .image {
+    width: 95%;
+    height: 95%;
+    margin: 0px 0 10px 0;
+}
+
+.biography-right .image_img{
+    border-radius: 15px;
+}
+
+/* Entertainment section */
+.entertainment-left .entertainment-single {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.entertainment-left .entertainment-single .image {
+    width: 30%;
+    height: 30%;
+    margin-right: 10px;
+}
+.entertainment-left .entertainment-single .image_img{
+    border-radius: 5px;
+}
+
+.entertainment-left .entertainment-single .entertainment-title {
+    width: 70%;
+}
+
+.entertainment-left .entertainment-single .entertainment-title h2 {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.entertainment-right .entertainment-single .image {
+    width: 95%;
+    height: 95%;
+    margin: 0px 0 10px 0;
+}
+
+.entertainment-right .image_img{
+    border-radius: 15px;
+}
+
+/* Textover image  */
+
+.textover {
+    position: relative;
+    margin-left: 0;
+}
+
+.textover figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    color: white;
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+
+}
+
+.image_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.5s;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+}
+
+.image_overlay:hover {
+    opacity: 1;
+}
+
+.image_overlay>* {
+    transform: translate(20px);
+    transition: transform 0.5s;
+    
+}
+
+.image_overlay:hover>* {
+    transform: translate(0);
+}
+
+.image_overlay .image_title {
+    color: rgb(234, 217, 217);
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 15px;
+}
+
+.image_overlay .image_description {
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    justify-content: center;
+    border-bottom: 15px;
+}
+
+.image_img{
+    border-radius: 15px;
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------- Category Page--------------------------------------------------------------------------------------- */
+.category-list .category-post{
+    border-radius: 15px;
+    border: 1px solid #d2d2d2;
+    padding: 10px;
+}
+.category-list .category-post .image .image_img{
+    width: 100%;
+    border-radius: 15px;
+}
+.category-list .category-post .category-title{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+}
+.category-list .category-post .author-div{
+    font-size: 0.6rem;
+    text-transform: capitalize !important;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------- Other Screens--------------------------------------------------------------------------------------- */
+
+/* Mobile Screens */
+
+@media (max-width: 480px) {
+    .biography-right{
+        display: none;
+    }
+    .entertainment-right{
+        display:none;
+    }
+
+}
+
+
+/* Ipad screens */
+
+@media (max-width: 768px) {
+    .biography-left:nth-child(5){
+        display: none;
+    }
+
+}
+
+/* Small screens/laptops  */
+
+@media (max-width: 1024px) {
+    
+}

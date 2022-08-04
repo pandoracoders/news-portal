@@ -24,9 +24,7 @@
             color: #111;
         }
 
-        p {
-            text-align: justify !important;
-        }
+       
     </style>
 </head>
 

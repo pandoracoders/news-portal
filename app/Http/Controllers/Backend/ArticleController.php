@@ -97,7 +97,7 @@ class ArticleController extends Controller
         $article->tags()->sync($request->tags);
 
 
-        return redirect()->route("backend.article-list")->with("success", "Article updated successfully.");
+        return redirect()->back()->with("success", "Article updated successfully.");
     }
 
     /**
