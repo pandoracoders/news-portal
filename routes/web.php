@@ -23,6 +23,8 @@ Route::get("/", [FrontendController::class, "index"])->name("home");
 
 Route::get("{slug}", [FrontendController::class, "singlePage"])->name("singlePage");
 
+Route::get("author/{author:slug}", [FrontendController::class, "authorArticle"])->name("authorArticle");
+
 
 
 

@@ -59,13 +59,15 @@ Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
 
 
 Route::group(['prefix' => 'article', "as" => "article-"], function () {
-    Route::get("/", [ArticleController::class, "index"])->name("list");
+    Route::get("/{task_status?}", [ArticleController::class, "index"])->name("list");
     Route::get("/create", [ArticleController::class, "create"])->name("create");
     Route::post("/store", [ArticleController::class, "store"])->name("store");
     Route::get("/edit/{article}", [ArticleController::class, "edit"])->name("edit");
     Route::post("/update/{article}", [ArticleController::class, "update"])->name("update");
     Route::get("/delete/{article}", [ArticleController::class, "destroy"])->name("delete");
     Route::get("/status-update/{article}", [ArticleController::class, "updateStatus"])->name("update_status");
+
+    Route::get("/task-status-update/{article}/{taskStatus}", [ArticleController::class, "updateTaskStatus"])->name("update_task_status");
 });
 
 
@@ -106,5 +108,3 @@ Route::group(['prefix' => 'role', "as" => "role-"], function () {
     Route::get("/delete/{role}", [RoleController::class, "destroy"])->name("delete");
     Route::get("/status-update/{role}", [RoleController::class, "updateStatus"])->name("update_status");
 });
-
-

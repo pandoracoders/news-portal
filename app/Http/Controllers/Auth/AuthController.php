@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use PragmaRX\Google2FAQRCode\Google2FA;
 
@@ -26,18 +27,15 @@ class AuthController extends Controller
     {
 
         if (auth()->attempt($request->only('email', 'password'))) {
-
-            if (!auth()->user()->google2fa_secret) {
-                // setup 2fa
-                return redirect()->route("2fa-enable");
-            } else {
-                // validate 2fa
-
-                return redirect()->route("2fa-enable");
-
-                dd("validate otp");
+            if (config("constants.enable_2fa")) {
+                if (!auth()->user()->google2fa_secret) {
+                    // setup 2fa
+                    return redirect()->route("2fa-enable");
+                } else {
+                    // validate 2fa
+                    return redirect()->route("2fa-enable");
+                }
             }
-
             return redirect()->intended($this->redirectTo);
         }
         return redirect()->route("login")->withErrors(["email" => "Invalid email or password"]);
@@ -104,8 +102,10 @@ class AuthController extends Controller
 
     public function logout()
     {
+
+        Cache::forget('permissions_' . auth()->id());
         auth()->logout();
         session()->flush();
-        return redirect()->route("home");
+        return redirect()->route("1234");
     }
 }

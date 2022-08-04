@@ -13,7 +13,8 @@
                                 {{ carbon($article->published_at)->format('M d, Y') }}
                             </p>|
                             <p class="article-author">
-                                <a href="#">{{ $article->writer->name }}</a>
+                                <a
+                                    href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
                             </p>
                             <p class="slider-category">
 
@@ -21,7 +22,9 @@
                                     class="text-white">{{ $article->category->title }}</a>
                             </p>
                             <p class="slider-title">
-                                {{ $article->summary }}
+                                <a href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                                    {{ $article->title }}
+                                </a>
                             </p>
                         </figure>
                     </li>

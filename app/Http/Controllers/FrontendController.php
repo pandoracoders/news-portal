@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
+use App\Models\Backend\User;
 
 class FrontendController extends Controller
 {
@@ -46,5 +47,12 @@ class FrontendController extends Controller
     private function getFeaturedArticle()
     {
         return Article::where("is_featured", 1)->limit($this->limit)->get();
+    }
+
+
+
+    public function authorArticle(User $author)
+    {
+        dd($user);
     }
 }

@@ -28,7 +28,7 @@
 
             @foreach ($section['children'] as $link)
                 @if (hasPermission($link['url']))
-                    <li>
+                    <li {{ Route::currentRouteName() == $link['url'] ? 'class=mm-active' : '' }}>
                         <a href="{{ route($link['url']) }}">
                             <div class="parent-icon">
                                 <i class="bi {{ $link['icon'] }}"></i>

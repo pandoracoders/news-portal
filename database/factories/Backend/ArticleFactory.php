@@ -3,6 +3,7 @@
 namespace Database\Factories\Backend;
 
 use App\Models\Backend\Category;
+use App\Models\Backend\Role;
 use App\Models\Backend\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,21 +21,19 @@ class ArticleFactory extends Factory
     public function definition()
     {
         $category = Category::find(random_int(1, Category::count()));
+        $published_at = $this->faker->boolean ? $this->faker->dateTime : '';
         return [
-            "title" => $this->faker->title,
-            "slug" => $this->faker->slug,
+            "title" => $this->faker->sentence(random_int(10, 15)),
+            "slug" => str_slug($this->faker->sentence(random_int(10, 15))),
             "summary" => $this->faker->text,
-            "body" => $this->faker->text,
+            "body" => $this->faker->sentence(random_int(500, 1000)),
             "image" => $this->faker->imageUrl,
             "editor_choice" => $this->faker->boolean,
             "category_id" => $category->id,
-            "writer_id" => function () {
-                return User::where("slug", "writer")->first()->id;
-            },
-            "editor_id" => function () {
-                return User::where("slug", "editor")->first()->id;
-            },
-            "published_at" => $this->faker->dateTime,
+            "writer_id" => User::find(random_int(2, User::count()))->id,
+            "editor_id" => Role::where("title", "Editor")->first()->users->random(1)[0]->id,
+            "published_at" => carbon($published_at),
+            "task_status" => $published_at ? "published" : config("constants.task_status")[random_int(0, 3)],
             "is_featured" => $this->faker->boolean,
             "views" => $this->faker->numberBetween(100, 10000),
             "tables" => function () use ($category) {

@@ -21,7 +21,8 @@
                          <div class="col-8 biography-title">
                              <p class="article-date"> {{ carbon($article->published_at)->format('M d, Y') }}</p>|<p
                                  class="article-author">
-                                 <a href="#">{{ $article->writer->name }}</a>
+                                 <a
+                                     href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
                              </p>
                              <h2>
                                  <a href="{{ route('singlePage', ['slug' => $article->slug]) }}">
@@ -79,7 +80,11 @@
                      </div>
                      <div class="trending-title">
                          <p class="article-date">{{ carbon($article->published_at)->format('M d, Y') }}</p>|<p
-                             class="article-author">{{ $article->writer->name }}</p>
+                             class="article-author"> <a
+                                 href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">
+                                 {{ $article->writer->alias_name }}
+                             </a>
+                         </p>
 
                          <h2>
                              <a class="" href="{{ route('singlePage', ['slug' => $article->slug]) }}">
@@ -89,7 +94,6 @@
                      </div>
                  </div>
              @empty
-
              @endforelse
 
          </div>

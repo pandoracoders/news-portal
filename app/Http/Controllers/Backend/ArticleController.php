@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DataTables\ArticleDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ArticleRequest;
 use App\Models\Backend\Article;
@@ -15,11 +16,12 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ArticleDataTable $datatable)
     {
-        return view($this->path . "index", [
-            "articles" => Article::orderBy("id", "desc")->get()
-        ]);
+        return $datatable->render($this->path . 'index');
+        // return view($this->path . "index", [
+        //     "articles" => Article::orderBy("id", "desc")->get()
+        // ]);
     }
 
     /**
@@ -108,5 +110,31 @@ class ArticleController extends Controller
     {
         $article?->delete();
         return redirect()->route("backend.article-list")->with("success", "Article deleted successfully.");
+    }
+
+
+
+    public function updateTaskStatus(Article $article, $taskStatus)
+    {
+        $user = auth()->user();
+        if ($user->id == $article->writer_id && $article->task_status == "writing" && $taskStatus == "open") {
+            $article->update([
+                "task_status" => $taskStatus,
+            ]);
+            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+        } else if (in_array($user->role->title, ["Editor", "Super Admin"]) && $article->task_status == "open" && $taskStatus == "reviewing") {
+            $article->update([
+                "task_status" => $taskStatus,
+                "editor_id" => $user->id,
+            ]);
+            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+        } else if ($user->id == $article->editor_id && in_array($user->role->title, ["Editor", "Super Admin"])  && $article->task_status == "reviewing" && $taskStatus == "published") {
+            $article->update([
+                "task_status" => $taskStatus,
+            ]);
+            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+        } else {
+            return redirect()->back()->with("error", "You are not authorized to perform this action.");
+        }
     }
 }

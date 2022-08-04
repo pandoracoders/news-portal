@@ -21,8 +21,13 @@ class ArticleTitleController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->role->title == "Writer") {
+            $article_title = ArticleTitle::whereNull("article_id")->get();
+        } else {
+            $article_title = ArticleTitle::all();
+        }
         return view($this->path . "index", [
-            "article_titles" => ArticleTitle::orderBy("id", "desc")->get()
+            "article_titles" => $article_title
         ]);
     }
 

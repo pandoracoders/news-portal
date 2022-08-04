@@ -52,6 +52,7 @@ class Article extends Model
         return $this->belongsToMany(Tag::class, ArticleTag::class);
     }
 
+    
     public static function boot()
     {
         parent::boot();

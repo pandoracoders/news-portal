@@ -44,55 +44,8 @@ class DatabaseSeeder extends Seeder
             Role::create($role);
         }
 
-        $user = User::create([
-            'name' => 'Pradip Parajuli',
-            'email' => 'prad4787@gmail.com',
-            'password' => bcrypt('password'),
-            "alias_name" => "Pradip Parajuli",
-            "slug" => "pradip-parajuli",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => RoleController::getSuperAdminPermission(),
-        ]);
-        $user = User::create([
-            'name' => 'Sandip Dangal',
-            'email' => 'sandipdangal77@gmail.com',
-            'password' => bcrypt('password'),
-            "alias_name" => "Ray",
-            "slug" => "ray",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => RoleController::getSuperAdminPermission(),
-        ]);
 
-
-
-        User::create([
-            'name' => 'Writer',
-            'email' => 'writer@gmail.com',
-            'password' => bcrypt('password'),
-            "alias_name" => "Writer",
-            "slug" => "writer",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Writer")->first()->id,
-            "permissions" => config("constants.writer_permissions"),
-
-        ]);
-
-        User::create([
-            'name' => 'Editor',
-            'email' => 'editor@gmail.com',
-            'password' => bcrypt('password'),
-            "alias_name" => "Editor",
-            "slug" => "editor",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Editor")->first()->id,
-            "permissions" => config("constants.editor_permissions"),
-        ]);
-
-
-
-        $this->call(CategorySeeder::class);
+        $this->call([CategorySeeder::class, UserSeeder::class]);
 
         foreach ($tags as $tag) {
             Tag::create([

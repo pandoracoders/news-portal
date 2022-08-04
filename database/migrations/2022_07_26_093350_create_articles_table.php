@@ -32,7 +32,7 @@ return new class extends Migration
 
             $table->boolean("is_featured")->default(false);
 
-            $table->string("task_status")->default("writting");
+            $table->string("task_status")->default("writing");
 
             $table->boolean(("editor_choice"))->default(false);
 

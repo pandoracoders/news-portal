@@ -21,7 +21,7 @@ Route::get('/1234', function () {
     session()->put("valid-user", "true");
     $url = (URL::temporarySignedRoute('login', now()->addMinutes(1)));
     return redirect()->away($url);
-});
+})->name("1234");
 
 Route::get('/login', [AuthController::class, "login"])->name("login")->middleware(["throttle:5"]);;
 Route::post("/login", [AuthController::class, "postLogin"])->name("post-login");

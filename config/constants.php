@@ -3,6 +3,13 @@
 return [
     "enable_2fa" => false,
     "article_limit" => 8,
+    "task_status" => [
+        "writing",
+        "submitted",
+        "reviewing",
+        "rejected",
+        "published",
+    ],
     "seo_validation" => [
         "meta_title" => "nullable|max:255",
         "meta_description" => "nullable",
@@ -25,6 +32,7 @@ return [
         "backend.category-list",
         "backend.tag-list",
         "backend.tag-create",
+        "backend.article-create",
         "backend.article-list",
     ],
     "home_page_cache_key" => "HOME_PAGE_CACHE",

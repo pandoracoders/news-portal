@@ -1,5 +1,6 @@
 @extends('backend.layouts.index')
 
+@include('backend.datatable')
 
 @push('styles')
     <!--plugins-->
@@ -16,13 +17,38 @@
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/table-datatable.js"></script>
+
+    {{ $dataTable->scripts() }}
+
+
+    <script>
+        $(document).ready(function() {
+            window.table = window.LaravelDataTables[Object.keys(window.LaravelDataTables)[0]];
+
+        });
+
+
+
+        $(document).on("change", ".table-filter", function() {
+            window.table.ajax.url(window.location.href + "?" + $(this).serialize()).load();
+            // window.table.ajax.reload();
+        })
+    </script>
 @endpush
+
+
+@php
+$tabs = [...['all'], ...config('constants.task_status')];
+if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
+    $tabs = array_diff($tabs, ['writing', 'rejected']);
+}
+@endphp
 
 
 @section('content')
     <div class="d-flex justify-content-between mb-2" style="align-items: baseline">
         {{-- <div class="col-"> --}}
-        <h6 class="mb-0 text-uppercase">article List</h6>
+        <h6 class="mb-0 text-uppercase">Article List</h6>
         {{-- </div> --}}
         {{-- <div class="left"> --}}
         {{-- <a href="{{ route('backend.article-create') }}" class="btn btn-primary btn-sm">
@@ -32,110 +58,44 @@
         {{-- </div> --}}
     </div>
 
+
     <div class="card">
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="example2" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Image</th>
-                            <th>Slug</th>
-                            <th>Category</th>
-                            <th>Tags</th>
-                            <th>Info</th>
-                            <th>Task Status</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($articles as $article)
-                            <tr>
-                                <td>{{ $article->title }}</td>
-                                <td>
-                                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" width="100px"
-                                        height="100px">
-                                </td>
-                                <td>
-                                    {{ $article->slug }}
-                                </td>
-                                <td>
-                                    {{ $article->category->title }}
-                                </td>
-                                <td>
+            <ul class="nav nav-tabs nav-primary" role="tablist">
 
-                                    <span class="badge badge-pill btn-primary mr-3">
-                                        {!! implode(
-                                            "</span><span class='badge badge-pill btn-primary mr-3'>",
-                                            $article->tags->pluck('title')->toArray(),
-                                        ) !!}
-                                    </span>
-
-                                </td>
-                                <td>
-                                    <div>
-                                        <span>Writer :</span> <span>{{ $article->writer->name }}</span>
+                @foreach ($tabs as $key => $task)
+                    <li class="nav-item" role="presentation">
+                        @if (Request()->task_status)
+                            <a class="nav-link {{ Request()->task_status == $task ? 'active' : '' }}"
+                                href="{{ route('backend.article-list', ['task_status' => $task == 'all' ? '' : $task]) }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">
+                                        {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}
                                     </div>
-
-                                    @if ($article->editor)
-                                        <div>
-                                            <span>Editor :</span> <span>{{ $article->editor->name }}</span>
-                                        </div>
-                                    @endif
-                                    @if ($article->editor)
-                                        <div>
-                                            <span>Editor :</span> <span>{{ $article->editor->name }}</span>
-                                        </div>
-                                    @endif
-                                    <div>
-                                        <span>Created at :</span> <span>{{ $article->created_at }}</span>
+                                </div>
+                            </a>
+                        @else
+                            <a class="nav-link {{ $key == 0 ? 'active' : '' }}"
+                                href="{{ route('backend.article-list', ['task_status' => $task == 'all' ? '' : $task]) }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="tab-title">
+                                        {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}
                                     </div>
-                                    <div>
-                                        <span>Updated at :</span> <span>{{ $article->updated_at }}</span>
-                                    </div>
+                                </div>
+                            </a>
+                        @endif
 
-                                </td>
-
-                                <td>
-                                    @if ($article->published_at)
-                                        <span class="badge badge-pill btn-success">{{ $article->published_at }}</span>
-                                    @else
-                                        <a href="#" class="badge badge-pill btn-danger">Request to publish</a>
-                                    @endif
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('backend.article-update_status', $article->id) }}" target="_blank"
-                                        class="btn btn-sm btn-{{ $article->status == 1 ? 'success' : 'danger' }}">
-                                        {{ $article->status == 1 ? 'Active' : 'InActive' }}
-                                    </a>
-
-                                </td>
-
-                                <td>
-                                    <a href="{{ route('backend.article-edit', $article->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('backend.article-delete', $article->id) }}"
-                                        class="btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
+                    </li>
+                @endforeach
 
 
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Title</th>
-                            <th>Image</th>
-                            <th>Slug</th>
-                            <th>Order</th>
-
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
+            </ul>
+            <div class="tab-content py-3">
+                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                    <div class="table-responsive">
+                        {{ $dataTable->table() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
