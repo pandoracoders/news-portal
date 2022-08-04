@@ -194,7 +194,7 @@
                     id: tag.id,
                     text: tag.title,
                 };
-            }), ).trigger('change');
+            })).trigger('change');
         });
     </script>
 @endpush

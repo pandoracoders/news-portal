@@ -54,7 +54,7 @@ class ArticleRequest extends FormRequest
         $this->route("article")->tags()->detach();
 
         // dd("hello");
-        foreach ($this->tags as $key => $tag) {
+        foreach ($this->tags ?? [] as $key => $tag) {
             if (intval($tag) == 0) {
                 $tag = Tag::updateOrCreate(
                     [

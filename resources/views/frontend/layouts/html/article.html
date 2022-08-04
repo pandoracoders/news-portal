@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <meta name="description" content="">
+    <meta name="theme-color" content="#db3434">
+    <meta name="msapplication-navbutton-color" content="#db3434">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#db3434">
+    <meta name="article:article-author" content="">
+    <meta name="article:published_time" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:type" content="">
+    <meta property="og:title" content="">
+    <meta property="og:article:published_time" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta property="og:image:alt" content="">
+    <meta property="twitter:title" content="">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:domain" content="">
+    <meta property="twitter:image" content="">
+    <link href="" rel="canonical">
+
+    <style>
+        body a {
+            color: #111;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="/public/frontend/css/splide.min.css">
+    <link rel="stylesheet" href="/public/frontend/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/public/frontend/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/public/frontend/css/article.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <header>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <div class="d-flex">
+                    <button class="navbar-toggler btn-menu d-block" id="sidebarBtnOpen" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="fa-solid fa-align-left menu-icon"></i>
+                        </span>
+                    </button>
+                    <a href="/" class="ml-3 brand-logo d-none" id="navScroll-btn">Website<span
+                            class="colored">Name</span>
+                    </a>
+                </div>
+
+                <a href="/" class="navbar-brand d-lg">
+                    Website Name
+                </a>
+
+                <div class="collapse navbar-collapse d-none d-lg-block" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto text-uppercase">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category 1
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category 1
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category 1
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category 1
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="sidebar" id="sidebar">
+                    <div class="d-flex justify-content-end">
+                        <div class="sidebar__btn-close" id="sidebarBtnClose">
+                            <i class="fa-solid fa-xmark cros-icon"></i>
+                        </div>
+                    </div>
+                    <ul class="pt-3 pt-lg-0 nav-menu menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category on sidebar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category on sidebar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Category on sidebar
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="sub">
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Advertise</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Privacy Policy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Terms Conditions</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a href="Ads" class="nav-link">Ads</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <!-- sidebar social links -->
+                    <div class="links side-links mt-3">
+                        <a href="#">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <div id="searchcontainer">
+
+                    <script async src="https://cse.google.com/cse.js?cx=9eee22d27b4343c6a"></script>
+
+                    <div class="gcse-search"></div>
+
+                    <div class="closeSearch" id="closeSearch">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="sidebar-overlay"></div>
+    <main class="container">
+        <div class="bc">
+            <ul class="breadcrumb-container">
+                <li class="breadcrumb">
+                    <a href="/">
+                        <i class="fa fa-solid fa-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb">
+                    <a href="<%=data.PageType%>" class="text-capitalize">
+                        Category
+                    </a>
+                </li>
+                <li class="breadcrumb active">
+                    <span class="text-capitalize">
+                        Article Title
+                    </span>
+                </li>
+            </ul>
+        </div>
+       
+        <div class="row main-section">
+            <div class="col-lg-8 article-section">
+                <div class="social-share">
+                    <a href="#"><i class="fa-brands fa-facebook facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest pinterest"></i></a>
+                </div>
+                <div class="content-title">
+                    <h1>This is the main title of the article</h1>
+                    <div class="meta-property">
+                        <span>
+                            <span class="published-on"><i class="fa-solid fa-clock"></i> </span><span
+                                class="published-date">Aug 2,
+                                2022</span>
+                        </span>
+                        .
+                        <span><i class="fa-solid fa-pen-to-square"></i></span><span class="updated-date">Aug
+                            3,
+                            2022</span> | By <a href="#"><span class="article-author">Ray</span></a>
+                    </div>
+                </div>
+
+                <div class="featured-image">
+                    <img src="/public/frontend/images/13.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="content-detail">
+
+                    <p> <strong>Hal Auden Cumberbatch</strong> is a celebrity kid born to Benedict Cumberbatch and
+                        Sophie
+                        Hunter. His father is a famous British actor mainly known for his role as Dr. Strange in the
+                        Marvel
+                        Universe. Similarly, his mother, on the other hand, is a well-known theater and opera
+                        director.
+                    </p>
+
+                    <p>He came into the limelight from the day he was born. So, there are a lot of fans and people
+                        who
+                        want
+                        to know more about him. Does he have any siblings? when is his birthday? where does he live?
+                        How
+                        is
+                        his lifestyle? There are a lot of questions but not too many answers.</p>
+
+                    <p>
+                        Thus, today in this article we are going to cover all the facts and details about Hal Auden
+                        Cumberbatch. So, what are we waiting for, let's get dive in!
+                    </p>
+                    <h2>Who is Hal Auden Cumberbatch? Details Regarding Benedict Cumberbatch's Son</h2>
+                    <p>
+                        He was born on <em>March 3rd, 2017</em> to his mother Sophie Hunter, and father Benedict
+                        Cumberbatch. His zodiac sign is Pisces. Similarly, talking about his age, Hal is five years
+                        old
+                        as
+                        of 2022.
+                    </p>
+
+                    <p>
+                        Additionally, his parents gave him the name 'Hal Auden' where Hal is a nickname for Henry
+                        Harold
+                        and
+                        Harry; a Shakespearean character, and Auden is a name of British origin which accounts for
+                        'old
+                        friend.'
+                    </p>
+
+                    <figure class="image">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/1.jpg" alt="Check this">
+                        <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
+                            it is expected to be it is must necessary to maintain the layout when the content of the
+                            image exceeds the normal limit.</figcaption>
+                    </figure>
+
+                    <p>
+                        Furthermore, the celebrity kid has English ancestry and is British by nationality.
+                    </p>
+
+                    <p>
+                        Talking about his education, there is not much information available in that regard. But
+                        because
+                        of
+                        his background, we can say that he is studying in a prestigious school in his locality.
+                    </p>
+                    <h2>Hal Auden's Father and Mother are Both Renowned Personalities</h2>
+
+                    <p>
+                        The celebrity kid's parents are both famous. His father Benedict Timothy Carlton Cumberbatch
+                        aka
+                        Benedict Cumberbatch is an English actor. He is better known for his outstanding acting in
+                        Sherlock
+                        from 2010 to 2017 where he played the lead character Sherlock Holmes. Similarly, He rose to
+                        fame
+                        mainly for playing Dr. Strange in the Marvel Cinematic Universe.
+                    </p>
+
+                    <figure class="image">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/3.jpg" alt="Check this">
+                        <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
+                            it is expected to be it is must necessary to maintain the layout when the content of the
+                            image exceeds the normal limit.</figcaption>
+                    </figure>
+
+                    <p>
+                        The multi-talented actor has also won various awards during his long acting career. He has
+                        won
+                        the
+                        <em>British Academy Television Award</em>, <em>Primetime Emmy Award</em>, and <em>Laurence
+                            Olivier
+                            Award</em>. Along with his win, he has also been nominated for two Academy Awards, two
+                        British
+                        Academy Film Awards, and four Golden Globe Awards.
+                    </p>
+
+                    <p>
+                        Similarly, his mother Sophie Hunter is a well-known English playwright, theatre director,
+                        and
+                        former
+                        actress and singer. She started her career and made her directorial debut in 2007,
+                        codirecting
+                        <em>The Terrific Electric</em> at the Barbican Pit. Along with that, she has also directed
+                        an
+                        <em>Off-Off-Broadway</em> (2010). Sophie directed <em>Phaedra</em> and<em> The Turn of the
+                            Screw</em> (2015).
+                    </p>
+
+                    <figure class="image">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/4.jpg" alt="Check this">
+                        <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
+                            it is expected to be it is must necessary to maintain the layout when the content of the
+                            image exceeds the normal limit.</figcaption>
+                    </figure>
+
+                    <p>
+                        Besides being a director, Hunter has also starred in a couple of tv series like <em>Midsomer
+                            Murders</em> (2004), <em>Mumbai Calling</em> (2007), and <em>Torchwood</em> (2009).
+                    </p>
+                    <h3>When did Hal Auden's Parents Meet, Are They Still Together?</h3>
+                    <p>
+                        Benedict Cumberbatch and Sophie Hunter reportedly <a
+                            href="https://people.com/movies/benedict-cumberbatch-sophie-hunter-relationship-timeline/"
+                            target="_blank" rel="noopener">met</a> in 2009 on a set while filming Burlesque
+                        Fairytales.
+                        The
+                        couple first appeared together in a French Open in June of 2014. Later that year they
+                        shocked
+                        their
+                        fans when the pair announced their engagement in November 2014.
+                    </p>
+
+                    <figure class="image">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/2.jpg" alt="Check this"
+                            width="">
+                        <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
+                            it is expected to be it is must necessary to maintain the layout when the content of the
+                            image exceeds the normal limit.</figcaption>
+                    </figure>
+
+                    <p>
+                        Talking about their marriage the two lovebirds exchanged vows on the <em>14th of February
+                            2015</em>
+                        on Valentine's Day. The wedding took place at the Church of St. Peter and St. Paul in
+                        Mottistone,
+                        England.
+                    </p>
+
+                    <p>
+                        The couple has been married since then and is enjoying their life together. They have also
+                        shared
+                        three sons since their marriage in 2015.
+                    </p>
+                    <h2>Hal Auden Has Two Brothers</h2>
+                    <p>
+                        He is the second eldest son and has two brothers. His elder brother was born Christopher
+                        Carlton
+                        Cumberbatch on June 1, 2015. He got the middle name 'Carlton' from his paternal grandfather.
+                        Similarly, the younger one is named Finn Cumberbatch born in 2019.
+                    </p>
+
+                    <figure class="image">
+                        <img title="Lionel-Messi-2018 (1).jpeg" width="450" src="/public/frontend/images/1.jpg"
+                            alt="Check this">
+                        <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
+                            it is expected to be it is must necessary to maintain the layout when the content of the
+                            image exceeds the normal limit.</figcaption>
+                    </figure>
+
+                    <p>
+                        According to their parents, all three siblings enjoy each other's company and love to spend
+                        time
+                        together, thus having an inseparable bond.
+                    </p>
+                    <h2>Hal Auden Lifestyle and His Parent's Net Worth</h2>
+                    <p>
+                        The star kid and his <a href="https://facebook.com" target="_blank">Check this one</a> two
+                        siblings are enjoying their lives to the fullest. He along with his
+                        two
+                        brothers are living with their parents and living a delighted life. The family currently
+                        lives
+                        in
+                        their beautiful home on the southern fringes of Hampstead Heath.
+                    </p>
+                    <blockquote class="instagram-media" data-instgrm-captioned
+                        data-instgrm-permalink="https://www.instagram.com/p/CgtsqxeMA7C/?utm_source=ig_embed&amp;utm_campaign=loading"
+                        data-instgrm-version="14"
+                        style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                        <div style="padding:16px;"> <a
+                                href="https://www.instagram.com/p/CgtsqxeMA7C/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;"
+                                target="_blank">
+                                <div style=" display: flex; flex-direction: row; align-items: center;">
+                                    <div
+                                        style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">
+                                    </div>
+                                    <div
+                                        style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+                                        <div
+                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">
+                                        </div>
+                                        <div
+                                            style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 19% 0;"></div>
+                                <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg
+                                        width="50px" height="50px" viewBox="0 0 60 60" version="1.1"
+                                        xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g transform="translate(-511.000000, -20.000000)" fill="#000000">
+                                                <g>
+                                                    <path
+                                                        d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg></div>
+                                <div style="padding-top: 8px;">
+                                    <div
+                                        style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">
+                                        View this post on Instagram</div>
+                                </div>
+                                <div style="padding: 12.5% 0;"></div>
+                                <div
+                                    style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
+                                    <div>
+                                        <div
+                                            style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">
+                                        </div>
+                                        <div
+                                            style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">
+                                        </div>
+                                        <div
+                                            style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">
+                                        </div>
+                                    </div>
+                                    <div style="margin-left: 8px;">
+                                        <div
+                                            style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">
+                                        </div>
+                                        <div
+                                            style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)">
+                                        </div>
+                                    </div>
+                                    <div style="margin-left: auto;">
+                                        <div
+                                            style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">
+                                        </div>
+                                        <div
+                                            style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">
+                                        </div>
+                                        <div
+                                            style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
+                                    <div
+                                        style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">
+                                    </div>
+                                    <div
+                                        style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">
+                                    </div>
+                                </div>
+                            </a>
+                            <p
+                                style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                                <a href="https://www.instagram.com/p/CgtsqxeMA7C/?utm_source=ig_embed&amp;utm_campaign=loading"
+                                    style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;"
+                                    target="_blank">A post shared by Genelia Deshmukh (@geneliad)</a>
+                            </p>
+                        </div>
+                    </blockquote>
+                    <script async src="//www.instagram.com/embed.js"></script>
+
+                    <p>
+                        His father and mother are both multi-millionaires. Auden's dad Benedict Cumberbatch is
+                        estimated
+                        to
+                        have a net fortune of <strong>$40 million</strong> which he has gathered from his career in
+                        acting.
+                    </p>
+
+                    <p>
+                        Similarly, his mon Sophie Hunter is estimated to have a fortune of <strong>$4-$5
+                            million</strong>
+                        which she has accumulated from her career as a director, playwright, former actress, and
+                        singer.
+                    </p>
+
+                    &nbsp;
+                </div>
+            </div>
+            <div class="col-lg-4  sidebar-section">
+                <div class="sidebar-section-wrap">
+                    <div class="heading">
+                        <div class="category-segment">
+                            <span>You May Also Like</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="sidebar-post col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/1.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6  col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/3.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6  col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/4.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/5.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/6.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/7.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/8.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/9.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+                            </div>
+
+                        </div>
+                        <div class="sidebar-post  col-md-6 col-lg-12 mt-3">
+                            <div class="image">
+                                <figure class="m-0">
+                                    <a href="#">
+                                        <img src="/public/frontend/images/10.jpg" alt="" class="image_img img-fluid">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="sidebar-post-title">
+
+                                <span class="title"><a href="#">This is the title for trending and to check how
+                                        long
+                                        the
+                                        text goes into
+                                        the title
+                                        section</a>
+                                </span>
+                                <span class="article-date">Jan 25, 2022</span>|<span class="article-author"><a
+                                        href="#">Author</a></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="tags">
+                    <div class="single-tag">
+                        <a href="#">#Tag Content</a>
+                    </div>
+                    <div class="single-tag">
+                        <a href="#">#Tag Content</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="similar-post-section">
+            <div class="heading mt-4 mb-4">
+                <div class="category-segment">
+                    <span>More </span>
+                </div>
+            </div>
+            <div class="row similar-post-container">
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/19.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author on &nbsp; </a></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/7.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author on &nbsp; </a></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/11.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author on &nbsp; </a></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/13.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author on &nbsp; </a></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/15.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author on &nbsp; </a></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="similar-post">
+                        <div class="image">
+                            <figure class="m-0">
+                                <a href="#">
+                                    <img src="/public/frontend/images/17.jpg" alt="" class="image_img img-fluid">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="similar-post-title">
+                            <div class="title"><a href="#"> This is the title for trending and to check how long the
+                                    text goes into
+                                    the title
+                                    section</a>
+                            </div>
+                            <span class="similar-post-date"> Jan 25, 2022</span> <span class="similar-post-author"><a
+                                    href="#">By Author | </a></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer-section">
+        <div class="footer-content pt-3 pb-3">
+            <div class="row">
+                <div class="col-lg-4 mb-50 d-none d-lg-block">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <h2>
+                                <a href="/">
+                                    Website Name
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="footer-social-icon">
+                            <span>Follow us</span>
+                            <a href="#">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-30">
+                    <div class="footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3><span>Useful Links</span></h3>
+                        </div>
+                        <ul class="d-flex d-md-block">
+                            <li><a href="#">Home</a></li>
+                            <li>
+                                <a href="#">
+                                    Category in footer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Category in footer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Category in footer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Category in footer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-50">
+                    <div class="footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3><span>Subscribe</span></h3>
+                        </div>
+                        <div class="footer-text mb-25 d-none d-lg-block">
+                            <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                        </div>
+                        <div class="subscribe-form">
+                            <input type="text" placeholder="Email Address" id="subscribeEmail">
+                            <button type="submit" id="subscriptionButton"><i
+                                    class="fa-regular fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2021, All Right Reserved <a>Website Name</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <script src="/public/frontend/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/public/frontend/js/script.js"></script>
+</body>
+
+</html>

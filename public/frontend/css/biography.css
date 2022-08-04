@@ -1,0 +1,370 @@
+
+.biography{
+    font-family: 'Lora', serif;
+    padding: 0px 35px; 
+}
+
+
+.biography .main-content-section .left-section{
+    position: sticky;
+    top: 6rem;
+
+}
+
+.biography .main-content-section .left-section .featured-image{
+    margin-bottom: 1rem;
+    
+}
+.biography .main-content-section .left-section .featured-image img{
+    border-radius: 5px;
+}
+
+
+.biography .main-content-section .left-section .facts .fact-title{
+    font-weight: 700;
+
+
+}
+
+.meta-property, .meta-property a {
+    margin: 15px 0;
+    font-size: 14px;
+    font-weight: 100;
+    color: rgba(48, 43, 43, 0.8);
+}
+
+.biography .main-content-section .right-section .content-title {
+    font-family: 'Lora', serif;
+    text-transform: capitalize;
+}
+
+.biography .main-content-section .right-section .content-title h1 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    max-width: 728px;
+}
+
+.biography .main-content-section .right-section .content-detail {
+    font-family: 'Lora', serif;
+
+}
+h1{
+    text-transform: capitalize;
+}
+
+.content-detail p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 28px;
+    max-width: 728px;
+
+    color: rgba(0,0,0,0.95)
+}
+
+.content-detail a{
+    color: blue;
+    font-weight: 700;
+}
+
+.content-detail a:hover{
+    color: #999;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
+    transition: text-underline-offset 300ms;
+}
+.content-detail a:visited{
+    color: rgb(169, 11, 126);
+}
+
+.content-detail h2 {
+    font-family: 'Lora', serif;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: 1.75rem;
+    max-width: 728px;
+    line-height: 2.7rem;
+    text-transform: capitalize;
+
+}
+
+.content-detail h3 {
+    font-family: 'Lora', serif;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: 1.50rem;
+    max-width: 728px;
+    line-height: 2.7rem;
+    text-transform: capitalize;
+
+}
+
+.content-detail h4 {
+    font-family: 'Lora', serif;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+    max-width: 728px;
+    line-height: 2.7rem;
+    text-transform: capitalize;
+
+}
+
+.content-detail h5 {
+    font-family: 'Lora', serif;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: 728px;
+    line-height: 2.7rem;
+    text-transform: capitalize;
+
+}
+
+.content-detail h6 {
+    font-family: 'Lora', serif;
+    margin: 1rem 0;
+    font-weight: 600;
+    font-size: .75rem;
+    max-width: 728px;
+    line-height: 2.7rem;
+    text-transform: capitalize;
+
+}
+
+.biography .main-content-section .right-section .content-detail figure {
+    max-width: 470px;
+    margin: auto;
+    margin-bottom: 15px;
+    text-align: center;
+    border: 1px solid rgb(221, 216, 216);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.biography .main-content-section .right-section .content-detail figure.image {
+    max-width: 470px
+}
+
+.biography .main-content-section .right-section .content-detail figure figcaption {
+    padding: 0px 5px;
+    font-size: .85rem;
+    font-weight: 300;
+    margin: auto;
+    max-width: 450px;
+    text-align: left;
+    font-style: italic;
+}
+
+.biography .main-content-section .right-section .content-detail img {
+    max-width: 100%;
+}
+
+
+
+/* Social Share */
+
+/* Social Share  */
+.social-share{
+    display: block;
+    text-align:right;
+    padding-bottom: 15px;
+    
+}
+.social-share .facebook{
+    color: #2374E1;
+    font-size: 1.6rem;
+    padding-right: .5rem;
+}
+.social-share .twitter{
+    font-size: 1.6rem;
+    color: #1D9BF0;
+    padding-right: .5rem;
+
+}
+.social-share .pinterest{
+    font-size: 1.6rem;
+    color: #B8321D;
+    padding-right: .5rem;
+
+}
+
+/* Sidebar Section */
+
+.sidebar-section {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    font-family: 'Lora', serif;
+
+}
+
+.sidebar-section-wrap{
+    position: sticky;
+    top: 6rem;
+}
+
+
+
+.sidebar-section .sidebar-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-section .sidebar-post .image {
+    width: 100%;
+
+}
+
+.sidebar-section .sidebar-post .image_img {
+    border-radius: 5px;
+
+}
+
+.sidebar-section .sidebar-post .title {
+    display: block;
+    padding-left: 5px;
+    font-weight: 400;
+    color: rgba(0,0,0,.0.76);
+    font-size: 15px;
+    line-height: 18px;
+}
+
+
+
+/* Tags */
+.tags .single-tag {
+    display: inline-block;
+}
+
+.tags a {
+    text-transform: uppercase;
+    color: #3c3030 !important;
+    padding: 6px 12px 5px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    background: none;
+    border: 1px solid #DEDEDE;
+    border-radius: 5px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    outline: none;
+}
+
+.tags a:hover {
+    color: #ffffff !important;
+    background-color: rgb(42, 40, 40) !important;
+    border-color: rgb(42, 40, 40) !important;
+}
+
+/* Similar post section */
+.similar-post-section .similar-post {
+    margin-bottom: 20px;
+    padding: 0;
+    border: 1px solid rgba(122, 122, 122, 0.8);
+    border-radius: 20px;
+    box-shadow: 2px 1px rgba(31, 30, 30, 0.7);
+}
+
+.similar-post-section .image_img {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+
+}
+
+.similar-post-section .similar-post-title {
+    display: block;
+    padding: 15px 15px 30px 15px;
+    font-weight: 500;
+    color: rgb(31, 26, 26);
+    font-size: 0.95rem;
+    
+}
+
+.similar-post-section .similar-post-date {
+    float: right;
+    font-size: 13px;
+    color: #3f0202 !important;
+    font-weight: 300;
+
+}
+
+.similar-post-section .similar-post-author {
+    float: right;
+    font-size: 13px;
+    color: #023f38;
+    font-weight: 300;
+}
+
+@media(max-width: 820px){
+    body{
+        overflow-x:hidden;
+    }
+}
+
+
+
+/* ============================================================================================================ */
+/* Table of contents */
+/* ============================================================================================================ */
+
+.table-of-contents{
+    background-color: #F8F9FA;
+    padding: 10px;
+    border: solid 1px #A2A9B1;
+    border-radius: 5px;
+    
+}
+.contents-heading:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.table-of-contents #title{
+    color:#171716;
+    font-weight: 600;
+    
+    border-bottom: 1px solid black;
+}
+
+.table-of-contents ul{
+    list-style: circle;
+    color:rgb(69, 69, 69)
+}
+
+.head-2{
+    padding-left: 0px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.head-3{
+    margin-left: 30px;
+    font-weight: 500;
+    font-size: 1rem;
+
+}
+.head-4{
+    margin-left: 60px;
+    font-weight: 400;
+    font-size: .9rem;
+
+}
+.head-5{
+    margin-left: 90px;
+    font-weight: 300;
+    font-size: .8rem;
+
+    
+}
+.head-6{
+    margin-left: 120px;
+    font-weight: 200;
+    font-size: .7rem;
+
+
+}
