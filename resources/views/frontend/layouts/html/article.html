@@ -198,7 +198,7 @@
                 </li>
             </ul>
         </div>
-       
+
         <div class="row main-section">
             <div class="col-lg-8 article-section">
                 <div class="social-share">
@@ -223,6 +223,26 @@
 
                 <div class="featured-image">
                     <img src="/public/frontend/images/13.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="table-of-contents col-lg-8">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <a data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <h5 class="contents-heading panel-title">Contents</h5>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel"
+                                aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <ul class="list">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content-detail">
 
@@ -288,9 +308,11 @@
                         aka
                         Benedict Cumberbatch is an English actor. He is better known for his outstanding acting in
                         Sherlock
-                        from 2010 to 2017 where he played the lead character Sherlock Holmes. Similarly, He rose to
-                        fame
-                        mainly for playing Dr. Strange in the Marvel Cinematic Universe.
+                    <blockquote>from 2010 to 2017 where he played the lead character Sherlock Holmes. Similarly, He rose
+                        to
+                        fame</blockquote>
+
+                    mainly for playing Dr. Strange in the Marvel Cinematic Universe.
                     </p>
 
                     <figure class="image">
@@ -959,6 +981,48 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        var headingList = document.querySelector('.content-detail').querySelectorAll("h2,h3,h4,h5,h6");
+        var contentSection = document.querySelector('.list');
+
+        // Slugify function
+        function string_to_slug(str) {
+            str = str.toLowerCase().trim();
+            str = str.replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
+
+            return str;
+        }
+
+        for (var i = 0; i < headingList.length; i++) {
+            if (headingList[i].localName == 'h2') {
+                var slug = string_to_slug(headingList[i].innerText);
+                headingList[i].id = `${slug}`
+                contentSection.innerHTML += `<li class="head-2"><a href="#${slug}">${headingList[i].innerText}</a></li>`
+            }
+            else if (headingList[i].localName == 'h3') {
+                var slug = string_to_slug(headingList[i].innerText);
+                contentSection.innerHTML += `<li class="head-3"><a href="#${slug}">${headingList[i].innerText}</a></li>`
+                headingList[i].id = `${slug}`
+            }
+            else if (headingList[i].localName == 'h4') {
+                var slug = string_to_slug(headingList[i].innerText);
+                contentSection.innerHTML += `<li class="head-4"><a href="#${slug}">${headingList[i].innerText}</a></li>`
+                headingList[i].id = `${slug}`
+            }
+            else if (headingList[i].localName == 'h5') {
+                var slug = string_to_slug(headingList[i].innerText);
+                contentSection.innerHTML += `<li class="head-5"><a href="#${slug}">${headingList[i].innerText}</a></li>`
+                headingList[i].id = `${slug}`
+            }
+            else if (headingList[i].localName == 'h6') {
+                var slug = string_to_slug(headingList[i].innerText);
+                contentSection.innerHTML += `<li class="head-6"><a href="#${slug}">${headingList[i].innerText}</a></li>`
+                headingList[i].id = `${slug}`
+            }
+        }
+    </script>
 
     <!-- Back To Top Button -->
     <button onclick="topFunction()" id="myBtn" title="Go to top">

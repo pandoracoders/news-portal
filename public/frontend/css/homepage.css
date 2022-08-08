@@ -168,24 +168,7 @@
 .image_img{
     border-radius: 15px;
 }
-/*-------------------------------------------------------------------------------------------------------------------------------------- Category Page--------------------------------------------------------------------------------------- */
-.category-list .category-post{
-    border-radius: 15px;
-    border: 1px solid #d2d2d2;
-    padding: 10px;
-}
-.category-list .category-post .image .image_img{
-    width: 100%;
-    border-radius: 15px;
-}
-.category-list .category-post .category-title{
-    font-size: 1.3rem;
-    text-transform: capitalize;
-}
-.category-list .category-post .author-div{
-    font-size: 0.6rem;
-    text-transform: capitalize !important;
-}
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------- Other Screens--------------------------------------------------------------------------------------- */
 

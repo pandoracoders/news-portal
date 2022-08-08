@@ -98,7 +98,7 @@
             plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
             imagetools_cors_hosts: ['picsum.photos'],
             menubar: '',
-            toolbar: 'blocks code bold italic underline insertfile image media link alignleft aligncenter alignjustify save numlist bullist charmap fullscreen  preview ',
+            toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen  preview ',
             toolbar_sticky: true,
             autosave_ask_before_unload: true,
             autosave_interval: "5s",
@@ -106,7 +106,7 @@
             autosave_restore_when_empty: false,
             autosave_retention: "5s",
             image_advtab: true,
-            content_css: '//www.tiny.cloud/css/codepen.min.css',
+            content_css: '//www.tiny.cloud/css/codepen.min.css, /',
             link_list: [{
                     title: 'My page 1',
                     value: 'http://www.tinymce.com'

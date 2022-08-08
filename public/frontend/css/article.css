@@ -91,7 +91,7 @@
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
-
+    scroll-margin-top: 100px;
 }
 
 .content-detail h3 {
@@ -102,6 +102,7 @@
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
+    scroll-margin-top: 100px;
 
 }
 
@@ -113,6 +114,7 @@
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
+    scroll-margin-top: 100px;
 
 }
 
@@ -124,6 +126,7 @@
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
+    scroll-margin-top: 100px;
 
 }
 
@@ -135,6 +138,7 @@
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
+    scroll-margin-top: 100px;
 
 }
 
@@ -273,5 +277,68 @@
     font-size: 1.6rem;
     color: #B8321D;
     padding-right: .5rem;
+
+}
+
+
+/* ============================================================================================================ */
+/* Table of contents */
+/* ============================================================================================================ */
+
+.table-of-contents{
+    background-color: #F8F9FA;
+    padding: 10px;
+    border: solid 1px #A2A9B1;
+    border-radius: 5px;
+    
+}
+.contents-heading:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.table-of-contents #title{
+    color:#171716;
+    font-weight: 600;
+    
+    border-bottom: 1px solid black;
+}
+
+.table-of-contents ul{
+    list-style: circle;
+    color:rgb(69, 69, 69);
+   
+}
+
+.head-2{
+    padding-left: 0px;
+    font-size: 1rem;
+    font-weight: 600;
+    
+}
+.head-3{
+    margin-left: 30px;
+    font-weight: 500;
+    font-size: 1rem;
+
+}
+.head-4{
+    margin-left: 60px;
+    font-weight: 400;
+    font-size: .9rem;
+
+}
+.head-5{
+    margin-left: 90px;
+    font-weight: 300;
+    font-size: .8rem;
+
+    
+}
+.head-6{
+    margin-left: 120px;
+    font-weight: 200;
+    font-size: .7rem;
+
 
 }
