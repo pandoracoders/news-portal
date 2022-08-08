@@ -10,8 +10,6 @@ use App\Models\Backend\ArticleTitle;
 use App\Models\Backend\Role;
 use App\Models\Backend\TableSet;
 use App\Models\Backend\Tag;
-use App\Models\Backend\User;
-use Database\Factories\ArticleFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,14 +26,17 @@ class DatabaseSeeder extends Seeder
         $roles = [
             [
                 "title" => "Super Admin",
+                "slug" => "super-admin",
                 "permissions" => RoleController::getSuperAdminPermission(),
             ],
             [
                 "title" => "Writer",
+                "slug" => "writer",
                 "permissions" => config("constants.writer_permissions"),
             ],
             [
                 "title" => "Editor",
+                "slug" => "editor",
                 "permissions" => config("constants.editor_permissions"),
             ],
         ];

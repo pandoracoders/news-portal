@@ -24,30 +24,15 @@
             <div class="collapse navbar-collapse d-none d-lg-block" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto text-uppercase">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category 1
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category 1
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category 1
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category 1
-                        </a>
-                    </li>
-
+                    @foreach ($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
+                                {{ $category->title }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -59,25 +44,16 @@
                 </div>
                 <ul class="pt-3 pt-lg-0 nav-menu menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            Home
-                        </a>
+                        <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category on sidebar
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category on sidebar
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Category on sidebar
-                        </a>
-                    </li>
+
+                    @foreach ($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
+                                {{ $category->title }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
                 <div class="sub">
                     <ul class="sub-menu">

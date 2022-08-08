@@ -84,11 +84,8 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
                                 </div>
                             </a>
                         @endif
-
                     </li>
                 @endforeach
-
-
             </ul>
             <div class="tab-content py-3">
                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
