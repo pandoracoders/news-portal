@@ -102,63 +102,50 @@
             toolbar_sticky: true,
             autosave_ask_before_unload: true,
             autosave_interval: "5s",
-            autosave_prefix: "{{ route("backend.article-update", $article->id) }}",
+            autosave_prefix: "{{ route('backend.article-update', $article->id) }}",
             autosave_restore_when_empty: false,
             autosave_retention: "5s",
             image_advtab: true,
-            content_css: '//www.tiny.cloud/css/codepen.min.css, /',
-            link_list: [{
-                    title: 'My page 1',
-                    value: 'http://www.tinymce.com'
-                },
-                {
-                    title: 'My page 2',
-                    value: 'http://www.moxiecode.com'
-                }
-            ],
-            image_list: [{
-                    title: 'My page 1',
-                    value: 'http://www.tinymce.com'
-                },
-                {
-                    title: 'My page 2',
-                    value: 'http://www.moxiecode.com'
-                }
-            ],
-            image_class_list: [{
-                    title: 'None',
-                    value: ''
-                },
-                {
-                    title: 'Some class',
-                    value: 'class-name'
-                }
-            ],
-            importcss_append: true,
-            file_picker_callback: function(callback, value, meta) {
-                /* Provide file and text for the link dialog */
-                // if (meta.filetype === 'file') {
-                //     callback('https://www.google.com/logos/google.jpg', {
-                //         text: 'My text'
-                //     });
-                // }
 
-                /* Provide image and alt text for the image dialog */
-                // if (meta.filetype === 'image') {
-                //     callback('https://www.google.com/logos/google.jpg', {
-                //         alt: 'My alt text'
-                //     });
-                // }
+            /* enable title field in the Image dialog*/
+            image_title: true,
+            /* enable automatic uploads of images represented by blob or data URIs*/
+            automatic_uploads: true,
 
-                // /* Provide alternative source and posted for the media dialog */
-                // if (meta.filetype === 'media') {
-                //     callback('movie.mp4', {
-                //         source2: 'alt.ogg',
-                //         poster: 'https://www.google.com/logos/google.jpg'
-                //     });
-                // }
+            file_picker_types: 'image',
+            /* and here's our custom image picker*/
+            file_picker_callback: function(cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                input.onchange = function() {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = function() {
+
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        /* call the callback and populate the Title field with the file name */
+                        cb(blobInfo.blobUri(), {
+                            title: file.name
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
             },
-            
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+
+
+            importcss_append: true,
+
             template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
             template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
             height: 520,
