@@ -205,29 +205,24 @@ h1{
 
 
 
-.sidebar-section .sidebar-post {
+.sidebar-section-wrap .sidebar-post{
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.sidebar-section .sidebar-post .image {
-    width: 100%;
-
+.sidebar-section-wrap .sidebar-post .image{
+    width: 40%;
 }
-
 .sidebar-section .sidebar-post .image_img {
     border-radius: 5px;
 
 }
 
-.sidebar-section .sidebar-post .title {
-    display: block;
-    padding-left: 5px;
-    font-weight: 400;
-    color: rgba(0,0,0,.0.76);
-    font-size: 15px;
-    line-height: 18px;
+.sidebar-post .sidebar-post-title{
+    width: 60%;
+}
+.sidebar-post .sidebar-post-title h2{
+    font-size: 14px;
+    font-weight: 300;
 }
 
 

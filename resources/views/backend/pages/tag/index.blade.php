@@ -27,7 +27,7 @@
         {{-- <div class="left"> --}}
         <a href="{{ route('backend.tag-create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-            Add Tag
+           + Add Tag
         </a>
         {{-- </div> --}}
     </div>
@@ -73,7 +73,7 @@
                                         <div class="btn-group">
                                             @if (hasPermission('backend.tag-edit'))
                                                 <a href="{{ route('backend.tag-edit', $tag->id) }}"
-                                                    class="btn btn-primary btn-sm">Edit</a>
+                                                    class="btn btn-warning btn-sm">Edit</a>
                                             @endif
                                             @if (hasPermission('backend.tag-delete'))
                                                 <a href="{{ route('backend.tag-delete', $tag->id) }}"

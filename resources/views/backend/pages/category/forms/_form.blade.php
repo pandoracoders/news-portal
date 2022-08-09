@@ -79,7 +79,7 @@
                     <div class="border p-3 rounded mb-2">
                         <h6 class="mb-0 text-uppercase">Action</h6>
                         <hr>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-success btn-block">
                             {{ isset($category) ? 'Update' : 'Save' }}
                         </button>
                         <a href="{{ route('backend.category-list') }}" class="btn btn-danger btn-block">

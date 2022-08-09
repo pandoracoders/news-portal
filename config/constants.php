@@ -43,7 +43,7 @@ return [
             "children" => [
                 "category" => [
                     "title" => "Category",
-                    "icon" => "bi-list",
+                    "icon" => "bi-folder2-open",
                     "url" => "backend.category-list",
                     "permissions" => [
                         "backend.category-list",
@@ -75,7 +75,7 @@ return [
                     ]
                 ],
                 "article" => [
-                    "title" => "Article",
+                    "title" => "Tasks",
                     "icon" => "bi-newspaper",
                     "url" => "backend.article-list",
                     "permissions" => [
@@ -86,7 +86,7 @@ return [
                     ]
                 ],
                 "article_title" => [
-                    "title" => "Article Title",
+                    "title" => "Topics",
                     "icon" => "bi-card-heading",
                     "url" => "backend.article_title-list",
                     "permissions" => [

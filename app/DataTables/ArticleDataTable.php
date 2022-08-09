@@ -45,18 +45,16 @@ class ArticleDataTable extends DataTable
         $datatable = (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn("title", function ($row) {
-                return "<img src='" . asset($row->image) . "' loading='lazy' width='100px' height='50px'> <span>"
-                    .
-                    (str_word_count($row->title) > 5 ? implode(' ', array_slice(str_word_count($row->title, 2), 0, 5)) . "..." : $row->title)
+                return (str_word_count($row->title) > 5 ? implode(' ', array_slice(str_word_count($row->title, 2), 0, 5)) . "..." : $row->title)
                     . "</span>";
             })
             ->addColumn("info", function ($row) {
                 $td = "";
                 if ($this->user->id != $row->writer_id) {
-                    $td .= "<span> Writer:</span> <span> <b> {$row->writer->name} </b> </span><br/>";
+                    $td .= "<span> Writer:</span> <span> <b> {$row->writer?->name} </b> </span><br/>";
                 }
                 if ($this->user->id != $row->editor_id) {
-                    $td .= "<span> Editor:</span> <span> <b> {$row->editor->name} </b> </span><br/>";
+                    $td .= "<span> Editor:</span> <span> <b> {$row->editor?->name} </b> </span><br/>";
                 }
                 if ($row->task_status == "published") {
                     $td .= "<span> Published:</span> <span> <b> ". carbon($row->published_at)->format("M d,Y H:m") ." </b> </span><br/>";

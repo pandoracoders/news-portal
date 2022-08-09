@@ -27,7 +27,7 @@
         @if (hasPermission('backend.category-create'))
             <a href="{{ route('backend.category-create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i>
-                Add Category
+               + Add Category
             </a>
         @endif
 
@@ -39,8 +39,7 @@
                 <table id="example2" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Image</th>
+                            <th>Name</th>
                             <th>Slug</th>
                             <th>Order</th>
                             @if (hasPermission('backend.category-update_status'))
@@ -55,10 +54,6 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <td>{{ $category->title }}</td>
-                                <td>
-                                    <img src="{{ asset($category->image) }}" alt="{{ $category->title }}" width="100px"
-                                        height="100px">
-                                </td>
                                 <td>
                                     {{ $category->slug }}
                                 </td>
@@ -80,7 +75,7 @@
                                         <div class="btn-group">
                                             @if (hasPermission('backend.category-edit'))
                                                 <a href="{{ route('backend.category-edit', $category->id) }}"
-                                                    class="btn btn-primary btn-sm">Edit</a>
+                                                    class="btn btn-warning btn-sm">Edit</a>
                                             @endif
                                             @if (hasPermission('backend.category-delete'))
                                                 <a href="{{ route('backend.category-delete', $category->id) }}"
@@ -93,8 +88,8 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Title</th>
-                            <th>Image</th>
+                            <th>Name</th>
+                           
                             <th>Slug</th>
                             <th>Order</th>
                             @if (hasPermission('backend.category-edit'))

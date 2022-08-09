@@ -27,7 +27,7 @@
         @if (hasPermission('backend.article_title-create'))
             <a href="{{ route('backend.article_title-create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i>
-                Add Article Title
+                + Create Topic
             </a>
         @endif
     </div>
@@ -76,7 +76,7 @@
                                         <div class="btn-group">
                                             @if (hasPermission('backend.article_title-edit'))
                                                 <a href="{{ route('backend.article_title-edit', $article_title->id) }}"
-                                                    class="btn btn-primary btn-sm">Edit</a>
+                                                    class="btn btn-warning btn-sm">Edit</a>
                                             @endif
                                             @if (hasPermission('backend.article_title-delete'))
                                                 <a href="{{ route('backend.article_title-delete', $article_title->id) }}"
