@@ -48,9 +48,9 @@
     <div class="sidebar-overlay"></div>
     <div id="headerAd" class="adver container text-center">
     </div>
-    <main class="container">
-        @yield('content')
-    </main>
+
+    @yield('content')
+
 
     <div id="footerAd" class="adver container text-center">
     </div>
@@ -109,7 +109,7 @@
                                         '<div class="category-post d-flex" style="flex-direction: column !important">';
                                     html += '<div class="image">';
                                     html += '<figure class="m-0">';
-                                    html += '<a href="' +  d[index].url + '">';
+                                    html += '<a href="' + d[index].url + '">';
                                     html += '<img src="' + d[index].image + '" alt="" class="image_img img-fluid">';
                                     html += '</a>';
                                     html += '</figure>';
@@ -117,7 +117,7 @@
                                     html +=
                                         '<div class="category-post-title" style="display: flex; flex-direction: column;justify-content: space-between; flex:1">';
                                     html += '<div class="title mb-3">';
-                                    html += '<a href="' +  d[index].url + '">';
+                                    html += '<a href="' + d[index].url + '">';
                                     html += d[index].title;
                                     html += '</a>';
                                     html += '</div>';
