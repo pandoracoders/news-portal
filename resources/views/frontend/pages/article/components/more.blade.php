@@ -18,10 +18,10 @@
                             {{ $article->title }}
                         </a>
                     </div>
-                    <div class="d-flex" style="justify-content: end">
-                        <a href="{{ route('authorArticle', $article->writer->slug) }}">By
-                            {{ $article->writer->alias_name }} on
-                        </a>
+                    <div class="similar-post-author" style="justify-content: end">
+                        By  <a href="{{ route('authorArticle', $article->writer->slug) }}">
+                            {{ $article->writer->alias_name }} 
+                        </a>on
 
                         <span class="mx-1">
                             {{ dateFormat($article->published_at) }}

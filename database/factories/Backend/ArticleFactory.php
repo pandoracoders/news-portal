@@ -36,7 +36,7 @@ class ArticleFactory extends Factory
             "body" => $this->faker->sentence(random_int(500, 1000)),
             "image" => rescue(function() use($dir){
                 return getRandomImage($dir);
-            }, uploadImageFromUrl("https://source.unsplash.com/random/500x500", $dir)),
+            }, uploadImageFromUrl("https://source.unsplash.com/random/728x455", $dir)),
             "editor_choice" => $this->faker->boolean,
             "category_id" => $category->id,
             "writer_id" => User::find(random_int(2, User::count()))->id,

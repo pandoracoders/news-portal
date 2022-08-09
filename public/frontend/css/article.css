@@ -17,8 +17,9 @@
     text-transform: capitalize;
 }
 
-.content-title h1 {
+h1 {
     font-family: 'Lora', serif;
+    text-transform: capitalize;
     font-size: 2rem;
     font-weight: 600;
     max-width: 728px;
@@ -159,11 +160,11 @@
 }
 
 .sidebar-section-wrap .sidebar-post{
-    display: flex;
+    display: none;
 }
 
 .sidebar-section-wrap .sidebar-post .image{
-    width: 40%;
+    max-width: 25%;
 }
 .sidebar-section .sidebar-post .image_img {
     border-radius: 5px;
@@ -171,10 +172,10 @@
 }
 
 .sidebar-post .sidebar-post-title{
-    width: 60%;
+    margin-left: 10px;
 }
 .sidebar-post .sidebar-post-title h2{
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
 }
 
@@ -243,10 +244,16 @@
 }
 
 .similar-post-section .similar-post-author {
-    float: right;
+    text-align: right;
     font-size: 13px;
-    color: #023f38;
-    font-weight: 300;
+    color: #099ad3;
+    font-weight: 500;
+}
+.similar-post-section .similar-post-author a {
+    text-align: right;
+    font-size: 13px;
+    color: #a600ff;
+    font-weight: 500;
 }
 
 /* Social Share  */
