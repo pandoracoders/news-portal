@@ -21,13 +21,19 @@ Route::redirect("/index", "/", 301);
 
 Route::get("/", [FrontendController::class, "index"])->name("home");
 
-Route::get("{slug}", [FrontendController::class, "singlePage"])->name("singlePage");
+Route::get("{slug}", [FrontendController::class, "singleArticle"])->name("singleArticle");
+
+Route::get("tag/{tag:slug}", [FrontendController::class, "tags"])->name("tags");
+
+Route::post("category/{category:slug}", [FrontendController::class, "categoryArticles"])->name("categoryArticles")->withoutMiddleware("csrf");
+Route::post("tag/{tag:slug}", [FrontendController::class, "tagArticles"])->name("tagArticles")->withoutMiddleware("csrf");
+Route::post("author/{author:slug}", [FrontendController::class, "authorArticles"])->name("authorArticles")->withoutMiddleware("csrf");
+
 
 Route::get("author/{author:slug}", [FrontendController::class, "authorArticle"])->name("authorArticle");
 
 
+Route::get("/news/search/{field}/{value}", [FrontendController::class, "searchByTableField"])->name("news.search");
 
 
 Route::redirect('/backend', 'dashboard', 301)->middleware("auth");
-
-Route::get("/news/search/{field}/{value}", [FrontendController::class, "searchByTableField"])->name("news.search");

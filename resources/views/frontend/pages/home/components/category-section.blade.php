@@ -12,7 +12,7 @@
                      <div class="biography-single">
                          <div class="col-4 image">
                              <figure class="m-0">
-                                 <a href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                                 <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                      <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                                          class="image_img img-fluid">
                                  </a>
@@ -25,7 +25,7 @@
                                      href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
                              </p>
                              <h2>
-                                 <a href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                                 <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                      {{ $article->title }}
                                  </a>
                              </h2>
@@ -43,7 +43,7 @@
                          <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                              class="image_img img-fluid">
                          <figcaption>
-                             <a class="text-white" href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                             <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                  {{ $article->title }}
                              </a>
                          </figcaption>
@@ -54,7 +54,7 @@
          <div class="row">
              <div class="col-12">
                  <h2 class="text-center load">
-                     <a href="{{ route('singlePage', ['slug' => $section['category']->slug]) }}" class="btn">View
+                     <a href="{{ route('singleArticle', ['slug' => $section['category']->slug]) }}" class="btn">View
                          All</a>
                  </h2>
              </div>
@@ -72,7 +72,7 @@
                  <div class="trending-single">
                      <div class="image">
                          <figure class="m-0">
-                             <a href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                             <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                  <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                                      class="image_img img-fluid">
                              </a>
@@ -87,7 +87,7 @@
                          </p>
 
                          <h2>
-                             <a class="" href="{{ route('singlePage', ['slug' => $article->slug]) }}">
+                             <a class="" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                  {{ $article->title }}
                              </a>
                          </h2>

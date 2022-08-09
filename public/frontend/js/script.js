@@ -57,14 +57,14 @@ var searchfield = document.getElementById('search-terms')
 var searchlabel = document.getElementById('search-label')
 var closeSearch = document.getElementById('closeSearch')
 
-searchlabel.addEventListener(touchorclick, function (e) { // when user clicks on search label
-    searchcontainer.classList.toggle('opensearch') // add or remove 'opensearch' to searchcontainer
-    if (!searchcontainer.classList.contains('opensearch')) { // if hiding searchcontainer
-        searchfield.blur() // blur search field
-        e.preventDefault() // prevent default label behavior of focusing on search field again
-    }
-    e.stopPropagation() // stop event from bubbling upwards
-}, false)
+//  searchlabel.addEventListener(touchorclick, function (e) { // when user clicks on search label
+//     searchcontainer.classList.toggle('opensearch') // add or remove 'opensearch' to searchcontainer
+//     if (!searchcontainer.classList.contains('opensearch')) { // if hiding searchcontainer
+//         searchfield.blur() // blur search field
+//         e.preventDefault() // prevent default label behavior of focusing on search field again
+//     }
+//     e.stopPropagation() // stop event from bubbling upwards
+// }, false)
 
 closeSearch.addEventListener(touchorclick, function (e) { // when user clicks anywhere in document
     searchcontainer.classList.remove('opensearch')

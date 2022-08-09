@@ -42,6 +42,11 @@ class Article extends Model
         return $this->belongsTo(User::class, 'writer_id');
     }
 
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'writer_id');
+    }
+
     public function editor()
     {
         return $this->belongsTo(User::class, 'editor_id');
@@ -52,7 +57,18 @@ class Article extends Model
         return $this->belongsToMany(Tag::class, ArticleTag::class);
     }
 
-    
+
+    public function more()
+    {
+        return Article::whereNot("id", $this->id)->limit(8)->get();
+    }
+
+    public function youMayAlsoLike()
+    {
+        return Article::whereNot("id", $this->id)->limit(8)->get();
+    }
+
+
     public static function boot()
     {
         parent::boot();

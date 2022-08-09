@@ -40,7 +40,8 @@
         },
         "files": [
             "app/Helper/helper.php",
-            "app/Helper/cache.php"
+            "app/Helper/cache.php",
+            "app/Helper/permission.php"
         ]
     },
     "autoload-dev": {

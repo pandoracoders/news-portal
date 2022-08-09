@@ -21,6 +21,10 @@ class Tag extends Model
 
     }
 
+    public function getOriginalTitleAttribute()
+    {
+        return $this->getRawOriginal('title');
+    }
 
     public function getTitleAttribute(){
         return $this->original['title'] .  "(".$this->articles->count().")";

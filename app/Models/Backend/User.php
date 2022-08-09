@@ -72,4 +72,10 @@ class User extends Authenticatable
     {
         return $this->permission->permissions;
     }
+
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class , "writer_id");
+    }
 }

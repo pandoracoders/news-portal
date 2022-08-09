@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
@@ -9,6 +10,13 @@ use App\Models\Backend\User;
 
 class FrontendController extends Controller
 {
+
+    public function __construct()
+    {
+        // view share
+        view()->share("categories", Category::all());
+    }
+
 
     private $limit = 8;
 
@@ -21,38 +29,78 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function singlePage($slug)
+    public function singleArticle($slug)
     {
         $category = Category::where("slug", $slug)->first();
         if ($category) {
-            // return category page
-            dd($category);
+            return view("frontend.pages.category.index", [
+                "category" => $category,
+            ]);
         }
         $article = Article::where("slug", $slug)->first();
         if ($article) {
-            // return article page
-            dd($article);
+            return view("frontend.pages.article.index", [
+                "article" => $article,
+            ]);
         }
         return abort(404);
     }
 
 
+    // private function getFeaturedArticle()
+    // {
+    //     return Article::where("is_featured", 1)->limit($this->limit)->get();
+    // }
 
-    public function searchByTableField($field, $value)
+    public function tags(Tag $tag)
     {
-        dd($field, $value);
+        if ($tag)
+            return view("frontend.pages.tag.index", [
+                "tag" => $tag,
+            ]);
+        else
+            return abort(404);
     }
-
-
-    private function getFeaturedArticle()
-    {
-        return Article::where("is_featured", 1)->limit($this->limit)->get();
-    }
-
 
 
     public function authorArticle(User $author)
     {
-        dd($user);
+        if ($author)
+            return view("frontend.pages.author.index", [
+                "author" => $author,
+            ]);
+        else
+            return abort(404);
+    }
+
+    public function categoryArticles(Category $category)
+    {
+        $limit = 9;
+        $page = request()->get("page", 1);
+        if (request()->ajax()) {
+            $articles = $category->articles()->limit($limit)->offset(($page) * $limit)->get();
+            return response()->json(ArticleResource::collection($articles), 200);
+        }
+        return abort(404);
+    }
+    public function tagArticles(Tag $tag)
+    {
+        $limit = 9;
+        $page = request()->get("page", 1);
+        if (request()->ajax()) {
+            $articles = $tag->articles()->limit($limit)->offset(($page) * $limit)->get();
+            return response()->json(ArticleResource::collection($articles), 200);
+        }
+        return abort(404);
+    }
+    public function authorArticles(User $author)
+    {
+        $limit = 9;
+        $page = request()->get("page", 1);
+        if (request()->ajax()) {
+            $articles = $author->articles()->limit($limit)->offset(($page) * $limit)->get();
+            return response()->json(ArticleResource::collection($articles), 200);
+        }
+        return abort(404);
     }
 }

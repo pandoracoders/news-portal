@@ -20,6 +20,13 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+
+        // check dir
+        $dir = "public/fake-images";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
         $category = Category::find(random_int(1, Category::count()));
         $published_at = $this->faker->boolean ? $this->faker->dateTime : '';
         return [
@@ -27,7 +34,7 @@ class ArticleFactory extends Factory
             "slug" => str_slug($this->faker->sentence(random_int(10, 15))),
             "summary" => $this->faker->text,
             "body" => $this->faker->sentence(random_int(500, 1000)),
-            "image" => $this->faker->imageUrl,
+            "image" => getRandomImage($dir) ?? uploadImageFromUrl($this->faker->imageUrl(640, 480), $dir),
             "editor_choice" => $this->faker->boolean,
             "category_id" => $category->id,
             "writer_id" => User::find(random_int(2, User::count()))->id,

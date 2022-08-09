@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             "slug" => "pradip-parajuli",
         ])->permission()->create([
             "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => RoleController::getSuperAdminPermission(),
+            "permissions" => config("constants.permissions"),
         ]);
         User::create([
             'name' => 'Sandip Dangal',
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             "slug" => "ray",
         ])->permission()->create([
             "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => RoleController::getSuperAdminPermission(),
+            "permissions" => config("constants.permissions"),
         ]);
 
         for ($i = 0; $i < 5; $i++) {
