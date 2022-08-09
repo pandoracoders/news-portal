@@ -34,7 +34,9 @@ class ArticleFactory extends Factory
             "slug" => str_slug($this->faker->sentence(random_int(10, 15))),
             "summary" => $this->faker->text,
             "body" => $this->faker->sentence(random_int(500, 1000)),
-            "image" => getRandomImage($dir) ?? uploadImageFromUrl($this->faker->imageUrl(640, 480), $dir),
+            "image" => rescue(function () use ($dir) {
+                return  getRandomImage($dir);
+            }, uploadImageFromUrl("https://source.unsplash.com/random/300×300", $dir)),
             "editor_choice" => $this->faker->boolean,
             "category_id" => $category->id,
             "writer_id" => User::find(random_int(2, User::count()))->id,
