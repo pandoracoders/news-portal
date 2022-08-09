@@ -1,5 +1,21 @@
 @extends('frontend.layouts.index')
 
+
+@push('styles')
+
+    <style>
+        .similar-post-section .row {
+            display: flex !important;
+
+        }
+
+        .similar-post-section .row>[class*='col-'] {
+            display: flex !important;
+            flex-direction: row !important;
+        }
+    </style>
+@endpush
+
 @if ($article->category->slug == 'biography')
     @include('frontend.pages.article.biography')
 @else

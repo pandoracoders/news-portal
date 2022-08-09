@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 biography">
                 <div class="row">
-                    <div class="col-lg-9 main-content-section">
+                    <div class="col-lg-9 col-md-9 main-content-section">
                         <div class="bc">
                             <ul class="breadcrumb-container">
                                 <li class="breadcrumb">

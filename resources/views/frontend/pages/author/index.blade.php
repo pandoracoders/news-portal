@@ -31,7 +31,7 @@
                 </li>
                 <li class="breadcrumb active">
                     <span class="text-capitalize">
-                        {{ $author->name }}
+                        {{ $author->alias_name }}
                     </span>
                 </li>
             </ul>
@@ -41,7 +41,7 @@
             <div class="container category-title">
                 <h1 class="text-capitalize">All Posts from :
                     <span class="colored">
-                        {{ $author->name }}
+                        {{ $author->alias_name }}
                     </span>
                 </h1>
             </div>
