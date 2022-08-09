@@ -37,11 +37,10 @@
 
         @foreach ($data['category_section'] as $key => $section)
             {{-- {{ dd($key) }} --}}
-            @if ($key == 'biography')
+            
                 @include('frontend.pages.home.components.category-section', [
                     'section' => $section,
                 ])
-            @endif
         @endforeach
 
         @if (count($data['born_today']))

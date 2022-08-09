@@ -50,8 +50,8 @@ class HomePageCache implements ShouldQueue
                 $articles =  $value->articles()->with(["category", "writer"])->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get();
                 $ids = array_merge($ids, $articles->pluck("id")->toArray());
                 $category_section[$value->slug]["articles"] = [
-                    $value->articles()->with(["category", "writer"])->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get(),
-                    $value->articles()->with(["category", "writer"])->limit(2)->whereNotIn("id", $ids)->get()
+                    $value->articles()->with(["category", "writer"])->limit(config("constants.article_limit", 7))->whereNotIn("id", $ids)->get(),
+                    $value->articles()->with(["category", "writer"])->limit(3)->whereNotIn("id", $ids)->get()
                 ];
                 if ($key == 0) {
 

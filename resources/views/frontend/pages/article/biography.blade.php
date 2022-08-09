@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 biography">
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 main-content-section">
+                    <div class="col-lg-9 col-md-12 main-content-section">
                         <div class="bc">
                             <ul class="breadcrumb-container">
                                 <li class="breadcrumb">
@@ -18,12 +18,12 @@
                                 <li class="breadcrumb">
                                     <a href="{{ route('singleArticle', $article->category->slug) }}"
                                         class="text-capitalize">
-                                        Category
+                                        {{ $article->category->slug }}
                                     </a>
                                 </li>
                                 <li class="breadcrumb active">
-                                    <span class="text-capitalize">
-                                        {{ $article->title }}
+                                    <span>
+                                        {{ $article->slug }}
                                     </span>
                                 </li>
                             </ul>
