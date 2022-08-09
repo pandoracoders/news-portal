@@ -1,7 +1,7 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/homepage.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/homepage.css" type="text/css">
 @endpush
 
 @push('scripts')

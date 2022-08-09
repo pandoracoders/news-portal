@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/biography.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.css" type="text/css">
 @endpush
 
 @section('content')
