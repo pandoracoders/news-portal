@@ -62,7 +62,7 @@
                                 @if (hasPermission('backend.article_title-update_status'))
                                     <td>
                                         <a href="{{ route('backend.article_title-update_status', $article_title->id) }}"
-                                            target="_blank"
+
                                             class="btn btn-sm btn-{{ $article_title->status == 1 ? 'success' : 'danger' }}">
                                             {{ $article_title->status == 1 ? 'Active' : 'InActive' }}
                                         </a>

@@ -21,38 +21,38 @@ return [
         "url"
     ],
     "permissions" => [
-        "view_category",
-        "manage_category",
-        "view_tag",
-        "manage_tag",
-        "view_table",
-        "manage_table",
-        "view_article_title",
-        "pick_article_title",
-        "manage_article_title",
-        "publish_article",
-        "view_article",
-        "manage_article",
-        "view_user",
-        "manage_user",
+        "category-view",
+        "category-manage",
+        "tag-view",
+        "tag-manage",
+        "table-view",
+        "table-manage",
+        "article_title-view",
+        "article_title-pick",
+        "article_title-manage",
+        "article-publish",
+        "article-view",
+        "article-manage",
+        "user-view",
+        "user-manage",
         "assign_permission",
-        "view_role",
-        "manage_role",
+        "role-view",
+        "role-manage",
     ],
     "writer_permissions" => [
-        "view_category",
-        "view_tag",
-        "view_article_title",
-        "pick_article_title",
-        "view_article",
+        "category-view",
+        "tag-view",
+        "article_title-view",
+        "article_title-pick",
+        "article-view",
     ],
     "editor_permissions" => [
-        "view_category",
-        "view_tag",
-        "view_article_title",
-        "pick_article_title",
-        "view_article",
-        "publish_article",
+        "category-view",
+        "tag-view",
+        "article_title-view",
+        "article_title-pick",
+        "article-view",
+        "article-publish",
     ],
     "home_page_cache_key" => "HOME_PAGE_CACHE",
 
@@ -63,9 +63,9 @@ return [
                 "category" => [
                     "title" => "Category",
                     "icon" => "bi-folder2-open",
-                    "url" => "backend.category-list",
+                    "url" => "backend.category-view",
                     "permissions" => [
-                        "backend.category-list",
+                        "backend.category-view",
                         "backend.category-create",
                         "backend.category-edit",
                         "backend.category-delete"
@@ -74,9 +74,9 @@ return [
                 "tag" => [
                     "title" => "Tag",
                     "icon" => "bi-tags",
-                    "url" => "backend.tag-list",
+                    "url" => "backend.tag-view",
                     "permissions" => [
-                        "backend.tag-list",
+                        "backend.tag-view",
                         "backend.tag-create",
                         "backend.tag-edit",
                         "backend.tag-delete"
@@ -85,9 +85,9 @@ return [
                 "table_set" => [
                     "title" => "Table Set",
                     "icon" => "bi-table",
-                    "url" => "backend.table_set-list",
+                    "url" => "backend.table_set-view",
                     "permissions" => [
-                        "backend.table_set-list",
+                        "backend.table_set-view",
                         "backend.table_set-create",
                         "backend.table_set-edit",
                         "backend.table_set-delete"
@@ -96,9 +96,9 @@ return [
                 "article" => [
                     "title" => "Tasks",
                     "icon" => "bi-newspaper",
-                    "url" => "backend.article-list",
+                    "url" => "backend.article-view",
                     "permissions" => [
-                        "backend.article-list",
+                        "backend.article-view",
                         "backend.article-create",
                         "backend.article-edit",
                         "backend.article-delete"
@@ -107,9 +107,9 @@ return [
                 "article_title" => [
                     "title" => "Topics",
                     "icon" => "bi-card-heading",
-                    "url" => "backend.article_title-list",
+                    "url" => "backend.article_title-view",
                     "permissions" => [
-                        "backend.article_title-list",
+                        "backend.article_title-view",
                         "backend.article_title-create",
                         "backend.article_title-edit",
                         "backend.article_title-delete"
@@ -125,25 +125,25 @@ return [
                 "user" => [
                     "title" => "User",
                     "icon" => "bi-person-plus-fill",
-                    "url" => "backend.user-list",
+                    "url" => "backend.user-view",
                     "permissions" => [
-                        "backend.user-list",
+                        "backend.user-view",
                         "backend.user-create",
                         "backend.user-edit",
                         "backend.user-delete"
                     ]
                 ],
-                "role" => [
-                    "title" => "Role",
-                    "icon" => "bi-person-check-fill",
-                    "url" => "backend.role-list",
-                    "permissions" => [
-                        "backend.role-list",
-                        "backend.role-create",
-                        "backend.role-edit",
-                        "backend.role-delete"
-                    ]
-                ],
+                // "role" => [
+                //     "title" => "Role",
+                //     "icon" => "bi-person-check-fill",
+                //     "url" => "backend.role-view",
+                //     "permissions" => [
+                //         "backend.role-view",
+                //         "backend.role-create",
+                //         "backend.role-edit",
+                //         "backend.role-delete"
+                //     ]
+                // ],
             ],
         ],
     ],

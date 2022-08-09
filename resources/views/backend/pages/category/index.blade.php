@@ -27,7 +27,7 @@
         @if (hasPermission('backend.category-create'))
             <a href="{{ route('backend.category-create') }}" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus"></i>
-               + Add Category
+                + Add Category
             </a>
         @endif
 
@@ -63,7 +63,6 @@
                                 @if (hasPermission('backend.category-update_status'))
                                     <td>
                                         <a href="{{ route('backend.category-update_status', $category->id) }}"
-                                            target="_blank"
                                             class="btn btn-sm btn-{{ $category->status == 1 ? 'success' : 'danger' }}">
                                             {{ $category->status == 1 ? 'Active' : 'InActive' }}
                                         </a>
@@ -89,10 +88,9 @@
                     <tfoot>
                         <tr>
                             <th>Name</th>
-                           
                             <th>Slug</th>
                             <th>Order</th>
-                            @if (hasPermission('backend.category-edit'))
+                            @if (hasPermission('backend.category-update_status'))
                                 <th>Status</th>
                             @endif
                             @if (hasPermission('backend.category-edit') || hasPermission('backend.category-delete'))

@@ -65,7 +65,7 @@ function getTitle($str)
                         <button type="submit" class="btn btn-primary btn-block">
                             {{ isset($role) ? 'Update' : 'Save' }}
                         </button>
-                        <a href="{{ route('backend.role-list') }}" class="btn btn-danger btn-block">
+                        <a href="{{ route('backend.role-view') }}" class="btn btn-danger btn-block">
                             Cancel
                         </a>
                     </div>

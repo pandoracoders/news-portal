@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
 
 Route::group(['prefix' => 'category', "as" => "category-"], function () {
-    Route::get("/", [CategoryController::class, "index"])->name("list");
+    Route::get("/", [CategoryController::class, "index"])->name("view");
     Route::get("/create", [CategoryController::class, "create"])->name("create");
     Route::post("/store", [CategoryController::class, "store"])->name("store");
     Route::get("/edit/{category}", [CategoryController::class, "edit"])->name("edit");
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'category', "as" => "category-"], function () {
 });
 
 Route::group(['prefix' => 'table_set', "as" => "table_set-"], function () {
-    Route::get("/", [TableSetController::class, "index"])->name("list");
+    Route::get("/", [TableSetController::class, "index"])->name("view");
     Route::get("/create", [TableSetController::class, "create"])->name("create");
     Route::post("/store", [TableSetController::class, "store"])->name("store");
     Route::get("/edit/{table_set}", [TableSetController::class, "edit"])->name("edit");
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'table_set', "as" => "table_set-"], function () {
 });
 
 Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
-    Route::get("/", [TagController::class, "index"])->name("list");
+    Route::get("/", [TagController::class, "index"])->name("view");
     Route::get("/create", [TagController::class, "create"])->name("create");
     Route::post("/store", [TagController::class, "store"])->name("store");
     Route::get("/edit/{tag}", [TagController::class, "edit"])->name("edit");
@@ -59,7 +59,7 @@ Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
 
 
 Route::group(['prefix' => 'article', "as" => "article-"], function () {
-    Route::get("/{task_status?}", [ArticleController::class, "index"])->name("list");
+    Route::get("/{task_status?}", [ArticleController::class, "index"])->name("view");
     Route::get("/create", [ArticleController::class, "create"])->name("create");
     Route::post("/store", [ArticleController::class, "store"])->name("store");
     Route::get("/edit/{article}", [ArticleController::class, "edit"])->name("edit");
@@ -72,7 +72,7 @@ Route::group(['prefix' => 'article', "as" => "article-"], function () {
 
 
 Route::group(['prefix' => 'article-title', "as" => "article_title-"], function () {
-    Route::get("/", [ArticleTitleController::class, "index"])->name("list");
+    Route::get("/", [ArticleTitleController::class, "index"])->name("view");
     Route::get("/create", [ArticleTitleController::class, "create"])->name("create");
     Route::post("/store", [ArticleTitleController::class, "store"])->name("store");
     Route::get("/edit/{article_title}", [ArticleTitleController::class, "edit"])->name("edit");
@@ -89,7 +89,7 @@ Route::group(['prefix' => 'article-title', "as" => "article_title-"], function (
 });
 
 Route::group(['prefix' => 'user', "as" => "user-"], function () {
-    Route::get("/", [UserController::class, "index"])->name("list");
+    Route::get("/", [UserController::class, "index"])->name("view");
     Route::get("/create", [UserController::class, "create"])->name("create");
     Route::post("/store", [UserController::class, "store"])->name("store");
     Route::get("/edit/{user}", [UserController::class, "edit"])->name("edit");
@@ -100,7 +100,7 @@ Route::group(['prefix' => 'user', "as" => "user-"], function () {
 
 
 Route::group(['prefix' => 'role', "as" => "role-"], function () {
-    Route::get("/", [RoleController::class, "index"])->name("list");
+    Route::get("/", [RoleController::class, "index"])->name("view");
     Route::get("/create", [RoleController::class, "create"])->name("create");
     Route::post("/store", [RoleController::class, "store"])->name("store");
     Route::get("/edit/{role}", [RoleController::class, "edit"])->name("edit");

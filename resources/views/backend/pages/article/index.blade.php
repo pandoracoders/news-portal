@@ -67,7 +67,7 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
                     <li class="nav-item" role="presentation">
                         @if (Request()->task_status)
                             <a class="nav-link {{ Request()->task_status == $task ? 'active' : '' }}"
-                                href="{{ route('backend.article-list', ['task_status' => $task == 'all' ? '' : $task]) }}">
+                                href="{{ route('backend.article-view', ['task_status' => $task == 'all' ? '' : $task]) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
                                         {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}
@@ -76,7 +76,7 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
                             </a>
                         @else
                             <a class="nav-link {{ $key == 0 ? 'active' : '' }}"
-                                href="{{ route('backend.article-list', ['task_status' => $task == 'all' ? '' : $task]) }}">
+                                href="{{ route('backend.article-view', ['task_status' => $task == 'all' ? '' : $task]) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
                                         {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}

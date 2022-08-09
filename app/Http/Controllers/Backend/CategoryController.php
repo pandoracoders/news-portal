@@ -41,7 +41,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         Category::create($request->validated());
-        return redirect()->route("backend.category-list")->with("success", "Category created successfully.");
+        return redirect()->route("backend.category-view")->with("success", "Category created successfully.");
     }
 
 
@@ -69,7 +69,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        return redirect()->route("backend.category-list")->with("success", "Category updated successfully.");
+        return redirect()->route("backend.category-view")->with("success", "Category updated successfully.");
     }
 
     /**
@@ -81,6 +81,18 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category?->delete();
-        return redirect()->route("backend.category-list")->with("success", "Category deleted successfully.");
+        return redirect()->route("backend.category-view")->with("success", "Category deleted successfully.");
+    }
+
+
+
+    public function updateStatus(Category $category)
+    {
+        if ($category && $category->id) {
+            $category->status = !$category->status;
+            $category->save();
+            return redirect()->route("backend.category-view")->with("success", "Category status updated successfully.");
+        }
+        return redirect()->route("backend.category-view")->with("error", "Category not found.");
     }
 }

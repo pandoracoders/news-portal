@@ -56,7 +56,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('backend.user-update_status', $user->id) }}" target="_blank"
+                                    <a href="{{ route('backend.user-update_status', $user->id) }}"
                                         class="btn btn-sm btn-{{ $user->status == 1 ? 'success' : 'danger' }}">
                                         {{ $user->status == 1 ? 'Active' : 'InActive' }}
                                     </a>

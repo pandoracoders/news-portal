@@ -111,7 +111,7 @@
                             <button type="submit" class="btn btn-primary btn-block">
                                 {{ isset($user) ? 'Update' : 'Save' }}
                             </button>
-                            <a href="{{ route('backend.user-list') }}" class="btn btn-danger btn-block">
+                            <a href="{{ route('backend.user-view') }}" class="btn btn-danger btn-block">
                                 Cancel
                             </a>
                         </div>
@@ -150,7 +150,7 @@
 
             const callApi = (role_id) => {
                 $.ajax({
-                    url: "{{ route('backend.role-list') }}",
+                    url: "{{ route('backend.role-view') }}",
                     type: "GET",
                     data: {
                         role_id: role_id,

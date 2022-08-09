@@ -49,7 +49,7 @@ class RoleController extends Controller
     {
         // dd($request->validated());
         Role::create($request->validated());
-        return redirect()->route("backend.role-list")->with("success", "Role created successfully.");
+        return redirect()->route("backend.role-view")->with("success", "Role created successfully.");
     }
 
 
@@ -79,7 +79,7 @@ class RoleController extends Controller
     {
         // dd($request->validated());
         $role->update($request->validated());
-        return redirect()->route("backend.role-list")->with("success", "Role updated successfully.");
+        return redirect()->route("backend.role-view")->with("success", "Role updated successfully.");
     }
 
     /**
@@ -91,7 +91,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role?->delete();
-        return redirect()->route("backend.role-list")->with("success", "Role deleted successfully.");
+        return redirect()->route("backend.role-view")->with("success", "Role deleted successfully.");
     }
 
 

@@ -60,7 +60,7 @@
 
                                 @if (hasPermission('backend.tag-update_status'))
                                     <td>
-                                        <a href="{{ route('backend.tag-update_status', $tag->id) }}" target="_blank"
+                                        <a href="{{ route('backend.tag-update_status', $tag->id) }}"
                                             class="btn btn-sm btn-{{ $tag->status == 1 ? 'success' : 'danger' }}">
                                             {{ $tag->status == 1 ? 'Active' : 'InActive' }}
                                         </a>

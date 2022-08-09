@@ -54,7 +54,6 @@ class HomePageCache implements ShouldQueue
                     $value->articles()->with(["category", "writer"])->limit(2)->whereNotIn("id", $ids)->get()
                 ];
                 if ($key == 0) {
-
                     $category_section[$value->slug]["second"]["title"] = "Editor Choice";
                     $category_section[$value->slug]["second"]["articles"] = Article::with(["category", "writer"])->where("is_featured", 1)->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get();
                 } else if ($key == 1) {

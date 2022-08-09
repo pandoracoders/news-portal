@@ -82,7 +82,7 @@
                         <button type="submit" class="btn btn-success btn-block">
                             {{ isset($category) ? 'Update' : 'Save' }}
                         </button>
-                        <a href="{{ route('backend.category-list') }}" class="btn btn-danger btn-block">
+                        <a href="{{ route('backend.category-view') }}" class="btn btn-danger btn-block">
                             Cancel
                         </a>
                     </div>

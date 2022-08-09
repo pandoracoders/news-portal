@@ -145,20 +145,3 @@ if (!function_exists("clearHomePageCache")) {
 }
 
 
-// permission check
-
-if (!function_exists("hasPermission")) {
-    function hasPermission($permission)
-    {
-        $permissions = Cache::rememberForever("permissions_" . auth()->id(), function () {
-            return auth()->user()->permissions;
-        });
-
-        // dd($permissions);
-
-        if (in_array($permission, $permissions)) {
-            return true;
-        }
-        return false;
-    }
-}

@@ -52,7 +52,7 @@ class ArticleTitleController extends Controller
     public function store(ArticleTitleRequest $request)
     {
         ArticleTitle::create($request->validated());
-        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle created successfully.");
+        return redirect()->route("backend.article_title-view")->with("success", "ArticleTitle created successfully.");
     }
 
 
@@ -81,7 +81,7 @@ class ArticleTitleController extends Controller
     public function update(ArticleTitleRequest $request, ArticleTitle $article_title)
     {
         $article_title->update($request->validated());
-        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle updated successfully.");
+        return redirect()->route("backend.article_title-view")->with("success", "ArticleTitle updated successfully.");
     }
 
     /**
@@ -93,16 +93,13 @@ class ArticleTitleController extends Controller
     public function destroy(ArticleTitle $article_title)
     {
         $article_title?->delete();
-        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle deleted successfully.");
+        return redirect()->route("backend.article_title-view")->with("success", "ArticleTitle deleted successfully.");
     }
 
 
 
     public function pick(ArticleTitle $article_title)
     {
-
-
-
         $article = Article::create([
             "title" => $article_title->title,
             "slug" => Str::slug($article_title->title),
@@ -138,6 +135,16 @@ class ArticleTitleController extends Controller
             }
             fclose($open);
         }
-        return redirect()->route("backend.article_title-list")->with("success", "ArticleTitle Imported successfully.");
+        return redirect()->route("backend.article_title-view")->with("success", "ArticleTitle Imported successfully.");
+    }
+
+    public function updateStatus(ArticleTitle $article_title)
+    {
+        if ($article_title && $article_title->id) {
+            $article_title->status = !$article_title->status;
+            $article_title->save();
+            return redirect()->route("backend.article_title-view")->with("success", "ArticleTitle status updated successfully.");
+        }
+        return redirect()->route("backend.article_title-view")->with("error", "ArticleTitle not found.");
     }
 }

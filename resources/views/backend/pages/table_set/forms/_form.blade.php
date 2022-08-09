@@ -61,7 +61,7 @@
                             <button type="submit" class="btn btn-primary btn-block">
                                 {{ isset($table_set) ? 'Update' : 'Save' }}
                             </button>
-                            <a href="{{ route('backend.table_set-list') }}" class="btn btn-danger btn-block">
+                            <a href="{{ route('backend.table_set-view') }}" class="btn btn-danger btn-block">
                                 Cancel
                             </a>
                         </div>

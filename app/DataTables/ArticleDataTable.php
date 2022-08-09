@@ -16,12 +16,17 @@ class ArticleDataTable extends DataTable
     private $role;
     private $user;
 
+    private $showAction = true;
+
+
+
 
 
     public function __construct()
     {
         $this->user = auth()->user();
-        $this->role = $this->user->role->title;
+        $this->role = $this->user->role->slug;
+        $this->showAction = $this->showAction();
     }
 
 
@@ -36,7 +41,6 @@ class ArticleDataTable extends DataTable
 
         $rawColumns = [
             "Active Status",
-            "action",
             "task_status",
             "title",
             "info"
@@ -57,14 +61,14 @@ class ArticleDataTable extends DataTable
                     $td .= "<span> Editor:</span> <span> <b> {$row->editor?->name} </b> </span><br/>";
                 }
                 if ($row->task_status == "published") {
-                    $td .= "<span> Published:</span> <span> <b> ". carbon($row->published_at)->format("M d,Y H:m") ." </b> </span><br/>";
+                    $td .= "<span> Published:</span> <span> <b> " . carbon($row->published_at)->format("M d,Y H:m") . " </b> </span><br/>";
                 }
 
                 return $td;
             })
             ->addColumn("Active Status", function ($article) {
                 // dd($this->role);
-                if ($this->role == "Writer") {
+                if ($this->role == "writer") {
                     return "<span class='badge badge-sm btn-" . ($article->status ? 'success' : 'danger') . "'>" . ($article->status ? "Active" : "Inactive") . "</span>";
                 } else {
                     return "<a href='"  .  route("backend.article-update_status", $article)  . "' class='badge badge-sm btn-" . ($article->status ? 'success' : 'danger') . "'>" . ($article->status ? "Active" : "Inactive") . "</a>";
@@ -84,10 +88,15 @@ class ArticleDataTable extends DataTable
         }
 
 
-        return $datatable->addColumn("action", function ($row) {
-            return $this->getAction($row);
-        })
-            ->rawColumns($rawColumns);
+        if ($this->showAction) {
+            $datatable->addColumn("action", function ($row) {
+                return $this->getAction($row);
+            });
+            array_push($rawColumns, "action");
+        }
+
+
+        return $datatable->rawColumns($rawColumns);
     }
 
     /**
@@ -98,12 +107,12 @@ class ArticleDataTable extends DataTable
      */
     public function query(Article $model): QueryBuilder
     {
-        $model = $model->newQuery();
+        $model = $model->orderBy("published_at")->newQuery();
         if (request("task_status")) {
             $model->where("task_status", request("task_status"));
         }
 
-        if ($this->role == "Writer") {
+        if ($this->role == "writer") {
             $model->where("writer_id", $this->user->id);
         } elseif ($this->role == "Editor") {
             $model->where("editor_id", $this->user->id);
@@ -123,15 +132,6 @@ class ArticleDataTable extends DataTable
             ->setTableId('article-table')
             ->columns($this->getColumns())
             ->minifiedAjax();
-        // ->dom('Bfrtip')
-        // ->orderBy(1)
-        // ->buttons(
-        //     Button::make('create'),
-        //     Button::make('export'),
-        //     Button::make('print'),
-        //     Button::make('reset'),
-        //     Button::make('reload')
-        // );
     }
 
     /**
@@ -153,8 +153,11 @@ class ArticleDataTable extends DataTable
         if (request()->task_status == "published") {
             array_push($columns, Column::make("views")->width(60)->class("text-center"));
         }
+        if ($this->showAction) {
+            array_push($columns, Column::make("action"));
+        }
 
-        return [...$columns, ...[Column::make("action")]];
+        return $columns;
     }
 
     /**
@@ -171,7 +174,7 @@ class ArticleDataTable extends DataTable
     public function getAction($row)
     {
         $td = "";
-        if ($this->role == "Writer") {
+        if ($this->role == "writer") {
             if (in_array($row->task_status, ["writing", "rejected"])) {
                 $td = "<a href='" . route('backend.article-edit', $row) . "'
         class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
@@ -185,5 +188,31 @@ class='badge badge-success badge-sm'> <i class='bi bi-check-circle'></i>Post for
         }
 
         return $td;
+    }
+
+
+
+    private function showAction()
+    {
+        if ($this->role == "writer") {
+            $hide_condition = [
+                "published",
+                "reviewing",
+                "submitted",
+            ];
+        } else {
+            $hide_condition = [
+                "published",
+                "reviewing",
+                "submitted",
+                "writing",
+                "rejected",
+            ];
+        }
+
+        if (in_array(request("task_status", ''), $hide_condition)) {
+            return false;
+        }
+        return true;
     }
 }

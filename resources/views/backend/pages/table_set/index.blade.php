@@ -55,7 +55,7 @@
 
                                 <td>
                                     <a href="{{ route('backend.table_set-update_status', $table_set->id) }}"
-                                        target="_blank"
+
                                         class="btn btn-sm btn-{{ $table_set->status == 1 ? 'success' : 'danger' }}">
                                         {{ $table_set->status == 1 ? 'Active' : 'InActive' }}
                                     </a>

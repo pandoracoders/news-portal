@@ -19,9 +19,7 @@ class ArticleController extends Controller
     public function index(ArticleDataTable $datatable)
     {
         return $datatable->render($this->path . 'index');
-        // return view($this->path . "index", [
-        //     "articles" => Article::orderBy("id", "desc")->get()
-        // ]);
+
     }
 
     /**
@@ -47,7 +45,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         Article::create($request->validated());
-        return redirect()->route("backend.article-list")->with("success", "Article created successfully.");
+        return redirect()->route("backend.article-view")->with("success", "Article created successfully.");
     }
 
 
@@ -109,7 +107,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article?->delete();
-        return redirect()->route("backend.article-list")->with("success", "Article deleted successfully.");
+        return redirect()->route("backend.article-view")->with("success", "Article deleted successfully.");
     }
 
 
@@ -121,20 +119,32 @@ class ArticleController extends Controller
             $article->update([
                 "task_status" => $taskStatus,
             ]);
-            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+            return redirect()->route("backend.article-view")->with("success", "Article Task status updated successfully.");
         } else if (in_array($user->role->title, ["Editor", "Super Admin"]) && $article->task_status == "open" && $taskStatus == "reviewing") {
             $article->update([
                 "task_status" => $taskStatus,
                 "editor_id" => $user->id,
             ]);
-            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+            return redirect()->route("backend.article-view")->with("success", "Article Task status updated successfully.");
         } else if ($user->id == $article->editor_id && in_array($user->role->title, ["Editor", "Super Admin"])  && $article->task_status == "reviewing" && $taskStatus == "published") {
             $article->update([
                 "task_status" => $taskStatus,
             ]);
-            return redirect()->route("backend.article-list")->with("success", "Article Task status updated successfully.");
+            return redirect()->route("backend.article-view")->with("success", "Article Task status updated successfully.");
         } else {
             return redirect()->back()->with("error", "You are not authorized to perform this action.");
         }
+    }
+
+
+
+    public function updateStatus(Article $article)
+    {
+        if ($article && $article->id) {
+            $article->status = !$article->status;
+            $article->save();
+            return redirect()->route("backend.article-view")->with("success", "Article status updated successfully.");
+        }
+        return redirect()->route("backend.article-view")->with("error", "Article not found.");
     }
 }

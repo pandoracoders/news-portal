@@ -41,7 +41,7 @@
                         <button type="submit" class="btn btn-success btn-block">
                             {{ isset($tag) ? 'Update' : 'Save' }}
                         </button>
-                        <a href="{{ route('backend.tag-list') }}" class="btn btn-danger btn-block">
+                        <a href="{{ route('backend.tag-view') }}" class="btn btn-danger btn-block">
                             Cancel
                         </a>
                     </div>
