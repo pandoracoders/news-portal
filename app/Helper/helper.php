@@ -14,15 +14,12 @@ if (!function_exists("str_slug")) {
     }
 }
 
-
-
 if (!function_exists("carbon")) {
     function carbon($date = null)
     {
         return $date ? Carbon::parse($date) ?? Carbon::now() : Carbon::now();
     }
 }
-
 
 if (!function_exists("getRandomImage")) {
     function getRandomImage($dir)
@@ -31,8 +28,6 @@ if (!function_exists("getRandomImage")) {
         return str_replace("public", "", Arr::random($images));
     }
 }
-
-
 
 if (!function_exists("uploadImageFromUrl")) {
     function uploadImageFromUrl($url, $dir, $name = null)
@@ -44,10 +39,9 @@ if (!function_exists("uploadImageFromUrl")) {
         $image = file_get_contents($url);
         $path = $dir . "/" . $name . ".jpg";
         file_put_contents($path, $image);
-        return  str_replace("public", "", $path);
+        return str_replace("public", "", $path);
     }
 }
-
 
 if (!function_exists("dateFormat")) {
     function dateFormat($date, $format = "d M Y")
@@ -59,7 +53,7 @@ if (!function_exists("dateFormat")) {
 if (!function_exists("customUcwords")) {
     function customUcwords($str)
     {
-        return ucwords(str_replace("_", " ", $str));
+        return ucwords(str_replace("-", " ", $str));
     }
 }
 
@@ -77,7 +71,6 @@ if (!function_exists("getCategoryTables")) {
     }
 }
 
-
 if (!function_exists("getArticleTables")) {
     function getArticleTables($article)
     {
@@ -87,7 +80,6 @@ if (!function_exists("getArticleTables")) {
     }
 }
 
-
 function getTableFieldArray($field, $value = null)
 {
     if ($field->type == "date") {
@@ -95,24 +87,25 @@ function getTableFieldArray($field, $value = null)
         $year = Carbon::parse($value)->format("Y");
         $slug = str_replace("day", "", str_slug($field->title));
         return [
-            "title" =>  $field->title,
+            "title" => $field->title,
             "type" => $field->type,
             "value" => $value,
             "searchable" => $field->searchable,
-            "html" => $value && $field->searchable ? ("<a href='" . route("news.search", ["field" => $slug . "-month", "value" => str_slug($month_day)]) . "'>" . $month_day . "</a>, " . "<a href='" . route("news.search", ["field" => $slug . "-year", "value" => str_slug($year)]) . "'>" . $year . "</a>")   : $value,
+            "html" => $value && $field->searchable ? ("<a href='" . route("news.search", ["field" => $slug . "-month", "value" => str_slug($month_day)]) . "'>" . $month_day . "</a>, " . "<a href='" . route("news.search", ["field" => $slug . "-year", "value" => str_slug($year)]) . "'>" . $year . "</a>") : $value,
         ];
-    } else
+    } else {
         return [
 
-            "title" =>  $field->title,
+            "title" => $field->title,
             "type" => $field->type,
             "value" => $value,
             "searchable" => $field->searchable,
-            "html" => $value && $field->searchable ? ("<a href='" . route("news.search", ["field" => str_slug($field->title), "value" => str_slug($value)]) . "'>" . $value . "</a>")   : $value,
+            "html" => $value && $field->searchable ? ("<a href='" . route("news.search", ["field" => str_slug($field->title), "value" => str_slug($value)]) . "'>" . $value . "</a>") : $value,
 
         ];
-}
+    }
 
+}
 
 if (!function_exists("getFirstCategoryArticle")) {
     function getFirstCategoryArticle($ids = [])
@@ -125,7 +118,6 @@ if (!function_exists("getFirstCategoryArticle")) {
         return $articles->get();
     }
 }
-
 
 // cache
 
@@ -143,5 +135,18 @@ if (!function_exists("clearHomePageCache")) {
         // return HomePageCache::getCache();
     }
 }
+
+if (!function_exists("articleTag")) {
+    function articleTag($article)
+    {
+        $tags=[];
+       foreach ($article->tags as $tag) {
+        $tags[] =  $tag->slug;
+       }
+
+       return $tags;
+    }
+}
+
 
 

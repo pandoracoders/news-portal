@@ -17,7 +17,6 @@ class FrontendController extends Controller
         view()->share("categories", Category::all());
     }
 
-
     private $limit = 8;
 
     public function index()
@@ -46,31 +45,28 @@ class FrontendController extends Controller
         return abort(404);
     }
 
-
-    // private function getFeaturedArticle()
-    // {
-    //     return Article::where("is_featured", 1)->limit($this->limit)->get();
-    // }
-
     public function tags(Tag $tag)
     {
-        if ($tag)
+        if ($tag) {
             return view("frontend.pages.tag.index", [
                 "tag" => $tag,
             ]);
-        else
+        } else {
             return abort(404);
-    }
+        }
 
+    }
 
     public function authorArticle(User $author)
     {
-        if ($author)
+        if ($author) {
             return view("frontend.pages.author.index", [
                 "author" => $author,
             ]);
-        else
+        } else {
             return abort(404);
+        }
+
     }
 
     public function categoryArticles(Category $category)
@@ -102,5 +98,10 @@ class FrontendController extends Controller
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);
+    }
+
+    public static function notFound()
+    {
+        return view("errors.404");
     }
 }

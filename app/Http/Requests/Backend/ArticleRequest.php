@@ -29,6 +29,7 @@ class ArticleRequest extends FormRequest
             'task_status' => 'nullable|string|max:255',
             'tables' => 'nullable|array',
             'tags.*' => 'nullable|exists:tags,id',
+            "task_status" => "nullable|in:" . implode(",", config("constants.task_status")),
 
         ];
     }
@@ -72,6 +73,13 @@ class ArticleRequest extends FormRequest
                 $tags[] = $tag->id;
             }
         }
-        $this->merge(["tables" => $tables, "tags" => $tags, "category_id" => $category->id, "slug" => $this->slug ?? str_slug($this->route("article")->title)]);
+
+        $this->merge(
+            [
+                "tables" => $tables,
+                "tags" => $tags,
+                "category_id" => $category->id,
+                "slug" => $this->slug ?? str_slug($this->route("article")->title),
+            ]);
     }
 }

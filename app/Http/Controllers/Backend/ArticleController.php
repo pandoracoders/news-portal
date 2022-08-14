@@ -19,7 +19,6 @@ class ArticleController extends Controller
     public function index(ArticleDataTable $datatable)
     {
         return $datatable->render($this->path . 'index');
-
     }
 
     /**
@@ -44,11 +43,11 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
+
         Article::create($request->validated());
+
         return redirect()->route("backend.article-view")->with("success", "Article created successfully.");
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -58,7 +57,17 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        // dd("hi");
+        $role = auth()->user()->role->slug;
+        $update_data = [];
+        if ($article->task_status == "writing" && $role == "writer") {
+            $update_data = ["task_status" => "writing"];
+
+        } else if ($article->task_status == "submitted" && $role != "writer") {
+            $update_data = ["task_status" => "editing", "editor_id" => auth()->user()->id];
+        }
+
+        $article->update(array_filter($update_data));
+
         return view($this->path . "crud", [
             "article" => $article,
             "categories" => \App\Models\Backend\Category::all(),
@@ -75,9 +84,6 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-
-        // dd($request->validated());
-
         if ($request->hasFile("image")) {
             $articleArray = array_merge(
                 collect($request->validated())->except(["tags"])->toArray(),
@@ -87,15 +93,25 @@ class ArticleController extends Controller
             );
         } else {
             $articleArray =
-                collect($request->validated())->except(["tags"])->toArray();
+            collect($request->validated())->except(["tags"])->toArray();
         }
 
-        $article->update($articleArray);
+        if ($request->task_status == "submitted" && $article->editor_id) {
+            $articleArray["task_status"] = "editing";
+        }
+
+        // dd($articleArray);
+
+        $article->update(array_filter($articleArray));
 
         $article->tags()->sync($request->tags);
 
+        if ($request->task_status) {
+            return redirect()->route("backend.article-view")->with("success", "Article updated successfully.");
+        } else {
+            return redirect()->back()->with("success", "Article updated successfully.");
+        }
 
-        return redirect()->back()->with("success", "Article updated successfully.");
     }
 
     /**
@@ -110,23 +126,21 @@ class ArticleController extends Controller
         return redirect()->route("backend.article-view")->with("success", "Article deleted successfully.");
     }
 
-
-
     public function updateTaskStatus(Article $article, $taskStatus)
     {
         $user = auth()->user();
-        if ($user->id == $article->writer_id && $article->task_status == "writing" && $taskStatus == "open") {
+        if ($user->id == $article->writer_id && $article->task_status == "writing" && $taskStatus == "submitted") {
             $article->update([
                 "task_status" => $taskStatus,
             ]);
             return redirect()->route("backend.article-view")->with("success", "Article Task status updated successfully.");
-        } else if (in_array($user->role->title, ["Editor", "Super Admin"]) && $article->task_status == "open" && $taskStatus == "reviewing") {
+        } else if (in_array($user->role->title, ["Editor", "Super Admin"]) && $article->task_status == "submitted" && $taskStatus == "editing") {
             $article->update([
                 "task_status" => $taskStatus,
                 "editor_id" => $user->id,
             ]);
             return redirect()->route("backend.article-view")->with("success", "Article Task status updated successfully.");
-        } else if ($user->id == $article->editor_id && in_array($user->role->title, ["Editor", "Super Admin"])  && $article->task_status == "reviewing" && $taskStatus == "published") {
+        } else if ($user->id == $article->editor_id && in_array($user->role->title, ["Editor", "Super Admin"]) && $article->task_status == "editing" && $taskStatus == "published") {
             $article->update([
                 "task_status" => $taskStatus,
             ]);
@@ -135,8 +149,6 @@ class ArticleController extends Controller
             return redirect()->back()->with("error", "You are not authorized to perform this action.");
         }
     }
-
-
 
     public function updateStatus(Article $article)
     {

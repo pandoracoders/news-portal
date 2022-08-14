@@ -40,7 +40,7 @@
 @php
 $tabs = [...['all'], ...config('constants.task_status')];
 if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
-    $tabs = array_diff($tabs, ['writing', 'rejected']);
+    $tabs = array_diff($tabs, ['writing']);
 }
 @endphp
 

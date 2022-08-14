@@ -6,9 +6,10 @@ return [
     "task_status" => [
         "writing",
         "submitted",
-        "reviewing",
-        "rejected",
+        "editing",
+        "modifying",
         "published",
+        "reviewing"
     ],
     "seo_validation" => [
         "meta_title" => "nullable|max:255",
@@ -49,8 +50,6 @@ return [
     "editor_permissions" => [
         "category-view",
         "tag-view",
-        "article_title-view",
-        "article_title-pick",
         "article-view",
         "article-publish",
     ],
