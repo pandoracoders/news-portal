@@ -64,11 +64,7 @@
                                 </a>
                             </figcaption>
                             <div class="image_overlay">
-                                <div class="image_title">
-                                    <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        {{ $article->title }}
-                                    </a>
-                                </div>
+                               
                                 <p class="image_description">
                                     {{ $article->summary }}
                                 </p>
@@ -101,11 +97,6 @@
                                 </a>
                             </figcaption>
                             <div class="image_overlay">
-                                <div class="image_title">
-                                    <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        {{ $article->title }}
-                                    </a>
-                                </div>
                                 <p class="image_description">
                                     {{ $article->summary }}
                                 </p>

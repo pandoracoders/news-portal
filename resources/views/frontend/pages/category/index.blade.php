@@ -36,7 +36,7 @@
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">Category : <span class="colored">
+                <h1 class="text-capitalize">All Posts on <span class="colored">
                         {{ $category->title }}
                     </span></h1>
             </div>
