@@ -92,12 +92,10 @@
 
                         <select class="form-control tag-select" id="permission" multiple="multiple"
                             name="permissions[]">
-                            @foreach ($permissions as $key => $permission_array)
-                                <optgroup label="{{ customUcwords($key) }}">
-                                    @foreach ($permission_array as $permission)
-                                        <option value="{{ $permission['name'] }}">
-                                            {{ customUcwords($permission['title']) }}</option>
-                                    @endforeach
+
+                            @foreach ($permissions as $key => $permission)
+                                <option value="{{ $permission }}">
+                                    {{ customUcwords($permission) }}</option>
                                 </optgroup>
                             @endforeach
                         </select>
@@ -129,22 +127,14 @@
     <script>
         window.data = @json(isset($user) ? $user->permission?->permissions : [])
 
-
-        function formatState(item) {
-            opt = $(item.element);
-            //console.log(opt.);
-            og = opt.closest('optgroup').attr('label');
-            console.log(og.trim() + " || " + item.text.trim());
-            return (og.trim() + " || " + item.text.trim());
-        };
-
         $(document).ready(function() {
 
             const select2 = $('#permission').select2({
                 placeholder: 'Select Permission',
                 allowClear: true,
+                // tags: true,
                 // templateResult: formatState,
-                templateSelection: formatState,
+                // templateSelection: formatState,
 
             });
 
@@ -169,7 +159,8 @@
                 callApi(role_id);
             });
 
-            (select2.val(data).trigger('change'));
+            console.log(select2.val(window.data).trigger('change'));
+            console.log(window.data);
 
 
         });

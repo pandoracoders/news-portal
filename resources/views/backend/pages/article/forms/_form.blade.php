@@ -1,12 +1,12 @@
 <form class="row g-3" method="POST"
     action="{{ isset($article) ? route('backend.article-update', ['article' => $article]) : route('backend.article-store') }}"
-    enctype="multipart/form-data">
+    enctype="multipart/form-data" id="article_form">
     @csrf
+
+    <input type="hidden" name="task_status" id="task_status">
+
     <div class="row">
-
         @include('error')
-
-
         <div class="col-xl-4">
             <div class="mx-auto">
                 <div class="card mb-2">
@@ -15,7 +15,6 @@
                             <h6 class="mb-0 text-uppercase"> Tables
                             </h6>
                             <hr>
-                            {{-- {{ dd(getArticleTables($article)) }} --}}
 
                             @foreach (getArticleTables($article) ?? [] as $key => $table)
                                 <div class="mb-2">
@@ -128,10 +127,10 @@
                                     <div class="col-12 mb-2 ">
                                         <label class="form-label">Tag *</label>
 
-                                        <select class="form-control tag-select" multiple="multiple" name="tags[]"
-                                            aria-placeholder="Enter  Tags">
+                                        <select class="form-control tag-select" id="tags" multiple="multiple"
+                                            name="tags[]" aria-placeholder="Enter  Tags">
                                             @foreach ($tags as $tag)
-                                                <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                                <option value="{{ $tag->slug }}">{{ $tag->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -146,18 +145,31 @@
                         ])
                     </div>
 
+
+
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="border p-3 rounded mb-2">
                                     <h6 class="mb-0 text-uppercase">Action</h6>
                                     <hr>
-                                    <button type="submit" class="btn btn-primary btn-block">
+                                    <button type="submit" class="btn btn-primary btn-block" id="save">
                                         {{ isset($article) ? 'Update' : 'Save' }}
                                     </button>
-                                    <a href="{{ route('backend.article-view') }}" class="btn btn-danger btn-block">
-                                        Cancel
-                                    </a>
+
+                                    @if (auth()->user()->role->slug == 'writer')
+                                        <button type="button" class="btn btn-success btn-block" id="submit">
+                                            Submit
+                                        </button>
+                                    @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
+                                        <button type="button" class="btn btn-success btn-block" id="publish">
+                                            Publish
+                                        </button>
+
+                                        <button type="button" class="btn btn-danger btn-block" id="modify">
+                                            Modify
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -174,59 +186,47 @@
 
 
 @push('scripts')
-    {{-- <script>
-        $(document).ready(function() {
-            var tags = @json(
-    $article
-        ->tags()
-        ->select('tag_id as id', 'title')
-        ->get()
-        ->toArray() ?? [],
-);
-            $('.tag-select').select2({
-                placeholder: 'Enter Tags',
-                tags: true,
-            });
-
-            console.log(tags);
-            $('.tag-select').select2().val(tags.map(function(tag) {
-                return {
-                    id: tag.id,
-                    text: tag.title,
-                };
-            })).trigger('change');
-        });
-    </script> --}}
-
-
-
-
     <script>
         $(document).ready(function() {
+            $(document).on("click", "#submit", function() {
+                $("#task_status").val('submitted');
+                $("#save").trigger("click");
+            })
 
-            // window.data = @json(isset($user) ? $user->permission?->permissions : []);
+            $(document).on("click", "#publish", function() {
+                $("#task_status").val('published');
+                $("#save").trigger("click");
+            })
 
-            var data = @json(
-    $article
-        ->tags()
-        ->select('tag_id as id', 'title as text')
-        ->get()
-        ->toArray() ?? [],
-);
+            $(document).on("click", "#modify", function() {
+                $("#task_status").val('modifying');
+                $("#save").trigger("click");
+            })
+        })
+    </script>
+@endpush
 
-            function formatState(item) {
-                return item.text.trim();
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            if (window) {
+
+                window.data = @json(isset($article) ? articleTag($article) : [])
+
+                const select2 = $('#tags').select2({
+                    placeholder: 'Tags',
+                    allowClear: true,
+                    tags: true,
+                });
+
+
+                console.log(select2.val(window.data).trigger('change'));
+
+                console.log(window.data)
             }
 
-            const select2 = $('.tag-select').select2({
-                placeholder: 'Select Tags',
-                allowClear: true,
-                // tags: true,
-                templateResult: formatState,
-                templateSelection: formatState,
-                data
-            });
-            console.log(select2.val(data).trigger('change'));
+
         });
     </script>
 @endpush

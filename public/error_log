@@ -1,0 +1,2 @@
+[11-Aug-2022 10:21:35 UTC] PHP Fatal error:  Cannot redeclare abort() (previously declared in /home/globalte/news/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:36) in /home/globalte/news/app/Helper/helper.php on line 139
+[11-Aug-2022 10:21:46 UTC] PHP Fatal error:  Cannot redeclare abort() (previously declared in /home/globalte/news/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php:36) in /home/globalte/news/app/Helper/helper.php on line 139

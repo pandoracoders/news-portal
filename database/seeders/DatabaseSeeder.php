@@ -92,9 +92,9 @@ class DatabaseSeeder extends Seeder
             "category_id" => 1,
         ]);
 
-        Article::factory(100)->create()->each(function ($article) {
-            $this->articleTag($article);
-        });
+        // Article::factory(100)->create()->each(function ($article) {
+        //     $this->articleTag($article);
+        // });
     }
 
 

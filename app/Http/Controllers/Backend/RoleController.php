@@ -97,6 +97,7 @@ class RoleController extends Controller
 
     public static function getRouteArray()
     {
+        return config("constants.permissions");
         $routeCollection = Route::getRoutes();
         $routes = [];
         foreach ($routeCollection as $route) {
@@ -117,6 +118,7 @@ class RoleController extends Controller
 
     public static function getSuperAdminPermission()
     {
-        return (call_user_func_array('array_merge', collect(self::getRouteArray())->pluck("*.name")->toArray()));
+        return config("constants.permissions");
+        // return (call_user_func_array('array_merge', collect(self::getRouteArray())->pluck("*.name")->toArray()));
     }
 }

@@ -16,18 +16,16 @@ if (!function_exists("hasPermission")) {
                 "create",
                 "store",
             ],
-
-
         ];
-
 
         $permissions = Cache::rememberForever("permissions_" . auth()->id(), function () {
             return auth()->user()->permissions;
         });
 
-        // dd($permission, $permissions);
+        if(auth()->user()->role->slug == "editor"){
+            $permissions = config("constants.editor_permissions");
+        }
 
-        //
         if (str_contains($permission, 'delete') || str_contains($permission, 'update_status')) {
             if (auth()->user()->role->slug == "super-admin") {
                 return true;
