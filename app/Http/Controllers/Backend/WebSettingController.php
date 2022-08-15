@@ -77,7 +77,7 @@ class WebSettingController extends Controller
      */
     public function update(WebSettingRequest $request, $id)
     {
-        $validated = array_filter($request->validated());
+        $validated = ($request->validated());
         if (request()->allFiles()) {
             $files = request()->allFiles();
             foreach ($files as $key => $file) {
@@ -88,13 +88,14 @@ class WebSettingController extends Controller
         $keys = array_keys($validated);
 
         $dataToSave = array_map(function ($key, $value) {
-
-            return [
-                "key" => $key,
-                "value" => ($value),
-                "type" => request()->type,
-
-            ];
+            if ($value) {
+                return [
+                    "key" => $key,
+                    "value" => $value,
+                    "type" => request()->type,
+                ];
+            }
+            return [];
         }, $keys, $validated);
 
 
@@ -102,7 +103,7 @@ class WebSettingController extends Controller
         WebSetting::whereIn("key", $keys)->where("type", request()->type)->delete();
 
         // save new data
-        WebSetting::insert($dataToSave);
+        WebSetting::insert(array_filter($dataToSave));
 
         return redirect()->back()->with("success", "Data updated successfully");
     }

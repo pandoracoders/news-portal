@@ -27,7 +27,7 @@
                     <div class="row mb-1">
                         <div class="col-xl-8">
                             <label for="formFile" class="form-label">Logo</label>
-                            <input class="form-control " type="file" id="formFile" name="logo"
+                            <input class="form-control " type="file" id="formFile" name="logo" value="{{ $webSetting['logo']->value ?? '' }}"
                                 onchange="document.getElementById('preview-logo').src = window.URL.createObjectURL(this.files[0])">
 
                         </div>
@@ -49,7 +49,7 @@
                     <div class="row mb-1">
                         <div class="col-xl-8">
                             <label for="formFile" class="form-label">Favicon</label>
-                            <input class="form-control " type="file" id="formFile" name="favicon"
+                            <input class="form-control " type="file" id="formFile" name="favicon" value="{{ $webSetting['favicon']->value ?? '' }}"
                                 onchange="document.getElementById('preview-favicon').src = window.URL.createObjectURL(this.files[0])">
 
                         </div>
