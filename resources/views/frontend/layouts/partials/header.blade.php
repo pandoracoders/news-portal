@@ -93,7 +93,7 @@
             </div>
 
             <div class="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
             </div>
 
             <div id="searchcontainer">

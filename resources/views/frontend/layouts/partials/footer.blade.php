@@ -13,24 +13,8 @@
 
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-50">
-                <div class="footer-widget">
-                    <div class="footer-widget-heading">
-                        <h3><span>Subscribe</span></h3>
-                    </div>
-                    <div class="footer-text mb-25 d-none d-lg-block">
-                        <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
-                    </div>
-                    <div class="subscribe-form">
-                        <input type="text" placeholder="Email Address" id="subscribeEmail">
-                        <button type="submit" id="subscriptionButton"><i
-                                class="fa-regular fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-30">
+            <div class="col-md-6 mb-30">
                 <div class="footer-social-icon">
-                    <span>Social</span>
                     <a href="#">
                         <i class="fa-brands fa-facebook"></i>
                     </a>
@@ -47,7 +31,7 @@
         <div class="row copyright-section mt-3">
             <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                 <div class="copyright-text">
-                    <p>Copyright &copy; 2022, All Right Reserved <a>Website Name</a></p>
+                    <p>&copy; Copyright 2022 <a>Pandora Group of Companies</a>. All Right Reserved</p>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">
