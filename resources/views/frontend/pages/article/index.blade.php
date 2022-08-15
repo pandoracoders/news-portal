@@ -67,6 +67,10 @@
             return str;
         }
 
+        if(headingList.length == 0){
+            document.querySelector('.table-of-contents').style = "display:none;"
+        }
+
         for (var i = 0; i < headingList.length; i++) {
             if (headingList[i].localName == 'h2') {
                 var slug = string_to_slug(headingList[i].innerText);

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/category.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.css" type="text/css">
 
     <style>
         .row {
@@ -36,7 +36,7 @@
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">Category : <span class="colored">
+                <h1 class="text-capitalize">All Posts on <span class="colored">
                         {{ $category->title }}
                     </span></h1>
             </div>

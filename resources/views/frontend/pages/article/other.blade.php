@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/article.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.css" type="text/css">
 
     <style>
         .similar-post-section .row {

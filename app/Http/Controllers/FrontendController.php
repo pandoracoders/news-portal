@@ -15,7 +15,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-        // clearHomePageCache();
+        clearHomePageCache();
 
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),

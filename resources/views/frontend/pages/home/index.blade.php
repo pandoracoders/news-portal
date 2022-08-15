@@ -1,7 +1,7 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/homepage.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/homepage.css" type="text/css">
 @endpush
 
 @push('scripts')
@@ -36,7 +36,11 @@
         @include('frontend.pages.home.components.slider')
 
         @foreach ($data['category_section'] as $key => $section)
-            @include('frontend.pages.home.components.category-section', ['section' => $section])
+            {{-- {{ dd($key) }} --}}
+
+                @include('frontend.pages.home.components.category-section', [
+                    'section' => $section,
+                ])
         @endforeach
 
         @if (count($data['born_today']))
@@ -60,11 +64,7 @@
                                 </a>
                             </figcaption>
                             <div class="image_overlay">
-                                <div class="image_title">
-                                    <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        {{ $article->title }}
-                                    </a>
-                                </div>
+
                                 <p class="image_description">
                                     {{ $article->summary }}
                                 </p>
@@ -97,11 +97,6 @@
                                 </a>
                             </figcaption>
                             <div class="image_overlay">
-                                <div class="image_title">
-                                    <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        {{ $article->title }}
-                                    </a>
-                                </div>
                                 <p class="image_description">
                                     {{ $article->summary }}
                                 </p>

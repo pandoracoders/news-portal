@@ -103,7 +103,7 @@ blockquote::before {
 }
 
 .category-div .category-title h1 .colored {
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 
@@ -128,7 +128,7 @@ blockquote::before {
   font-size: 13px !important;
   font-weight: 400 !important;
   color: #ffffff !important;
-  background-color: #DD4132FF !important;
+  background-color: rgb(80, 80, 80) !important;
   text-transform: uppercase;
 }
 
@@ -193,8 +193,8 @@ blockquote::before {
 
 .contact-us .contact-form .btn:hover {
   color: #f8f9fb !important;
-  border-color: #DD4132FF !important;
-  background-color: #DD4132FF !important;
+  border-color: rgb(78, 78, 78) !important;
+  background-color: rgb(78, 78, 78) !important;
 }
 
 .contact-us .info h2 {
@@ -215,7 +215,7 @@ blockquote::before {
   font-size: 16px !important;
   font-weight: 300 !important;
   line-height: 30px !important;
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 .contact-us .info p span {
@@ -382,7 +382,7 @@ blockquote::before {
 }
 
 .right .popular .wrapper .title-div .small-title:hover {
-  color: #DD4132FF !important;
+  color: rgb(99, 99, 99) !important;
 }
 
 @media (max-width: 720px) {
@@ -556,7 +556,7 @@ blockquote::before {
 
 .notfound-social > a:hover {
   color: #fff;
-  background-color: #DD4132FF !important;
+  background-color: rgb(103, 103, 103) !important;
 }
 
 @media only screen and (max-width: 480px) {
@@ -606,6 +606,7 @@ blockquote::before {
   font-size: 14px;
   color: #7e7e7e;
   line-height: 28px;
+  
 }
 
 .footer-section .footer-social-icon{
@@ -621,24 +622,31 @@ blockquote::before {
 }
 
 .footer-section .footer-social-icon a {
-  color: #b0aeae;
+  color: #ffffff;
   font-size: 20px;
   margin-right: 15px;
+
 }
 
-.footer-section .facebook-bg {
+.footer-section .fa-facebook {
   background: #3B5998;
   padding: 10px;
+  border-radius: 50%;
+
 }
 
-.footer-section .twitter-bg {
+.footer-section .fa-twitter {
   background: #55ACEE;
   padding: 10px;
+  border-radius: 50%;
+
 }
 
-.footer-section .google-bg {
+.footer-section .fa-pinterest {
   background: #DD4B39;
   padding: 10px;
+  border-radius: 50%;
+
 }
 
 .footer-section .footer-widget-heading h3{
@@ -692,9 +700,14 @@ blockquote::before {
           transform: rotate(-6deg); 
 }
 
+.footer-section .copyright-text{
+}
+
 .footer-section .copyright-text p {
   margin: 0;
-  font-size: 13px;
+  text-align: right !important;
+  font-style: italic;
+  font-size: 12px;
   color: #d2d2d2;
 }
 
@@ -1047,7 +1060,7 @@ main {
 }
 
 .h-profile .main-grid .item .wrapper h3:hover {
-  color: #DD4132FF !important;
+  color: rgb(69, 69, 69) !important;
 }
 
 .h-profile .main-grid .item .featured-para p {
@@ -1069,6 +1082,7 @@ main {
   line-height: 12px !important;
   color: #313131 !important;
   border: 1px solid #888888 !important;
+  border-radius: 5px !important;
   padding: 15px 30px;
   border-radius: 0;
   -webkit-transition: 0.2s ease;
@@ -1076,8 +1090,9 @@ main {
 }
 
 .load .btn:hover {
-  background: #9E1030FF !important;
-  border: 1px solid #9E1030FF !important;
+  background: rgb(80, 80, 80) !important;
+  border: 1px solid rgb(80, 80, 80) !important;
+  border-radius: 5px;
   color: #ffffff !important;
 }
 
@@ -1228,7 +1243,6 @@ header .navbar {
 header .navbar .brand-logo {
   font-size: 20px;
   font-weight: 600;
-  line-height: 34px;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #2F3846;
@@ -1243,9 +1257,11 @@ header .navbar .brand-logo .page {
 
 header .navbar .navbar-brand {
   font-size: 26px;
+  line-height: 200%;
   font-weight: 500;
   color: #d4d2d2 !important;
   align-items: center;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
   transition: ease .3s;
@@ -1275,6 +1291,11 @@ header .navbar .navbar-nav .nav-item .nav-link {
   color: #d4d2d2 !important;
   letter-spacing: 1px;
   position: relative;
+}
+
+header .navbar .navbar-nav .nav-item .active{
+  background-color: rgba(138, 135, 138, 0.5);
+  border-radius: 5px;
 }
 
 header .navbar .navbar-nav .nav-item .nav-link:hover::after {
@@ -1307,7 +1328,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item {
 }
 
 header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
-  background-color: #DD4132FF !important;
+  background-color: rgb(80, 80, 80) !important;
   color: #ffffff !important;
 }
 
@@ -1369,11 +1390,11 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   left: 0;
   height: 2px;
   width: 100px;
-  background-color: #DD4132FF !important;
+  background-color: rgb(80, 80, 80) !important;
 }
 
 .popular .main-title h2 .colored {
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 .popular .image {
@@ -1411,7 +1432,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   line-height: 20px !important;
   color: #ffffff !important;
   text-transform: uppercase;
-  background-color: #DD4132FF !important;
+  background-color: rgb(80, 80, 80) !important;
   border-radius: 4px;
   padding: 5px 5px;
 }
@@ -1440,7 +1461,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 .popular .image .wrapper .author-div .author:hover {
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 .post .left .image {
@@ -1467,7 +1488,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 .post .left .image cite:hover a {
-  color: #9E1030FF !important;
+  color: rgb(81, 81, 81) !important;
 }
 
 .post .left .details {
@@ -1515,7 +1536,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 .post .left .details p a {
-  color: #EF5350;
+  color: rgb(80, 80, 80);
 }
 
 .post .right .related .heading .title-line{
@@ -1554,7 +1575,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 .top-wrap .wrapper .author-div .name .author {
-  color: #9E1030FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 @media (max-width: 720px) {
@@ -1634,6 +1655,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   font-size: 1rem ;
   font-weight: 500;
   display: inline-block;
+  hyphens: auto;
 }
 
 #glider .splide__slide .box {
@@ -1664,7 +1686,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 #glider .splide__slide .box .image .cat a small {
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 1px;
@@ -1708,7 +1730,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 #glider .splide__slide .box:hover .wrapper a h2 {
-  color: #DD4132FF !important;
+  color: rgb(80, 80, 80) !important;
 }
 
 #glider .splide__arrows .splide__arrow svg{
@@ -1719,8 +1741,8 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 #glider .splide__arrows .splide__arrow:hover {
-  background-color: #DD4132FF !important;
-  border-color: #DD4132FF !important;
+  background-color: rgb(80, 80, 80) !important;
+  border-color: rgb(80, 80, 80) !important;
 }
 
 #glider .splide__arrows .splide__arrow:hover svg{
@@ -1776,9 +1798,15 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   /* Add a dark-grey background on hover */
 }
 
+.search{
+  color:white;
+  cursor: pointer;
+}
+
 .search #search-label {
   font-size: 20px;
   cursor: pointer;
+  color: white;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -1842,8 +1870,8 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   padding: 16.5px 30px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: #DD4132FF;
-  border-color: #DD4132FF;
+  background-color: rgb(80, 80, 80);
+  border-color: rgb(80, 80, 80);
 }
 
 #searchcontainer .gsc-search-button-v2 svg {
@@ -1892,7 +1920,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
   line-height: 12px !important;
   color: #ffffff !important;
   text-transform: uppercase;
-  background-color: #9E1030FF !important;
+  background-color: rgb(80, 80, 80) !important;
   padding: 10px 24px;
   border-radius: 4px;
 }

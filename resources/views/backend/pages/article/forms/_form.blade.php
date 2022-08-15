@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <div class="border p-3 rounded">
                                 <h6 class="mb-0 text-uppercase">
-                                    {{ (isset($article) ? 'Update' : 'Create') . ' Category' }}</h6>
+                                    {{ (isset($article) ? 'Update' : 'Create') . ' Post' }}</h6>
                                 <hr>
 
 
