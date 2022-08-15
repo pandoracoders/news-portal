@@ -50,8 +50,8 @@ if (!function_exists("dateFormat")) {
     }
 }
 
-if (!function_exists("customUcwords")) {
-    function customUcwords($str)
+if (!function_exists("unSlug")) {
+    function unSlug($str)
     {
         return ucwords(str_replace("-", " ", $str));
     }
