@@ -2,7 +2,6 @@
 
 
 @push('styles')
-
     <style>
         .similar-post-section .row {
             display: flex !important;
@@ -12,6 +11,10 @@
         .similar-post-section .row>[class*='col-'] {
             display: flex !important;
             flex-direction: row !important;
+        }
+
+        .instagram-media {
+            margin: auto !important;
         }
     </style>
 @endpush
@@ -25,6 +28,32 @@
 
 
 @push('scripts')
+    {{-- <script>
+        $(document).ready(function() {
+            $('.article-content img').addClass('img-fluid');
+            $('.article-content img').addClass('img-thumbnail');
+            $('.article-content img').addClass('mb-3');
+            $('.article-content img').addClass('mx-auto');
+            $('.article-content img').addClass('d-block');
+        });
+    </script> --}}
+
+    <script async src="//www.instragram.com/embed.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            const atags = document.querySelectorAll('a');
+            atags.forEach((a) => {
+                // of outbound link
+                if (a.href.indexOf(location.hostname) === -1) {
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                }
+            });
+        });
+    </script>
+
     <script>
         var headingList = document.querySelector('.content-detail').querySelectorAll("h2,h3,h4,h5,h6");
         var contentSection = document.querySelector('.list');

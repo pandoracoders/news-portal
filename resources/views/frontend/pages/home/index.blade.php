@@ -36,12 +36,7 @@
         @include('frontend.pages.home.components.slider')
 
         @foreach ($data['category_section'] as $key => $section)
-            {{-- {{ dd($key) }} --}}
-            @if ($key == 'biography')
-                @include('frontend.pages.home.components.category-section', [
-                    'section' => $section,
-                ])
-            @endif
+            @include('frontend.pages.home.components.category-section', ['section' => $section])
         @endforeach
 
         @if (count($data['born_today']))

@@ -21,14 +21,14 @@
     <script src="https://cdn.tiny.cloud/1/j13mw8eat9x0mct0dhgcxkzjhazjsq0ck1acz86lodyv52w7/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>
-
-
         tinymce.init({
             selector: 'textarea.editor',
             plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
             imagetools_cors_hosts: ['picsum.photos'],
             image_caption: true,
-            image_show_caption:true,
+            image_show_caption: true,
+            relative_urls: false,
+            convert_urls: false,
             menubar: '',
             toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen  preview ',
             toolbar_sticky: true,
@@ -73,7 +73,7 @@
 
                 input.click();
             },
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:20px }',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14pt; width: 100%; }',
 
 
             importcss_append: true,

@@ -11,12 +11,6 @@ use App\Models\Backend\User;
 class FrontendController extends Controller
 {
 
-    public function __construct()
-    {
-        // view share
-        view()->share("categories", Category::all());
-    }
-
     private $limit = 8;
 
     public function index()

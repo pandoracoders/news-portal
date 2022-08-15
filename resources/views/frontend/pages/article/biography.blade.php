@@ -31,16 +31,17 @@
                         </div>
 
                         <div class="row">
-                           @include("frontend.pages.article.components.title-section")
+                            @include('frontend.pages.article.components.title-section')
+
+
                             <div class="col-lg-4">
                                 <div class="left-section">
                                     <div class="featured-image">
                                         <div class="image">
                                             <figure class="m-0">
-                                                <a href="{{ route('singleArticle', $article->slug) }}">
-                                                    <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
-                                                        class="image_img img-fluid">
-                                                </a>
+                                                <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
+                                                    class="image_img img-fluid">
+
                                             </figure>
                                         </div>
                                     </div>
@@ -90,13 +91,15 @@
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="content-detail my-4">
                                     <p>
                                         {!! $article->body !!}
                                     </p>
                                 </div>
                                 <div class="col-md-12">
-                                   @include("frontend.pages.article.components.tags")
+                                    @include('frontend.pages.article.components.tags')
                                 </div>
                             </div>
                         </div>
