@@ -41,10 +41,10 @@ function getTitle($str)
                             <select class="form-control tag-select" id="permission" multiple="multiple"
                                 name="permissions[]" aria-placeholder="Enter  Tags">
                                 @foreach ($permissions as $key => $permission_array)
-                                    <optgroup label="{{ customUcwords($key) }}">
+                                    <optgroup label="{{ unSlug($key) }}">
                                         @foreach ($permission_array as $permission)
                                             <option value="{{ $permission['name'] }}">
-                                                {{ customUcwords($permission['title']) }}</option>
+                                                {{ unSlug($permission['title']) }}</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach

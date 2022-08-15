@@ -7,37 +7,9 @@
 
     <div class="row">
         @include('error')
-        <div class="col-xl-4">
-            <div class="mx-auto">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="border p-3 rounded">
-                            <h6 class="mb-0 text-uppercase"> Tables
-                            </h6>
-                            <hr>
 
-                            @foreach (getArticleTables($article) ?? [] as $key => $table)
-                                <div class="mb-2">
-                                    <h3 class="text-center"> {{ $key }} </h3>
-                                    <hr>
 
-                                    @foreach ($table as $field)
-                                        <div class="form-group mb-1">
-                                            <label for="">{{ $field['title'] }}</label>
-                                            <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
-                                                name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
-                                                value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-8 mx-auto">
+        <div class="col-xl-12 mx-auto">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-2">
@@ -147,43 +119,69 @@
 
 
 
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="border p-3 rounded mb-2">
-                                    <h6 class="mb-0 text-uppercase">Action</h6>
-                                    <hr>
-                                    <button type="submit" class="btn btn-primary btn-block" id="save">
-                                        {{ isset($article) ? 'Update' : 'Save' }}
-                                    </button>
 
-                                    @if (auth()->user()->role->slug == 'writer')
-                                        <button type="button" class="btn btn-success btn-block" id="submit">
-                                            Submit
-                                        </button>
-                                    @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
-                                        <button type="button" class="btn btn-success btn-block" id="publish">
-                                            Publish
-                                        </button>
-
-                                        <button type="button" class="btn btn-danger btn-block" id="modify">
-                                            Modify
-                                        </button>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
-
         </div>
+        <div class="col-xl-12">
+            <div class="mx-auto">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="border p-3 rounded">
+                            <h6 class="mb-0 text-uppercase"> Tables
+                            </h6>
+                            <hr>
 
+                            @foreach (getArticleTables($article) ?? [] as $key => $table)
+                                <div class="mb-2">
+                                    <h3 class="text-center"> {{ $key }} </h3>
+                                    <hr>
+
+                                    @foreach ($table as $field)
+                                        <div class="form-group mb-1">
+                                            <label for="">{{ $field['title'] }}</label>
+                                            <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
+                                                name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
+                                                value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="border p-3 rounded mb-2">
+                        <h6 class="mb-0 text-uppercase">Action</h6>
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-block" id="save">
+                            {{ isset($article) ? 'Update' : 'Save' }}
+                        </button>
+
+                        @if (auth()->user()->role->slug == 'writer')
+                            <button type="button" class="btn btn-success btn-block" id="submit">
+                                Submit
+                            </button>
+                        @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
+                            <button type="button" class="btn btn-success btn-block" id="publish">
+                                Publish
+                            </button>
+
+                            <button type="button" class="btn btn-danger btn-block" id="modify">
+                                Modify
+                            </button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
-
-
 
 @push('scripts')
     <script>

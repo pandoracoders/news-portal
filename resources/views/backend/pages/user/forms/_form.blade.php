@@ -95,7 +95,7 @@
 
                             @foreach ($permissions as $key => $permission)
                                 <option value="{{ $permission }}">
-                                    {{ customUcwords($permission) }}</option>
+                                    {{ unSlug($permission) }}</option>
                                 </optgroup>
                             @endforeach
                         </select>

@@ -6,18 +6,21 @@ use Intervention\Image\Facades\Image;
 
 class ImageUpload
 {
-    public static function upload($file)
+    public static function upload($file, $path = null, $filename = null)
     {
-        $path = ("uploads/" . date("Y/m/d/"));
+
+        $path = $path . "/" ?? ("uploads/" . date("Y/m/d/"));
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-
-        $filename = str_slug(explode(".", $file->getClientOriginalName())[0]);
+        if ($filename == null) {
+            $filename = str_slug(explode(".", $file->getClientOriginalName())[0]);
+            $path = $path . time() . "_" .  $filename . '.webp';
+        } else {
+            $path = $path . $filename . '.webp';
+        }
         // Intervention
-        $path = $path . time() . "_" .  $filename . '.webp';
         Image::make($file)->encode('webp', 90)->save(($path));
-
         return $path;
     }
 }

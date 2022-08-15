@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\TableSetController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\WebSettingController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -107,4 +108,9 @@ Route::group(['prefix' => 'role', "as" => "role-"], function () {
     Route::post("/update/{role}", [RoleController::class, "update"])->name("update");
     Route::get("/delete/{role}", [RoleController::class, "destroy"])->name("delete");
     Route::get("/status-update/{role}", [RoleController::class, "updateStatus"])->name("update_status");
+});
+
+Route::group(['prefix' => 'setting', "as" => "setting-"], function () {
+    Route::get("/{type}", [WebSettingController::class, "index"])->name("view");
+    Route::post("/update/{type}", [WebSettingController::class, "update"])->name("update");
 });

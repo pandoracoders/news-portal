@@ -23,13 +23,12 @@
 
 @section('content')
     <main class="container">
-
         <div class="row main-section">
             <div class="col-lg-8 article-section">
                 <div class="bc">
                     <ul class="breadcrumb-container">
                         <li class="breadcrumb">
-                            <a href="/">
+                            <a href="{{ url("/") }}">
                                 <i class="fa fa-solid fa-home"></i>
                             </a>
                         </li>

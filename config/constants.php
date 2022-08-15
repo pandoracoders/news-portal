@@ -11,6 +11,15 @@ return [
         "published",
         "reviewing"
     ],
+    "web_setting_tabs" => ['branding', 'social-media'],
+    "social_media" => [
+        "facebook",
+        "twitter",
+        "instagram",
+        "youtube",
+        "linkedin",
+        "pinterest",
+    ],
     "seo_validation" => [
         "meta_title" => "nullable|max:255",
         "meta_description" => "nullable",
@@ -26,6 +35,8 @@ return [
         "category-manage",
         "tag-view",
         "tag-manage",
+        "table_set-view",
+        "table_set-manage",
         "table-view",
         "table-manage",
         "article_title-view",
