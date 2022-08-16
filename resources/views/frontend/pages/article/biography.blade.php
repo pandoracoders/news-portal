@@ -91,9 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div class="content-detail my-4">
+                                <div class="content-detail">
                                     <p>
                                         {!! $article->body !!}
                                     </p>

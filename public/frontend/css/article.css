@@ -75,7 +75,7 @@ h1 {
 }
 
 .content-detail a:hover{
-    color: #999;
+    color: #00a6ff;
     text-decoration: underline !important;
     text-underline-offset: 5px;
     transition: text-underline-offset 300ms;
@@ -99,7 +99,7 @@ h1 {
     font-family: 'Lora', serif;
     margin: 1rem 0;
     font-weight: 600;
-    font-size: 1.50rem;
+    font-size: 1.40rem;
     max-width: 728px;
     line-height: 2.7rem;
     text-transform: capitalize;
