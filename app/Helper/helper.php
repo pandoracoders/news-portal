@@ -7,6 +7,13 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
+
+if(!function_exists("replaceOrigin")){
+    function replaceOrigin($str){
+        return str_replace("http://wp.test", "https://wikibioages.com/", $str);
+    }
+}
+
 if (!function_exists("str_slug")) {
     function str_slug($str)
     {

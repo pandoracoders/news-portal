@@ -21,75 +21,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ["Biography", "Fiction", "Non-Fiction", "Poetry", "Short Story", "Poem", "Normal", "Long Story", "fact"];
-        // $roles = ["Super Admin", "Writer", "Editor"];
-        $roles = [
-            [
-                "title" => "Super Admin",
-                "slug" => "super-admin",
-                "permissions" => RoleController::getSuperAdminPermission(),
-            ],
-            [
-                "title" => "Writer",
-                "slug" => "writer",
-                "permissions" => config("constants.writer_permissions"),
-            ],
-            [
-                "title" => "Editor",
-                "slug" => "editor",
-                "permissions" => config("constants.editor_permissions"),
-            ],
-        ];
 
-        foreach ($roles as $key => $role) {
-            Role::create($role);
-        }
-
-
-        $this->call([CategorySeeder::class, UserSeeder::class]);
-
-        foreach ($tags as $tag) {
-            Tag::create([
-                'title' => $tag,
-                'slug' => str_slug($tag),
-            ]);
-        }
-
-        $table_set = TableSet::create([
-            "title" => "Quick Facts",
-        ]);
-
-        $table_set->categories()->sync([1]);
-
-        $table_fields = [
-            [
-                "title" => "Birthday",
-                "type" => "date",
-                "searchable" => true,
-                "created_at" => now(),
-                "updated_at" => now(),
-            ],
-            [
-                "title" => "Country",
-                "type" => "text",
-                "searchable" => true,
-                "created_at" => now(),
-                "updated_at" => now(),
-            ],
-            [
-                "title" => "Full Name",
-                "type" => "text",
-                "searchable" => false,
-                "created_at" => now(),
-                "updated_at" => now(),
-            ]
-        ];
-
-        $table_set->tableFields()->createMany($table_fields);
-
-        ArticleTitle::create([
-            "title" => "Facebook",
-            "category_id" => 1,
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            TableSeeder::class,
+            // WPSeeder::class,
         ]);
 
         // Article::factory(100)->create()->each(function ($article) {
