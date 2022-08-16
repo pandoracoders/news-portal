@@ -8,9 +8,9 @@
 
 
   <!--Start Back To Top Button-->
-  <a href="javaScript:;" class="back-to-top">
+  {{-- <a href="javaScript:;" class="back-to-top">
       <ion-icon name="arrow-up-outline"></ion-icon>
-  </a>
+  </a> --}}
   <!--End Back To Top Button-->
 
   <!--start switcher-->

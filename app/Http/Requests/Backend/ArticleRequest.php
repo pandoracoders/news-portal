@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Backend;
 
+use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,7 +16,16 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $required = [
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:articles,slug,' . $this->route("article")->id,
+            'summary' => 'required|string|max:255',
+            'body' => 'required|string',
+            'image' => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            'category_id' => 'required|exists:categories,id',
+        ];
+
+        $rules =  [
             'title' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . $this->route("article")->id,
             'summary' => 'nullable|string|max:255',
@@ -32,12 +42,17 @@ class ArticleRequest extends FormRequest
             "task_status" => "nullable|in:" . implode(",", config("constants.task_status")),
 
         ];
+
+        return $this->task_status == "submitted" ? array_merge($rules, $required) : $rules;
     }
 
     protected function prepareForValidation()
     {
 
-        $category = ($this->route("article")->category);
+
+        $category = Category::find($this->category_id);
+
+        // dd($this->all());
 
         $tables = [];
         $tags = [];
@@ -80,6 +95,7 @@ class ArticleRequest extends FormRequest
                 "tags" => $tags,
                 "category_id" => $category->id,
                 "slug" => $this->slug ?? str_slug($this->route("article")->title),
-            ]);
+            ]
+        );
     }
 }

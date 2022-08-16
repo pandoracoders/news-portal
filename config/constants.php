@@ -35,8 +35,6 @@ return [
         "category-manage",
         "tag-view",
         "tag-manage",
-        "table_set-view",
-        "table_set-manage",
         "table-view",
         "table-manage",
         "article_title-view",
