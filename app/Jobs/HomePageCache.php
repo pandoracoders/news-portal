@@ -39,37 +39,85 @@ class HomePageCache implements ShouldQueue
 
     public static function getCache()
     {
+
         return Cache::rememberForever(config("constants.home_page_cache_key"), function () {
             // get featured articles
-            $featured_articles = Article::with(["category", "writer"])->where("is_featured", true)->limit(config("constants.article_limit", 8))->get();
+            $featured_articles = Article::with(["category", "writer"])
+                ->where("is_featured", true)
+                ->where("task_status", "published")
+                ->limit(config("constants.article_limit", 8))
+                ->get();
             $ids = $featured_articles->pluck("id")->toArray();
-            $category_section = [];
-            foreach (Category::limit(2)->get() as $key => $value) {
 
-                $category_section[$value->slug]["category"] = $value;
-                $articles =  $value->articles()->with(["category", "writer"])->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get();
-                $ids = array_merge($ids, $articles->pluck("id")->toArray());
-                $category_section[$value->slug]["articles"] = [
-                    $value->articles()->with(["category", "writer"])->limit(config("constants.article_limit", 7))->whereNotIn("id", $ids)->get(),
-                    $value->articles()->with(["category", "writer"])->limit(3)->whereNotIn("id", $ids)->get()
+            $editor_choice = Article::with(["category", "writer"])
+                ->where("task_status", "published")
+                ->limit(config("constants.article_limit", 8))
+                ->whereNotIn("id", $ids)
+                ->get();
+
+            $ids = array_merge($ids, $editor_choice->pluck("id")->toArray());
+
+            $just_pubished = Article::with(["category", "writer"])
+                ->orderBy("published_at", "desc")
+                ->where("task_status", "published")
+                ->limit(config("constants.article_limit", 8))
+                ->whereNotIn("id", $ids)
+                ->get();
+
+            $ids = array_merge($ids, $just_pubished->pluck("id")->toArray());
+
+            $category_section = [];
+
+            foreach (Category::where("status", 1)->limit(2)->get() as $key => $category) {
+
+                $category_section[$category->slug]["category"] = $category;
+
+                $articles1 =  $category->articles()->with(["category", "writer"])
+                    ->where("task_status", "published")
+                    ->limit(config("constants.article_limit", 7))
+                    ->whereNotIn("id", $ids)
+                    ->get();
+
+                $ids = array_merge($ids, $articles1->pluck("id")->toArray());
+
+
+
+                $articles2 = $category->articles()->with(["category", "writer"])
+                    ->where("task_status", "published")
+                    ->limit(3)
+                    ->whereNotIn("id", $ids)
+                    ->get();
+                $ids = array_merge($ids, $articles2->pluck("id")->toArray());
+
+                $category_section[$category->slug]["articles"] = [
+                    $articles1,
+                    $articles2
                 ];
                 if ($key == 0) {
-                    $category_section[$value->slug]["second"]["title"] = "Editor Choice";
-                    $category_section[$value->slug]["second"]["articles"] = Article::with(["category", "writer"])->where("is_featured", 1)->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get();
+                    $category_section[$category->slug]["second"]["title"] = "Editor Choice";
+                    $category_section[$category->slug]["second"]["articles"] = $editor_choice;
                 } else if ($key == 1) {
-                    $category_section[$value->slug]["second"]["title"] = "Just Published";
-                    $category_section[$value->slug]["second"]["articles"] = Article::with(["category", "writer"])->limit(config("constants.article_limit", 8))->whereNotIn("id", $ids)->get();
+                    $category_section[$category->slug]["second"]["title"] = "Just Published";
+                    $category_section[$category->slug]["second"]["articles"] = $just_pubished;
                 }
-            }
 
-            // dd($category_section);
+                // dd($ids);
+
+            }
             $today = carbon()->format("M d");
-            return [
+            return ([
                 "featured_articles" => $featured_articles,
                 "category_section" => $category_section,
-                "born_today" => Article::with(["category", "writer"])->where('tables->Quick Facts->birthday->value', "LIKE", "%$today%")->limit(config("constants.article_limit", 8))->get(),
-                "died_today" => Article::with(["category", "writer"])->where('tables->Quick Facts->death_day->value', "LIKE", "%$today%")->limit(config("constants.article_limit", 8))->get(),
-            ];
+                "born_today" => Article::with(["category", "writer"])
+                    ->where("task_status", "published")
+                    ->where('tables->Quick Facts->birthday->value', "LIKE", "%$today%")
+                    ->limit(config("constants.article_limit", 8))
+                    ->get(),
+                "died_today" => Article::with(["category", "writer"])
+                    ->where("task_status", "published")
+                    ->where('tables->Quick Facts->death_day->value', "LIKE", "%$today%")
+                    ->limit(config("constants.article_limit", 8))->get(),
+            ]);
         });
     }
 }

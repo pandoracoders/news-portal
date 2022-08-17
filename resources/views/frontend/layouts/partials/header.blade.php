@@ -12,23 +12,29 @@
                         <i class="fa-solid fa-align-left menu-icon"></i>
                     </span>
                 </button>
-                <a href="/" class="ml-3 brand-logo d-none" id="navScroll-btn">Website<span
-                        class="colored">Name</span>
+                <a href="{{ url('/') }}" class="ml-3 brand-logo d-none" id="navScroll-btn">
+                    {{ getSettingValue('website_title') }}
                 </a>
             </div>
 
-            <a href="/" class="navbar-brand d-lg">
-                Website Name
+            <a href="{{ url('/') }}" class="navbar-brand d-lg">
+                {{ getSettingValue('website_title') }}
             </a>
+
+            @php
+                $current_url = isset($article) ? route('singleArticle', ['slug' => $article->category->slug]) : Request::url();
+            @endphp
 
             <div class="collapse navbar-collapse d-none d-lg-block" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto text-uppercase">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link {{ $current_url == url('/') ? 'active' : '' }}"
+                            href="{{ url('/') }}">Home</a>
                     </li>
                     @foreach ($categories as $category)
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
+                            <a class="nav-link {{ $current_url == route('singleArticle', ['slug' => $category->slug]) ? 'active' : '' }}"
+                                href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
                                 {{ $category->title }}
                             </a>
                         </li>
@@ -44,12 +50,14 @@
                 </div>
                 <ul class="pt-3 pt-lg-0 nav-menu menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link {{ $current_url == url('/') ? 'active' : '' }}"
+                            href="{{ url('/') }}">Home</a>
                     </li>
 
                     @foreach ($categories as $category)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
+                            <a class="nav-link {{ $current_url == route('singleArticle', ['slug' => $category->slug]) ? 'active' : '' }}"
+                                href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
                                 {{ $category->title }}
                             </a>
                         </li>
@@ -79,15 +87,13 @@
                 </div>
                 <!-- sidebar social links -->
                 <div class="links side-links mt-3">
-                    <a href="#">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
+                    @forelse (getSettingType("social-media") as $media)
+                        <a href="{{ $media->value }}">
+                            <i class="fa-brands fa-{{ $media->key }}"></i>
+                        </a>
+                    @empty
+                    @endforelse
+                    
                 </div>
 
             </div>

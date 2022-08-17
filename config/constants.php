@@ -63,6 +63,7 @@ return [
         "article-publish",
     ],
     "home_page_cache_key" => "HOME_PAGE_CACHE",
+    "web_setting_cache_key"=> "WEB_SETTING_CACHE",
 
     "sidebar" => [
         [

@@ -14,4 +14,18 @@ class WebSetting extends Model
         "value",
         "type",
     ];
+
+
+    // boot function
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            clearSettingCache();
+        });
+
+        static::updated(function ($model) {
+            clearSettingCache();
+        });
+    }
 }

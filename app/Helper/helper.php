@@ -2,17 +2,63 @@
 
 use App\Jobs\HomePageCache;
 use App\Models\Backend\Category;
+use App\Models\Backend\WebSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 
-if(!function_exists("replaceOrigin")){
-    function replaceOrigin($str){
+if (!function_exists("clearSettingCache")) {
+    function clearSettingCache()
+    {
+        Cache::forget(config("constants.web_settings_cache_key"));
+    }
+}
+
+if (!function_exists("getSettingType")) {
+    function getSettingType($key)
+    {
+        $settings = Cache::rememberForever(config("constants.web_settings_cache_key"), function () {
+            return WebSetting::get();
+        }); 
+        return $settings->where("type", $key);
+    }
+}
+
+
+if (!function_exists("getSettingValue")) {
+    function getSettingValue($key)
+    {
+        Cache::forget(config("constants.web_settings_cache_key"));
+        $settings = Cache::rememberForever(config("constants.web_settings_cache_key"), function () {
+            return WebSetting::get();
+        });
+
+        return $settings->where("key", $key)->first()?->value;
+    }
+}
+
+
+if (!function_exists("replaceOrigin")) {
+    function replaceOrigin($str)
+    {
         return str_replace("http://wp.test", "https://wikibioages.com/", $str);
     }
 }
+
+if (!function_exists("convertCaption")) {
+    function convertCaption($str)
+    {
+        return preg_replace(
+            '/\[caption([^\]]+)align="([^"]+)"\s+width="(\d+)"\](\s*\<img[^>]+>)\s*(.*?)\s*\[\/caption\]/i',
+            '<figure\1 class="figure \2">\4<figcaption class="caption">\5</figcaption></figure>',
+            replaceOrigin($str)
+        );
+    }
+}
+
+
 
 if (!function_exists("str_slug")) {
     function str_slug($str)
@@ -111,7 +157,6 @@ function getTableFieldArray($field, $value = null)
 
         ];
     }
-
 }
 
 if (!function_exists("getFirstCategoryArticle")) {
@@ -146,14 +191,11 @@ if (!function_exists("clearHomePageCache")) {
 if (!function_exists("articleTag")) {
     function articleTag($article)
     {
-        $tags=[];
-       foreach ($article->tags as $tag) {
-        $tags[] =  $tag->slug;
-       }
+        $tags = [];
+        foreach ($article->tags as $tag) {
+            $tags[] =  $tag->slug;
+        }
 
-       return $tags;
+        return $tags;
     }
 }
-
-
-

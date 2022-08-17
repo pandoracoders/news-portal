@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\WebSettingRequest;
 use App\Models\Backend\WebSetting;
 use App\Services\ImageUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 
 class WebSettingController extends Controller
 {
@@ -23,6 +25,14 @@ class WebSettingController extends Controller
 
         $webSetting = WebSetting::where("type", request()->type)->get()->keyBy("key");
         return view("backend.pages.setting.index", compact("webSetting"));
+    }
+
+
+    public function clearCache()
+    {
+        Artisan::call("cache:clear");
+        Cache::flush();
+        return redirect()->back()->with("success", "Cache cleared successfully");
     }
 
     /**

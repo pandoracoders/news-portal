@@ -51,6 +51,15 @@
                     <div class="menu-title">Web Setting</div>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('backend.setting-clear_cache') }}">
+                    <div class="parent-icon">
+                        <i class="bi bi-gear"></i>
+                    </div>
+                    <div class="menu-title">Clear Cache</div>
+                </a>
+            </li>
         @endif
 
 

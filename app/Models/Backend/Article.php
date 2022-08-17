@@ -31,6 +31,18 @@ class Article extends Model
         'tables' => 'array',
     ];
 
+    protected $hidden =[
+        "body",
+        "created_at",
+        "updated_at",
+        "deleted_at",
+        "published_at",
+        "status",
+        "task_status",
+        "tables",
+        "editor_id"
+    ];
+
 
     public function category()
     {
