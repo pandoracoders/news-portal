@@ -36,9 +36,9 @@
             </div>
             <div class="col-xl-6 col-lg-6">
                 <ul>
-                    <li>Privacy Policy</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
         </div>

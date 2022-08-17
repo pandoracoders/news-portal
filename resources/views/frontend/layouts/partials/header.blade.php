@@ -64,14 +64,11 @@
                             <a href="#" class="nav-link">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Advertise</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="#" class="nav-link">Privacy Policy</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="#" class="nav-link">Terms Conditions</a>
-                        </li>
+                        </li> --}}
                         <!-- <li class="nav-item">
                             <a href="Ads" class="nav-link">Ads</a>
                         </li> -->
