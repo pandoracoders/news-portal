@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\SitemapController;
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\Role;
@@ -19,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get("sitemap.xml", [SitemapController::class, "index"]);
+
 
 Route::get('/seed/db', function () {
 

@@ -35,7 +35,7 @@ if (!function_exists("getSettingValue")) {
             return WebSetting::get();
         });
 
-        return $settings->where("key", $key)->first()?->value;
+        return $settings->where("key", $key)->first()?->value ?? '';
     }
 }
 

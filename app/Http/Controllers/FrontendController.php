@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ArticleResource;
+use App\Jobs\OrgSchema;
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
@@ -15,9 +16,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-        // clearHomePageCache();
-
-        // dd(getSettingValue("website_title"));
+      (OrgSchema::dispatch());
 
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),

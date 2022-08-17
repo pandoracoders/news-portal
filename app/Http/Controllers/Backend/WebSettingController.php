@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\WebSettingRequest;
+use App\Jobs\OrgSchema;
 use App\Models\Backend\WebSetting;
 use App\Services\ImageUpload;
 use Illuminate\Http\Request;
@@ -95,25 +96,22 @@ class WebSettingController extends Controller
             }
         }
 
-        $keys = array_keys($validated);
-
-        $dataToSave = array_map(function ($key, $value) {
+        foreach ($validated as $key => $value) {
+            $old = WebSetting::where("key", $key)->where("type", request()->type)->first() ?? new WebSetting();
             if ($value) {
-                return [
+                $old->fill([
                     "key" => $key,
                     "value" => $value,
                     "type" => request()->type,
-                ];
+                ]);
+                $old->save();
+            } else {
+                $old->delete();
             }
-            return [];
-        }, $keys, $validated);
+        }
 
-
-        // delete old data
-        WebSetting::whereIn("key", $keys)->where("type", request()->type)->delete();
-
-        // save new data
-        WebSetting::insert(array_filter($dataToSave));
+        clearSettingCache();
+        OrgSchema::dispatch();
 
         return redirect()->back()->with("success", "Data updated successfully");
     }
