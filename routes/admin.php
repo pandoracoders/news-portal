@@ -113,4 +113,6 @@ Route::group(['prefix' => 'role', "as" => "role-"], function () {
 Route::group(['prefix' => 'setting', "as" => "setting-"], function () {
     Route::get("/{type}", [WebSettingController::class, "index"])->name("view");
     Route::post("/update/{type}", [WebSettingController::class, "update"])->name("update");
+
+    Route::get("clear/cache", [WebSettingController::class, "clearCache"])->name("clear_cache");
 });

@@ -15,7 +15,9 @@ class FrontendController extends Controller
 
     public function index()
     {
-        clearHomePageCache();
+        // clearHomePageCache();
+
+        // dd(getSettingValue("website_title"));
 
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
@@ -24,13 +26,13 @@ class FrontendController extends Controller
 
     public function singleArticle($slug)
     {
-        $category = Category::where("slug", $slug)->first();
+        $category = Category::where("status", 1)->where("slug", $slug)->first();
         if ($category) {
             return view("frontend.pages.category.index", [
                 "category" => $category,
             ]);
         }
-        $article = Article::where("slug", $slug)->first();
+        $article = Article::where("slug", $slug)->where("task_status", "published")->first();
         if ($article) {
             return view("frontend.pages.article.index", [
                 "article" => $article,
@@ -48,7 +50,6 @@ class FrontendController extends Controller
         } else {
             return abort(404);
         }
-
     }
 
     public function authorArticle(User $author)
@@ -60,7 +61,6 @@ class FrontendController extends Controller
         } else {
             return abort(404);
         }
-
     }
 
     public function categoryArticles(Category $category)
@@ -68,7 +68,10 @@ class FrontendController extends Controller
         $limit = 9;
         $page = request()->get("page", 1);
         if (request()->ajax()) {
-            $articles = $category->articles()->limit($limit)->offset(($page) * $limit)->get();
+            $articles = $category->articles()
+                ->where("task_status", "published")
+                ->limit($limit)
+                ->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);
@@ -78,7 +81,9 @@ class FrontendController extends Controller
         $limit = 9;
         $page = request()->get("page", 1);
         if (request()->ajax()) {
-            $articles = $tag->articles()->limit($limit)->offset(($page) * $limit)->get();
+            $articles = $tag->articles()
+            ->where("task_status", "published")
+            ->limit($limit)->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);
@@ -88,7 +93,9 @@ class FrontendController extends Controller
         $limit = 9;
         $page = request()->get("page", 1);
         if (request()->ajax()) {
-            $articles = $author->articles()->limit($limit)->offset(($page) * $limit)->get();
+            $articles = $author->articles()
+            ->where("task_status", "published")
+            ->limit($limit)->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);

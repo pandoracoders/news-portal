@@ -7,8 +7,6 @@
 
     <div class="row">
         @include('error')
-
-
         <div class="col-xl-12 mx-auto">
             <div class="row">
                 <div class="col-12">
@@ -36,10 +34,9 @@
                                 <div class="col-12 mb-2 ">
                                     <label class="form-label">Category *</label>
                                     <select name="category_id" class="form-control"
-                                        {{ isset($article) ? 'disabled=disabled' : '' }}>
+                                        {{ isset($article) && auth()->user()->role->slug != 'super-admin' ? 'readonly=readonly' : '' }}>
                                         <option value="" disabled>Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="" disabled>Select Category</option>
                                             <option value="{{ $category->id }}"
                                                 {{ isset($article) && $article->category_id == $category->id ? 'selected' : '' }}>
                                                 {{ $category->title }}
@@ -159,6 +156,15 @@
                     <div class="border p-3 rounded mb-2">
                         <h6 class="mb-0 text-uppercase">Action</h6>
                         <hr>
+
+                        <button type="submit" class="btn btn-primary btn-block back-to-top" style="display: inline;">
+                            {{ isset($article) ? 'Update' : 'Save' }}
+                        </button>
+
+                        <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
+                           <small style="font-size:14px">Save </small>
+                        </a>
+
                         <button type="submit" class="btn btn-primary btn-block" id="save">
                             {{ isset($article) ? 'Update' : 'Save' }}
                         </button>
@@ -181,11 +187,23 @@
             </div>
         </div>
     </div>
+
+
+
+
+
 </form>
 
 @push('scripts')
     <script>
         $(document).ready(function() {
+
+            $(document).on("click", ".save-post", function() {
+
+                $("#save").trigger("click");
+            })
+
+
             $(document).on("click", "#submit", function() {
                 $("#task_status").val('submitted');
                 $("#save").trigger("click");

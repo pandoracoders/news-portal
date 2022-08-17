@@ -5,8 +5,8 @@
                 <div class="footer-widget">
                     <div class="footer-logo">
                         <h2>
-                            <a href="/">
-                                Website Name
+                            <a href="{{ url("/") }}">
+                                {{ getSettingValue('website_title') }}
                             </a>
                         </h2>
                     </div>
@@ -15,23 +15,23 @@
             </div>
             <div class="col-md-6 mb-30">
                 <div class="footer-social-icon">
-                    <a href="#">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-brands fa-pinterest "></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
+                    {{-- {{ dd(getSettingType("social-media")) }} --}}
+                    @forelse (getSettingType("social-media") as $media)
+                        <a href="{{ $media->value }}">
+                            <i class="fa-brands fa-{{ $media->key }}"></i>
+                        </a>
+                    @empty
+                    @endforelse
+
+
                 </div>
             </div>
-            
+
         </div>
         <div class="row copyright-section mt-3">
             <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                 <div class="copyright-text">
-                    <p>&copy; Copyright 2022 <a>Pandora Group of Companies</a>. All Right Reserved</p>
+                    <p>&copy; Copyright {{ date('Y') }} <a>Pandora Group of Companies</a>. All Right Reserved</p>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

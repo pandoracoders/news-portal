@@ -39,30 +39,30 @@ class UserSeeder extends Seeder
             "permissions" => config("constants.permissions"),
         ]);
 
-        for ($i = 0; $i < 5; $i++) {
-            $id = $i > 0 ? $i : '';
-            User::create([
-                'name' => "Writer $id",
-                'email' => "writer$id@gmail.com",
-                'password' => bcrypt('password'),
-                "alias_name" => "Writer $id",
-                "slug" => "writer$id",
-            ])->permission()->create([
-                "role_id" => Role::where("title", "Writer")->first()->id,
-                "permissions" => config("constants.writer_permissions"),
+        // for ($i = 0; $i < 5; $i++) {
+        //     $id = $i > 0 ? $i : '';
+        //     User::create([
+        //         'name' => "Writer $id",
+        //         'email' => "writer$id@gmail.com",
+        //         'password' => bcrypt('password'),
+        //         "alias_name" => "Writer $id",
+        //         "slug" => "writer$id",
+        //     ])->permission()->create([
+        //         "role_id" => Role::where("title", "Writer")->first()->id,
+        //         "permissions" => config("constants.writer_permissions"),
 
-            ]);
+        //     ]);
 
-            User::create([
-                'name' => "Editor $id",
-                'email' => "editor$id@gmail.com",
-                'password' => bcrypt('password'),
-                "alias_name" => "Editor $id",
-                "slug" => "editor$id",
-            ])->permission()->create([
-                "role_id" => Role::where("title", "Editor")->first()->id,
-                "permissions" => config("constants.editor_permissions"),
-            ]);
-        }
+        //     User::create([
+        //         'name' => "Editor $id",
+        //         'email' => "editor$id@gmail.com",
+        //         'password' => bcrypt('password'),
+        //         "alias_name" => "Editor $id",
+        //         "slug" => "editor$id",
+        //     ])->permission()->create([
+        //         "role_id" => Role::where("title", "Editor")->first()->id,
+        //         "permissions" => config("constants.editor_permissions"),
+        //     ]);
+        // }
     }
 }

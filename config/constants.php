@@ -35,8 +35,6 @@ return [
         "category-manage",
         "tag-view",
         "tag-manage",
-        "table_set-view",
-        "table_set-manage",
         "table-view",
         "table-manage",
         "article_title-view",
@@ -65,6 +63,7 @@ return [
         "article-publish",
     ],
     "home_page_cache_key" => "HOME_PAGE_CACHE",
+    "web_setting_cache_key"=> "WEB_SETTING_CACHE",
 
     "sidebar" => [
         [

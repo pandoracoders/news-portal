@@ -16,10 +16,18 @@
         .instagram-media {
             margin: auto !important;
         }
+
+        figcaption {
+            text-align: center !important;
+        }
+
+        figure {
+            display: block !important;
+        }
     </style>
 @endpush
 
-@if ($article->category->slug == 'biography')
+@if ($article->tables)
     @include('frontend.pages.article.biography')
 @else
     @include('frontend.pages.article.other')
@@ -41,18 +49,7 @@
     <script async src="//www.instragram.com/embed.js"></script>
     <script async src="https://platform.twitter.com/widgets.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
-            const atags = document.querySelectorAll('a');
-            atags.forEach((a) => {
-                // of outbound link
-                if (a.href.indexOf(location.hostname) === -1) {
-                    a.target = '_blank';
-                    a.rel = 'noopener';
-                }
-            });
-        });
-    </script>
+
 
     <script>
         var headingList = document.querySelector('.content-detail').querySelectorAll("h2,h3,h4,h5,h6");
@@ -67,7 +64,7 @@
             return str;
         }
 
-        if(headingList.length == 0){
+        if (headingList.length == 0) {
             document.querySelector('.table-of-contents').style = "display:none;"
         }
 

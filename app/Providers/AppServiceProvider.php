@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Backend\Category;
+use App\Models\Backend\WebSetting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        view()->share("categories", Category::all());
+        $settings = WebSetting::get()->groupBy("type");
+        view()->share(["categories" => Category::all(), "web_settings" => $settings]);
     }
 }

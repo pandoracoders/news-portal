@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    @if (isset($title))
+        <title> {{ $title }} - {{ getSettingValue('website_title') }}</title>
+    @else
+        <title>{{ getSettingValue('website_title') }} - {{ getSettingValue('slogan') }}</title>
+    @endif
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -75,6 +79,19 @@
     @stack('scripts')
 
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            const atags = document.querySelectorAll('a');
+            atags.forEach((a) => {
+                // of outbound link
+                if (a.href.indexOf(location.hostname) === -1) {
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                }
+            });
+        });
+    </script>
     <script>
         if (window.ajax_url) {
             const scrollContent = document.getElementById('scroll-content');

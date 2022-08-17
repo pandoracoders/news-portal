@@ -32,8 +32,9 @@
     <!-- Slider -->
 
     <main class="container">
-
-        @include('frontend.pages.home.components.slider')
+        @if ($data['featured_articles']->count())
+            @include('frontend.pages.home.components.slider')
+        @endif
 
         @foreach ($data['category_section'] as $key => $section)
             @include('frontend.pages.home.components.category-section', [
