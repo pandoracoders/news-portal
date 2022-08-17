@@ -1,0 +1,32 @@
+[
+    {
+        "key": "website_title",
+        "value": "News Portal",
+        "type": "branding"
+    },
+    {
+        "key": "slogan",
+        "value": "Best News Portal In The Town",
+        "type": "branding"
+    },
+    {
+        "key": "about-us",
+        "type": "pages",
+        "value": "About Us Page Content"
+    },
+    {
+        "key": "contact-us",
+        "type": "pages",
+        "value": "Contact Us Page Content"
+    },
+    {
+        "key": "terms-and-conditions",
+        "type": "pages",
+        "value": "Terms and Conditions Page Content"
+    },
+    {
+        "key": "privacy-policy",
+        "type": "pages",
+        "value": "Privacy Policy Page Content"
+    }
+]

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('web_settings', function (Blueprint $table) {
             $table->id();
             $table->string("key");
-            $table->string("value");
+            $table->longText("value");
             $table->string("type");
         });
     }

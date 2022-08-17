@@ -26,16 +26,24 @@ if (!function_exists("getSettingType")) {
     }
 }
 
-
-if (!function_exists("getSettingValue")) {
-    function getSettingValue($key)
+if (!function_exists("getSetting")) {
+    function getSetting($key)
     {
         // Cache::forget(config("constants.web_settings_cache_key"));
         $settings = Cache::rememberForever(config("constants.web_settings_cache_key"), function () {
             return WebSetting::get();
         });
+        return $settings->where("key", $key)->first() ?? null;
+    }
+}
 
-        return $settings->where("key", $key)->first()?->value ?? '';
+
+
+if (!function_exists("getSettingValue")) {
+    function getSettingValue($key)
+    {
+        $setting = getSetting($key);
+        return $setting ? $setting->value : null;
     }
 }
 

@@ -51,14 +51,10 @@
                                 </div>
 
 
-
-
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Body</label>
-                                    <textarea name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('summary') }}</textarea>
+                                    <textarea name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('body') }}</textarea>
                                 </div>
-
-
 
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Summary</label>

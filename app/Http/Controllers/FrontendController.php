@@ -16,7 +16,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-      (OrgSchema::dispatch());
+        (OrgSchema::dispatch());
 
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
@@ -25,6 +25,10 @@ class FrontendController extends Controller
 
     public function singleArticle($slug)
     {
+        if (getSetting($slug)) {
+            return view("frontend.pages.static-page", ["page" => getSetting($slug)]);
+        }
+
         $category = Category::where("status", 1)->where("slug", $slug)->first();
         if ($category) {
             return view("frontend.pages.category.index", [
@@ -81,8 +85,8 @@ class FrontendController extends Controller
         $page = request()->get("page", 1);
         if (request()->ajax()) {
             $articles = $tag->articles()
-            ->where("task_status", "published")
-            ->limit($limit)->offset(($page) * $limit)->get();
+                ->where("task_status", "published")
+                ->limit($limit)->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);
@@ -93,8 +97,8 @@ class FrontendController extends Controller
         $page = request()->get("page", 1);
         if (request()->ajax()) {
             $articles = $author->articles()
-            ->where("task_status", "published")
-            ->limit($limit)->offset(($page) * $limit)->get();
+                ->where("task_status", "published")
+                ->limit($limit)->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);

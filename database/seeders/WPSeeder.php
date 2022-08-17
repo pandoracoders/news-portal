@@ -20,7 +20,7 @@ class WPSeeder extends Seeder
     public function run()
     {
 
-        $json = file_get_contents(base_path("database/seeds/wikibioages.json"));
+        $json = file_get_contents(base_path("database/seeders/json/wikibioages.json"));
         $data = json_decode($json, true);
 
         foreach ($data as $key => $post) {

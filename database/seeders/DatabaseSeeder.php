@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TableSeeder::class,
             WPSeeder::class,
+            PageSeeder::class,
         ]);
 
         // Article::factory(100)->create()->each(function ($article) {

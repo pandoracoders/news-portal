@@ -43,6 +43,16 @@
         @if (auth()->user()->role->slug == 'super-admin')
             <li class="menu-label">System</li>
 
+            <li>
+                <a href="{{ route('backend.page-view') }}">
+                    <div class="parent-icon">
+                        <i class="bi bi-file-earmark-break"></i>
+                    </div>
+                    <div class="menu-title">Page</div>
+                </a>
+            </li>
+
+
             <li {{ Route::currentRouteName() == 'backend.setting-view' ? 'class=mm-active' : '' }}>
                 <a href="{{ route('backend.setting-view', ['type' => 'branding']) }}">
                     <div class="parent-icon">
@@ -61,8 +71,6 @@
                 </a>
             </li>
         @endif
-
-
 
     </ul>
     <!--end navigation-->

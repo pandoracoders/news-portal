@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\TableSetController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WebSettingController;
+use App\Http\Controllers\PageController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -115,4 +116,12 @@ Route::group(['prefix' => 'setting', "as" => "setting-"], function () {
     Route::post("/update/{type}", [WebSettingController::class, "update"])->name("update");
 
     Route::get("clear/cache", [WebSettingController::class, "clearCache"])->name("clear_cache");
+});
+
+
+Route::group(['prefix' => 'page', "as" => "page-"], function () {
+    Route::get("/", [PageController::class, "index"])->name("view");
+
+    Route::get("/edit/{page}", [PageController::class, "edit"])->name("edit");
+    Route::post("/update/{page}", [PageController::class, "update"])->name("update");
 });
