@@ -21,7 +21,7 @@ if (!function_exists("getSettingType")) {
     {
         $settings = Cache::rememberForever(config("constants.web_settings_cache_key"), function () {
             return WebSetting::get();
-        }); 
+        });
         return $settings->where("type", $key);
     }
 }
@@ -30,7 +30,7 @@ if (!function_exists("getSettingType")) {
 if (!function_exists("getSettingValue")) {
     function getSettingValue($key)
     {
-        Cache::forget(config("constants.web_settings_cache_key"));
+        // Cache::forget(config("constants.web_settings_cache_key"));
         $settings = Cache::rememberForever(config("constants.web_settings_cache_key"), function () {
             return WebSetting::get();
         });

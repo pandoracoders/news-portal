@@ -17,6 +17,8 @@ class FrontendController extends Controller
     {
         // clearHomePageCache();
 
+        // dd(getSettingValue("website_title"));
+
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
         ]);
