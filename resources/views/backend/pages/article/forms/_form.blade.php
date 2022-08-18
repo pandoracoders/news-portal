@@ -152,13 +152,15 @@
                     <div class="border p-3 rounded mb-2">
                         <h6 class="mb-0 text-uppercase">Action</h6>
                         <hr>
-
-                        <button type="submit" class="btn btn-primary btn-block back-to-top" style="display: inline;">
-                            {{ isset($article) ? 'Update' : 'Save' }}
-                        </button>
+                        @if ($article->discussions)
+                            <a data-bs-toggle="modal" href="#discussion-model" class="back-to-top"
+                                style="display: inline; bottom:80px; background-color: #f73757">
+                                <i class="bi bi-chat-dots"></i>
+                            </a>
+                        @endif
 
                         <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
-                           <small style="font-size:14px">Save </small>
+                            <small style="font-size:14px">Save </small>
                         </a>
 
                         <button type="submit" class="btn btn-primary btn-block" id="save">
@@ -170,11 +172,13 @@
                                 Submit
                             </button>
                         @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
-                            <button type="button" class="btn btn-success btn-block" id="publish">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#publish-article">
                                 Publish
                             </button>
 
-                            <button type="button" class="btn btn-danger btn-block" id="modify">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modify-article">
                                 Modify
                             </button>
                         @endif
@@ -183,6 +187,78 @@
             </div>
         </div>
     </div>
+
+    @if (auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
+        <div class="modal fade" id="modify-article" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Any Message ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label for="" class="form-label">Message</label>
+                                <textarea name="discussion" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-block" id="modify">
+                            Modify
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="publish-article" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Publish Date</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                date-time picker goes here
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-block" id="publish">
+                            Publish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+    @if ($article->discussions)
+        <div class="modal fade" id="discussion-model" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-header">
+                    <h5 class="modal-title">Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    {!! '<p>' . implode('</p> <hr/> <p>', $article->discussions) . '</p>' !!}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    @endif
 
 
 

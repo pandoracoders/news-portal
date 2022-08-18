@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ArticleTitleRequest;
 use App\Imports\Backend\ArticleTitle as BackendArticleTitle;
+use App\Jobs\Backend\ArticleLogJob;
 use App\Models\Backend\Article;
 use App\Models\Backend\ArticleTitle;
 use App\Models\Backend\Category;
@@ -110,6 +111,9 @@ class ArticleTitleController extends Controller
         $article_title->update([
             "article_id" => $article->id,
         ]);
+
+
+        ArticleLogJob::dispatchAfterResponse($article, "Article picked by " . auth()->user()->name);
 
         return redirect()->route("backend.article-edit", ["article" => $article]);
     }

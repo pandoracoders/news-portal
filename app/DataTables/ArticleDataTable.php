@@ -193,30 +193,15 @@ class ArticleDataTable extends DataTable
         } else if ($this->role == "editor") {
 
             if (!in_array($row->task_status, $this->editor_hide_condition)) {
-                if ($row->task_status == "submitted" || in_array($row->task_status,["editing", "published"])) {
+                if ($row->task_status == "submitted" || in_array($row->task_status, ["editing", "published"])) {
                     $td = "<a href='" . route('backend.article-edit', $row) . "'
                     class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
                 }
             }
-            if ($row->task_status == "editing") {
-                $td .= "<a href='" . route('backend.article-update_task_status', ["article" => $row, "taskStatus" => "published"]) . "'
-    class='badge badge-success badge-sm mr-2'> <i class='bi bi-check-circle'></i>Publish</a>";
-
-                $td .= "<a href='" . route('backend.article-update_task_status', ["article" => $row, "taskStatus" => "rejected"]) . "'
-    class='badge badge-danger badge-sm'> <i class='bi bi-check-circle'></i>Reject</a>";
-            }
-        }
-
-        else if ($this->role == "super-admin") {
-             $td = "<a href='" . route('backend.article-edit', $row) . "'
+        } else if ($this->role == "super-admin") {
+            $td = "<a href='" . route('backend.article-edit', $row) . "'
                     class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
-                $td .= "<a href='" . route('backend.article-update_task_status', ["article" => $row, "taskStatus" => "published"]) . "'
-    class='badge badge-success badge-sm mr-2'> <i class='bi bi-check-circle'></i>Publish</a>";
-
-                $td .= "<a href='" . route('backend.article-update_task_status', ["article" => $row, "taskStatus" => "rejected"]) . "'
-    class='badge badge-danger badge-sm'> <i class='bi bi-check-circle'></i>Reject</a>";
-            }
-
+        }
         return $td;
     }
 
@@ -226,7 +211,7 @@ class ArticleDataTable extends DataTable
             $hide_condition = $this->writer_hide_condition;
         } else if ($this->role == "editor") {
             $hide_condition = $this->editor_hide_condition;
-        }else{
+        } else {
             $hide_condition = [];
         }
 

@@ -16,8 +16,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-        (OrgSchema::dispatch());
-
+        // dd("here");
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
         ]);

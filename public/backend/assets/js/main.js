@@ -41,7 +41,7 @@ $(function() {
   $(".btn-mobile-filter").on("click", function() {
 		$(".filter-sidebar").removeClass("d-none");
 	}),
-  
+
     $(".btn-mobile-filter-close").on("click", function() {
 		$(".filter-sidebar").addClass("d-none");
 	}),
@@ -61,17 +61,17 @@ $(function() {
 
   }),
 
-  
+
 
 
   $(document).ready(function() {
-		$(window).on("scroll", function() {
-			$(this).scrollTop() > 300 ? $(".back-to-top").fadeIn() : $(".back-to-top").fadeOut()
-		}), $(".back-to-top").on("click", function() {
-			return $("html, body").animate({
-				scrollTop: 0
-			}, 600), !1
-		})
+		// $(window).on("scroll", function() {
+		// 	$(this).scrollTop() > 300 ? $(".back-to-top").fadeIn() : $(".back-to-top").fadeOut()
+		// }), $(".back-to-top").on("click", function() {
+		// 	return $("html, body").animate({
+		// 		scrollTop: 0
+		// 	}, 600), !1
+		// })
 	})
 
 
@@ -87,13 +87,13 @@ $(function() {
         $("html").attr("class", "dark-theme")
     }
 
-  }), 
+  }),
 
 
 
 
 
-// Theme switcher 
+// Theme switcher
 
 $("#LightTheme").on("click", function() {
   $("html").attr("class", "light-theme")
@@ -108,7 +108,7 @@ $("#SemiDark").on("click", function() {
 }),
 
 
-// headercolor colors 
+// headercolor colors
 
 $("#headercolor1").on("click", function() {
   $("html").addClass("color-header headercolor1"), $("html").removeClass("headercolor2 headercolor3 headercolor4 headercolor5 headercolor6 headercolor7 headercolor8")
@@ -129,7 +129,7 @@ $("#headercolor1").on("click", function() {
 })
 
 
-// sidebar colors 
+// sidebar colors
 $('#sidebarcolor1').click(theme1);
 $('#sidebarcolor2').click(theme2);
 $('#sidebarcolor3').click(theme3);
@@ -186,8 +186,8 @@ function theme8() {
     })
 
 
-  
 
-  
-    
+
+
+
 });

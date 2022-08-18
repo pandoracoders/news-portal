@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\ArticleDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ArticleRequest;
+use App\Jobs\Backend\ArticleLogJob;
 use App\Models\Backend\Article;
 use App\Services\ImageUpload;
 
@@ -57,16 +58,20 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $message = "";
         $role = auth()->user()->role->slug;
         $update_data = [];
-        if ($article->task_status == "writing" && $role == "writer") {
-            $update_data = ["task_status" => "writing"];
 
-        } else if ($article->task_status == "submitted" && $role != "writer") {
+        if ($article->task_status == "submitted" && $role != "writer") {
+            $message = "Article picked by " . auth()->user()->name . "for editing";
             $update_data = ["task_status" => "editing", "editor_id" => auth()->user()->id];
         }
 
         $article->update(array_filter($update_data));
+
+        if ($message)
+            ArticleLogJob::dispatchAfterResponse($article, $message);
+
 
         return view($this->path . "crud", [
             "article" => $article,
@@ -84,6 +89,8 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
+        $message = "Article saved by " . auth()->user()->name;
+
         if ($request->hasFile("image")) {
             $articleArray = array_merge(
                 collect($request->validated())->except(["tags"])->toArray(),
@@ -93,25 +100,36 @@ class ArticleController extends Controller
             );
         } else {
             $articleArray =
-            collect($request->validated())->except(["tags"])->toArray();
+                collect($request->validated())->except(["tags"])->toArray();
+        }
+
+        if ($request->task_status == "submitted") {
+            if ($article->editor_id) {
+                $message = "Article Resubmitted and assign to " . auth()->user()->name . " for editing";
+            } else {
+                $message = "Article is submitted and open for editor";
+            }
+        } else if ($request->task_status == "published") {
+            $message = "Article published by " . auth()->user()->name;
+        } else if ($request->task_status == "modifying") {
+            $message = auth()->user()->name . " send Article for modification";
         }
 
         if ($request->task_status == "submitted" && $article->editor_id) {
             $articleArray["task_status"] = "editing";
         }
 
-        // dd($articleArray);
-
         $article->update(array_filter($articleArray));
 
         $article->tags()->sync($request->tags);
+        if ($message)
+            ArticleLogJob::dispatch($article, $message, $request->discussion ?? '');
 
         if ($request->task_status) {
             return redirect()->route("backend.article-view")->with("success", "Article updated successfully.");
         } else {
             return redirect()->back()->with("success", "Article updated successfully.");
         }
-
     }
 
     /**
@@ -128,6 +146,8 @@ class ArticleController extends Controller
 
     public function updateTaskStatus(Article $article, $taskStatus)
     {
+        dd("update task status");
+
         $user = auth()->user();
         if ($user->id == $article->writer_id && $article->task_status == "writing" && $taskStatus == "submitted") {
             $article->update([
@@ -152,11 +172,17 @@ class ArticleController extends Controller
 
     public function updateStatus(Article $article)
     {
+        // dd("stat");
         if ($article && $article->id) {
+
             $article->status = !$article->status;
             $article->save();
+
+            ArticleLogJob::dispatch($article, "Article status update to " . ($article->status ? "Active" : "Inactive") . " by " . auth()->user()->name);
+
             return redirect()->route("backend.article-view")->with("success", "Article status updated successfully.");
         }
+
         return redirect()->route("backend.article-view")->with("error", "Article not found.");
     }
 }

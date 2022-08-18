@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend;
 
+use App\Jobs\Backend\ArticleLogJob;
 use App\Jobs\HomePageCache;
 use App\Models\Backend\User;
 use App\Models\Traits\SeoTrait;
@@ -31,7 +32,7 @@ class Article extends Model
         'tables' => 'array',
     ];
 
-    protected $hidden =[
+    protected $hidden = [
         "body",
         "created_at",
         "updated_at",
@@ -70,6 +71,20 @@ class Article extends Model
     }
 
 
+    public function articleLog()
+    {
+        return $this->hasMany(ArticleLog::class);
+    }
+
+    public function getDiscussionsAttribute()
+    {
+        return array_filter($this->articleLog()
+            ->whereNotNull("discussion")
+            ->select("article_id", "id", "discussion")
+            ->get()->pluck("discussion")->toArray() ?? []);
+    }
+
+
     public function more()
     {
         return Article::whereNot("id", $this->id)->limit(8)->get();
@@ -86,6 +101,7 @@ class Article extends Model
         parent::boot();
         static::created(function ($model) {
             HomePageCache::dispatchAfterResponse();
+
         });
         static::updated(function ($model) {
             HomePageCache::dispatchAfterResponse();
