@@ -17,6 +17,8 @@ class ArticleDataTable extends DataTable
 
     private $showAction = true;
 
+    private $showLinks = false;
+
     private $writer_hide_condition = [
         "published",
         "editing",
@@ -32,6 +34,7 @@ class ArticleDataTable extends DataTable
         $this->user = auth()->user();
         $this->role = $this->user->role->slug;
         $this->showAction = $this->showAction();
+        $this->showLinks = (request("task_status") == "published" || !request("task_status")  ) ? true : false;
     }
 
     /**
@@ -98,6 +101,15 @@ class ArticleDataTable extends DataTable
             array_push($rawColumns, "action");
         }
 
+        if($this->showLinks){
+            $datatable->addColumn('incoming', function ($row) {
+                return $row->incoming_link;
+            });
+            $datatable->addColumn("outgoing", function ($row) {
+                return $row->outgoing_link;
+            });
+        }
+
         return $datatable->rawColumns($rawColumns);
     }
 
@@ -160,6 +172,20 @@ class ArticleDataTable extends DataTable
             array_push($columns, Column::make("action"));
         }
 
+        if($this->showLinks){
+            array_push($columns, Column::make("incoming")
+            ->title('<i class="bi bi-box-arrow-in-down-left" style="font-size:20px"></i>')
+            ->data("incoming")
+            ->class("text-center")
+            ->width(100)
+
+            ->class("text-center"));
+            array_push($columns, Column::make("outgoing")
+            ->title('<i class="bi bi-box-arrow-up-right" style="font-size:18px"></i>')
+            ->width(60)
+            ->class("text-center"));
+        }
+
         return $columns;
     }
 
@@ -187,9 +213,6 @@ class ArticleDataTable extends DataTable
         class='badge badge-success badge-sm'> <i class='bi bi-check-circle'></i>Post for review</a>";
                 }
             }
-
-            // } else {
-            // }
         } else if ($this->role == "editor") {
 
             if (!in_array($row->task_status, $this->editor_hide_condition)) {

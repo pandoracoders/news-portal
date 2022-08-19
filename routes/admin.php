@@ -70,6 +70,7 @@ Route::group(['prefix' => 'article', "as" => "article-"], function () {
     Route::get("/status-update/{article}", [ArticleController::class, "updateStatus"])->name("update_status");
 
     Route::get("/task-status-update/{article}/{taskStatus}", [ArticleController::class, "updateTaskStatus"])->name("update_task_status");
+    Route::post("article-search", [ArticleController::class, "search"])->name("search");
 });
 
 

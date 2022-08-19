@@ -8,6 +8,7 @@ use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
 use App\Models\Backend\User;
+use DOMDocument;
 
 class FrontendController extends Controller
 {
@@ -16,7 +17,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-        // dd("here");
+        // dd(url("/"));
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
         ]);

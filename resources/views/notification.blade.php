@@ -44,11 +44,8 @@
         @elseif(session()->has('error'))
             round_success_noti('error', "{{ session()->get('error') }}");
         @else
-        
+
         @endif
         // round_success_noti();
     </script>
 @endpush
-
-
-hello everyone

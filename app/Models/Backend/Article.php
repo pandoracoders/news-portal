@@ -6,44 +6,22 @@ use App\Jobs\Backend\ArticleLogJob;
 use App\Jobs\HomePageCache;
 use App\Models\Backend\User;
 use App\Models\Traits\SeoTrait;
+use DOMDocument;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
     use HasFactory, SeoTrait;
 
-    protected $fillable = [
-        'title',
-        'slug',
-        'summary',
-        'body',
-        'image',
-        'category_id',
-        'writer_id',
-        'editor_id',
-        'published_at',
-        'status',
-        'task_status',
-        'tables',
-    ];
+    protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables'];
 
     protected $casts = [
         'tables' => 'array',
     ];
 
-    protected $hidden = [
-        "body",
-        "created_at",
-        "updated_at",
-        "deleted_at",
-        "published_at",
-        "status",
-        "task_status",
-        "tables",
-        "editor_id"
-    ];
-
+    protected $hidden = ['body', 'created_at', 'updated_at', 'deleted_at', 'published_at', 'status', 'task_status', 'tables', 'editor_id'];
 
     public function category()
     {
@@ -70,7 +48,6 @@ class Article extends Model
         return $this->belongsToMany(Tag::class, ArticleTag::class);
     }
 
-
     public function articleLog()
     {
         return $this->hasMany(ArticleLog::class);
@@ -78,30 +55,76 @@ class Article extends Model
 
     public function getDiscussionsAttribute()
     {
-        return array_filter($this->articleLog()
-            ->whereNotNull("discussion")
-            ->select("article_id", "id", "discussion")
-            ->get()->pluck("discussion")->toArray() ?? []);
+        return array_filter(
+            $this->articleLog()
+                ->whereNotNull('discussion')
+                ->select('article_id', 'id', 'discussion')
+                ->get()
+                ->pluck('discussion')
+                ->toArray() ?? [],
+        );
     }
 
+    public function readMore(){
+        return null;
+    }
+
+    public function linkableArticles($search = null)
+    {
+        $keyword = str_word_count($this->title) < 2 ? $this->title : $this->seo->meta_keywords;
+        $url = url('/') . '/';
+        $articles = Article::where('task_status', 'published')
+            ->where('status', 1)
+            ->where('id', '!=', $this->id)
+            ->select(DB::raw("title , CONCAT('$url',slug) as value , image"));
+        if ($search) {
+            $articles->where('title', 'like', "%$search%")->get();
+        } else {
+            $articles->where('title', 'like', '%' . $keyword . '%');
+        }
+        return $articles->get();
+    }
+
+    public function getIncomingLinkAttribute()
+    {
+        return Article::where('body', 'like', '%' . route('singleArticle', $this->slug) . '%')
+            ->where('id', '!=', $this->id)
+            ->count() ?? 0;
+    }
+
+    public function getOutgoingLinkAttribute()
+    {
+        $match = [];
+        preg_match_all('/<a [^>]*href="(.+)"/', $this->body, $match);
+        if ($match && isset($match[1])) {
+            return count(
+                array_filter($match[1], function ($item) {
+                    return strpos($item, 'news-portal.test') ? $item : null;
+                }),
+            );
+        }
+        return 0;
+    }
 
     public function more()
     {
-        return Article::whereNot("id", $this->id)->limit(8)->get();
+        return Article::whereNot('id', $this->id)
+            ->limit(8)
+            ->get();
     }
 
     public function youMayAlsoLike()
     {
-        return Article::whereNot("id", $this->id)->limit(8)->get();
+        return Article::whereNot('id', $this->id)
+            ->limit(8)
+            ->get();
     }
-
 
     public static function boot()
     {
         parent::boot();
         static::created(function ($model) {
             HomePageCache::dispatchAfterResponse();
-
         });
         static::updated(function ($model) {
             HomePageCache::dispatchAfterResponse();

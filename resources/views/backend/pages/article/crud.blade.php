@@ -23,7 +23,7 @@
     <script>
         tinymce.init({
             selector: 'textarea.editor',
-            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+            plugins: 'preview advlist autolink importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
             imagetools_cors_hosts: ['picsum.photos'],
             image_caption: true,
             image_show_caption: true,
@@ -86,6 +86,7 @@
             noneditable_noneditable_class: "mceNonEditable",
             toolbar_mode: 'sliding',
             contextmenu: "link image imagetools table",
+
         });
     </script>
 @endpush
