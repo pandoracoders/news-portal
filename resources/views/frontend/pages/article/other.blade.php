@@ -1,23 +1,5 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.css" type="text/css">
-
-    <style>
-        .similar-post-section .row {
-            display: flex !important;
-
-        }
-
-        .similar-post-section .row>[class*='col-'] {
-            display: flex !important;
-            flex-direction: row !important;
-        }
-    </style>
-
-    <style>
-        .featured-image>img {
-            width: 100% !important;
-        }
-    </style>
 @endpush
 
 
@@ -25,18 +7,20 @@
     <main class="container">
         <div class="row main-section">
             <div class="col-lg-8 article-section">
-                <div class="bc">
+                <div class="bc mx-5 m-3">
                     <ul class="breadcrumb-container">
                         <li class="breadcrumb">
                             <a href="{{ url("/") }}">
-                                <i class="fa fa-solid fa-home"></i>
+                                Home
                             </a>
                         </li>
+                        ⇢
                         <li class="breadcrumb">
-                            <a href="{{ route('singleArticle', $article->category->slug) }}" class="text-capitalize">
+                            <a href="{{ route('singleArticle', $article->category->slug) }}">
                                 {{ $article->category->title }}
                             </a>
                         </li>
+                        ⇢
                         <li class="breadcrumb active">
                             <span class="text-capitalize">
                                 {{ $article->title }}

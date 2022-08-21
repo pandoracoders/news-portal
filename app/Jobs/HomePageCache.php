@@ -84,7 +84,7 @@ class HomePageCache implements ShouldQueue
 
                 $articles2 = $category->articles()->with(["category", "writer"])
                     ->where("task_status", "published")
-                    ->limit(3)
+                    ->limit(2)
                     ->whereNotIn("id", $ids)
                     ->get();
                 $ids = array_merge($ids, $articles2->pluck("id")->toArray());
