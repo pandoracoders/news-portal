@@ -28,6 +28,12 @@ class WebSettingRequest extends FormRequest
             foreach (config("constants.social_media") as $value) {
                 $rules[$value] = "nullable|url";
             }
+        } else if( $this->route("type") == "secret"){
+            $rules = [
+                "facebook_token" => "nullable",
+                "twitter_token" => "nullable",
+                "pinterest_token" => "nullable"
+            ];
         }
 
 

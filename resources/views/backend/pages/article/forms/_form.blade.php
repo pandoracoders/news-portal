@@ -239,7 +239,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mb-2">
-                                date-time picker goes here
+                                <input id="datetimepicker" type="text" class="form-control" name="published_at">
                             </div>
                         </div>
                     </div>
@@ -439,8 +439,8 @@
     <script>
         $(document).ready(function() {
 
-
-
+            jQuery('#datetimepicker').datetimepicker({});
+            
             const articleHtmlStyle = (articles) => {
                 let html = '';
                 articles.forEach(article => {
