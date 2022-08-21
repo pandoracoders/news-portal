@@ -44,6 +44,7 @@ h1 {
 
 .content-detail figure {
     max-width: 470px;
+    display:block;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -66,7 +67,7 @@ h1 {
     font-weight: 300;
     margin: auto;
     max-width: 450px;
-    text-align: left;
+    text-align: center;
     font-style: italic;
 }
 

@@ -43,9 +43,6 @@
             }
         }
     </style>
-
-    {!! getSettingValue("org_schema") !!}
-
 </head>
 
 <body>

@@ -65,15 +65,21 @@
                 </ul>
                 <div class="sub">
                     <ul class="sub-menu">
-
-                        @forelse (getSettingType("pages") as $page)
-                            <li class="nav-item">
-                                <a href="{{ route('singleArticle', $page->key) }}"
-                                    class="nav-link">{{ unSlug($page->key) }}</a>
-                            </li>
-                        @empty
-                        @endforelse
-
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Privacy Policy</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="#" class="nav-link">Terms Conditions</a>
+                        </li> --}}
+                        <!-- <li class="nav-item">
+                            <a href="Ads" class="nav-link">Ads</a>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- sidebar social links -->
@@ -84,7 +90,7 @@
                         </a>
                     @empty
                     @endforelse
-
+                    
                 </div>
 
             </div>

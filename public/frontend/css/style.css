@@ -20,6 +20,15 @@
   color: #d2d2d4;
 }
 
+.instagram-media, .twitter-tweet{
+  margin: auto !important;
+}
+
+iframe{
+  width: 100%;
+  max-height: 455px;
+}
+
 /* End Selection Color */
 
 html {
