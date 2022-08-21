@@ -179,7 +179,7 @@
     </header>
     <div class="sidebar-overlay"></div>
     <main class="container">
-        
+
         <div class="row main-section">
             <div class="col-lg-8 article-section">
                 <div class="bc">
@@ -196,7 +196,8 @@
                         </li>
                         <li class="breadcrumb active">
                             <span class="text-capitalize">
-                                Article Title Article TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle Title
+                                Article Title Article TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle
+                                TitleArticle TitleArticle TitleArticle TitleArticle TitleArticle Title
                             </span>
                         </li>
                     </ul>
@@ -285,7 +286,8 @@
                     </p>
 
                     <figure class="image">
-                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/Lionel Goat Messi.jpg" alt="Check this">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/Lionel Goat Messi.jpg"
+                            alt="Check this">
                         <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
                             it is expected to be it is must necessary to maintain the layout when the content of the
                             image exceeds the normal limit.</figcaption>
@@ -316,7 +318,8 @@
                     </p>
 
                     <figure class="image">
-                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/messi-small.jpg" alt="Check this">
+                        <img title="Lionel-Messi-2018 (1).jpeg" src="/public/frontend/images/messi-small.jpg"
+                            alt="Check this">
                         <figcaption>Here goes the caption in deatil but what happens if the caption is longer than
                             it is expected to be it is must necessary to maintain the layout when the content of the
                             image exceeds the normal limit.</figcaption>
@@ -546,7 +549,7 @@
                             <div class="image">
                                 <figure class="m-0">
                                     <a href="#">
-                                        <img src="/public/frontend/images/3.jpg" alt="" class="image_img img-fluid">
+                                        <img src="/public/frontend/images/messi.jpg" alt="" class="image_img img-fluid">
                                     </a>
                                 </figure>
                             </div>
@@ -554,7 +557,9 @@
                                 <h2>This is the title for trending and to check how long the text goes into the title
                                     section
                                 </h2>
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Author</p>
+                                <div class="meta">
+                                    <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Author</p>
+                                </div>
                             </div>
                         </div>
                         <div class="sidebar-post col-md-6 col-lg-12 mt-3">
@@ -671,6 +676,43 @@
                 </div>
             </div>
         </div>
+        <p id="beforeCommentsText">Post Your Comment Here:</p>
+        <div id="comments" class="col-md-7">
+            <div>
+                <label for="full_name">Full Name:</label>
+                <input type="text" name="full_name" id="" class="form-control">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" id="">
+            </div>
+            <div>
+                <label for="comment">Comment:</label>
+                <textarea name="comment" id="" class="form-control" rows="7"></textarea>
+            </div>
+            <div class="submit-btn">
+                <span class="btn btn-sm btn-success">Submit</span>
+            </div>
+        </div>
+        <div class="user-comments col-md-7">
+            <p>Comments:</p>
+            <div class="single-comment">  
+                <p class="full-name"><i class="fa-solid fa-user"></i> &nbsp;Guragain Maila</p>
+                <p class="comment"><i class="fa-solid fa-comment"></i> &nbsp;That is absolutely ridiculous. I can't believe I am even wasting my time on commenting</p>
+            </div>
+            <div class="single-comment">  
+                <p class="full-name"><i class="fa-solid fa-user"></i> &nbsp;Guragain Maila</p>
+                <p class="comment"><i class="fa-solid fa-comment"></i> &nbsp;That is absolutely ridiculous. I can't believe I am even wasting my time on commenting</p>
+            </div>
+            <div class="single-comment">  
+                <p class="full-name"><i class="fa-solid fa-user"></i> &nbsp;Guragain Maila</p>
+                <p class="comment"><i class="fa-solid fa-comment"></i> &nbsp;That is absolutely ridiculous. I can't believe I am even wasting my time on commenting</p>
+            </div>
+            <div class="single-comment">  
+                <p class="full-name"><i class="fa-solid fa-user"></i> &nbsp;Guragain Maila</p>
+                <p class="comment"><i class="fa-solid fa-comment"></i> &nbsp;That is absolutely ridiculous. I can't believe I am even wasting my time on commenting That is absolutely ridiculous. I can't believe I am even wasting my time on commenting</p>
+            </div>
+        </div>
         <div class="similar-post-section">
             <div class="heading mt-4 mb-4">
                 <div class="category-segment">
@@ -678,7 +720,7 @@
                 </div>
             </div>
             <div class="row similar-post-container">
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
@@ -695,13 +737,14 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
@@ -718,13 +761,14 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
@@ -741,13 +785,14 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
@@ -764,18 +809,20 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
                                 <a href="#">
-                                    <img src="/public/frontend/images/Lionel Goat Messi.jpg" alt="" class="image_img img-fluid">
+                                    <img src="/public/frontend/images/Lionel Goat Messi.jpg" alt=""
+                                        class="image_img img-fluid">
                                 </a>
                             </figure>
                         </div>
@@ -787,18 +834,20 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-lg-3">
                     <div class="similar-post">
                         <div class="image">
                             <figure class="m-0">
                                 <a href="#">
-                                    <img src="/public/frontend/images/messi-small.jpg" alt="" class="image_img img-fluid">
+                                    <img src="/public/frontend/images/messi-small.jpg" alt=""
+                                        class="image_img img-fluid">
                                 </a>
                             </figure>
                         </div>
@@ -810,7 +859,8 @@
                                     section</a>
                             </div>
                             <div class="meta">
-                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio Actor</p>
+                                <p class="article-date">Jan 25, 2022</p>|<p class="article-author">Lionardo DiCaprio
+                                    Actor</p>
                             </div>
                         </div>
                     </div>

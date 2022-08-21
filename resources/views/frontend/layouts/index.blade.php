@@ -121,9 +121,9 @@
                                 var html = '';
 
                                 for (let index = 0; index < d.length; index++) {
-                                    html += '<div class="col-md-6 col-lg-4 mb-1">';
+                                    html += '<div class="col-md-6 col-lg-4 mb-1 single-post">';
                                     html +=
-                                        '<div class="category-post d-flex" style="flex-direction: column !important">';
+                                        '<div class="category-post">';
                                     html += '<div class="image">';
                                     html += '<figure class="m-0">';
                                     html += '<a href="' + d[index].url + '">';
@@ -132,19 +132,19 @@
                                     html += '</figure>';
                                     html += '</div>';
                                     html +=
-                                        '<div class="category-post-title" style="display: flex; flex-direction: column;justify-content: space-between; flex:1">';
+                                        '<div class="category-post-title">';
                                     html += '<div class="title mb-3">';
                                     html += '<a href="' + d[index].url + '">';
                                     html += d[index].title;
                                     html += '</a>';
                                     html += '</div>';
-                                    html += '<span class="category-post-author">';
-                                    html += '<div class="d-flex" style="justify-content: end">';
-                                    html += '<a href="' + d[index].author.url + '">By ' + d[index].author.name +
-                                        ' on </a>';
-                                    html += '<span class="mx-1">' + d[index].published_at + '</span>';
+                                    html += '<div class="meta"><p class = "article-date" >' + d[index]
+                                        .published_at + ' | </p>';
+                                    html += '<p class="article-author">';
+                                    html += '<a href="' + d[index].author.url + '"> ' + d[index].author.name +
+                                        '</a></p>';
+
                                     html += '</div>';
-                                    html += '</span>';
                                     html += '</div>';
                                     html += '</div>';
                                     html += '</div>';

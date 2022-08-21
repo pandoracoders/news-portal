@@ -2,7 +2,7 @@
 
 return [
     "enable_2fa" => false,
-    "article_limit" => 8,
+    "article_limit" => 6,
     "task_status" => [
         "writing",
         "submitted",

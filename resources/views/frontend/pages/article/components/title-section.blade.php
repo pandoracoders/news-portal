@@ -1,22 +1,23 @@
-<div class="social-share">
-    <a href="#"><i class="fa-brands fa-facebook facebook"></i></a>
-    <a href="#"><i class="fa-brands fa-twitter twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-pinterest pinterest"></i></a>
-</div>
 <div class="title">
     <h1> {{ $article->title }} </h1>
     <div class="meta-property">
         <span class="mx-1">
             <span class="published-on"><i class="fa-solid fa-clock"></i> </span><span class="published-date">
-                {{ dateFormat($article->published_at) }} </span>
+                {{ dateFormat($article->published_at) }} &nbsp; |</span>
         </span>
         @if ($article->updated_at > $article->published_at)
             <span>
                 <i class="fa-solid fa-pen-to-square"></i></span><span class="updated-date">
-                {{ dateFormat($article->updated_at) }}
+                {{ dateFormat($article->updated_at) }} &nbsp;|&nbsp;
             </span>
         @endif
-        | By <a href="{{ route('authorArticle', $article->author->slug) }}"><span
-                class="article-author">{{ $article->author->alias_name }}</span></a>
+        <span class="article-author"><a
+                href="{{ route('authorArticle', $article->author->slug) }}">{{ $article->author->alias_name }}</a>
+        </span>
+    </div>
+    <div class="social-share">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}" target="_blank"><i class="fa-brands fa-facebook facebook"></i></a>
+        <a href="https://twitter.com/intent/tweet?url={{ Request::url() }}"><i class="fa-brands fa-twitter twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-pinterest pinterest"></i></a>
     </div>
 </div>

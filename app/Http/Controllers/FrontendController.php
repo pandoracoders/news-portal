@@ -71,7 +71,8 @@ class FrontendController extends Controller
             $articles = $category->articles()
                 ->where("task_status", "published")
                 ->limit($limit)
-                ->offset(($page) * $limit)->get();
+                ->offset(($page) * $limit)
+                ->orderBy("published_at","desc")->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);

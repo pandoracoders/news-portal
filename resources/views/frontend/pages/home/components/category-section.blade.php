@@ -28,11 +28,14 @@
                                     </a>
                                 </h2>
 
-                                <p class="article-date"> {{ carbon($article->published_at)->format('M d, Y') }}</p>|<p
-                                    class="article-author">
-                                    <a
-                                        href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
-                                </p>
+                                <div class="meta">
+                                    <p class="article-date">{{ carbon($article->published_at)->format('M d, Y') }} | </p> <a
+                                         href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}"><p
+                                         class="article-author">
+                                         {{ $article->writer->alias_name }}
+                                        </p>   
+                                    </a>
+                                 </div>
                             </div>
 
                         </div>
@@ -85,20 +88,19 @@
                          </figure>
                      </div>
                      <div class="trending-title">
-                         
-
                          <h2>
                              <a class="" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                  {{ $article->title }}
                              </a>
                          </h2>
-
-                         <p class="article-date">{{ carbon($article->published_at)->format('M d, Y') }}</p>|<p
-                             class="article-author"> <a
-                                 href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">
+                         <div class="meta">
+                            <p class="article-date">{{ carbon($article->published_at)->format('M d, Y') }} | </p> <a
+                                 href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}"><p
+                                 class="article-author">
                                  {{ $article->writer->alias_name }}
-                             </a>
-                         </p>   
+                                </p>   
+                            </a>
+                         </div>
                      </div>
                  </div>
              @empty

@@ -38,6 +38,11 @@
     width: 65%;
     max-height: 70px;
     min-height: 70px;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between;
+    flex: 1
 }
 
 .trending-single .trending-title h2 {
@@ -85,7 +90,10 @@
     width: 65%;
     max-height: 70px;
     min-height: 70px;
-
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between;
+    flex: 1
 }
 
 .biography-left .biography-single .biography-title h2 {
@@ -145,6 +153,10 @@
     width: 65%;
     max-height: 70px;
     min-height: 70px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between;
+    flex: 1
 }
 
 .entertainment-left .entertainment-single .entertainment-title h2 {
