@@ -2,20 +2,10 @@
 
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}/frontend/css/category.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.css" type="text/css">
 
 
-    <style>
-        .row {
-            display: flex !important;
-
-        }
-
-        .row>[class*='col-'] {
-            display: flex !important;
-            flex-direction: row !important;
-        }
-    </style>
+   
 @endpush
 
 

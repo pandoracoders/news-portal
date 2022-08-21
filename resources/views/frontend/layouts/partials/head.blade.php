@@ -13,6 +13,6 @@
 <meta property="og:image:alt" content="">
 <meta property="twitter:title" content="">
 <meta property="twitter:description" content="">
-<meta property="twitter:domain" content="">
+<meta property="twitter:domain" content="{{ getSettingValue('website_title') }}">
 <meta property="twitter:image" content="">
-<link href="" rel="canonical">
+<link href="{{ Request::url() }}" rel="canonical">

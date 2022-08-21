@@ -2,29 +2,7 @@
 
 
 @push('styles')
-    <style>
-        .similar-post-section .row {
-            display: flex !important;
-
-        }
-
-        .similar-post-section .row>[class*='col-'] {
-            display: flex !important;
-            flex-direction: row !important;
-        }
-
-        .instagram-media {
-            margin: auto !important;
-        }
-
-        figcaption {
-            text-align: center !important;
-        }
-
-        figure {
-            display: block !important;
-        }
-    </style>
+    
 @endpush
 
 @if ($article->tables)

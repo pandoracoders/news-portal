@@ -1,7 +1,7 @@
 <footer class="footer-section">
     <div class="footer-content pt-3 pb-3">
         <div class="row">
-            <div class="col-lg-4 mb-50 d-none d-lg-block">
+            <div class="col-lg-6 mb-50 d-none d-lg-block">
                 <div class="footer-widget">
                     <div class="footer-logo">
                         <h2>
@@ -13,7 +13,7 @@
 
                 </div>
             </div>
-            <div class="col-md-6 mb-30">
+            <div class="col-md-6 mb-30 social-section">
                 <div class="footer-social-icon">
                     {{-- {{ dd(getSettingType("social-media")) }} --}}
                     @forelse (getSettingType("social-media") as $media)
@@ -36,9 +36,9 @@
             </div>
             <div class="col-xl-6 col-lg-6">
                 <ul>
-                    <li>Privacy Policy</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
         </div>
