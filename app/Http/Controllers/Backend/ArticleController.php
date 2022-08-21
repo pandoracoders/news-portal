@@ -98,6 +98,7 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $message = 'Article saved by ' . auth()->user()->name;
+        $published_at = null;
 
         if ($request->hasFile('image')) {
             $articleArray = array_merge(
@@ -122,6 +123,11 @@ class ArticleController extends Controller
             }
         } elseif ($request->task_status == 'published') {
             $message = 'Article published by ' . auth()->user()->name;
+            if (!$article->published_at) {
+                $articleArray['published_at'] = carbon($request->published_at);
+            } else {
+                unset($articleArray['published_at']);
+            }
         } elseif ($request->task_status == 'modifying') {
             $message = auth()->user()->name . ' send Article for modification';
         }

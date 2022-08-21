@@ -10,6 +10,8 @@
 
     <link href="{{ asset('backend') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ asset("backend/assets/plugins/datetime/jquery.datetimepicker.min.css") }}">
 @endpush
 
 @push('scripts')
@@ -17,7 +19,7 @@
     <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 
     <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.min.js"></script>
-
+    <script src="{{ asset("backend/assets/plugins/datetime/jquery.datetimepicker.full.min.js") }}"></script>
     <script src="https://cdn.tiny.cloud/1/j13mw8eat9x0mct0dhgcxkzjhazjsq0ck1acz86lodyv52w7/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>
