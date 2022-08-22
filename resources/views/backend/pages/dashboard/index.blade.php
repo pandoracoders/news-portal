@@ -21,585 +21,156 @@
 
 
 @section('content')
-    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-5">
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="mx-auto widget-icon bg-light-dark text-dark">
-                        <i class="bi bi-basket2-fill"></i>
-                    </div>
-                    <div class="text-center mt-3">
-                        <h3 class="text-dark mb-1">4.6K</h3>
-                        <p class="text-muted mb-4">Total Orders</p>
-                        <p class="text-dark mb-0 font-13"><i class="bi bi-arrow-up"></i><span>45.5%</span>
-                        </p>
-                    </div>
-                </div>
+    @php
+    $headers = ['id', 'name', 'status', 'today', 'yesterday', 'this-week', 'last-week', 'this-month', 'last-month'];
+    $data_array = [];
+    foreach ($writers as $key => $writer) {
+        $data_array[$key]['id'] = $key + 1;
+        $data_array[$key]['name'] = $writer->name;
+        foreach (config('constants.task_status') as $value) {
+            $today = $writer->getTodayStat($value);
+            $yesterday = $writer->getYesterdayStat($value);
+            $this_week = $writer->getThisWeekStat($value);
+            $last_week = $writer->getLastWeekStat($value);
+            $this_month = $writer->getThisMonthStat($value);
+            $last_month = $writer->getLastMonthStat($value);
+            if ($today == 0 && $yesterday == 0 && $this_week == 0 && $last_week == 0 && $this_month == 0 && $last_month == 0) {
+
+            } else {
+                $data_array[$key]['status'][$value] = [
+                    'today' => $writer->getTodayStat($value),
+                    'yesterday' => $writer->getYesterdayStat($value),
+                    'this-week' => $writer->getThisWeekStat($value),
+                    'last-week' => $writer->getLastWeekStat($value),
+                    'this-month' => $writer->getThisMonthStat($value),
+                    'last-month' => $writer->getLastMonthStat($value),
+                ];
+            }
+        }
+    }
+
+    @endphp
+    <div class="card radius-10 w-100">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <h6 class="mb-0">Writer Stats</h6>
             </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="mx-auto widget-icon bg-light-dark text-dark">
-                        <i class="bi bi-wallet-fill"></i>
-                    </div>
-                    <div class="text-center mt-3">
-                        <h3 class="text-dark mb-1">$25M</h3>
-                        <p class="text-muted mb-4">Total Income</p>
-                        <p class="text-dark mb-0 font-13"><i class="bi bi-arrow-up"></i><span>24.5%</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="mx-auto widget-icon bg-light-dark text-dark">
-                        <i class="bi bi-people-fill"></i>
-                    </div>
-                    <div class="text-center mt-3">
-                        <h3 class="text-dark mb-1">5.6K</h3>
-                        <p class="text-muted mb-4">Total Visitors</p>
-                        <p class="text-dark mb-0 font-13"><i class="bi bi-arrow-down"></i><span>15.8%</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="mx-auto widget-icon bg-light-dark text-dark">
-                        <i class="bi bi-chat-text-fill"></i>
-                    </div>
-                    <div class="text-center mt-3">
-                        <h3 class="text-dark mb-1">752</h3>
-                        <p class="text-muted mb-4">Total Comments</p>
-                        <p class="text-dark mb-0 font-13"><i class="bi bi-arrow-up"></i><span>35.2%</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="mx-auto widget-icon bg-light-dark text-dark">
-                        <i class="bi bi-bar-chart-fill"></i>
-                    </div>
-                    <div class="text-center mt-3">
-                        <h3 class="text-dark mb-1">42.8%</h3>
-                        <p class="text-muted mb-4">Bounce Rate</p>
-                        <p class="text-dark mb-0 font-13"><i class="bi bi-arrow-down"></i><span>28.5%</span></p>
-                    </div>
-                </div>
+            <div class="table-responsive mt-2">
+                <table class="table align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            @foreach ($headers as $header)
+                                <th class="text-center">
+                                    {{ unSlug($header) }}
+
+                                </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data_array as $key => $arr)
+                            <tr>
+                                <td> {{ $arr['id'] }}</td>
+                                <td> {{ $arr['name'] }}</td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ unSlug($status) }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['today'] ? $value['today'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['yesterday'] ? $value['yesterday'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['this-week'] ? $value['this-week'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['last-week'] ? $value['last-week'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['this-month'] ? $value['this-month'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light">
+                                            @foreach ($arr['status'] as $status => $value)
+                                                <tr>
+                                                    <th class="text-center">
+                                                        {{ $value['last-month'] ? $value['last-month'] : '-' }}
+                                                    </th>
+                                                </tr>
+                                            @endforeach
+                                        </thead>
+                                    </table>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <!--end row-->
-
-
-
-    <div class="row">
-        <div class="col-12 col-lg-8 col-xl-8 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <h6 class="mb-0">Statistics</h6>
-                        <div class="ms-auto">
-                            <div class="d-flex align-items-center font-13 gap-2">
-                                <span class="border px-1 rounded cursor-pointer"><i
-                                        class="bx bxs-circle me-1 text-dark"></i>Downloads</span>
-                                <span class="border px-1 rounded cursor-pointer"><i
-                                        class="bx bxs-circle me-1 text-dark opacity-25"></i>Earnings</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-container1">
-                        <canvas id="chart1"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4 d-flex">
-            <div class="card radius-10 overflow-hidden w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <h6 class="mb-0">Top Categories</h6>
-                        <div class="dropdown options ms-auto">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                                <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="chart-container6">
-                        <div class="piechart-legend">
-                            <h2 class="mb-1">$85K</h2>
-                            <h6 class="mb-0">Total Sales</h6>
-                        </div>
-                        <canvas id="chart2"></canvas>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center border-top">
-                        Clothing
-                        <span class="badge bg-dark rounded-pill">55</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Electronics
-                        <span class="badge bg-dark opacity-75 rounded-pill">20</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Furniture
-                        <span class="badge bg-dark opacity-25 rounded-pill">10</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--end row-->
-
-
-    <div class="row">
-        <div class="col-12 col-lg-12 col-xl-6 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <h6 class="mb-0">Customers</h6>
-                        <div class="dropdown options ms-auto">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                                <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:;">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row row-cols-1 row-cols-md-2 g-3 align-items-center">
-                        <div class="col-lg-7 col-xl-7 col-xxl-7">
-                            <div class="chart-container5">
-                                <div class="piechart-legend">
-                                    <h2 class="mb-1">48K</h2>
-                                    <h6 class="mb-0">Customers</h6>
-                                </div>
-                                <canvas id="chart3"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-xl-5 col-xxl-5">
-                            <div class="">
-                                <div class="d-flex align-items-start gap-2 mb-3">
-                                    <div>
-                                        <ion-icon name="ellipse-sharp" class="text-dark"></ion-icon>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1">Current Customers</p>
-                                        <p class="mb-0 h5">66%</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-2 mb-3">
-                                    <div>
-                                        <ion-icon name="ellipse-sharp" class="text-dark opacity-50">
-                                        </ion-icon>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1">New Customers</p>
-                                        <p class="mb-0 h5">48%</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-2">
-                                    <div>
-                                        <ion-icon name="ellipse-sharp" class="text-dark opacity-25">
-                                        </ion-icon>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1">Retargeted Customers</p>
-                                        <p class="mb-0 h5">25%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-12 col-xl-6 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <h6 class="mb-0">Sales By Country</h6>
-                        <div class="dropdown options ms-auto">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                                <ion-icon name="ellipsis-horizontal-sharp" role="img" class="md hydrated"
-                                    aria-label="ellipsis horizontal sharp"></ion-icon>
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-borderless align-middle mb-0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="country-icon">
-                                            <img src="{{ asset('backend') }}/assets/images/icons/india.png"
-                                                alt="" width="32">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="country-name h6 mb-0">India</div>
-                                    </td>
-                                    <td class="w-100">
-                                        <div class="progress flex-grow-1" style="height: 5px;">
-                                            <div class="progress-bar bg-dark" role="progressbar" style="width: 82%;">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="percent-data">82%</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="country-icon">
-                                            <img src="{{ asset('backend') }}/assets/images/icons/usa.png"
-                                                alt="" width="32">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="country-name h6 mb-0">USA</div>
-                                    </td>
-                                    <td class="w-100">
-                                        <div class="progress flex-grow-1" style="height: 5px;">
-                                            <div class="progress-bar bg-dark" role="progressbar" style="width: 70%;">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="percent-data">70%</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="country-icon">
-                                            <img src="{{ asset('backend') }}/assets/images/icons/china.png"
-                                                alt="" width="32">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="country-name h6 mb-0">China</div>
-                                    </td>
-                                    <td class="w-100">
-                                        <div class="progress flex-grow-1" style="height: 5px;">
-                                            <div class="progress-bar bg-dark" role="progressbar" style="width: 60%;">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="percent-data">60%</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="country-icon">
-                                            <img src="{{ asset('backend') }}/assets/images/icons/russia.png"
-                                                alt="" width="32">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="country-name h6 mb-0">Russia</div>
-                                    </td>
-                                    <td class="w-100">
-                                        <div class="progress flex-grow-1" style="height: 5px;">
-                                            <div class="progress-bar bg-dark" role="progressbar" style="width: 45%;">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="percent-data">45%</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="country-icon">
-                                            <img src="{{ asset('backend') }}/assets/images/icons/china.png"
-                                                alt="" width="32">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="country-name h6 mb-0">China</div>
-                                    </td>
-                                    <td class="w-100">
-                                        <div class="progress flex-grow-1" style="height: 5px;">
-                                            <div class="progress-bar bg-dark" role="progressbar" style="width: 30%;">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="percent-data">30%</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end row-->
-
-    <div class="row">
-        <div class="col-12 col-lg-12 col-xl-4 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <h6 class="mb-0">Visitors</h6>
-                        <div class="fs-5 ms-auto dropdown">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots"></i></div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="chart5" class=""></div>
-                    <div class="d-flex align-items-center gap-5 justify-content-center mt-3 p-2 radius-10 border">
-                        <div class="text-center">
-                            <h3 class="mb-2 text-dark">8,546</h3>
-                            <p class="mb-0">New Visitors</p>
-                        </div>
-                        <div class="border-end sepration"></div>
-                        <div class="text-center">
-                            <h3 class="mb-2 text-dark opacity-50">3,723</h3>
-                            <p class="mb-0">Old Visitors</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <h6 class="mb-0">Traffic Source</h6>
-                        <div class="fs-5 ms-auto dropdown">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots"></i></div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="chart4" class=""></div>
-                    <div class="traffic-widget">
-                        <div class="progress-wrapper mb-3">
-                            <p class="mb-1">Social <span class="float-end">8,475</span></p>
-                            <div class="progress rounded-0" style="height: 8px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 80%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mb-3">
-                            <p class="mb-1">Direct <span class="float-end">7,989</span></p>
-                            <div class="progress rounded-0" style="height: 8px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 65%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mb-0">
-                            <p class="mb-1">Search <span class="float-end">6,359</span></p>
-                            <div class="progress rounded-0" style="height: 8px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 50%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <h6 class="mb-0">Sales By Country</h6>
-                        <div class="fs-5 ms-auto dropdown">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots"></i></div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="geographic-map" class="mt-2"></div>
-                    <div class="traffic-widget">
-                        <div class="progress-wrapper mb-3">
-                            <p class="mb-1">United States <span class="float-end">$2.5K</span></p>
-                            <div class="progress rounded-0" style="height: 6px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 75%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mb-3">
-                            <p class="mb-1">Russia <span class="float-end">$4.5K</span></p>
-                            <div class="progress rounded-0" style="height: 6px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 55%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mb-0">
-                            <p class="mb-1">Australia <span class="float-end">$8.5K</span></p>
-                            <div class="progress rounded-0" style="height: 6px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 80%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end row-->
-
-
-    <div class="row">
-        <div class="col-12 col-lg-12 col-xl-4 d-flex">
-            <div class="card radius-10 bg-transparent shadow-none w-100">
-                <div class="card-body p-0">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="widget-icon radius-10 bg-dark text-white">
-                                    <ion-icon name="wallet-sharp" role="img" class="md hydrated"
-                                        aria-label="wallet sharp">
-                                    </ion-icon>
-                                </div>
-                                <div class="fs-5 ms-auto">
-                                    <ion-icon name="ellipsis-horizontal-sharp" role="img" class="md hydrated"
-                                        aria-label="ellipsis horizontal sharp">
-                                    </ion-icon>
-                                </div>
-                            </div>
-                            <h4 class="my-3">$4,580</h4>
-                            <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 65%">
-                                </div>
-                            </div>
-                            <p class="mb-0 mt-2">Earned This Month <span class="float-end">+2.4%</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card radius-10 mb-0">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="widget-icon-2 bg-dark text-white">
-                                    <ion-icon name="people-sharp" role="img" class="md hydrated"
-                                        aria-label="people sharp">
-                                    </ion-icon>
-                                </div>
-                                <div class="fs-5 ms-auto">
-                                    <ion-icon name="ellipsis-horizontal-sharp" role="img" class="md hydrated"
-                                        aria-label="ellipsis horizontal sharp">
-                                    </ion-icon>
-                                </div>
-                            </div>
-                            <h4 class="my-3">8,126</h4>
-                            <div class="progress mt-1" style="height: 5px;">
-                                <div class="progress-bar bg-dark" role="progressbar" style="width: 65%">
-                                </div>
-                            </div>
-                            <p class="mb-0 mt-2">New Clients <span class="float-end">+5.3%</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-12 col-xl-4 d-flex">
-            <div class="card radius-10 w-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <h6 class="mb-0">User Activity</h6>
-                        <div class="dropdown options ms-auto">
-                            <div class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                                <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="chart-container3">
-                        <canvas id="chart6"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-12 col-xl-4 d-flex">
-            <div class="card radius-10 bg-transparent shadow-none w-100">
-                <div class="card-body p-0">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start justify-content-between">
-                                <div>
-                                    <p class="mb-2">Total Session</p>
-                                    <h4 class="mb-0">15,690 <span class="ms-1 font-13 text-success">+36%</span></h4>
-                                </div>
-                                <div class="fs-5">
-                                    <ion-icon name="ellipsis-vertical-sharp"></ion-icon>
-                                </div>
-                            </div>
-                            <div class="mt-3" id="chart7"></div>
-                        </div>
-                    </div>
-                    <div class="card radius-10 mb-0">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start justify-content-between">
-                                <div>
-                                    <p class="mb-2">Page Views</p>
-                                    <h4 class="mb-0">28,963 <span class="ms-1 font-13 text-danger">-4.5%</span></h4>
-                                </div>
-                                <div class="fs-5">
-                                    <ion-icon name="ellipsis-vertical-sharp"></ion-icon>
-                                </div>
-                            </div>
-                            <div class="mt-3" id="chart8"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end row-->
-
 
     <div class="card radius-10 w-100">
         <div class="card-body">
