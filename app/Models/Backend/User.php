@@ -48,7 +48,9 @@ class User extends Authenticatable
 
     public function getRoleAttribute()
     {
-        return $this->role()->first();
+        return $this->role()
+            ->orderBy('created_at', 'desc')
+            ->first();
     }
 
     public function getPermissionsAttribute()
@@ -61,6 +63,21 @@ class User extends Authenticatable
         return $this->hasMany(Article::class, 'writer_id');
     }
 
+    public function getIsEditorAttribute($value)
+    {
+        return $this->role->slug == 'editor';
+    }
+
+    public function getIsWriterAttribute($value)
+    {
+        return $this->role->slug == 'writer';
+    }
+
+    public function getIsAdminAttribute($value)
+    {
+        return $this->role->slug == 'admin';
+    }
+
     // scope
 
     public function scopeWriter($query)
@@ -70,53 +87,113 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeEditor($query)
+    {
+        return $query->whereHas('permission.role', function ($q) {
+            $q->where('slug', 'editor');
+        });
+    }
+
     // stat
 
     public function getTodayStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->where('task_status', $task_status)
-            ->where('created_at', carbon())
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)->where('created_at', carbon());
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+        } else {
+            $data = $data->where('writer_id', $this->id);
+        }
+
+        return $data->count() ?? 0;
     }
 
     public function getYesterdayStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->where('task_status', $task_status)
-            ->where('created_at', carbon()->subDay())
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)->where('created_at', carbon()->subDay());
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+        }
+        return $data->count() ?? 0;
     }
 
     public function getThisWeekStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->whereBetween('created_at', [weekendStart(), weekendEnd()])
-            ->where('task_status', $task_status)
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)->where('created_at', '>=', carbon()->startOfWeek());
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+            // dd($data->get());
+        } else {
+            $data = $data->where('writer_id', $this->id);
+        }
+
+        return $data->count() ?? 0;
     }
 
     public function getLastWeekStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->whereBetween('created_at', [weekendStart()->subWeek(), weekendEnd()->subWeek()])
-            ->where('task_status', $task_status)
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)
+            ->where(
+                'created_at',
+                '>=',
+                carbon()
+                    ->subWeek()
+                    ->startOfWeek(),
+            )
+            ->where(
+                'created_at',
+                '<=',
+                carbon()
+                    ->subWeek()
+                    ->endOfWeek(),
+            );
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+        }
+        return $data->count() ?? 0;
     }
 
     public function getThisMonthStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->whereBetween('created_at', [carbon()->startOfMonth(), carbon()->endOfMonth()])
-            ->where('task_status', $task_status)
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)->where('created_at', '>=', carbon()->startOfMonth());
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+        }
+        return $data->count() ?? 0;
     }
 
     public function getLastMonthStat($task_status)
     {
-        return Article::where('writer_id', $this->id)
-            ->whereBetween('created_at', [weekendStart()->subMonth(), weekendEnd()->subMonth()])
-            ->where('task_status', $task_status)
-            ->count() ?? 0;
+        $data = Article::where('task_status', $task_status)
+            ->where(
+                'created_at',
+                '>=',
+                carbon()
+                    ->subMonth()
+                    ->startOfMonth(),
+            )
+            ->where(
+                'created_at',
+                '<=',
+                carbon()
+                    ->subMonth()
+                    ->endOfMonth(),
+            );
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+        }
+        return $data->count() ?? 0;
     }
 }

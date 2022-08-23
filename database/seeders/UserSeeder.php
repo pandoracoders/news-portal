@@ -18,26 +18,32 @@ class UserSeeder extends Seeder
     public function run()
     {
         // super admin
-        User::create([
-            'name' => 'Pradip Parajuli',
-            'email' => 'prad4787@gmail.com',
-            'password' => bcrypt('password'),
-            "alias_name" => "Pradip Parajuli",
-            "slug" => "pradip-parajuli",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => config("constants.permissions"),
-        ]);
+
         User::create([
             'name' => 'Sandip Dangal',
             'email' => 'sandipdangal77@gmail.com',
             'password' => bcrypt('password'),
-            "alias_name" => "Ray",
-            "slug" => "ray",
-        ])->permission()->create([
-            "role_id" => Role::where("title", "Super Admin")->first()->id,
-            "permissions" => config("constants.permissions"),
-        ]);
+            'alias_name' => 'Ray',
+            'slug' => 'ray',
+        ])
+            ->permission()
+            ->create([
+                'role_id' => Role::where('title', 'Super Admin')->first()->id,
+                'permissions' => config('constants.permissions'),
+            ]);
+
+        User::create([
+            'name' => 'Pradip Parajuli',
+            'email' => 'prad4787@gmail.com',
+            'password' => bcrypt('password'),
+            'alias_name' => 'Pradip Parajuli',
+            'slug' => 'pradip-parajuli',
+        ])
+            ->permission()
+            ->create([
+                'role_id' => Role::where('title', 'Super Admin')->first()->id,
+                'permissions' => config('constants.permissions'),
+            ]);
 
         // for ($i = 0; $i < 5; $i++) {
         //     $id = $i > 0 ? $i : '';

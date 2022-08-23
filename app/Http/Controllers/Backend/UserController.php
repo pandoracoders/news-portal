@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    private $path = "backend.pages.user.";
+    private $path = 'backend.pages.user.';
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view($this->path . "index", [
-            "users" => User::orderBy("id", "desc")->get()
+        return view($this->path . 'index', [
+            'users' => User::orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -30,11 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-
-
-        return view($this->path . "crud", [
-            "permissions" => (RoleController::getRouteArray()),
-            "roles" => Role::orderBy("id", "desc")->get()
+        return view($this->path . 'crud', [
+            'permissions' => RoleController::getRouteArray(),
+            'roles' => Role::orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -47,14 +45,11 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create(array_filter($request->validated()));
-        $user->permission()->updateOrCreate(
-            ["role_id" => $request->role_id],
-            ["permissions" => $request->permissions]
-        );
-        return redirect()->route("backend.user-view")->with("success", "User created successfully.");
+        $user->permission()->updateOrCreate(['role_id' => $request->role_id], ['permissions' => $request->permissions]);
+        return redirect()
+            ->route('backend.user-view')
+            ->with('success', 'User created successfully.');
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -64,10 +59,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view($this->path . "crud", [
-            "user" => $user,
-            "permissions" => (RoleController::getRouteArray()),
-            "roles" => Role::orderBy("id", "desc")->get()
+        return view($this->path . 'crud', [
+            'user' => $user,
+            'permissions' => RoleController::getRouteArray(),
+            'roles' => Role::orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -80,13 +75,12 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        // dd($request->validated());
+
         $user->update(array_filter($request->validated()));
-        $user->permission()->updateOrCreate(
-            ["role_id" => $request->role_id],
-            ["permissions" => $request->permissions]
-        );
-        return redirect()->route("backend.user-view")->with("success", "User updated successfully.");
+        $user->permission()->updateOrCreate(['user_id' => $user->id], ['role_id' => $request->role_id, 'permissions' => $request->permissions]);
+        return redirect()
+            ->route('backend.user-view')
+            ->with('success', 'User updated successfully.');
     }
 
     /**
@@ -98,6 +92,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user?->delete();
-        return redirect()->route("backend.user-view")->with("success", "User deleted successfully.");
+        return redirect()
+            ->route('backend.user-view')
+            ->with('success', 'User deleted successfully.');
     }
 }
