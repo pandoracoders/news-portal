@@ -26,6 +26,8 @@
 
     <meta name="atdlayout" content="home">
 
+    {!! getSettingValue('org_schema') !!}
+
     <style>
         body a {
             color: #111;

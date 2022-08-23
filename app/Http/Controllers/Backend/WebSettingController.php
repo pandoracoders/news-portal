@@ -20,20 +20,23 @@ class WebSettingController extends Controller
      */
     public function index()
     {
-        if (!in_array(request()->type, config("constants.web_setting_tabs"))) {
+        if (!in_array(request()->type, config('constants.web_setting_tabs'))) {
             abort(404);
         }
 
-        $webSetting = WebSetting::where("type", request()->type)->get()->keyBy("key");
-        return view("backend.pages.setting.index", compact("webSetting"));
+        $webSetting = WebSetting::where('type', request()->type)
+            ->get()
+            ->keyBy('key');
+        return view('backend.pages.setting.index', compact('webSetting'));
     }
-
 
     public function clearCache()
     {
-        Artisan::call("cache:clear");
+        Artisan::call('cache:clear');
         Cache::flush();
-        return redirect()->back()->with("success", "Cache cleared successfully");
+        return redirect()
+            ->back()
+            ->with('success', 'Cache cleared successfully');
     }
 
     /**
@@ -88,7 +91,7 @@ class WebSettingController extends Controller
      */
     public function update(WebSettingRequest $request, $id)
     {
-        $validated = ($request->validated());
+        $validated = $request->validated();
         if (request()->allFiles()) {
             $files = request()->allFiles();
             foreach ($files as $key => $file) {
@@ -97,23 +100,27 @@ class WebSettingController extends Controller
         }
 
         foreach ($validated as $key => $value) {
-            $old = WebSetting::where("key", $key)->where("type", request()->type)->first() ?? new WebSetting();
+            $old =
+                WebSetting::where('key', $key)
+                    ->where('type', request()->type)
+                    ->first() ?? new WebSetting();
             if ($value) {
                 $old->fill([
-                    "key" => $key,
-                    "value" => $value,
-                    "type" => request()->type,
+                    'key' => $key,
+                    'value' => $value,
+                    'type' => request()->type,
                 ]);
                 $old->save();
             } else {
                 $old->delete();
             }
         }
-
-        clearSettingCache();
         OrgSchema::dispatch();
+        clearSettingCache();
 
-        return redirect()->back()->with("success", "Data updated successfully");
+        return redirect()
+            ->back()
+            ->with('success', 'Data updated successfully');
     }
 
     /**

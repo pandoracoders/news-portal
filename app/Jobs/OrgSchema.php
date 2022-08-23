@@ -33,34 +33,34 @@ class OrgSchema implements ShouldQueue
      */
     public function handle()
     {
-        $web_title = getSettingValue("website_title") ?? "Test Website";
-        $logo = asset(getSettingValue("logo") ?? '');
+        $web_title = getSettingValue('website_title') ?? 'Test Website';
+        $logo = asset(getSettingValue('logo') ?? '');
         $sameAs = [];
-        if (getSettingType("social-media")) {
-            foreach (getSettingType("social-media") as $key => $media) {
+        if (getSettingType('social-media')) {
+            foreach (getSettingType('social-media') as $key => $media) {
                 $sameAs[] = $media->value;
             }
         }
-
-        // dd(getSettingType("social-media"));
-
         $localBusiness = Schema::organization()
+            ->settype('Business')
             ->name($web_title)
             ->logo($logo)
             ->url(url('/'))
-            ->if(getSettingValue("contact_email"), function (Organization $schema) {
-                $schema->email(getSettingValue("contact_email"));
-            })->if(count($sameAs), function (Organization $schema) use ($sameAs) {
+            ->if(getSettingValue('contact_email'), function (Organization $schema) {
+                $schema->email(getSettingValue('contact_email'));
+            })
+            ->if(count($sameAs), function (Organization $schema) use ($sameAs) {
                 $schema->sameAs($sameAs);
             });
 
-        WebSetting::updateOrcreate([
-            "key" => "org_schema",
-            "type" => "branding",
-        ], [
-            "value" => $localBusiness->toJson(),
-        ]);
-
-        // dd($localBusiness->toScript());
+        WebSetting::updateOrCreate(
+            [
+                'key' => 'org_schema',
+                'type' => 'branding',
+            ],
+            [
+                'value' => $localBusiness->toJson(),
+            ],
+        );
     }
 }
