@@ -19,6 +19,7 @@ class Article extends Model
 
     protected $casts = [
         'tables' => 'array',
+        "published_at" => "datetime",
     ];
 
     protected $hidden = ['body', 'created_at', 'updated_at', 'deleted_at', 'published_at', 'status', 'task_status', 'tables', 'editor_id'];

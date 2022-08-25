@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.css" type="text/css">
 @endpush
 
-@section('content')
+
     <main>
         <div class="row">
             <div class="col-12 biography">
@@ -126,4 +126,4 @@
             </div>
         </div>
     </main>
-@endsection
+

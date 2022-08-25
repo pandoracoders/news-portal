@@ -1,12 +1,15 @@
 <?php
 
 use App\Jobs\HomePageCache;
+use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use App\Models\Backend\WebSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+
+
 
 if (!function_exists('weekendStart')) {
     function weekendStart()

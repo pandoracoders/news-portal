@@ -26,7 +26,10 @@
 
     <meta name="atdlayout" content="home">
 
-    {!! getSettingValue('org_schema') !!}
+    
+    {!! getOrganizationSchema() !!}
+
+    @stack('schema')
 
     <style>
         body a {
@@ -48,6 +51,7 @@
 </head>
 
 <body>
+
 
     @include('frontend.layouts.partials.header')
 

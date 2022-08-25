@@ -1,33 +1,23 @@
 @extends('frontend.layouts.index')
 
 
-@push('styles')
-    
+@push('schema')
+    {!! getArticleSchema($article) !!}
 @endpush
 
-@if ($article->tables)
-    @include('frontend.pages.article.biography')
-@else
-    @include('frontend.pages.article.other')
-@endif
+@section('content')
+    @if ($article->tables)
+        @include('frontend.pages.article.biography')
+    @else
+        @include('frontend.pages.article.other')
+    @endif
+@endsection
 
 
 
 @push('scripts')
-    {{-- <script>
-        $(document).ready(function() {
-            $('.article-content img').addClass('img-fluid');
-            $('.article-content img').addClass('img-thumbnail');
-            $('.article-content img').addClass('mb-3');
-            $('.article-content img').addClass('mx-auto');
-            $('.article-content img').addClass('d-block');
-        });
-    </script> --}}
-
     <script async src="//www.instragram.com/embed.js"></script>
     <script async src="https://platform.twitter.com/widgets.js"></script>
-
-
 
     <script>
         var headingList = document.querySelector('.content-detail').querySelectorAll("h2,h3,h4,h5,h6");
