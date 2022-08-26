@@ -46,7 +46,7 @@ h1 {
 
 .content-detail figure {
     max-width: 470px;
-    display:block;
+    display: block;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -81,9 +81,9 @@ h1 {
 
 .content-detail {
     margin-top: 5px;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 33px;
+    line-height: 28px;
     max-width: 728px;
     color: #212121;
 }
@@ -195,9 +195,9 @@ h1 {
 
 .sidebar-post .sidebar-post-title h2,
 sidebar-post .sidebar-post-title h2 a {
-    font-size: 15px;
-    line-height: 22px;
-    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -239,10 +239,14 @@ sidebar-post .sidebar-post-title h2 a {
 
 /* Similar post section */
 
+.post-section {
+    display: flex;
+}
+
 .similar-post-section .similar-post {
     display: flex;
     flex-direction: column !important;
-
+    flex: 1;
     margin-bottom: 20px;
     padding: 0;
     border: 1px solid rgba(122, 122, 122, 0.8);
@@ -250,7 +254,7 @@ sidebar-post .sidebar-post-title h2 a {
     box-shadow: 2px 1px rgba(31, 30, 30, 0.7);
     width: 100%;
 
-    
+
 }
 
 .similar-post-section .image_img {
@@ -265,17 +269,15 @@ sidebar-post .sidebar-post-title h2 a {
 }
 
 .similar-post-section .similar-post-title {
-   
     padding: 15px 15px 0px 15px;
     font-weight: 500;
     color: rgb(31, 26, 26);
-    font-size: 0.95rem;
+    font-size: 14px;
 
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     justify-content: space-between;
     flex: 1
-
 }
 
 .similar-post-title .title {
@@ -285,6 +287,11 @@ sidebar-post .sidebar-post-title h2 a {
     -webkit-box-orient: vertical;
 }
 
+@media(max-width: 820px) {
+    body {
+        overflow-x: hidden;
+    }
+}
 
 /* Social Share  */
 .social-share {
@@ -392,26 +399,28 @@ sidebar-post .sidebar-post-title h2 a {
                     Comment Section
 ===================================================================================================================== */
 
-#comments{
+#comments {
     border: solid 1px #d2d2d4;
     border-radius: 5px;
     box-shadow: 1px .5px #ddd;
     padding: 15px;
-    margin:0 0 15px 0;
+    margin: 0 0 15px 0;
 }
-#beforeCommentsText{
+
+#beforeCommentsText {
     margin: 20px 10px 0 10px;
     padding: 5px 0;
     font-size: 16px;
     font-weight: 600;
     color: #174135
 }
-.submit-btn{
+
+.submit-btn {
     margin: 10px 0;
     text-align: right;
 }
 
-.submit-btn .btn{
+.submit-btn .btn {
     padding: 5px 10px;
     border-radius: 20px;
     font-weight: 600;
@@ -419,7 +428,7 @@ sidebar-post .sidebar-post-title h2 a {
 }
 
 /* User Comments Display */
-.user-comments>p{
+.user-comments>p {
     font-weight: 600;
     background-color: #303031;
     display: inline-block;
@@ -428,21 +437,22 @@ sidebar-post .sidebar-post-title h2 a {
     color: white;
 }
 
-.user-comments .single-comment{
+.user-comments .single-comment {
     margin: 5px;
     padding: 5px;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    
-    
+
+
 }
-.user-comments .single-comment .full-name{
+
+.user-comments .single-comment .full-name {
     font-size: 12px;
     color: #00a6ff;
     font-weight: 600;
 }
 
-.user-comments .single-comment .comment{
+.user-comments .single-comment .comment {
     display: flex;
     margin-left: 15px;
     font-size: 12px;

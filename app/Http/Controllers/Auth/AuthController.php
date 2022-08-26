@@ -81,8 +81,6 @@ class AuthController extends Controller
         }
     }
 
-
-
     public function postValidate2FA(Request $request)
     {
         $user = auth()->user();

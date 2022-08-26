@@ -4,6 +4,7 @@ namespace App\Models\Backend;
 
 use App\Jobs\Backend\ArticleLogJob;
 use App\Jobs\HomePageCache;
+use App\Jobs\OrgSchema;
 use App\Models\Backend\User;
 use App\Models\Traits\SeoTrait;
 use DOMDocument;
@@ -19,6 +20,7 @@ class Article extends Model
 
     protected $casts = [
         'tables' => 'array',
+        'published_at' => 'datetime',
     ];
 
     protected $hidden = ['body', 'created_at', 'updated_at', 'deleted_at', 'published_at', 'status', 'task_status', 'tables', 'editor_id'];
@@ -65,7 +67,8 @@ class Article extends Model
         );
     }
 
-    public function readMore(){
+    public function readMore()
+    {
         return null;
     }
 
@@ -125,9 +128,11 @@ class Article extends Model
         parent::boot();
         static::created(function ($model) {
             HomePageCache::dispatchAfterResponse();
+            OrgSchema::dispatchAfterResponse($model);
         });
         static::updated(function ($model) {
             HomePageCache::dispatchAfterResponse();
+            OrgSchema::dispatchAfterResponse($model);
         });
     }
 }

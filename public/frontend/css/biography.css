@@ -82,8 +82,8 @@ h1 {
     text-transform: capitalize;
 }
 
-.content-detail p {
-    font-size: 17px;
+.content-detail {
+    font-size: 16px;
     font-weight: 400;
     line-height: 28px;
     max-width: 728px;
@@ -316,21 +316,29 @@ h1 {
 
 /* Similar post section */
 
+.post-section {
+    display: flex;
+}
+
 .similar-post-section .similar-post {
     display: flex;
     flex-direction: column !important;
-
+    flex: 1;
     margin-bottom: 20px;
     padding: 0;
     border: 1px solid rgba(122, 122, 122, 0.8);
     border-radius: 20px;
     box-shadow: 2px 1px rgba(31, 30, 30, 0.7);
+    width: 100%;
+
+
 }
 
 .similar-post-section .image_img {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     min-width: 100%;
+    max-width: 100%;
     max-height: 230px;
     min-height: 230px;
     object-fit: cover;
@@ -338,17 +346,15 @@ h1 {
 }
 
 .similar-post-section .similar-post-title {
-    display: block;
     padding: 15px 15px 0px 15px;
     font-weight: 500;
     color: rgb(31, 26, 26);
-    font-size: 0.95rem;
+    font-size: 14px;
 
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     justify-content: space-between;
     flex: 1
-
 }
 
 .similar-post-title .title {

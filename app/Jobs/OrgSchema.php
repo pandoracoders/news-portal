@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Backend\Article;
 use App\Models\Backend\WebSetting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -16,14 +17,15 @@ class OrgSchema implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private $article;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Article $article = null)
     {
-        //
+        $this->article = $article;
     }
 
     /**
@@ -33,34 +35,20 @@ class OrgSchema implements ShouldQueue
      */
     public function handle()
     {
-        $web_title = getSettingValue("website_title") ?? "Test Website";
-        $logo = asset(getSettingValue("logo") ?? '');
-        $sameAs = [];
-        if (getSettingType("social-media")) {
-            foreach (getSettingType("social-media") as $key => $media) {
-                $sameAs[] = $media->value;
-            }
+        if ($this->article) {
+            $this->article->update([
+                'schema' => getArticleSchema($this->article),
+            ]);
+        } else {
+            WebSetting::updateOrCreate(
+                [
+                    'key' => 'org_schema',
+                    'type' => 'branding',
+                ],
+                [
+                    'value' => getOrganizationSchema(),
+                ],
+            );
         }
-
-        // dd(getSettingType("social-media"));
-
-        $localBusiness = Schema::organization()
-            ->name($web_title)
-            ->logo($logo)
-            ->url(url('/'))
-            ->if(getSettingValue("contact_email"), function (Organization $schema) {
-                $schema->email(getSettingValue("contact_email"));
-            })->if(count($sameAs), function (Organization $schema) use ($sameAs) {
-                $schema->sameAs($sameAs);
-            });
-
-        WebSetting::updateOrcreate([
-            "key" => "org_schema",
-            "type" => "branding",
-        ], [
-            "value" => $localBusiness->toJson(),
-        ]);
-
-        // dd($localBusiness->toScript());
     }
 }
