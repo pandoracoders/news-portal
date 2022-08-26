@@ -202,7 +202,8 @@ h1 {
 
 /* Social Share  */
 .social-share {
-    display: block;
+    flex: 1;
+    margin-right: 40px;
     text-align: right;
 
 }
