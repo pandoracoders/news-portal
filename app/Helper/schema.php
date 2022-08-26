@@ -5,6 +5,9 @@
     if (!function_exists('getImageMeta')) {
         function getImageMeta($url)
         {
+            if(!$url){
+                return null;
+            }
             $url = asset($url);
             $image = file_get_contents($url);
             [$width, $height] = getimagesizefromstring($image);
