@@ -2,7 +2,7 @@
 
 
 @push('schema')
-    {!! getArticleSchema($article) !!}
+    {!! $article->schema !!}
 @endpush
 
 @section('content')

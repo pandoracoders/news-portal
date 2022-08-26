@@ -27,7 +27,7 @@
     <meta name="atdlayout" content="home">
 
     
-    {!! getOrganizationSchema() !!}
+    {!! getSettingValue('org_schema') !!}
 
     @stack('schema')
 
