@@ -44,7 +44,6 @@ class TableSetController extends Controller
      */
     public function store(TableSetRequest $request)
     {
-
         $table_set = TableSet::create($request->validated());
         foreach ($request->categories as $category) {
             $table_set->tableSetCategories()->create([
@@ -83,6 +82,7 @@ class TableSetController extends Controller
     public function update(TableSetRequest $request, TableSet $table_set)
     {
         $table_set->update($request->validated());
+        $table_set->categories()->sync($request->categories);
         return redirect()->route("backend.table_set-view")->with("success", "TableSet updated successfully.");
     }
 

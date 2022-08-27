@@ -5,7 +5,7 @@
 
         @include('error')
 
-        <div class="col-xl-6 mx-auto">
+        <div class="col-xl-6 mx-auto"
             <div class="card mb-2">
                 <div class="card-body">
                     <div class="border p-3 rounded">

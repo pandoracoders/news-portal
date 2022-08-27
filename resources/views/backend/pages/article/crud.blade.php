@@ -75,14 +75,14 @@
 
                 input.click();
             },
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14pt; width: 100%; }',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 100%; }',
 
 
             importcss_append: true,
 
             template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
             template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-            height: 520,
+            height: 1000,
             image_caption: true,
             quickbars_selection_toolbar: 'quicklink',
             noneditable_noneditable_class: "mceNonEditable",

@@ -30,13 +30,14 @@
 
                         {{-- multiple select --}}
                         <div class="col-12 mb-2 ">
-                            <label class="form-label">Title *</label>
-                            <select name="categories[]" id="" class="form-control">
+                            <label class="form-label">Categories *</label>
+                            <select name="categories[]" id="categories" class="form-control" multiple="multiple">
                                 <option value="" disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option
-                                        {{ isset($table_set) && $table_set->categories()->first()->id == $category->id ? 'selected=selected' : '' }}
-                                        value="{{ $category->id }}">{{ $category->title }}</option>
+                                        {{ isset($table_set) && in_array($category->id,$table_set->categories()->pluck('category_id')->toArray()) ? 'selected=selected' : '' }}
+                                        value="{{ $category->id }}">{{ $category->title }}
+                                    </option>
                                 @endforeach
                             </select>
 
@@ -104,7 +105,8 @@
                                         <td>
                                             <select name="field_type[]" id="" class="form-control">
                                                 @foreach (config('constants.table_field_types') as $key => $type)
-                                                    <option {{ $field->type == $type ? "selected=selected" : '' }}  value="{{ $type }}">
+                                                    <option {{ $field->type == $type ? 'selected=selected' : '' }}
+                                                        value="{{ $type }}">
                                                         {{ ucwords($type) }}</option>
                                                 @endforeach
                                             </select>
@@ -112,7 +114,7 @@
                                         <td>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="searchable[]"
-                                                    value="1" {{ $field->searchable ? "checked=checked" : "" }} >
+                                                    value="1" {{ $field->searchable ? 'checked=checked' : '' }}>
                                             </div>
                                         </td>
                                         <td>
@@ -171,6 +173,17 @@
 
 @push('scripts')
     <script>
+        $(document).ready(function(){
+            const select2 = $('#categories').select2({
+                placeholder: 'Select Categories',
+                allowClear: true,
+                // tags: true,
+                // templateResult: formatState,
+                // templateSelection: formatState,
+    
+            });
+        })
+
         $(document).ready(function() {
             $(document).on('click', '.btn-danger', function() {
                 $(this).closest('tr').remove();
