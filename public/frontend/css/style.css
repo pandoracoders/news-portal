@@ -1,13 +1,3 @@
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
-/* -------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------
------------------------------------------------------------------------
---------------------------------------------------------------------------------
----------------------------------------------------------------------------
---------------------------------------------------------------------*/
-
 /* Selection Color */
 ::-moz-selection {
   /* Code for Firefox */
@@ -32,7 +22,7 @@ iframe{
 /* End Selection Color */
 
 html {
-  
+
   font-size: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -109,7 +99,7 @@ blockquote::before {
   font-size: 15px;
   line-height: 30px;
   font-weight: 600;
-  color: #767a82;
+  color: #555657;
 }
 
 .breadcrumb-container li a {
@@ -263,7 +253,7 @@ blockquote::before {
   border-radius: 5px;
 }
 
-.collapsed .panel-title::before {
+.collapsed > span.panel-title::before {
   float: right !important;
   content: "Show";
   padding-right: 5px;
@@ -484,7 +474,7 @@ blockquote::before {
 }
 
 .notfound .notfound-404 h1 {
-  
+
   position: absolute;
   left: 50%;
   top: 50%;
@@ -608,7 +598,7 @@ blockquote::before {
 */
 .footer-section {
   background: #151414;
-  
+
 }
 
 .footer-section ul {
@@ -810,7 +800,7 @@ main {
 }
 
 .category-segment {
-  
+
   color: white;
   border-bottom: 3px solid #1e2129;
   margin: 0px;
@@ -1646,7 +1636,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 #glider .splide__slide .slider-image .slider-category {
-  
+
   position: absolute;
   top: 0;
   right: 0;
@@ -1660,8 +1650,8 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 .article-date {
-  
-  color: #999ca8;
+
+  color: #555657;
   font-weight: 700;
   padding: 5px 0px;
   font-size: 11px;
@@ -1671,15 +1661,15 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 
 .article-author,
 .article-author a {
-  
-  color: #999ca8;
+
+  color: #555657;
   font-weight: 700;
   padding: 5px 0px;;
   margin: 0px;
   font-size: 11px;
   display: inline;
 
-  
+
 }
 
 .article-author a:hover {
@@ -1687,7 +1677,7 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 }
 
 #glider .splide__slide .slider-image .slider-title {
-  
+
   margin: 0;
   width: 100%;
   padding: 0px 5px;
@@ -2231,4 +2221,4 @@ header .navbar .navbar-nav #dropdown .dropdown-menu .dropdown-item:hover {
 
 /*# sourceMappingURL=style.css.map */
 
-/* 
+/*

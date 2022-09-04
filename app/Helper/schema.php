@@ -1,4 +1,4 @@
-    <?php
+<?php
     use App\Models\Backend\Article;
     use Illuminate\Support\Facades\Cache;
 

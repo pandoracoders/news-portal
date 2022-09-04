@@ -33,6 +33,13 @@
             window.table.ajax.url(window.location.href + "?" + $(this).serialize()).load();
             // window.table.ajax.reload();
         })
+
+        $(document).ready(function() {
+            $(document).on("change", "input:checkbox", function(){
+                $.ajax($(this).data("url"));
+            })
+
+        });
     </script>
 @endpush
 

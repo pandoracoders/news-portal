@@ -11,7 +11,7 @@ return [
         "published",
         "reviewing"
     ],
-    "web_setting_tabs" => ['branding', 'social-media'],
+    "web_setting_tabs" => ['branding', 'social-media', 'secret'],
     "social_media" => [
         "facebook",
         "twitter",

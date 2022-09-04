@@ -25,7 +25,7 @@ class Category extends Model
         return $this->hasMany(Article::class);
     }
 
-    // tabel
+    // table
 
     public function tables()
     {

@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WebSettingController;
 use App\Http\Controllers\PageController;
+use App\Models\Backend\Article;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
+
+Route::get('/dashboard/table', [DashboardController::class, "table"])->name("dashboard_table");
 
 Route::group(['prefix' => 'category', "as" => "category-"], function () {
     Route::get("/", [CategoryController::class, "index"])->name("view");
@@ -71,6 +74,10 @@ Route::group(['prefix' => 'article', "as" => "article-"], function () {
 
     Route::get("/task-status-update/{article}/{taskStatus}", [ArticleController::class, "updateTaskStatus"])->name("update_task_status");
     Route::post("article-search", [ArticleController::class, "search"])->name("search");
+
+    Route::get("/featured/{article}", [ArticleController::class, "featured"])->name('featured');
+
+    Route::get("/editor-choice/{article}", [ArticleController::class, "editor_choice"])->name('editor_choice');
 });
 
 

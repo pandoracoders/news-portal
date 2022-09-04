@@ -22,7 +22,7 @@ $login_url = env("ADMIN_URL", 1234);
 Route::get("$login_url", function () {
     session()->put("valid-user", "true");
     $url = (URL::temporarySignedRoute('login', now()->addMinutes(1)));
-    return redirect()->away($url);
+    return redirect()->to($url);
 })->name("1234");
 
 Route::get('/login', [AuthController::class, "login"])->name("login")->middleware(["throttle:5"]);;

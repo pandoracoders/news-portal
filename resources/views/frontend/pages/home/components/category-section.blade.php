@@ -15,13 +15,13 @@
                             <div class="col-4 image">
                                 <figure class="m-0">
                                     <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        <img src="{{ asset($article->image) }}" loading="lazy"
-                                            alt="{{ $article->title }}" class="image_img img-fluid">
+                                        <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy"
+                                            alt="{{ $article->title }}" class="image_img">
                                     </a>
                                 </figure>
                             </div>
                             <div class="col-8 biography-title">
-                                
+
                                 <h2>
                                     <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                         {{ $article->title }}
@@ -33,7 +33,7 @@
                                          href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}"><p
                                          class="article-author">
                                          {{ $article->writer->alias_name }}
-                                        </p>   
+                                        </p>
                                     </a>
                                  </div>
                             </div>
@@ -48,8 +48,8 @@
              <div class="biography-right col-lg-6 mt-3">
                  @foreach ($section['articles'][1] ?? [] as $key => $article)
                      <figure class="textover">
-                         <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                             class="image_img img-fluid">
+                         <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
+                             class="image_img">
                          <figcaption>
                              <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                  {{ $article->title }}
@@ -82,8 +82,8 @@
                      <div class="image">
                          <figure class="m-0">
                              <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                 <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                                     class="image_img img-fluid">
+                                 <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
+                                     class="image_img">
                              </a>
                          </figure>
                      </div>
@@ -98,7 +98,7 @@
                                  href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}"><p
                                  class="article-author">
                                  {{ $article->writer->alias_name }}
-                                </p>   
+                                </p>
                             </a>
                          </div>
                      </div>

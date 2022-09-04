@@ -226,4 +226,20 @@ class ArticleController extends Controller
         $articles = Article::find($request->id)?->linkableArticles($request->search);
         return response()->json($articles);
     }
+
+    public function featured(Article $article){
+        $article->update([
+            'is_featured' => !$article->is_featured
+        ]);
+        return back()->with('success',"Article " . $article->is_featured ? 'added to' : 'removed from'. " featured list");
+    }
+
+    public function editor_choice(Article $article){
+        $article->update([
+            'editor_choice' => !$article->editor_choice
+        ]);
+
+        // dd($article );
+        return back()->with('success',"Article " . $article->editor_choice ? 'added to' : 'removed from'. " editor choice list");
+    }
 }

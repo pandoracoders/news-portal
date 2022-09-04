@@ -37,12 +37,14 @@
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
-                            <a data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <h5 class="contents-heading panel-title">Contents</h5>
-                            </a>
+                            <span data-bs-toggle="collapse" data-bs-parent="#accordion" data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                class="collapsed"
+                                aria-controls="collapseOne">
+                                <span class="contents-heading panel-title">Contents</span>
+                            </span>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel"
+                        <div id="collapseOne" class="panel-collapse collapse in " role="tabpanel"
                             aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <ul class="list">

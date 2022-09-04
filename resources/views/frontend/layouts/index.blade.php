@@ -14,7 +14,10 @@
 
     @include('frontend.layouts.partials.head')
 
-    <link rel="stylesheet" href="{{ asset('frontend') }}/css/splide.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/css/style.css" type="text/css">
 
@@ -26,7 +29,7 @@
 
     <meta name="atdlayout" content="home">
 
-    
+
     {!! getSettingValue('org_schema') !!}
 
     @stack('schema')
@@ -78,8 +81,6 @@
     <script src="{{ asset('frontend') }}/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ asset('frontend') }}/js/script.js"></script>
-
-    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
 
 
     @stack('scripts')

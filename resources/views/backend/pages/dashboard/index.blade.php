@@ -17,6 +17,13 @@
     <script src="{{ asset('backend') }}/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/chartjs/chart.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
+    <script>
+        fetch("{{ route('backend.dashboard_table') }}").then(response => response.json()).then(r => {
+
+            $("#table-holder").html(r.body);
+            console.log(r.body)
+        })
+    </script>
 @endpush
 
 

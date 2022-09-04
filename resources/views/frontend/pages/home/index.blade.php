@@ -1,10 +1,15 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/homepage.css" type="text/css">
+
+
+    <link rel="stylesheet" href="{{ asset('frontend/css/detail.css')}}">
 @endpush
 
+
+
 @push('scripts')
+<script src="{{ asset('frontend') }}/js/splide.min.js"></script>
     <script>
         new Splide('.splide', {
             type: 'loop',

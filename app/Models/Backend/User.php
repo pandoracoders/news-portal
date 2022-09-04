@@ -107,7 +107,7 @@ class User extends Authenticatable
             $data = $data->where('writer_id', $this->id);
         }
 
-        return $data->count() ?? 0;
+        return $data->count();
     }
 
     public function getYesterdayStat($task_status)
@@ -118,7 +118,7 @@ class User extends Authenticatable
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
             });
         }
-        return $data->count() ?? 0;
+        return $data->count();
     }
 
     public function getThisWeekStat($task_status)
@@ -133,7 +133,7 @@ class User extends Authenticatable
             $data = $data->where('writer_id', $this->id);
         }
 
-        return $data->count() ?? 0;
+        return $data->count();
     }
 
     public function getLastWeekStat($task_status)
@@ -158,7 +158,7 @@ class User extends Authenticatable
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
             });
         }
-        return $data->count() ?? 0;
+        return $data->count();
     }
 
     public function getThisMonthStat($task_status)
@@ -169,7 +169,7 @@ class User extends Authenticatable
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
             });
         }
-        return $data->count() ?? 0;
+        return $data->count();
     }
 
     public function getLastMonthStat($task_status)
@@ -194,6 +194,6 @@ class User extends Authenticatable
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
             });
         }
-        return $data->count() ?? 0;
+        return $data->count();
     }
 }

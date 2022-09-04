@@ -110,6 +110,20 @@ class ArticleDataTable extends DataTable
             });
         }
 
+        if(in_array($this->role , ["super-admin", "editor"]) && $this->showLinks){
+            $datatable->addColumn("featured", function ($row) {
+
+                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->is_featured ? 'checked' :'') . " data-url='" . route("backend.article-featured", ["article"=> $row]) . "'/>" : '';
+            });
+
+            $datatable->addColumn("editor_choice", function ($row) {
+                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->editor_choice ? 'checked' :'') . " data-url='" . route("backend.article-editor_choice", ["article"=> $row]) . "'/>" : '' ;
+            });
+
+            array_push($rawColumns, "featured");
+            array_push($rawColumns, "editor_choice");
+        }
+
         return $datatable->rawColumns($rawColumns);
     }
 
@@ -132,6 +146,10 @@ class ArticleDataTable extends DataTable
         } elseif ($this->role == "editor") {
             $model->where("editor_id", $this->user->id)
                 ->orWhereNull("editor_id");
+        }
+        if(request()->search && is_array(request()->search)){
+
+            $model->where('title','like',"%".request()->search['value']."%");
         }
         return $model;
     }
@@ -172,6 +190,11 @@ class ArticleDataTable extends DataTable
             array_push($columns, Column::make("action"));
         }
 
+        if(in_array($this->role , ["super-admin", "editor"]) && $this->showLinks){
+            array_push($columns, Column::make("featured"));
+            array_push($columns, Column::make("editor_choice"));
+        }
+
         if($this->showLinks){
             array_push($columns, Column::make("incoming")
             ->title('<i class="bi bi-box-arrow-in-down-left" style="font-size:20px"></i>')
@@ -185,6 +208,8 @@ class ArticleDataTable extends DataTable
             ->width(60)
             ->class("text-center"));
         }
+
+
 
         return $columns;
     }
