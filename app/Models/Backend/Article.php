@@ -8,6 +8,7 @@ use App\Jobs\OrgSchema;
 use App\Models\Backend\User;
 use App\Models\Traits\SeoTrait;
 use DOMDocument;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -134,5 +135,9 @@ class Article extends Model
             HomePageCache::dispatchAfterResponse();
             OrgSchema::dispatchAfterResponse($model);
         });
+    }
+
+    public function scopeActiveAndPublish(Builder $q){
+        return $q->where('task_status','published')->where('status',1)->orderBy('published_at','desc');
     }
 }

@@ -42,14 +42,14 @@ class HomePageCache implements ShouldQueue
 
         return Cache::rememberForever(config("constants.home_page_cache_key"), function () {
             // get featured articles
-            $featured_articles = Article::with(["category", "writer"])
+            $featured_articles = Article::activeAndPublish()->with(["category", "writer"])
                 ->where("is_featured", true)
                 ->where("task_status", "published")
                 ->limit(config("constants.article_limit", 8))
                 ->get();
             $ids = $featured_articles->pluck("id")->toArray();
 
-            $editor_choice = Article::with(["category", "writer"])
+            $editor_choice = Article::activeAndPublish()->with(["category", "writer"])
                 ->where("task_status", "published")
                 ->limit(config("constants.article_limit", 8))
                 ->whereNotIn("id", $ids)
@@ -57,8 +57,7 @@ class HomePageCache implements ShouldQueue
 
             $ids = array_merge($ids, $editor_choice->pluck("id")->toArray());
 
-            $just_pubished = Article::with(["category", "writer"])
-                ->orderBy("published_at", "desc")
+            $just_pubished = Article::activeAndPublish()->with(["category", "writer"])
                 ->where("task_status", "published")
                 ->limit(config("constants.article_limit", 8))
                 ->whereNotIn("id", $ids)
@@ -108,12 +107,12 @@ class HomePageCache implements ShouldQueue
             return ([
                 "featured_articles" => $featured_articles,
                 "category_section" => $category_section,
-                "born_today" => Article::with(["category", "writer"])
+                "born_today" => Article::activeAndPublish()->with(["category", "writer"])
                     ->where("task_status", "published")
                     ->where('tables->Quick Facts->birthday->value', "LIKE", "%$today%")
                     ->limit(config("constants.article_limit", 8))
                     ->get(),
-                "died_today" => Article::with(["category", "writer"])
+                "died_today" => Article::activeAndPublish()->with(["category", "writer"])
                     ->where("task_status", "published")
                     ->where('tables->Quick Facts->death_day->value', "LIKE", "%$today%")
                     ->limit(config("constants.article_limit", 8))->get(),

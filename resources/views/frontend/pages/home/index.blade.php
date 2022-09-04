@@ -3,7 +3,7 @@
 @push('styles')
 
 
-    <link rel="stylesheet" href="{{ asset('frontend/css/detail.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/homepage.min.css')}}">
 @endpush
 
 

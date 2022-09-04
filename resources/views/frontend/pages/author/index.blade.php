@@ -1,24 +1,30 @@
-@extends('frontend.layouts.index')
-
+@extends('frontend.layouts.index', [
+    'meta_title' => $author->alias_name,
+    'meta_description' => "All the articles from {$author->alias_name}",
+    'meta_keyword' => getSettingValue('meta_keyword'),
+    'image' => getSettingValue('logo'),
+    'type' => 'website'
+])
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
 
 
-   
+
 @endpush
 
 
 @section('content')
     <main class="container">
         <!-- BreadCrumb -->
-        <div class="bc m-3">
+        <div class="bc">
             <ul class="breadcrumb-container">
                 <li class="breadcrumb">
                     <a href="{{ url('/') }}">
                         <span>Home</span>
                     </a>
                 </li>
+                ⇢
                 <li class="breadcrumb active">
                     <span class="text-capitalize">
                         {{ $author->alias_name }}

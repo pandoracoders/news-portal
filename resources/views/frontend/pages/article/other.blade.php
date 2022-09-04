@@ -1,12 +1,12 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.min.css" type="text/css">
 @endpush
 
 
 <main class="container">
     <div class="row main-section">
         <div class="col-lg-8 article-section">
-            <div class="bc mx-5 m-3">
+            <div class="bc">
                 <ul class="breadcrumb-container">
                     <li class="breadcrumb">
                         <a href="{{ url('/') }}">

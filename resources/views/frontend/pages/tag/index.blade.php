@@ -1,7 +1,13 @@
-@extends('frontend.layouts.index')
+@extends('frontend.layouts.index', [
+    'meta_title' => $tag->seo?->meta_title ?? $tag->title,
+    'meta_description' => $tag->seo?->meta_title ?? "All the articles on ${$tag->title}",
+    'meta_keyword' => $tag->seo?->meta_keyword ?? getSettingValue('meta_keyword'),
+    'image' => getSettingValue('logo'),
+    'type' => 'website'
+])
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
 @endpush
 
 @section('content')

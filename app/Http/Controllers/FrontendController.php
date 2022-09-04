@@ -17,7 +17,7 @@ class FrontendController extends Controller
 
     public function index()
     {
-    
+
 
 
 
@@ -43,7 +43,7 @@ class FrontendController extends Controller
                 "category" => $category,
             ]);
         }
-        $article = Article::where("slug", $slug)->where("task_status", "published")->first();
+        $article = Article::activeAndPublish()->where("slug", $slug)->where("task_status", "published")->first();
         if ($article) {
             return view("frontend.pages.article.index", [
                 "article" => $article,

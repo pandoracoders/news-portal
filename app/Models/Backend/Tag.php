@@ -17,7 +17,7 @@ class Tag extends Model
     ];
 
     public function articles(){
-       return $this->belongsToMany(Article::class,ArticleTag::class);
+       return $this->belongsToMany(Article::class,ArticleTag::class)->activeAndPublish();
 
     }
 

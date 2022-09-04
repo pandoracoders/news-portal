@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function articles()
     {
-        return $this->hasMany(Article::class, 'writer_id');
+        return $this->hasMany(Article::class, 'writer_id')->activeAndPublish();
     }
 
     public function getIsEditorAttribute($value)

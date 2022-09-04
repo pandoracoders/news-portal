@@ -2,6 +2,8 @@
 
 @include('backend.datatable')
 
+
+
 @push('styles')
     <!--plugins-->
     <link href="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />

@@ -1,13 +1,19 @@
-@extends('frontend.layouts.index')
+@extends('frontend.layouts.index', [
+    'meta_title' => $category->seo?->meta_title ?? $category->title,
+    'meta_description' => $category->seo?->meta_title ?? "All the articles on {$category->title}",
+    'meta_keyword' => $category->seo?->meta_keyword ?? getSettingValue('meta_keyword'),
+    'image' => getSettingValue('logo'),
+    'type' => 'website'
+])
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
 @endpush
 
 @section('content')
     <main class="container">
         <!-- BreadCrumb -->
-        <div class="bc mx-5 m-3">
+        <div class="bc">
             <ul class="breadcrumb-container">
                 <li class="breadcrumb">
                     <a href="{{ url('/') }}">
@@ -23,7 +29,7 @@
             </ul>
         </div>
 
-        <section class="category-div mb-3">
+        <section class="category-div mt-3 mb-3">
             <div class="container category-title">
                 <h3 class="text-capitalize">All Posts on <span class="colored">
                         {{ $category->title }}

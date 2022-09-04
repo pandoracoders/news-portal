@@ -1,5 +1,9 @@
 @extends('frontend.layouts.index')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('') }}frontend/css/error.min.css" type="text/css">
+@endpush
+
 
 @section('content')
     <main class="container">

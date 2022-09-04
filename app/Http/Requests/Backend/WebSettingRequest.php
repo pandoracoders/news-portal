@@ -35,6 +35,14 @@ class WebSettingRequest extends FormRequest
                 "pinterest_token" => "nullable"
             ];
         }
+        else if( $this->route("type") == "seo"){
+            $rules = [
+                "meta_title" => "nullable",
+                "meta_description" => "nullable",
+                "meta_keyword" => "nullable"
+            ];
+        }
+
 
 
         return $rules;
