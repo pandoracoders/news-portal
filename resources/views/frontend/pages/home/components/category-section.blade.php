@@ -15,7 +15,7 @@
                             <div class="col-4 image">
                                 <figure class="m-0">
                                     <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                        <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy"
+                                        <img src="{{ asset("image-placeholder.png") }}"   width="50" height="50" data-src="{{ asset($article->image) }}" loading="lazy"
                                             alt="{{ $article->title }}" class="image_img">
                                     </a>
                                 </figure>
@@ -48,7 +48,7 @@
              <div class="biography-right col-lg-6 mt-3">
                  @foreach ($section['articles'][1] ?? [] as $key => $article)
                      <figure class="textover">
-                         <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
+                         <img width="50" height="50" src="{{ asset("image-placeholder.png") }}" data-src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                              class="image_img">
                          <figcaption>
                              <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
@@ -82,7 +82,7 @@
                      <div class="image">
                          <figure class="m-0">
                              <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                 <img width="50" height="50" src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
+                                 <img width="50" height="50" src="{{ asset("image-placeholder.png") }}" data-src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                                      class="image_img">
                              </a>
                          </figure>

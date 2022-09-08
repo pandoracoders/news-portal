@@ -1,15 +1,13 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/homepage.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/homepage.min.css') }}">
 @endpush
 
 
 
 @push('scripts')
-<script src="{{ asset('frontend') }}/js/splide.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
     <script>
         new Splide('.splide', {
             type: 'loop',
@@ -29,6 +27,25 @@
                 }
             }
         }).mount();
+    </script>
+
+
+    <script>
+        if ('loading' in HTMLImageElement.prototype) {
+
+            setTimeout(() => {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    img.src = img.dataset.src;
+                });
+            });
+        } else {
+            // Dynamically import the LazySizes library
+            const script = document.createElement('script');
+            script.src =
+                'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
     </script>
 @endpush
 
@@ -58,8 +75,8 @@
                     <div class="col-md-4">
                         <figure class="textover">
                             <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                                    class="image_img img-fluid">
+                                <img src="{{ asset('image-placeholder.png') }}" default-src="{{ asset($article->image) }}"
+                                    loading="lazy" alt="{{ $article->title }}" class="image_img img-fluid">
                             </a>
                             <figcaption>
                                 <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">

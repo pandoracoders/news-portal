@@ -42,7 +42,8 @@
             "app/Helper/helper.php",
             "app/Helper/schema.php",
             "app/Helper/cache.php",
-            "app/Helper/permission.php"
+            "app/Helper/permission.php",
+            "app/Helper/ajax.php"
         ]
     },
     "autoload-dev": {

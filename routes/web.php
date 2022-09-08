@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SitemapController;
 use App\Models\Backend\Article;
@@ -21,29 +22,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('sitemap.xml', [SitemapController::class, 'index']);
 
-Route::get("sitemap.xml", [SitemapController::class, "index"]);
+Route::redirect('/home', '/', 301);
 
+Route::redirect('/index', '/', 301);
 
-Route::redirect("/home", "/", 301);
+Route::get('/', [FrontendController::class, 'index'])->name('home');
 
-Route::redirect("/index", "/", 301);
+Route::get('{slug}', [FrontendController::class, 'singleArticle'])->name('singleArticle');
 
-Route::get("/", [FrontendController::class, "index"])->name("home");
+Route::get('tag/{tag:slug}', [FrontendController::class, 'tags'])->name('tags');
 
-Route::get("{slug}", [FrontendController::class, "singleArticle"])->name("singleArticle");
+Route::post('category/{category:slug}', [FrontendController::class, 'categoryArticles'])
+    ->name('categoryArticles')
+    ->withoutMiddleware('csrf');
+Route::post('tag/{tag:slug}', [FrontendController::class, 'tagArticles'])
+    ->name('tagArticles')
+    ->withoutMiddleware('csrf');
+Route::post('author/{author:slug}', [FrontendController::class, 'authorArticles'])
+    ->name('authorArticles')
+    ->withoutMiddleware('csrf');
 
-Route::get("tag/{tag:slug}", [FrontendController::class, "tags"])->name("tags");
+Route::get('author/{author:slug}', [FrontendController::class, 'authorArticle'])->name('authorArticle');
 
-Route::post("category/{category:slug}", [FrontendController::class, "categoryArticles"])->name("categoryArticles")->withoutMiddleware("csrf");
-Route::post("tag/{tag:slug}", [FrontendController::class, "tagArticles"])->name("tagArticles")->withoutMiddleware("csrf");
-Route::post("author/{author:slug}", [FrontendController::class, "authorArticles"])->name("authorArticles")->withoutMiddleware("csrf");
+Route::get('/news/search/{field}/{value}', [FrontendController::class, 'searchByTableField'])->name('news.search');
 
+Route::redirect('/backend', 'dashboard', 301)->middleware('auth');
 
-Route::get("author/{author:slug}", [FrontendController::class, "authorArticle"])->name("authorArticle");
+// ajax route
 
-
-Route::get("/news/search/{field}/{value}", [FrontendController::class, "searchByTableField"])->name("news.search");
-
-
-Route::redirect('/backend', 'dashboard', 301)->middleware("auth");
+Route::group(['perfix' => 'ajax', 'as' => 'ajax'], function () {
+    Route::get('article/you-may-also-like/{article}', [AjaxController::class, 'youMayAlsoLike'])->name('youMayAlsoLike');
+});
