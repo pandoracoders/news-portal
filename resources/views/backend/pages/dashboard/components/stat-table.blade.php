@@ -69,8 +69,8 @@ foreach ($tables as $name => $value) {
                                 <div class="d-flex align-items-center">
                                     <h6 class="mb-0">{{ ucwords($key) }} Stats</h6>
                                 </div>
-                                <div class="table-responsive mt-2">
-                                    <table class="table align-middle mb-0">
+                                <div class="table table-striped table-bordered table-responsive mt-2">
+                                    <table class="table table-striped table-bordered align-middle mb-0">
                                         <thead class="table-light">
                                             <tr>
                                                 @foreach ($headers as $header)
@@ -86,7 +86,7 @@ foreach ($tables as $name => $value) {
                                                     <td> {{ $arr['id'] }}</td>
                                                     <td> {{ $arr['name'] }}</td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -99,7 +99,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -112,7 +112,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -125,7 +125,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -138,7 +138,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -151,7 +151,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>
@@ -164,7 +164,7 @@ foreach ($tables as $name => $value) {
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <table class="table align-middle mb-0">
+                                                        <table class="table table-striped table-bordered align-middle mb-0">
                                                             <thead class="table-light">
                                                                 @foreach ($arr['status'] ?? [] as $status => $value)
                                                                     <tr>

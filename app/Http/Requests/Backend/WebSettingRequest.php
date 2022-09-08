@@ -42,7 +42,13 @@ class WebSettingRequest extends FormRequest
                 "meta_keyword" => "nullable"
             ];
         }
-
+        else if( $this->route("type") == "analytics"){
+            $rules = [
+                "google_analytics_code" => "nullable",
+                "google_tag_manager_code" => "nullable",
+                "google_search_console_code" => "nullable",
+            ];
+        }
 
 
         return $rules;

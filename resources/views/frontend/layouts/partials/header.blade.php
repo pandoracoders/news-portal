@@ -90,10 +90,10 @@
                         </a>
                     @empty
                     @endforelse
-                    
+
                 </div>
 
-            </div>
+        </div>
 
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
@@ -101,7 +101,8 @@
 
             <div id="searchcontainer">
 
-                <script async src="https://cse.google.com/cse.js?cx=9eee22d27b4343c6a"></script>
+                <script async src="https://cse.google.com/cse.js?cx=d615d410296b9481a">
+                </script>
 
                 <div class="gcse-search"></div>
 

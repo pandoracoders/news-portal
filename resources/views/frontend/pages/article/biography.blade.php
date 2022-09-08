@@ -1,5 +1,6 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.css" type="text/css">
+<link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.min.css" type="text/css">
+
 @endpush
 
 
@@ -15,12 +16,14 @@
                                         <i class="fa fa-solid fa-home"></i>
                                     </a>
                                 </li>
+                                ⇢
                                 <li class="breadcrumb">
                                     <a href="{{ route('singleArticle', $article->category->slug) }}"
                                         class="text-capitalize">
                                         {{ $article->category->slug }}
                                     </a>
                                 </li>
+                                ⇢
                                 <li class="breadcrumb active">
                                     <span>
                                         {{ $article->slug }}
@@ -77,7 +80,7 @@
                                                 <a data-bs-toggle="collapse" data-bs-parent="#accordion"
                                                     data-bs-target="#collapseOne" aria-expanded="true"
                                                     aria-controls="collapseOne">
-                                                    <h5 class="contents-heading panel-title">Contents</h5>
+                                                    <span class="contents-heading panel-title">Contents</span>
                                                 </a>
                                             </div>
                                             <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel"

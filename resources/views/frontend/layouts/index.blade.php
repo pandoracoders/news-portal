@@ -38,7 +38,6 @@
 
 <body>
 
-
     @include('frontend.layouts.partials.header')
 
     <div class="sidebar-overlay"></div>

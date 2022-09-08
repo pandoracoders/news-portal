@@ -32,8 +32,6 @@ class DashboardController extends Controller
 
     public function table(){
         {
-
-
             $tables = [
                  'writers' => User::writer()->get(),
                  'editors' => User::editor()->get(),

@@ -98,7 +98,7 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
             </ul>
             <div class="tab-content py-3">
                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                    <div class="table-responsive">
+                    <div class="table-striped table-bordered table-responsive">
                         {{ $dataTable->table() }}
                     </div>
                 </div>

@@ -29,7 +29,7 @@
 
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/plugins/notifications/css/lobibox.min.css" />
 
-    
+
     <style>
         td {
             vertical-align: middle;
@@ -46,7 +46,7 @@
 
     @yield('styles')
 
-    <title>News - Backend </title>
+    <title>{{ getSettingValue('website_title') }} - Backend </title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
         <div class="page-content-wrapper">
             <!-- start page content-->
             <div class="page-content">
-                @include('backend.layouts.partials.breadcrumb')
+
                 @yield('content')
 
             </div>
