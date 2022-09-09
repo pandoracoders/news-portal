@@ -31,7 +31,7 @@
             @include('frontend.pages.article.components.title-section')
 
             <div class="featured-image">
-                <img src="{{ $article->image }}" class="img-fluid" alt="{{ $article->title }}">
+                <img data-src="{{ $article->image }}" src="{{ asset(("image-placeholder.png")) }}" class="" alt="{{ $article->title }}">
             </div>
             <div class="table-of-contents col-lg-8">
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

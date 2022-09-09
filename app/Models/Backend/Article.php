@@ -6,6 +6,7 @@ use App\Jobs\Backend\ArticleLogJob;
 use App\Jobs\HomePageCache;
 use App\Jobs\OrgSchema;
 use App\Models\Backend\User;
+use App\Models\StaticPost;
 use App\Models\Traits\SeoTrait;
 use DOMDocument;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,6 +50,10 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, ArticleTag::class);
+    }
+
+    public function staticPost(){
+        return $this->hasOne(StaticPost::class);
     }
 
     public function articleLog()
@@ -130,6 +135,12 @@ class Article extends Model
         static::created(function ($model) {
             HomePageCache::dispatchAfterResponse();
             OrgSchema::dispatchAfterResponse($model);
+            if($model->task_status == "published"){
+                $model->staticPost()->updateOrCreate([
+                    "slug" => $model->slug,
+                    "body" => view("frontend.pages.article.components.content", ["article"=> $model])->render()
+                ]);
+            }
         });
         static::updated(function ($model) {
             HomePageCache::dispatchAfterResponse();

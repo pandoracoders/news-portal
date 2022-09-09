@@ -1,5 +1,4 @@
 <header>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -22,7 +21,7 @@
             </a>
 
             @php
-                $current_url = isset($article) ? route('singleArticle', ['slug' => $article->category->slug]) : Request::url();
+                $current_url = isset($article) ? route('singleArticle', ['slug' => $article->category?->slug ?? 'nu']) : Request::url();
             @endphp
 
             <div class="collapse navbar-collapse d-none d-lg-block" id="navbarSupportedContent">

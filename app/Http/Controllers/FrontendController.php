@@ -33,6 +33,12 @@ class FrontendController extends Controller
 
     public function singleArticle($slug)
     {
+        $article = Article::activeAndPublish()->where("slug", $slug)->where("task_status", "published")->first();
+        if ($article) {
+            return view("frontend.pages.article.index", [
+                "article" => $article,
+            ]);
+        }
         if (getSetting($slug)) {
             return view("frontend.pages.static-page", ["page" => getSetting($slug)]);
         }
@@ -43,12 +49,7 @@ class FrontendController extends Controller
                 "category" => $category,
             ]);
         }
-        $article = Article::activeAndPublish()->where("slug", $slug)->where("task_status", "published")->first();
-        if ($article) {
-            return view("frontend.pages.article.index", [
-                "article" => $article,
-            ]);
-        }
+
         return abort(404);
     }
 

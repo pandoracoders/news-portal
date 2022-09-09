@@ -58,7 +58,7 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
     <!-- Custom JS -->
-    <script src="{{ asset('frontend') }}/js/script.js"></script>
+    <script src="{{ asset('frontend') }}/js/script.min.js"></script>
 
 
     @stack('scripts')
