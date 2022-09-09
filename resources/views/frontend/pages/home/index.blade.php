@@ -32,14 +32,10 @@
 
 
 
-    <script></script>
-
-
     <script>
         const loadImage = () => {
             if ('loading' in HTMLImageElement.prototype) {
-
-                const images = document.querySelectorAll('img[loading="lazy"]');
+                const images = document.querySelectorAll('img');
                 images.forEach(img => {
                     img.src = img.dataset.src;
                 });
@@ -55,7 +51,7 @@
 
         setTimeout(()=>{
             loadImage();
-        }, 10000)
+        }, 1000)
 
         setTimeout(() => {
 

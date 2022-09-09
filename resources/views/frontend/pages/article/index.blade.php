@@ -87,11 +87,73 @@
     </script>
 
 
-    <script>
-        if (window) {
+<script>
+    var page = 1;
+    var loading = 0;
+    var extra = 500;
+    window.onscroll = function() {
+        const scrollContent = document.getElementById('scroll-content');
+        if (window.innerHeight + window.scrollY > scrollContent.offsetHeight - extra && loading === 0) {
+            // extra = 0;
+            loading = 1;
+            fetch("{{ route('categoryArticles', $article->category->slug) }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-Requested-With": "XMLHttpRequest",
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        page,
+                    })
+                })
+                .then(response => response.json())
+                .then(d => {
 
-            window.ajax_url = "{{ route('categoryArticles', $article->category->slug) }}";
-            window.col_lg = 3;
+                    if (d && d.length > 0) {
+                        // var r = d.data;
+                        var html = '';
+
+                        for (let index = 0; index < d.length; index++) {
+                            html += `<div class="col-md-4 col-lg-3 post-section article-card">`;
+                            html +=
+                                '<div class="similar-post">';
+                            html += '<div class="image">';
+                            html += '<figure class="m-0">';
+                            html += '<a href="' + d[index].url + '">';
+                            html += '<img src="' + d[index].image + '" alt="" class="image_img img-fluid">';
+                            html += '</a>';
+                            html += '</figure>';
+                            html += '</div>';
+                            html +=
+                                '<div class="similar-post-title">';
+                            html += '<div class="title mb-3">';
+                            html += '<a href="' + d[index].url + '">';
+                            html += d[index].title;
+                            html += '</a>';
+                            html += '</div>';
+                            html += '<div class="meta"><p class = "article-date" >' + d[index]
+                                .published_at + ' | </p>';
+                            html += '<p class="article-author">';
+                            html += '<a href="' + d[index].author.url + '"> ' + d[index].author.name +
+                                '</a></p>';
+
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+
+
+                        scrollContent.insertAdjacentHTML('beforeend', html);
+                        page++;
+                        loading = 0;
+                    }
+                })
         }
-    </script>
+    }
+</script>
+
+
+
 @endpush
