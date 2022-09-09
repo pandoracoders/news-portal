@@ -98,18 +98,6 @@
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
             </div>
-
-            <div id="searchcontainer">
-
-                <script async src="https://cse.google.com/cse.js?cx=d615d410296b9481a">
-                </script>
-
-                <div class="gcse-search"></div>
-
-                <div class="closeSearch" id="closeSearch">
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-            </div>
         </div>
     </nav>
 </header>

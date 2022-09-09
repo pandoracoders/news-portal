@@ -7,7 +7,7 @@
 
     <div class="row">
         @include('error')
-        <div class="col-xl-12 mx-auto">
+        <div class="col-xl-9">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-2">
@@ -31,24 +31,7 @@
                                 </div>
 
 
-                                <div class="col-12 mb-2 ">
-                                    <label class="form-label">Category *</label>
-                                    <select name="category_id" class="form-control"
-                                        {{ isset($article) && auth()->user()->role->slug != 'super-admin' ? 'readonly=readonly' : '' }}>
-                                        <option value="" disabled>Select Category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ isset($article) && $article->category_id == $category->id ? 'selected' : '' }}>
-                                                {{ $category->title }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @if (isset($errors) && $errors->has('category_id'))
-                                        <div class="invalid-feedback">
-                                            {{ $errors->first('category_id') }}
-                                        </div>
-                                    @endif
-                                </div>
+
 
 
                                 <div class="col-12 mb-2">
@@ -61,45 +44,7 @@
                                     <textarea name="summary" class="form-control" rows="5">{{ isset($article) ? $article->summary : old('summary') }}</textarea>
                                 </div>
 
-                                <div class="row mb-1">
-                                    <div class="col-xl-8">
-                                        <label for="formFile" class="form-label">Featured Image</label>
-                                        <input
-                                            class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
-                                            type="file" id="formFile" name="image"
-                                            onchange="document.getElementById('preview-image').src = window.URL.createObjectURL(this.files[0])">
-                                        @if (isset($errors) && $errors->has('image'))
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('image') }}
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="border p-3 rounded">
-                                            <h6 class="mb-0 text-uppercase">Image Preiew</h6>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <img height="50px" width="100px" id="preview-image"
-                                                        src="{{ isset($article) ? asset($article->image) : '' }}"
-                                                        class="img-fluid" alt="">
-                                                </div>
-                                            </div>
 
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 mb-2 ">
-                                        <label class="form-label">Tag *</label>
-
-                                        <select class="form-control tag-select" id="tags" multiple="multiple"
-                                            name="tags[]" aria-placeholder="Enter  Tags">
-                                            @foreach ($tags as $tag)
-                                                <option value="{{ $tag->slug }}">{{ $tag->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,7 +62,120 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12">
+        <div class="col-xl-3">
+            <div style="position:sticky; top:4rem;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="border p-3 rounded mb-2">
+                            <h6 class="mb-0 text-uppercase">Action</h6>
+                            <hr>
+
+
+
+
+                            <a data-bs-toggle="modal" href="#more-article" class="back-to-top"
+                                style="display: inline; bottom:180px; background-color: #4e775d">
+                                <i class="bi bi-plus"></i>
+                            </a>
+
+                            @if ($article->discussions)
+                                <a data-bs-toggle="modal" href="#discussion-model" class="back-to-top"
+                                    style="display: inline; bottom:120px; background-color: #44607d">
+                                    <i class="bi bi-chat-dots"></i>
+                                </a>
+                            @endif
+
+                            <a data-bs-toggle="modal" href="#linkable-article" class="back-to-top"
+                                style="display: inline; bottom:80px; background-color: #52777f">
+                                <i class="bi bi-link"></i>
+                            </a>
+
+                            <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
+                                <small style="font-size:14px">Save </small>
+                            </a>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="save">
+                                {{ isset($article) ? 'Update' : 'Save' }}
+                            </button>
+
+                            @if (auth()->user()->role->slug == 'writer')
+                                <button type="button" class="btn btn-success btn-block" id="submit">
+                                    Submit
+                                </button>
+                            @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#publish-article">
+                                    Publish
+                                </button>
+
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modify-article">
+                                    Modify
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 mt-2" style="position:sticky; top:15rem;">
+                <label class="form-label mx-2">Category *</label>
+                <select name="category_id" class="form-control"
+                    {{ isset($article) && auth()->user()->role->slug != 'super-admin' ? 'readonly=readonly' : '' }}>
+                    <option value="" disabled>Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ isset($article) && $article->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->title }}
+                        </option>
+                    @endforeach
+                </select>
+                @if (isset($errors) && $errors->has('category_id'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('category_id') }}
+                    </div>
+                @endif
+            </div>
+
+
+
+            <div class="row mb-1" style="position:sticky; top:20rem;">
+                <div>
+                    <label for="formFile" class="form-label">Featured Image</label>
+                    <input class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
+                        type="file" id="formFile" name="image"
+                        onchange="document.getElementById('preview-image').src = window.URL.createObjectURL(this.files[0])">
+                    @if (isset($errors) && $errors->has('image'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('image') }}
+                        </div>
+                    @endif
+                </div>
+                <div>
+                    <div class="border p-3 rounded">
+                        <div class="row">
+                            <div class="col-12">
+                                <img height="150" width="300" id="preview-image"
+                                    src="{{ isset($article) ? asset($article->image) : '' }}" class="img-fluid"
+                                    alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 mb-2 mt-2">
+                    <label class="form-label">Tag *</label>
+
+                    <select class="form-control tag-select" id="tags" multiple="multiple" name="tags[]"
+                        aria-placeholder="Enter  Tags">
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->slug }}">{{ $tag->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <div class="mx-auto">
                 <div class="card mb-2">
                     <div class="card-body">
@@ -145,61 +203,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="border p-3 rounded mb-2">
-                        <h6 class="mb-0 text-uppercase">Action</h6>
-                        <hr>
-
-
-
-
-                        <a data-bs-toggle="modal" href="#more-article" class="back-to-top"
-                            style="display: inline; bottom:180px; background-color: #f73757">
-                            <i class="bi bi-plus"></i>
-                        </a>
-
-                        @if ($article->discussions)
-                            <a data-bs-toggle="modal" href="#discussion-model" class="back-to-top"
-                                style="display: inline; bottom:120px; background-color: #f73757">
-                                <i class="bi bi-chat-dots"></i>
-                            </a>
-                        @endif
-
-                        <a data-bs-toggle="modal" href="#linkable-article" class="back-to-top"
-                            style="display: inline; bottom:80px; background-color: #f73757">
-                            <i class="bi bi-link"></i>
-                        </a>
-
-                        <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
-                            <small style="font-size:14px">Save </small>
-                        </a>
-
-                        <button type="submit" class="btn btn-primary btn-block" id="save">
-                            {{ isset($article) ? 'Update' : 'Save' }}
-                        </button>
-
-                        @if (auth()->user()->role->slug == 'writer')
-                            <button type="button" class="btn btn-success btn-block" id="submit">
-                                Submit
-                            </button>
-                        @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#publish-article">
-                                Publish
-                            </button>
-
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#modify-article">
-                                Modify
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
 
     @if (auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
@@ -440,7 +446,7 @@
         $(document).ready(function() {
 
             jQuery('#datetimepicker').datetimepicker({});
-            
+
             const articleHtmlStyle = (articles) => {
                 let html = '';
                 articles.forEach(article => {

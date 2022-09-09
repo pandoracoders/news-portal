@@ -9,13 +9,6 @@
                                 <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
                                     class="slider-image-img img-fluid">
                             </a>
-                            <p class="article-date">
-                                {{ carbon($article->published_at)->format('M d, Y') }}
-                            </p>|
-                            <p class="article-author">
-                                <a
-                                    href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
-                            </p>
                             <p class="slider-category">
 
                                 <a href="{{ route('singleArticle', ['slug' => $article->category->slug]) }}"
@@ -25,6 +18,13 @@
                                 <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                     {{ $article->title }}
                                 </a>
+                            </p>
+                            <p class="article-date">
+                                {{ carbon($article->published_at)->format('M d, Y') }}
+                            </p>|
+                            <p class="article-author">
+                                <a
+                                    href="{{ route('authorArticle', ['author' => $article->writer->slug]) }}">{{ $article->writer->alias_name }}</a>
                             </p>
                         </figure>
                     </li>
