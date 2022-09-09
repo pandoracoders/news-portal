@@ -6,8 +6,8 @@
                     <li class="splide__slide">
                         <figure class="slider-image">
                             <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                                    class="slider-image-img img-fluid">
+                                <img src="{{ asset("image-placeholder.png") }}" data-src="{{ asset($article->image) }}"  alt="{{ $article->title }}"
+                                    class="slider-image-img">
                             </a>
                             <p class="slider-category">
 

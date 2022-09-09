@@ -51,7 +51,7 @@ class HomePageCache implements ShouldQueue
             $editor_choice = Article::activeAndPublish()
                 ->with(['category', 'writer'])
                 ->where('task_status', 'published')
-                ->whereNotIn('editor_choice', 1)
+                ->where('editor_choice', 1)
                 ->limit(config('constants.article_limit', 8))
                 ->whereNotIn('id', $ids)
                 ->get();
