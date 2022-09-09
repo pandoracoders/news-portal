@@ -9,7 +9,8 @@
 @push('scripts')
     <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
     <script>
-        new Splide('.splide', {
+        // document.getQuery
+        document.querySelector("div.splide") && new Splide('.splide', {
             type: 'loop',
             perPage: 4,
             gap: '5px',

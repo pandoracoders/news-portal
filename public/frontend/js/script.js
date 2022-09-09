@@ -66,8 +66,8 @@ var closeSearch = document.getElementById('closeSearch')
 //     e.stopPropagation() // stop event from bubbling upwards
 // }, false)
 
-closeSearch.addEventListener(touchorclick, function (e) { // when user clicks anywhere in document
-    searchcontainer.classList.remove('opensearch')
-}, false)
+// closeSearch.addEventListener(touchorclick, function (e) { // when user clicks anywhere in document
+//     searchcontainer.classList.remove('opensearch')
+// }, false)
 
 

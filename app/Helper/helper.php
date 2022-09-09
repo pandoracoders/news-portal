@@ -93,7 +93,8 @@ if (!function_exists('getSettingValue')) {
 if (!function_exists('replaceOrigin')) {
     function replaceOrigin($str)
     {
-        return str_replace('http://wp.test', 'https://wikibioages.com/', $str);
+        $str = str_replace('http://wp.test', 'https://wikibioages.com/', $str);
+        return str_replace('http://', 'https://', $str);
     }
 }
 
