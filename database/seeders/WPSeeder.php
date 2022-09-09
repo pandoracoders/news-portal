@@ -47,7 +47,7 @@ class WPSeeder extends Seeder
                 'writer_id' => $author->id,
                 'editor_id' => 1,
                 "image" => replaceOrigin($post["feature_image"]),
-                "body" => convertCaption(replaceOrigin($post["body"])),
+                "body" => wrapByPTag(convertCaption(replaceOrigin($post["body"]))),
                 "task_status" => $post["task_status"] == "publish" ? "published" : "submitted"
             ]));
 

@@ -10,6 +10,35 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 
+if (!function_exists('wrapByPTag')) {
+    function wrapByPTag($str)
+    {
+        $strWithP = "";
+        $p = explode("\n", $str);
+        foreach ($p as $key => $value) {
+            if(!str_contains($value,"<h")   ){
+                if(!str_contains($value,"<figure")){
+                    if(!str_contains($value,"<block")){
+                        $strWithP .= "<p>$value</p>";
+                    }else{
+                        $strWithP .= $value;
+                    }
+                }else{
+                    $strWithP .= $value;
+                }
+            }
+            else{
+                $strWithP .= $value;
+            }
+        }
+        return $strWithP;
+        $str =  str_replace("\r", "", $str);
+          $str =  "<p>" . str_replace("\n", "</p><p>", $str) . "</p>";
+          return $str =  str_replace("\r", "", $str);
+    }
+}
+
+
 
 if (!function_exists('weekendStart')) {
     function weekendStart()
