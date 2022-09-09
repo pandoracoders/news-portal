@@ -53,8 +53,12 @@
             }
         }
 
-        setTimeout(() => {
+        setTimeout(()=>{
             loadImage();
+        }, 10000)
+
+        setTimeout(() => {
+
             fetch("{{ route('ajax.getHomePageAjax') }}")
                 .then(response => response.json())
                 .then(({
@@ -70,7 +74,7 @@
 
 
 
-        }, 2000);
+        }, 5000);
     </script>
 @endpush
 
@@ -95,8 +99,5 @@
         </section>
         <section id="died-today">
         </section>
-
-
-
     </main>
 @endsection
