@@ -57,10 +57,6 @@
     <button onclick="topFunction()" id="myBtn" title="Go to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
-
-
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('frontend') }}/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ asset('frontend') }}/js/script.js"></script>
 
