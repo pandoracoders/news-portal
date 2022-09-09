@@ -52,6 +52,7 @@ Route::redirect('/backend', 'dashboard', 301)->middleware('auth');
 
 // ajax route
 
-Route::group(['perfix' => 'ajax', 'as' => 'ajax'], function () {
+Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
     Route::get('article/you-may-also-like/{article}', [AjaxController::class, 'youMayAlsoLike'])->name('youMayAlsoLike');
+    Route::get('home-page-ajax', [AjaxController::class, 'getHomePageAjax'])->name('getHomePageAjax');
 });

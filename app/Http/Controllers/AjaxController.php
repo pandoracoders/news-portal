@@ -13,4 +13,11 @@ class AjaxController extends Controller
             'data' => getYouMayAlsoLike($article),
         ]);
     }
+
+
+    public function getHomePageAjax(){
+        return response()->json([
+            'data' => getHomePageAjax(),
+        ]);
+    }
 }

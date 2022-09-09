@@ -51,6 +51,7 @@ class HomePageCache implements ShouldQueue
             $editor_choice = Article::activeAndPublish()
                 ->with(['category', 'writer'])
                 ->where('task_status', 'published')
+                ->whereNotIn('editor_choice', 1)
                 ->limit(config('constants.article_limit', 8))
                 ->whereNotIn('id', $ids)
                 ->get();
@@ -85,17 +86,16 @@ class HomePageCache implements ShouldQueue
 
                 $ids = array_merge($ids, $articles1->pluck('id')->toArray());
 
-                $articles2 = $category->articles()->with(["category", "writer"])
-                    ->where("task_status", "published")
+                $articles2 = $category
+                    ->articles()
+                    ->with(['category', 'writer'])
+                    ->where('task_status', 'published')
                     ->limit(2)
-                    ->whereNotIn("id", $ids)
+                    ->whereNotIn('id', $ids)
                     ->get();
-                $ids = array_merge($ids, $articles2->pluck("id")->toArray());
+                $ids = array_merge($ids, $articles2->pluck('id')->toArray());
 
-                $category_section[$category->slug]['articles'] = [
-                    $articles1,
-                    $articles2
-                ];
+                $category_section[$category->slug]['articles'] = [$articles1, $articles2];
                 if ($key == 0) {
                     $category_section[$category->slug]['second']['title'] = 'Editor Choice';
                     $category_section[$category->slug]['second']['articles'] = $editor_choice;
