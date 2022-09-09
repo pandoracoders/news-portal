@@ -1,15 +1,13 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-
-
-    <link rel="stylesheet" href="{{ asset('frontend/css/homepage.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/homepage.min.css') }}">
 @endpush
 
 
 
 @push('scripts')
-<script src="{{ asset('frontend') }}/js/splide.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
     <script>
         new Splide('.splide', {
             type: 'loop',
@@ -30,6 +28,50 @@
             }
         }).mount();
     </script>
+
+
+
+
+    <script></script>
+
+
+    <script>
+        const loadImage = () => {
+            if ('loading' in HTMLImageElement.prototype) {
+
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    img.src = img.dataset.src;
+                });
+
+            } else {
+                // Dynamically import the LazySizes library
+                const script = document.createElement('script');
+                script.src =
+                    'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js';
+                document.body.appendChild(script);
+            }
+        }
+
+        setTimeout(() => {
+            loadImage();
+            fetch("{{ route('ajax.getHomePageAjax') }}")
+                .then(response => response.json())
+                .then(({
+                    data
+                }) => {
+                    console.log(data)
+                    document.getElementById('more-category-section').innerHTML = data.category_section_html;
+                    document.getElementById('born-today').innerHTML = data.born_today;
+                    document.getElementById('died-today').innerHTML = data.died_today;
+
+                    loadImage();
+                });
+
+
+
+        }, 2000);
+    </script>
 @endpush
 
 
@@ -46,70 +88,15 @@
                 'section' => $section,
             ])
         @endforeach
-        @if (count($data['born_today']))
-            <section class="row outer-section">
-                <div class="heading mt-4 mb-4">
-                    <div class="category-segment">
-                        <span>Born Today</span>
-                    </div>
-                </div>
+        <div id="more-category-section">
+        </div>
 
-                @forelse ($data['born_today'] as $article)
-                    <div class="col-md-4">
-                        <figure class="textover">
-                            <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                                    class="image_img img-fluid">
-                            </a>
-                            <figcaption>
-                                <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                    {{ $article->title }}
-                                </a>
-                            </figcaption>
-                            <div class="image_overlay">
+        <section id="born-today">
+        </section>
+        <section id="died-today">
+        </section>
 
-                                <p class="image_description">
-                                    {{ $article->summary }}
-                                </p>
-                            </div>
-                        </figure>
-                    </div>
-                @empty
-                @endforelse
-            </section>
-        @endif
 
-        @if (count($data['died_today']))
-            <section class="row outer-section">
-                <div class="heading mt-4 mb-4">
-                    <div class="category-segment">
-                        <span>Died Today</span>
-                    </div>
-                </div>
-
-                @forelse ($data['died_today'] as $article)
-                    <div class="col-md-4">
-                        <figure class="textover">
-                            <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                <img src="{{ asset($article->image) }}" loading="lazy" alt="{{ $article->title }}"
-                                    class="image_img img-fluid">
-                            </a>
-                            <figcaption>
-                                <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                    {{ $article->title }}
-                                </a>
-                            </figcaption>
-                            <div class="image_overlay">
-                                <p class="image_description">
-                                    {{ $article->summary }}
-                                </p>
-                            </div>
-                        </figure>
-                    </div>
-                @empty
-                @endforelse
-            </section>
-        @endif
 
     </main>
 @endsection

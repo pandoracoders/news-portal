@@ -60,24 +60,13 @@
         </div>
         <div class="col-lg-4 sidebar-section mt-3">
             <div class="sidebar-section-wrap">
-                <div class="heading">
-                    <div class="category-segment">
-                        <span>You May Also Like</span>
-                    </div>
-                </div>
-                @include('frontend.pages.article.components.sidebar')
+
             </div>
         </div>
         <div class="col-md-12">
             @include('frontend.pages.article.components.tags')
         </div>
     </div>
-    <div class="similar-post-section">
-        <div class="heading mt-4 mb-4">
-            <div class="category-segment">
-                <span>More </span>
-            </div>
-        </div>
-        @include('frontend.pages.article.components.more')
+    <div class="similar-post-section ">
     </div>
 </main>

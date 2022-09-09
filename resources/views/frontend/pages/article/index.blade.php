@@ -3,7 +3,7 @@
     'meta_description' => $article->seo->meta_description,
     'meta_keyword' => $article->seo->meta_keyword,
     'image' => $article->image,
-    'type' => 'article'
+    'type' => 'article',
 ])
 
 
@@ -13,8 +13,8 @@
 
 @push('head')
     <meta name="article:author" content="{{ $article->author->alias_name }}">
-    <meta name="article:published_time" content="{{$article->published_at}}">
-    <meta property="og:article:published_time" content="{{$article->published_at}}">
+    <meta name="article:published_time" content="{{ $article->published_at }}">
+    <meta property="og:article:published_time" content="{{ $article->published_at }}">
 @endpush
 
 @section('content')
@@ -70,6 +70,28 @@
                 contentSection.innerHTML += `<li class="head-6"><a href="#${slug}">${headingList[i].innerText}</a></li>`
                 headingList[i].id = `${slug}`
             }
+        }
+    </script>
+
+    <script>
+        setTimeout(() => {
+            fetch("{{ route('ajax.youMayAlsoLike', $article->id) }}")
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    document.querySelector('.sidebar-section-wrap').innerHTML = res.data.youMayAlsoLike;
+                    document.querySelector('.similar-post-section').innerHTML = res.data.more;
+                    // document.querySelector('.view-count').innerHTML = res.value;
+                })
+        }, 5000);
+    </script>
+
+
+    <script>
+        if (window) {
+
+            window.ajax_url = "{{ route('categoryArticles', $article->category->slug) }}";
+            window.col_lg = 3;
         }
     </script>
 @endpush

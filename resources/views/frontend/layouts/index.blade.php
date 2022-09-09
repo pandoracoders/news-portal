@@ -83,11 +83,17 @@
     </script>
     <script>
         if (window.ajax_url) {
-            const scrollContent = document.getElementById('scroll-content');
+            const col_lg = window.col_lg || "4";
+            const col_md = col_lg == "3" ? "4" : "6";
+
+
+            console.log(col_lg, col_md);
+
             var page = 1;
             var loading = 0;
             var extra = 500;
             window.onscroll = function() {
+                const scrollContent = document.getElementById('scroll-content');
                 if (window.innerHeight + window.scrollY > scrollContent.offsetHeight - extra && loading === 0) {
                     // extra = 0;
                     loading = 1;
@@ -110,7 +116,7 @@
                                 var html = '';
 
                                 for (let index = 0; index < d.length; index++) {
-                                    html += '<div class="col-md-6 col-lg-4 mb-1 single-post">';
+                                    html += `<div class="col-md-${col_md} col-lg-${col_lg} mb-1 single-post">`;
                                     html +=
                                         '<div class="category-post">';
                                     html += '<div class="image">';
