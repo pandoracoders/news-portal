@@ -17,7 +17,6 @@
                                     {{ (isset($article) ? 'Update' : 'Create') . ' Post' }}</h6>
                                 <hr>
 
-
                                 <div class="col-12 mb-2 ">
                                     <label class="form-label">Title *</label>
                                     <input type="text" {{ isset($article) ? 'readonly=readonly' : '' }}
@@ -30,10 +29,6 @@
                                     @endif
                                 </div>
 
-
-
-
-
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Body</label>
                                     <textarea name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('body') }}</textarea>
@@ -41,7 +36,7 @@
 
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Summary</label>
-                                    <textarea name="summary" class="form-control" rows="5">{{ isset($article) ? $article->summary : old('summary') }}</textarea>
+                                    <textarea data-validation="required|min:100|max:255" name="summary" class="form-control" rows="5">{{ isset($article) ? $article->summary : old('summary') }}</textarea>
                                 </div>
 
 
@@ -69,10 +64,6 @@
                         <div class="border p-3 rounded mb-2">
                             <h6 class="mb-0 text-uppercase">Action</h6>
                             <hr>
-
-
-
-
                             <a data-bs-toggle="modal" href="#more-article" class="back-to-top"
                                 style="display: inline; bottom:180px; background-color: #4e775d">
                                 <i class="bi bi-plus"></i>
@@ -94,12 +85,12 @@
                                 <small style="font-size:14px">Save </small>
                             </a>
 
-                            <button type="submit" class="btn btn-primary btn-block" id="save">
+                            <button type="submit" class="btn btn-primary btn-block form-submit" id="save">
                                 {{ isset($article) ? 'Update' : 'Save' }}
                             </button>
 
                             @if (auth()->user()->role->slug == 'writer')
-                                <button type="button" class="btn btn-success btn-block" id="submit">
+                                <button type="button" class="btn btn-success btn-block form-submit" id="submit">
                                     Submit
                                 </button>
                             @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
@@ -345,10 +336,6 @@
         </div>
     @endif
 
-
-
-
-
 </form>
 
 @push('styles')
@@ -371,7 +358,9 @@
 
             $(document).on("click", "#submit", function() {
                 $("#task_status").val('submitted');
-                $("#save").trigger("click");
+                // check if required validation
+                if (window.formValidation($(this)))
+                    $("#save").trigger("click");
             })
 
             $(document).on("click", "#publish", function() {

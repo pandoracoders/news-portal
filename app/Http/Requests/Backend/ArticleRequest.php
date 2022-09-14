@@ -21,7 +21,7 @@ class ArticleRequest extends FormRequest
             'slug' => 'required|string|max:255|unique:articles,slug,' . $this->route("article")->id,
             'summary' => 'required|string|max:255',
             'body' => 'required|string',
-            'image' => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            "image" => "required_without:id|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'category_id' => 'required|exists:categories,id',
         ];
 
@@ -30,7 +30,7 @@ class ArticleRequest extends FormRequest
             'slug' => 'nullable|string|max:255|unique:articles,slug,' . $this->route("article")->id,
             'summary' => 'nullable|string|max:255',
             'body' => 'nullable|string',
-            'image' => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            // 'image' => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'category_id' => 'nullable|exists:categories,id',
             'writer_id' => 'nullable|exists:users,id',
             'editor_id' => 'nullable|exists:users,id',
@@ -91,6 +91,7 @@ class ArticleRequest extends FormRequest
 
         $this->merge(
             [
+                "id" => $this->route("article")?->id,
                 "tables" => $tables,
                 "tags" => $tags,
                 "category_id" => $category->id,

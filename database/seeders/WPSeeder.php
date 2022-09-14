@@ -32,6 +32,7 @@ class WPSeeder extends Seeder
                 "password" => bcrypt("@pandora@"),
                 "alias_name" => $post["author"]["display_name"]
             ]);
+            
             $author->permission()->updateOrCreate(["user_id" => $author->id], [
                 "role_id" => Role::where("title", "Writer")->first()->id,
                 "permissions" => config("constants.writer_permissions"),

@@ -17,7 +17,7 @@
             if ('loading' in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll('img');
                 images.forEach(img => {
-                    img.src = img.dataset.src;
+                    mg.dataset.src && (img.src = img.dataset.src);
                 });
 
             } else {

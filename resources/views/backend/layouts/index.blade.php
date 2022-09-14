@@ -97,6 +97,78 @@
     <!-- Main JS-->
     <script src="{{ asset('backend') }}/assets/js/main.js"></script>
 
+
+    <script>
+        const getInvalidFeedback = (error) => {
+            return `<div class="invalid-feedback">${error}</div>`;
+        }
+
+        const removeInvalidFeedback = (el) => {
+            $(el).removeClass('is-invalid');
+            $(el).next('.invalid-feedback').remove();
+        }
+
+        const formValidation = (btn) => {
+            var isValidForm = true;
+            const form = $(btn).closest('form');
+            // get all  form data-validation
+            const validations = form.find('[data-validation]');
+            if (validations.length) {
+                validations.each(function() {
+                    removeInvalidFeedback(this);
+                    validationArray = $(this).attr('data-validation').split('|');
+                    var message = '';
+                    validationArray.forEach(function(item) {
+                        if (message == '') {
+                            var name = $(this).attr('name');
+                            // ucword name
+                            name = name.charAt(0).toUpperCase() + name.slice(1);
+                            const validation = item.split(':');
+                            const validationName = validation[0];
+
+                            switch (validationName) {
+                                case 'required':
+                                    if ($(this).val() == '') {
+                                        console.log('null');
+                                        $(this).addClass('is-invalid');
+                                        message =
+                                            `${name} is required.`;
+                                    }
+                                    break;
+                                case 'min':
+                                    if ($(this).val().length < validation[1]) {
+                                        $(this).addClass('is-invalid');
+                                        message =
+                                            `${name} must be at least ${validation[1]} characters.`
+                                    }
+                                    break;
+                                case 'max':
+                                    if ($(this).val().length > validation[1]) {
+                                        $(this).addClass('is-invalid');
+                                        message =
+                                            `${name} must be at most ${validation[1]} characters.`;
+                                    }
+                                    break;
+                                default:
+
+                                    break;
+                            }
+                            if (message != '') {
+                                isValidForm = false;
+                                $(this).after(getInvalidFeedback(message));
+                            }
+                        }
+                    }.bind(this));
+                });
+            }
+
+            return isValidForm;
+        }
+        if (window) {
+            window.formValidation = formValidation;
+        }
+    </script>
+
     @stack('scripts')
 
 
