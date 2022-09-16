@@ -4,7 +4,7 @@
             <img src="{{ asset('backend') }}/assets/images/logo-icon-2.png" class="logo-icon" alt="logo icon">
         </div>
         <div>
-            <h4 class="logo-text">{{getSettingValue('website_title')}}</h4>
+            <img style="width: 160px; padding: 10px;" src="{{ asset(getSettingValue('logo'))}} " alt="">
         </div>
         <div class="toggle-icon ms-auto">
             <ion-icon name="menu-sharp"></ion-icon>
@@ -46,7 +46,7 @@
             <li>
                 <a href="{{ route('backend.page-view') }}">
                     <div class="parent-icon">
-                        <i class="bi bi-file-earmark-break"></i>
+                        <i class="bi bi-files"></i>
                     </div>
                     <div class="menu-title">Page</div>
                 </a>
@@ -65,7 +65,7 @@
             <li>
                 <a href="{{ route('backend.setting-clear_cache') }}">
                     <div class="parent-icon">
-                        <i class="bi bi-gear"></i>
+                        <i class="bi bi-brush-fill"></i>
                     </div>
                     <div class="menu-title">Clear Cache</div>
                 </a>

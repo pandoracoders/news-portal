@@ -1,6 +1,7 @@
 <?php
     use App\Models\Backend\Article;
     use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
     if (!function_exists('getImageMeta')) {
         function getImageMeta($url)
@@ -8,8 +9,13 @@
             if(!$url){
                 return null;
             }
+
+            if(!Storage::disk("public_folder")->exists($url)){
+                return null;
+            }
+
             $url = asset($url);
-            $image = file_get_contents($url);
+            $image = file_get_contents($url) ;
             [$width, $height] = getimagesizefromstring($image);
             return [
                 '@type' => 'ImageObject',

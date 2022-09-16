@@ -153,11 +153,15 @@ class User extends Authenticatable
                     ->subWeek()
                     ->endOfWeek(),
             );
-        if ($this->isEditor) {
-            $data = $data->where(function ($q) {
-                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
-            });
-        }
+            if ($this->isEditor) {
+                $data = $data->where(function ($q) {
+                    $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+                });
+                // dd($data->get());
+            } else {
+                $data = $data->where('writer_id', $this->id);
+            }
+
         return $data->count();
     }
 
@@ -168,7 +172,11 @@ class User extends Authenticatable
             $data = $data->where(function ($q) {
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
             });
+            // dd($data->get());
+        } else {
+            $data = $data->where('writer_id', $this->id);
         }
+
         return $data->count();
     }
 
@@ -189,11 +197,15 @@ class User extends Authenticatable
                     ->subMonth()
                     ->endOfMonth(),
             );
-        if ($this->isEditor) {
-            $data = $data->where(function ($q) {
-                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
-            });
-        }
+            if ($this->isEditor) {
+                $data = $data->where(function ($q) {
+                    $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+                });
+                // dd($data->get());
+            } else {
+                $data = $data->where('writer_id', $this->id);
+            }
+
         return $data->count();
     }
 }

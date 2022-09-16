@@ -35,7 +35,7 @@
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">All Posts from :
+                <h1 class="text-capitalize">All Posts from
                     <span class="colored">
                         {{ $author->alias_name }}
                     </span>

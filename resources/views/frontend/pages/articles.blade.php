@@ -17,9 +17,18 @@
                     </div>
 
                     <div class="meta">
-                        <p class="article-date"> {{ dateFormat($article->published_at) }} | </p><p class="article-author"><a href="{{ route('authorArticle', $article->writer->slug) }}">
-                            {{ $article->writer->alias_name }} 
-                        </a></p>
+                        <p class="article-date"> {{ dateFormat($article->published_at) }} | </p>
+                        <p class="article-author">
+                            @isset($author)
+                                <a href="{{ route('singleArticle', $article->category->slug) }}">
+                                    {{ $article->category->title }}
+                                </a>
+                            @else
+                                <a href="{{ route('authorArticle', $article->writer->slug) }}">
+                                    {{ $article->writer->alias_name }}
+                                </a>
+                            @endisset
+                        </p>
                     </div>
                 </div>
             </div>
