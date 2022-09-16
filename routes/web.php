@@ -22,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('sitemap.xml', [SitemapController::class, 'index']);
+// Route::get('sitemap.xml', [SitemapController::class, 'index']);
+
+
+Route::get("/search", [FrontendController::class, "search"])->name("search");
 
 Route::redirect('/home', '/', 301);
 
@@ -51,7 +54,6 @@ Route::get('/news/search/{field}/{value}', [FrontendController::class, 'searchBy
 Route::redirect('/backend', 'dashboard', 301)->middleware('auth');
 
 // ajax route
-
 Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
     Route::get('article/you-may-also-like/{article}', [AjaxController::class, 'youMayAlsoLike'])->name('youMayAlsoLike');
     Route::get('home-page-ajax', [AjaxController::class, 'getHomePageAjax'])->name('getHomePageAjax');

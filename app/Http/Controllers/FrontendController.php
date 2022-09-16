@@ -9,6 +9,7 @@ use App\Models\Backend\Category;
 use App\Models\Backend\Tag;
 use App\Models\Backend\User;
 use DOMDocument;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -17,17 +18,18 @@ class FrontendController extends Controller
 
     public function index()
     {
-
-
-
-
-
-
-
-
-
         return view("frontend.pages.home.index", [
             "data" => getHomePageCache(),
+        ]);
+    }
+
+
+    public function search(Request $request){
+        return view("frontend.pages.search.index", [
+            "article" => Article::activeAndPublish()->where("title", "like", "%" . $request->query . "%")
+            ->orWhere("body", "like", "%" . $request->query . "%")
+            ->limit(8)
+            ->get(),
         ]);
     }
 

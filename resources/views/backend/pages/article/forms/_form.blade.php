@@ -16,7 +16,6 @@
                                 <h6 class="mb-0 text-uppercase">
                                     {{ (isset($article) ? 'Update' : 'Create') . ' Post' }}</h6>
                                 <hr>
-
                                 <div class="col-12 mb-2 ">
                                     <label class="form-label">Title *</label>
                                     <input type="text" {{ isset($article) ? 'readonly=readonly' : '' }}
@@ -49,11 +48,6 @@
                             'meta' => isset($article) ? $article->seo : null,
                         ])
                     </div>
-
-
-
-
-
                 </div>
             </div>
         </div>

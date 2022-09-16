@@ -18,7 +18,7 @@ class Article extends Model
 {
     use HasFactory, SeoTrait;
 
-    protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables', "is_featured","editor_choice"];
+    protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables', "is_featured", "editor_choice"];
 
     protected $casts = [
         'tables' => 'array',
@@ -52,7 +52,8 @@ class Article extends Model
         return $this->belongsToMany(Tag::class, ArticleTag::class);
     }
 
-    public function staticPost(){
+    public function staticPost()
+    {
         return $this->hasOne(StaticPost::class);
     }
 
@@ -135,20 +136,21 @@ class Article extends Model
         static::created(function ($model) {
             HomePageCache::dispatchAfterResponse();
             OrgSchema::dispatchAfterResponse($model);
-            if($model->task_status == "published"){
-                $model->staticPost()->updateOrCreate([
-                    "slug" => $model->slug,
-                    "body" => view("frontend.pages.article.components.content", ["article"=> $model])->render()
-                ]);
+            if ($model->task_status == "published") {
+                OrgSchema::dispatch($model);
             }
         });
         static::updated(function ($model) {
             HomePageCache::dispatchAfterResponse();
             OrgSchema::dispatchAfterResponse($model);
+            if ($model->task_status == "published") {
+                OrgSchema::dispatch($model);
+            }
         });
     }
 
-    public function scopeActiveAndPublish(Builder $q){
-        return $q->where('task_status','published')->where('status',1)->orderBy('published_at','desc');
+    public function scopeActiveAndPublish(Builder $q)
+    {
+        return $q->where('task_status', 'published')->where('status', 1)->orderBy('published_at', 'desc');
     }
 }
