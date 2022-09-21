@@ -6,9 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="{{ asset(getSettingValue('favicon')) }}" sizes="64x64">
     <!-- loader-->
+
     <link href="{{ asset('backend') }}/assets/css/pace.min.css" rel="stylesheet" />
     <script src="{{ asset('backend') }}/assets/js/pace.min.js"></script>
+
 
 
     @stack('styles')

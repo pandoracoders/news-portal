@@ -13,11 +13,11 @@
 
 
     <script>
-        const loadImage = () => {
+        const loadImages = () => {
             if ('loading' in HTMLImageElement.prototype) {
                 const images = document.querySelectorAll('img');
                 images.forEach(img => {
-                    mg.dataset.src && (img.src = img.dataset.src);
+                    img.dataset.src && (img.src = img.dataset.src);
                 });
 
             } else {
@@ -52,7 +52,7 @@
                 }).mount();
 
             }
-            loadImage();
+            loadImages();
         }, 5000)
 
         setTimeout(() => {
@@ -67,7 +67,7 @@
                     document.getElementById('born-today').innerHTML = data.born_today;
                     document.getElementById('died-today').innerHTML = data.died_today;
 
-                    loadImage();
+                    loadImages();
                 });
 
 

@@ -120,7 +120,7 @@ if (!function_exists('getArticleSchema')) {
                 'publisher' => getOrganizationSchema(true),
                 'description' => $article->summary,
                 'text' => strip_tags($article->body),
-                'keywords' => implode(', ', $article->tags->pluck('title')->toArray()) . ', ' . $article->category->title . ', ' . $article->seo->meta_keywords,
+                'keywords' => implode(', ', $article->tags->pluck('title')->toArray()) . ', ' . $article->category->title . ', ' . $article->seo?->meta_keywords,
             ];
         });
         return returnSchemaScriptTag(json_encode($schema));
