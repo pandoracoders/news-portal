@@ -139,35 +139,36 @@ class User extends Authenticatable
     public function getLastWeekStat($task_status)
     {
         $data = Article::where('task_status', $task_status)
-            ->where(
+            ->whereBetween(
                 'created_at',
-                '>=',
-                carbon()
-                    ->subWeek()
-                    ->startOfWeek(),
-            )
-            ->where(
-                'created_at',
-                '<=',
-                carbon()
-                    ->subWeek()
-                    ->endOfWeek(),
+
+                [
+                    carbon()
+                        ->subWeek()
+                        ->startOfWeek(),
+
+                    carbon()
+                        ->subWeek()
+                        ->endOfWeek()
+                ]
             );
-            if ($this->isEditor) {
-                $data = $data->where(function ($q) {
-                    $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
-                });
-                // dd($data->get());
-            } else {
-                $data = $data->where('writer_id', $this->id);
-            }
+
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+            // dd($data->get());
+        } else {
+            $data = $data->where('writer_id', $this->id);
+        }
 
         return $data->count();
     }
 
     public function getThisMonthStat($task_status)
     {
-        $data = Article::where('task_status', $task_status)->where('created_at', '>=', carbon()->startOfMonth());
+        $data = Article::where('task_status', $task_status)
+            ->where('created_at', '>=', carbon()->startOfMonth());
         if ($this->isEditor) {
             $data = $data->where(function ($q) {
                 $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
@@ -183,28 +184,26 @@ class User extends Authenticatable
     public function getLastMonthStat($task_status)
     {
         $data = Article::where('task_status', $task_status)
-            ->where(
+            ->whereBetween(
                 'created_at',
-                '>=',
-                carbon()
-                    ->subMonth()
-                    ->startOfMonth(),
-            )
-            ->where(
-                'created_at',
-                '<=',
-                carbon()
-                    ->subMonth()
-                    ->endOfMonth(),
+                [
+                    carbon()
+                        ->subMonth()
+                        ->startOfMonth(),
+                    carbon()
+                        ->subMonth()
+                        ->endOfMonth(),
+                ]
             );
-            if ($this->isEditor) {
-                $data = $data->where(function ($q) {
-                    $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
-                });
-                // dd($data->get());
-            } else {
-                $data = $data->where('writer_id', $this->id);
-            }
+
+        if ($this->isEditor) {
+            $data = $data->where(function ($q) {
+                $q->where('writer_id', $this->id)->orWhere('editor_id', $this->id);
+            });
+            // dd($data->get());
+        } else {
+            $data = $data->where('writer_id', $this->id);
+        }
 
         return $data->count();
     }

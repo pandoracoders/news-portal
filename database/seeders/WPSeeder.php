@@ -30,9 +30,10 @@ class WPSeeder extends Seeder
                 "name" => $post["author"]["display_name"],
                 "email" => $post["author"]["user_email"],
                 "password" => bcrypt("@pandora@"),
-                "alias_name" => $post["author"]["display_name"]
+                "alias_name" => $post["author"]["display_name"],
+
             ]);
-            
+
             $author->permission()->updateOrCreate(["user_id" => $author->id], [
                 "role_id" => Role::where("title", "Writer")->first()->id,
                 "permissions" => config("constants.writer_permissions"),
@@ -49,7 +50,8 @@ class WPSeeder extends Seeder
                 'editor_id' => 1,
                 "image" => replaceOrigin($post["feature_image"]),
                 "body" => wrapByPTag(convertCaption(replaceOrigin($post["body"]))),
-                "task_status" => $post["task_status"] == "publish" ? "published" : "submitted"
+                "task_status" => $post["task_status"] == "publish" ? "published" : "submitted",
+                'created_at' => $post["published_at"],
             ]));
 
             $article_data = collect($article_data)->except(["tags", "category", "feature_image", "meta_data", "author"])->toArray();
