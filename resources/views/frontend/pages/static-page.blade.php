@@ -1,7 +1,7 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.css" type="text/css">
+    <link rel="stylesheet" href="{{ asset('') }}frontend/css/static-page.min.css" type="text/css">
 @endpush
 
 
@@ -16,7 +16,7 @@
                                 <i class="fa fa-solid fa-home"></i>
                             </a>
                         </li>
-
+                        ⇢
                         <li class="breadcrumb active">
                             <span class="text-capitalize">
                                 {{ unSlug($page->key) }}
@@ -25,11 +25,7 @@
                     </ul>
                 </div>
 
-                <div class="social-share">
-                    <a href="#"><i class="fa-brands fa-facebook facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-pinterest pinterest"></i></a>
-                </div>
+
                 <div class="title">
                     <h1> {{ unSlug($page->key) }} </h1>
 

@@ -31,7 +31,7 @@
         <div class="row copyright-section mt-3">
             <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                 <div class="copyright-text">
-                    <p>&copy; Copyright {{ date('Y') }} <a>Pandora Group of Companies</a>. All Right Reserved</p>
+                    <p>&copy; Copyright {{ date('Y') }} <a href="/">{{ getSettingValue('website_title')}}</a>. All Right Reserved</p>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">

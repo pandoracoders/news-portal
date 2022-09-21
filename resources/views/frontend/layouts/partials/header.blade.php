@@ -65,13 +65,13 @@
                 <div class="sub">
                     <ul class="sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">About Us</a>
+                            <a href="/about-us" class="nav-link">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Contact</a>
+                            <a href="/contact-us" class="nav-link">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Privacy Policy</a>
+                            <a href="/privacy-policy" class="nav-link">Privacy Policy</a>
                         </li>
                         {{-- <li class="nav-item">
                             <a href="#" class="nav-link">Terms Conditions</a>
