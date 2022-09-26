@@ -99,7 +99,7 @@ button{text-transform:none;}
 ::selection{background:rgb(1, 40, 53);color:#d2d2d4;}
 body{font-family:'Lora', serif;}
 .bc{display:-webkit-box;text-overflow:ellipsis;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin:1rem 0rem 0rem 1rem;}
-.breadcrumb-container{text-transform:uppercase;display:inline;margin:10px 0px;padding:0;list-style:none;}
+.breadcrumb-container{text-transform:capitalize;display:inline;margin:10px 0px;padding:0;list-style:none;}
 .breadcrumb-container li{display:inline;font-size:15px;line-height:30px;font-weight:600;color:#767a82;}
 .breadcrumb-container li a{font-weight:800;color:#3535b1;position:relative;}
 .breadcrumb-container li a:hover{color:#00a6ff;}

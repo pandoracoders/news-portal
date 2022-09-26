@@ -1,3 +1,7 @@
+@php
+$factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-day', 'death-cause', 'nationality', 'ethnicity', 'father', 'mother', 'siblings', 'profession', 'net-worth', 'height', 'weight', 'body-measurement', 'gender-identity', 'marital-status', 'spouse', 'children'];
+@endphp
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.min.css" type="text/css">
 @endpush
@@ -56,13 +60,32 @@
                                             </div>
                                         </div>
                                         <table class="table facts-table">
-
+                                            @php
+                                                // dd($table)
+                                            @endphp
                                             <tbody>
-                                                @foreach ($table as $tr)
-                                                    <tr>
-                                                        <td class="fact-title">{!! $tr['title'] !!}</td>
-                                                        <td class="fact-detail">{!! $tr['html'] !!}</td>
-                                                    </tr>
+                                                @foreach ($factsOrder as $tr)
+                                                    @if (array_key_exists($tr, $table))
+                                                        @if ($tr == 'birth-day')
+                                                            <tr>
+                                                                <td class="fact-title">
+                                                                    Birthday
+                                                                </td>
+                                                                <td class="fact-detail">
+                                                                    {!! $table['birth-month']['html'] !!} {!! $table['birth-day']['html'] !!}, {!! $table['birth-year']['html'] !!}
+                                                                </td>
+                                                            </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td class="fact-title">
+                                                                    {!! $table[$tr]['title'] !!}
+                                                                </td>
+                                                                <td class="fact-detail">
+                                                                    {!! $table[$tr]['html'] !!}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

@@ -44,3 +44,16 @@
         </div>
     </div>
 </footer>
+
+<script>
+    var searchIcon = document.querySelector('#search-label');
+    var overlay = document.querySelector('#search-container')
+    var closeBtn = document.querySelector('.close-search')
+    searchIcon.addEventListener('click', function(){
+        overlay.style.display = "block";
+    })
+    closeBtn.addEventListener('click', function(){
+        overlay.style.display = "none";
+    })
+
+</script>

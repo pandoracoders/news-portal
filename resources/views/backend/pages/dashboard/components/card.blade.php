@@ -3,7 +3,7 @@
         <div class="card radius-10">
             <div class="card-body">
                 <div class="mx-auto widget-icon bg-light-dark text-dark">
-                    <i class="bi bi-basket2-fill"></i>
+                    <i class="bi bi-journals"></i>
                 </div>
                 <div class="text-center mt-3">
                     <h3 class="text-dark mb-1">{{ $todays_posts }}</h3>
@@ -16,7 +16,7 @@
         <div class="card radius-10">
             <div class="card-body">
                 <div class="mx-auto widget-icon bg-light-dark text-dark">
-                    <i class="bi bi-wallet-fill"></i>
+                    <i class="bi bi-wallet2"></i>
                 </div>
                 <div class="text-center mt-3">
 
@@ -32,7 +32,7 @@
         <div class="card radius-10">
             <div class="card-body">
                 <div class="mx-auto widget-icon bg-light-dark text-dark">
-                    <i class="bi bi-people-fill"></i>
+                    <i class="bi bi-window-stack"></i>
                 </div>
                 <div class="text-center mt-3">
                     <h3 class="text-dark mb-1">{{ $total_posts }}</h3>
@@ -45,7 +45,7 @@
         <div class="card radius-10">
             <div class="card-body">
                 <div class="mx-auto widget-icon bg-light-dark text-dark">
-                    <i class="bi bi-chat-text-fill"></i>
+                    <i class="bi bi-person"></i>
                 </div>
                 <div class="text-center mt-3">
                     <h3 class="text-dark mb-1">{{ $total_writers }}</h3>
@@ -58,7 +58,7 @@
         <div class="card radius-10">
             <div class="card-body">
                 <div class="mx-auto widget-icon bg-light-dark text-dark">
-                    <i class="bi bi-bar-chart-fill"></i>
+                    <i class="bi bi-person-square"></i>
                 </div>
                 <div class="text-center mt-3">
                     <h3 class="text-dark mb-1">{{ $total_editors }}</h3>

@@ -73,7 +73,7 @@
                                         <div class="btn-group">
                                             @if (hasPermission('backend.tag-edit'))
                                                 <a href="{{ route('backend.tag-edit', $tag->id) }}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                    class="btn btn-warning btn-sm mx-2">Edit</a>
                                             @endif
                                             @if (hasPermission('backend.tag-delete'))
                                                 <a href="{{ route('backend.tag-delete', $tag->id) }}"

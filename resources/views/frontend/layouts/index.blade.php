@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {!! getSettingValue('google_analytics_code') !!}
     <meta charset="UTF-8">
@@ -15,8 +16,7 @@
         body a {
             color: #111;
         }
-    </style>
-    <style>
+
         p {
             text-align: justify !important;
         }
@@ -26,8 +26,55 @@
                 text-align: left !important;
             }
         }
+
+        #search-container {
+            position: fixed;
+            /* Sit on top of the page content */
+            display: none;
+            /* Hidden by default */
+            width: 100%;
+            /* Full width (cover the whole page) */
+            height: 100%;
+            /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(75, 73, 73);
+            /* Black background with opacity */
+            z-index: 20;
+            /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer;
+            /* Add a pointer on hover */
+        }
+
+        #search-box {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            font-size: 50px;
+            color: white;
+            cursor: auto;
+        }
+        .gsc-control-cse{
+            /* background-color: transparent !important; */
+            border:none !important;
+        }
+        .gsc-search-button-v2 {
+            font-size: 15px !important;
+            margin-left: 2px !important;
+        }
+        .close-search{
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            font-weight: 400;
+            font-size: 27px;
+        }
     </style>
 </head>
+
 <body>
     @include('frontend.layouts.partials.header')
     <div class="sidebar-overlay"></div>

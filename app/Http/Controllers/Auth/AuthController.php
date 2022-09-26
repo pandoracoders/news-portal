@@ -38,7 +38,7 @@ class AuthController extends Controller
             }
             return redirect()->intended($this->redirectTo);
         }
-        return redirect()->route("login")->withErrors(["email" => "Invalid email or password"]);
+        return back()->withErrors(["email" => "Invalid email or password"]);
     }
 
 

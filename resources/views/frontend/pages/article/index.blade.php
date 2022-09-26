@@ -46,7 +46,7 @@
         });
     </script>
     <script>
-        var headingList = document.querySelector('.content-detail').querySelectorAll("h2,h3,h4,h5,h6");
+        var headingList = document.querySelector('.content-detail').querySelectorAll("h2");
         var contentSection = document.querySelector('.list');
 
         // Slugify function
@@ -91,7 +91,6 @@
             fetch("{{ route('ajax.youMayAlsoLike', $article->id) }}")
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res)
                     document.querySelector('.sidebar-section-wrap').innerHTML = res.data.youMayAlsoLike;
                     document.querySelector('.similar-post-section').innerHTML = res.data.more;
                     // document.querySelector('.view-count').innerHTML = res.value;

@@ -74,7 +74,7 @@
                                         <div class="btn-group">
                                             @if (hasPermission('backend.category-edit'))
                                                 <a href="{{ route('backend.category-edit', $category->id) }}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                    class="btn btn-warning btn-sm mx-2">Edit</a>
                                             @endif
                                             @if (hasPermission('backend.category-delete'))
                                                 <a href="{{ route('backend.category-delete', $category->id) }}"

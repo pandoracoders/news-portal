@@ -58,26 +58,18 @@
                         <div class="border p-3 rounded mb-2">
                             <h6 class="mb-0 text-uppercase">Action</h6>
                             <hr>
-                            <a data-bs-toggle="modal" href="#more-article" class="back-to-top"
-                                style="display: inline; bottom:180px; background-color: #4e775d">
-                                <i class="bi bi-plus"></i>
-                            </a>
+
 
                             @if ($article->discussions)
                                 <a data-bs-toggle="modal" href="#discussion-model" class="back-to-top"
-                                    style="display: inline; bottom:120px; background-color: #44607d">
+                                    style="display: inline; bottom:120px; background-color: #de001e">
                                     <i class="bi bi-chat-dots"></i>
                                 </a>
                             @endif
 
-                            <a data-bs-toggle="modal" href="#linkable-article" class="back-to-top"
-                                style="display: inline; bottom:80px; background-color: #52777f">
-                                <i class="bi bi-link"></i>
-                            </a>
-
-                            <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
+                            {{-- <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
                                 <small style="font-size:14px">Save </small>
-                            </a>
+                            </a> --}}
 
                             <button type="submit" class="btn btn-primary btn-block form-submit" id="save">
                                 {{ isset($article) ? 'Update' : 'Save' }}
@@ -160,10 +152,20 @@
                     </select>
                 </div>
                 <div class="col-12 mb-2 mt-2">
-                    <label style="display:block;" class="form-label">Facts</label>
-                    <button type="button" data-target=".bd-example-modal-lg" data-bs-toggle="modal" href="#facts-modal" class="btn btn-md btn-secondary col-md-4">
-                                       Add Facts
-                                    </button>
+                    <label style="display:block;" class="form-label">Features</label>
+                    <button type="button" data-target=".bd-example-modal-lg" data-bs-toggle="modal"
+                        href="#facts-modal" class="btn btn-md btn-secondary col-md-4">
+                        Add Facts
+                    </button>
+
+
+                    <a data-bs-toggle="modal" href="#more-article" class="btn btn-md btn-primary">
+                        Read More
+                    </a>
+
+                    <a data-bs-toggle="modal" href="#linkable-article" class="btn btn-md btn-secondary">
+                        Find Links
+                    </a>
                 </div>
 
             </div>
@@ -290,34 +292,47 @@
 
 
     @if ($article->discussions)
-        <div class="modal fade" id="discussion-model" tabindex="-1" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="discussion-model" tabindex="-1"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-header">
-                    <h5 class="modal-title">Message</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Messages</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mx-auto">
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <div class="border p-3 rounded">
+                                        {!! '<p>' . implode('</p> <hr/> <p>', $article->discussions) . '</p>' !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            aria-label="Close">Close</button>
+                    </div>
 
-                    {!! '<p>' . implode('</p> <hr/> <p>', $article->discussions) . '</p>' !!}
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>
         </div>
     @endif
 
     {{-- Quick Facts Modal --}}
-    <div class="modal fade bd-example-modal-lg" style="margin-left: -200px;" id="facts-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog" >
+    <div class="modal fade bd-example-modal-lg" style="margin-left: -200px;" id="facts-modal" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content" style="width:1000px;">
                 <div class="modal-header">
                     <h5 class="modal-title">Quick Facts</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body">
                     <div class="mx-auto">
                         <div class="card mb-2">
                             <div class="card-body">
@@ -328,18 +343,16 @@
 
                                     @foreach (getArticleTables($article) ?? [] as $key => $table)
                                         <div class="mb-2">
-                                            <h3 class="text-center"> {{ $key }} </h3>
-                                            <hr>
-
                                             <div class="row">
                                                 @foreach ($table as $field)
-                                                <div class="form-group mb-1 col-md-6">
-                                                    <label for="">{{ $field['title'] }}</label>
-                                                    <input type="{{ $field['type'] ?? 'text' }}" class="form-control"
-                                                        name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
-                                                        value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
-                                                </div>
-                                            @endforeach
+                                                    <div class="form-group mb-1 col-md-6">
+                                                        <label for="">{{ $field['title'] }}</label>
+                                                        <input type="{{ $field['type'] ?? 'text' }}"
+                                                            class="form-control"
+                                                            name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
+                                                            value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     @endforeach
@@ -349,9 +362,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a href="javaScript:;" class="btn btn-md btn-success save-post" style="display: inline;">
+                        Save
+                    </a>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                         aria-label="Close">Close</button>
                 </div>
+
+
             </div>
         </div>
     </div>

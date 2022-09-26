@@ -17,7 +17,7 @@
             </div>
 
             <a href="{{ url('/') }}" class="navbar-brand d-lg">
-               <img src=" {{ asset(getSettingValue('logo')) }}" height="50" alt="">
+               <img src=" {{ asset(getSettingValue('logo')) }}" height="45" alt="">
             </a>
 
             @php
@@ -96,7 +96,21 @@
 
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
+                <div id="search-container">
+                    <script async src="https://cse.google.com/cse.js?cx=d615d410296b9481a">
+                    </script>
+                        <p class="close-search">X</p>
+                    <div id="search-box">
+                        <gcse:search enablehistory="false"></gcse:search>
+                    </div>
+                </div>
             </div>
+
         </div>
     </nav>
 </header>
+{{--
+     <div class="search-container" style="">
+
+                </div>
+     --}}
