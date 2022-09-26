@@ -49,15 +49,15 @@ if (!function_exists('getYouMayAlsoLike')) {
         $more .= '</div>';
         $more .= '<div class="row" id="scroll-content">';
 
-        $moreArticles = Article::where('category_id', $article->category->id)
-            ->where('id', '!=', $article->id)
-            ->whereNotIn('id', $articles->pluck('id')->toArray())
-            ->limit(8)
-            ->get();
+        // $moreArticles = Article::where('category_id', $article->category->id)
+        //     ->where('id', '!=', $article->id)
+        //     ->whereNotIn('id', $articles->pluck('id')->toArray())
+        //     ->limit(8)
+        //     ->get();
 
-        foreach ($moreArticles as $article) {
-            $more .= view('frontend.pages.article.components.more', compact('article'))->render();
-        }
+        // foreach ($moreArticles as $article) {
+        //     $more .= view('frontend.pages.article.components.more', compact('article'))->render();
+        // }
 
         $more .= '</div>';
 
