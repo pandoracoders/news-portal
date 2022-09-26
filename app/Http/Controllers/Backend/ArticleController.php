@@ -21,8 +21,16 @@ class ArticleController extends Controller
      */
     public function index(ArticleDataTable $datatable)
     {
-
-        $counts = (Article::selectRaw("count(*) as count,task_status")->groupBy("task_status")->get()->keyBy("task_status")->toArray());
+        $user = auth()->user();
+        $counts = Article::selectRaw("count(*) as count,task_status")->groupBy("task_status");
+        if ($user->isEditor) {
+            $counts = $counts->where(function ($q) use ($user) {
+                $q->where('writer_id', $user->id)->orWhere('editor_id', $user->id);
+            });
+        } else if ($user->isWriter) {
+            $counts = $counts->where('writer_id', $user->id);
+        }
+        $counts = $counts->get()->keyBy("task_status")->toArray();
         return $datatable->render($this->path . 'index', compact('counts'));
     }
 
