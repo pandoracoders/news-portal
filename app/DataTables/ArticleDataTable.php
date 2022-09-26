@@ -232,11 +232,6 @@ class ArticleDataTable extends DataTable
             if (!in_array($row->task_status, $this->writer_hide_condition)) {
                 $td = "<a href='" . route('backend.article-edit', $row) . "'
                 class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
-
-                if ($row->task_status == "writing") {
-                    $td .= "<a href='" . route('backend.article-update_task_status', ["article" => $row, "taskStatus" => "submitted"]) . "'
-        class='badge badge-success badge-sm'> <i class='bi bi-check-circle'></i>Post for review</a>";
-                }
             }
         } else if ($this->role == "editor") {
 

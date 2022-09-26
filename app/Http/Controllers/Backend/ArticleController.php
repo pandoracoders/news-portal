@@ -180,7 +180,6 @@ class ArticleController extends Controller
 
     public function updateTaskStatus(Article $article, $taskStatus)
     {
-        dd('update task status');
 
         $user = auth()->user();
         if ($user->id == $article->writer_id && $article->task_status == 'writing' && $taskStatus == 'submitted') {
