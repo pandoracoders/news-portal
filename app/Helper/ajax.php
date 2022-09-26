@@ -48,15 +48,15 @@ if (!function_exists('getYouMayAlsoLike')) {
         $more .= '</div>';
         $more .= '<div class="row" id="scroll-content">';
 
-        $moreArticles = Article::where('category_id', $article->category->id)
-            ->where('id', '!=', $article->id)
-            ->whereNotIn('id', $articles->pluck('id')->toArray())
-            ->limit(8)
-            ->get();
+        // $moreArticles = Article::where('category_id', $article->category->id)
+        //     ->where('id', '!=', $article->id)
+        //     ->whereNotIn('id', $articles->pluck('id')->toArray())
+        //     ->limit(8)
+        //     ->get();
 
-        foreach ($moreArticles as $article) {
-            $more .= view('frontend.pages.article.components.more', compact('article'))->render();
-        }
+        // foreach ($moreArticles as $article) {
+        //     $more .= view('frontend.pages.article.components.more', compact('article'))->render();
+        // }
 
         $more .= '</div>';
 
@@ -82,12 +82,10 @@ if (!function_exists('getHomePageAjax')) {
 
         $category_section = [];
 
-        foreach (
-            Category::where('id', 1)
-                ->where('status', 1)
-                ->get()
-            as $key => $category
-        ) {
+        foreach (Category::where('id', 1)
+            ->where('status', 1)
+            ->get()
+            as $key => $category) {
             $section['category'] = $category;
 
             $articles1 = $category
