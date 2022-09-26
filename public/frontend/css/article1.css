@@ -127,7 +127,7 @@ blockquote{background:linear-gradient(to right, rgb(159, 159, 159), rgb(196, 195
 blockquote::before{content:"";left:0;position:absolute;height:100%;bottom:0px;width:6px;background:rgba(39, 37, 36, 0.8)!important;border-radius:20px;}
 .meta{margin:0;padding:0;text-align:right;display:block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .bc{display:-webkit-box;text-overflow:ellipsis;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin:1rem 0rem 0rem 0rem;}
-.breadcrumb-container{text-transform:uppercase;display:inline;margin:10px 0px;padding:0;list-style:none;}
+.breadcrumb-container{text-transform:capitalize;display:inline;margin:10px 0px;padding:0;list-style:none;}
 .breadcrumb-container li{display:inline;font-size:15px;line-height:30px;font-weight:600;color:#656565;}
 .breadcrumb-container li a{font-weight:800;color:#3535b1;position:relative;}
 .breadcrumb-container li a:hover{color:#00a6ff;}

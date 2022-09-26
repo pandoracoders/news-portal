@@ -22,7 +22,7 @@ if (!function_exists('getYouMayAlsoLike')) {
             })
                 ->where('id', '!=', $article->id)
                 ->get()
-                ->random(8);
+                ->random(12);
         }
 
         $youMayAlsoLike = '';

@@ -49,13 +49,7 @@ class TableSeeder extends Seeder
                 "created_at" => now(),
                 "updated_at" => now(),
             ],
-            [
-                "title" => "Birth Month",
-                "type" => "text",
-                "searchable" => true,
-                "created_at" => now(),
-                "updated_at" => now(),
-            ],
+
             [
                 "title" => "Birth Day",
                 "type" => "text",
@@ -64,7 +58,22 @@ class TableSeeder extends Seeder
                 "updated_at" => now(),
             ],
             [
-                "title" => "Death",
+                "title" => "Death Year",
+                "type" => "text",
+                "searchable" => false,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
+
+            [
+                "title" => "Death Day",
+                "type" => "text",
+                "searchable" => false,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
+            [
+                "title" => "Death Cause",
                 "type" => "text",
                 "searchable" => false,
                 "created_at" => now(),
@@ -128,6 +137,20 @@ class TableSeeder extends Seeder
             ],
             [
                 "title" => "Weight",
+                "type" => "text",
+                "searchable" => false,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
+            [
+                "title" => "Eye Color",
+                "type" => "text",
+                "searchable" => false,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
+            [
+                "title" => "Hair Color",
                 "type" => "text",
                 "searchable" => false,
                 "created_at" => now(),

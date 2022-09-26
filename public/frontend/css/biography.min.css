@@ -130,7 +130,7 @@ iframe{border:0;}
 @media (max-width: 500px){
 .biography .main-content-section .left-section .featured-image img{border-radius:5px;max-height:200px;min-height:200px;min-width:100%;object-fit:cover;object-position:top;}
 }
-.biography .main-content-section .left-section .facts .fact-title{font-weight:700;}
+.biography .main-content-section .left-section .facts .fact-title{font-weight:700;}.facts a{color: #00a6ff;}
 .content-detail figure{max-width:470px;display:block;margin:auto;margin-top:10px;margin-bottom:10px;text-align:center;border:1px solid rgb(221, 216, 216);padding:10px;border-radius:5px;}
 h1{text-transform:capitalize;}
 .content-detail{font-size:17px;font-weight:400;line-height:28px;color:rgba(0, 0, 0, 0.95);}
@@ -182,7 +182,7 @@ iframe{width:100%;}
 body{font-family:'Lora', serif;}
 .meta{margin:0;padding:0;text-align:right;display:block;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .bc{display:-webkit-box;text-overflow:ellipsis;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
-.breadcrumb-container{text-transform:uppercase;display:inline;margin:10px 0px;padding:0;list-style:none;}
+.breadcrumb-container{text-transform:capitalize;display:inline;margin:10px 0px;padding:0;list-style:none;}
 .breadcrumb-container li{display:inline;font-size:15px;line-height:30px;font-weight:600;color:#555657;}
 .breadcrumb-container li a{font-weight:800;color:#3535b1;position:relative;}
 .breadcrumb-container li a:hover{color:#00a6ff;}
