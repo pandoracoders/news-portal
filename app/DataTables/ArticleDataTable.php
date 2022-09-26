@@ -135,7 +135,7 @@ class ArticleDataTable extends DataTable
      */
     public function query(Article $model): QueryBuilder
     {
-        $model = $model->orderBy("published_at")->newQuery();
+        $model = $model->orderBy("published_at", "desc")->newQuery();
 
         if (request("task_status")) {
             $model->where("task_status", request("task_status"));

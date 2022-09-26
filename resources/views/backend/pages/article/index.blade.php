@@ -37,7 +37,7 @@
         })
 
         $(document).ready(function() {
-            $(document).on("change", "input:checkbox", function(){
+            $(document).on("change", "input:checkbox", function() {
                 $.ajax($(this).data("url"));
             })
 
@@ -77,18 +77,33 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
                         @if (Request()->task_status)
                             <a class="nav-link {{ Request()->task_status == $task ? 'active' : '' }}"
                                 href="{{ route('backend.article-view', ['task_status' => $task == 'all' ? '' : $task]) }}">
+
+
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
-                                        {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}
+                                        {{ $task == 'submitted' ? auth()->user()->isWriter ? ucwords($task) : 'Open' : ucwords($task) }}
+                                        @if ($key != 0)
+                                            <span class="badge badge-primary"
+                                                style="">
+                                                {{ array_key_exists($task, $counts) ? $counts[$task]['count'] : 0 }}
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </a>
                         @else
                             <a class="nav-link {{ $key == 0 ? 'active' : '' }}"
                                 href="{{ route('backend.article-view', ['task_status' => $task == 'all' ? '' : $task]) }}">
+
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
-                                        {{ $task == 'submitted' ? ucwords($task) . ' (Open for editor)' : ucwords($task) }}
+                                        {{ $task == 'submitted' ? auth()->user()->isWriter ? ucwords($task) : 'Open' : ucwords($task) }}
+                                        @if ($key != 0)
+                                            <span class="badge badge-primary"
+                                                style="">
+                                                {{ array_key_exists($task, $counts) ? $counts[$task]['count'] : 0 }}
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </a>

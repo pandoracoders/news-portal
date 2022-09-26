@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->permission->permissions;
     }
 
+    public function allArticles()
+    {
+        return $this->hasMany(Article::class, 'writer_id');
+    }
+
     public function articles()
     {
         return $this->hasMany(Article::class, 'writer_id')->activeAndPublish();
@@ -67,6 +72,7 @@ class User extends Authenticatable
     {
         return $this->role->slug == 'editor';
     }
+
 
     public function getIsWriterAttribute($value)
     {

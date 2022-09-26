@@ -22,6 +22,7 @@ class WPSeeder extends Seeder
 
         $json = file_get_contents(base_path("database/seeders/json/wikibioages.json"));
         $data = json_decode($json, true);
+        $data = array_reverse($data);
 
         foreach ($data as $key => $post) {
             // create author
