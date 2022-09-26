@@ -95,27 +95,7 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                             </div>
                         </div>
                         <div class="right-section col-lg-8">
-                            <div class="table-of-contents col-lg-8">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <a data-bs-toggle="collapse" data-bs-parent="#accordion"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                <span class="contents-heading panel-title">Contents</span>
-                                            </a>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel"
-                                            aria-labelledby="headingOne">
-                                            <div class="panel-body">
-                                                <ul class="list">
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('frontend.pages.article.components.table_of_content')
                             <div class="content-detail">
                                 <p>
                                     {!! $article->body !!}

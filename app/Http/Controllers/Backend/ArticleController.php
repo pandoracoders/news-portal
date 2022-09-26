@@ -21,7 +21,9 @@ class ArticleController extends Controller
      */
     public function index(ArticleDataTable $datatable)
     {
-        return $datatable->render($this->path . 'index');
+
+        $counts = (Article::selectRaw("count(*) as count,task_status")->groupBy("task_status")->get()->keyBy("task_status")->toArray());
+        return $datatable->render($this->path . 'index', compact('counts'));
     }
 
     /**
@@ -227,19 +229,21 @@ class ArticleController extends Controller
         return response()->json($articles);
     }
 
-    public function featured(Article $article){
+    public function featured(Article $article)
+    {
         $article->update([
             'is_featured' => !$article->is_featured
         ]);
-        return back()->with('success',"Article " . $article->is_featured ? 'added to' : 'removed from'. " featured list");
+        return back()->with('success', "Article " . $article->is_featured ? 'added to' : 'removed from' . " featured list");
     }
 
-    public function editor_choice(Article $article){
+    public function editor_choice(Article $article)
+    {
         $article->update([
             'editor_choice' => !$article->editor_choice
         ]);
 
         // dd($article );
-        return back()->with('success',"Article " . $article->editor_choice ? 'added to' : 'removed from'. " editor choice list");
+        return back()->with('success', "Article " . $article->editor_choice ? 'added to' : 'removed from' . " editor choice list");
     }
 }
