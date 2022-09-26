@@ -69,7 +69,7 @@ class HomePageCache implements ShouldQueue
             $category_section = [];
 
             foreach (
-                Category::where('id', 2)
+                Category::where('id', 1)
                     ->where('status', 1)
                     ->get()
                 as $key => $category

@@ -2,6 +2,7 @@
 
 use App\Models\Backend\Article;
 use App\Models\Backend\Category;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 if (!function_exists('getYouMayAlsoLike')) {
     function getYouMayAlsoLike($article)
@@ -83,7 +84,7 @@ if (!function_exists('getHomePageAjax')) {
         $category_section = [];
 
         foreach (
-            Category::where('id', 1)
+            Category::where('id', 2)
                 ->where('status', 1)
                 ->get()
             as $key => $category

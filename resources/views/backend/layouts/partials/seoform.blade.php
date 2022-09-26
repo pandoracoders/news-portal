@@ -7,7 +7,7 @@
                     <hr>
                     <div class="col-12">
                         <label class="form-label">Meta Ttile</label>
-                        <input type="text"
+                        <input data-validation="required"  type="text"
                             class="form-control {{ isset($errors) && $errors->has('meta_title') ? 'is-invalid' : '' }}"
                             name="meta_title"
                             value="{{ isset($meta) ? $meta->meta_title : old('meta_title') }}">
@@ -20,7 +20,7 @@
 
                     <div class="col-12">
                         <label class="form-label">Meta Description</label>
-                        <textarea class="form-control {{ isset($errors) && $errors->has('meta_description') ? 'is-invalid' : '' }}"
+                        <textarea data-validation="required" class="form-control {{ isset($errors) && $errors->has('meta_description') ? 'is-invalid' : '' }}"
                             name="meta_description">{{ isset($meta) ? $meta->meta_description : old('meta_description') }}</textarea>
                         @if (isset($errors) && $errors->has('meta_description'))
                             <div class="invalid-feedback">

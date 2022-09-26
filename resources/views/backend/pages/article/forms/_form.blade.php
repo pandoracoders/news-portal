@@ -30,7 +30,7 @@
 
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Body</label>
-                                    <textarea name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('body') }}</textarea>
+                                    <textarea data-validation="required" name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('body') }}</textarea>
                                 </div>
 
                                 <div class="col-12 mb-2">
@@ -119,7 +119,7 @@
             <div class="row mb-1" style="position:sticky; top:20rem;">
                 <div>
                     <label for="formFile" class="form-label">Featured Image</label>
-                    <input class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
+                    <input data-validation="required" class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
                         type="file" id="formFile" name="image"
                         onchange="document.getElementById('preview-image').src = window.URL.createObjectURL(this.files[0])">
                     @if (isset($errors) && $errors->has('image'))
