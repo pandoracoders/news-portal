@@ -93,6 +93,7 @@
                 .then(res => {
                     document.querySelector('.sidebar-section-wrap').innerHTML = res.data.youMayAlsoLike;
                     document.querySelector('.similar-post-section').innerHTML = res.data.more;
+                    document.querySelector('.table-holder').innerHTML = res.data.tables ?? '';
                     // document.querySelector('.view-count').innerHTML = res.value;
                 })
         }, 5000);

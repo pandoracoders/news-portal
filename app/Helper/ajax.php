@@ -6,7 +6,10 @@ use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
 if (!function_exists('getYouMayAlsoLike')) {
     function getYouMayAlsoLike($article)
+
     {
+        $tables = view("frontend.pages.article.components.facts", compact('article'))->render();
+
         $keyword = $article->seo->meta_keywords;
         $articles = Article::where(function ($q) {
             $q->where('task_status', 'published')->where('status', 1);
@@ -61,9 +64,11 @@ if (!function_exists('getYouMayAlsoLike')) {
 
         $more .= '</div>';
 
+
         return [
             'youMayAlsoLike' => $youMayAlsoLike,
             'more' => $more,
+            "tables" => $tables
         ];
     }
 }
@@ -83,12 +88,10 @@ if (!function_exists('getHomePageAjax')) {
 
         $category_section = [];
 
-        foreach (
-            Category::where('id', 2)
-                ->where('status', 1)
-                ->get()
-            as $key => $category
-        ) {
+        foreach (Category::where('id', 2)
+            ->where('status', 1)
+            ->get()
+            as $key => $category) {
             $section['category'] = $category;
 
             $articles1 = $category

@@ -119,7 +119,8 @@
             <div class="row mb-1" style="position:sticky; top:20rem;">
                 <div>
                     <label for="formFile" class="form-label">Featured Image</label>
-                    <input data-validation="required" class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
+                    <input data-validation="required"
+                        class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
                         type="file" id="formFile" name="image"
                         onchange="document.getElementById('preview-image').src = window.URL.createObjectURL(this.files[0])">
                     @if (isset($errors) && $errors->has('image'))
@@ -292,8 +293,7 @@
 
 
     @if ($article->discussions)
-        <div class="modal fade bd-example-modal-lg" id="discussion-model" tabindex="-1"
-            aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="discussion-model" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -340,18 +340,64 @@
                                     {{-- <h6 class="mb-0 text-uppercase"> Tables
                                     </h6>
                                     <hr> --}}
+                                    @php
+                                        $oldTable = $article->tables;
+                                    @endphp
+                                    @foreach ($article->category->tables as $table)
+                                        @php
+                                            $key = str_slug($table->title);
+                                        @endphp
+                                        <div class="mb-2">
+                                            <div class="row">
+                                                @foreach ($table->tableFields as $field)
+                                                    @php
+                                                        $value = $oldTable[$key][str_slug($field->title)]['value'] ?? '';
+                                                    @endphp
+                                                    <div class="form-group mb-1 col-md-6">
+                                                        <label for="">{{ $field->title }}</label>
+                                                        @if (str_contains($field->title, 'Month'))
+                                                            <select class="form-control"
+                                                                name="{{ str_slug($key) . '_' . str_slug($field->title) }}">
+                                                                @foreach (getMonths() as $month)
+                                                                    <option value="{{ str_slug($month) }}"
+                                                                        {{ $value == str_slug($month) ? 'selected' : '' }}>
+                                                                        {{ $month }} </option>
+                                                                @endforeach
+                                                            </select>
+                                                        @else
+                                                            <input type="{{ $field['type'] ?? 'text' }}"
+                                                                class="form-control"
+                                                                name="{{ str_slug($key) . '_' . str_slug($field->title) }}"
+                                                                value="{{ $field['type'] == 'date' ? carbon($value)->format('Y-m-d') : $value }}">
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
 
                                     @foreach (getArticleTables($article) ?? [] as $key => $table)
                                         <div class="mb-2">
                                             <div class="row">
                                                 @foreach ($table as $field)
-                                                    <div class="form-group mb-1 col-md-6">
+                                                    {{-- <div class="form-group mb-1 col-md-6">
                                                         <label for="">{{ $field['title'] }}</label>
-                                                        <input type="{{ $field['type'] ?? 'text' }}"
-                                                            class="form-control"
-                                                            name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
-                                                            value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
-                                                    </div>
+                                                        @if (str_contains($field['title'], 'Month'))
+                                                            <select class="form-control"
+                                                                name="{{ str_slug($key) . '_' . str_slug($field['title']) }}">
+                                                                @foreach (getMonths() as $month)
+                                                                    <option value="{{ str_slug($month) }}"
+                                                                        {{ $field['value'] == $month ? 'selected' : '' }}>
+                                                                        {{ $month }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        @else
+                                                            <input type="{{ $field['type'] ?? 'text' }}"
+                                                                class="form-control"
+                                                                name="{{ str_slug($key) . '_' . str_slug($field['title']) }}"
+                                                                value="{{ $field['type'] == 'date' ? carbon($field['value'])->format('Y-m-d') : $field['value'] }}">
+                                                        @endif
+                                                    </div> --}}
                                                 @endforeach
                                             </div>
                                         </div>

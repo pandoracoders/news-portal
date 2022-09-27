@@ -24,12 +24,13 @@ class FrontendController extends Controller
     }
 
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         return view("frontend.pages.search.index", [
             "article" => Article::activeAndPublish()->where("title", "like", "%" . $request->query . "%")
-            ->orWhere("body", "like", "%" . $request->query . "%")
-            ->limit(8)
-            ->get(),
+                ->orWhere("body", "like", "%" . $request->query . "%")
+                ->limit(8)
+                ->get(),
         ]);
     }
 
@@ -86,7 +87,7 @@ class FrontendController extends Controller
                 ->where("task_status", "published")
                 ->limit($limit)
                 ->offset(($page) * $limit)
-                ->orderBy("published_at","desc")->get();
+                ->orderBy("published_at", "desc")->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
         return abort(404);
@@ -119,5 +120,24 @@ class FrontendController extends Controller
     public static function notFound()
     {
         return view("errors.404");
+    }
+
+
+    public function searchByTableField($field, $value)
+    {
+
+        $limit = 9;
+        $page = request()->get("page", 1);
+        if (request()->ajax()) {
+            $articles = Article::searchJson($field, $value)->activeAndPublish()
+                ->limit($limit)->offset(($page) * $limit)->get();
+            return response()->json(ArticleResource::collection($articles), 200);
+        }
+        return view("frontend.pages.table-search.index", [
+            "field" => $field,
+            "value" => $value,
+            "articles" => Article::searchJson($field, $value)->activeAndPublish()
+                ->limit($limit)->get(),
+        ]);
     }
 }

@@ -52,45 +52,7 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                                         </figure>
                                     </div>
                                 </div>
-                                <div class="facts">
-                                    @foreach ($article->tables as $title => $table)
-                                        {{-- {{ dd($table , $title) }} --}}
-                                        <div class="heading">
-                                            <div class="category-segment">
-                                                <span>{{ $title }}</span>
-                                            </div>
-                                        </div>
-                                        <table class="table facts-table">
-                                            @php
-                                                // dd($table)
-                                            @endphp
-                                            <tbody>
-                                                @foreach ($factsOrder as $tr)
-                                                    @if (array_key_exists($tr, $table))
-                                                        @if ($tr == 'birth-day')
-                                                            <tr>
-                                                                <td class="fact-title">
-                                                                    Birthday
-                                                                </td>
-                                                                <td class="fact-detail">
-                                                                    {!! $table['birth-month']['html'] !!} {!! $table['birth-day']['html'] !!}, {!! $table['birth-year']['html'] !!}
-                                                                </td>
-                                                            </tr>
-                                                        @else
-                                                            <tr>
-                                                                <td class="fact-title">
-                                                                    {!! $table[$tr]['title'] !!}
-                                                                </td>
-                                                                <td class="fact-detail">
-                                                                    {!! $table[$tr]['html'] !!}
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    @endforeach
+                                <div class="table-holder">
 
                                 </div>
                             </div>

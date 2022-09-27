@@ -153,4 +153,10 @@ class Article extends Model
     {
         return $q->where('task_status', 'published')->where('status', 1)->orderBy('published_at', 'desc');
     }
+
+    public function scopeSearchJson(Builder $q, $field, $value)
+
+    {
+        return $q->where("tables->quick-facts->$field", "like", "%$value%");
+    }
 }

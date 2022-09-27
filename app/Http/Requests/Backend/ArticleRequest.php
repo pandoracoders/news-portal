@@ -52,14 +52,14 @@ class ArticleRequest extends FormRequest
 
         $category = Category::find($this->category_id);
 
-        // dd($this->all());
 
         $tables = [];
         $tags = [];
-        // dd(getArticleTables($this->route("article")));
+
         foreach (getArticleTables($this->route("article")) as $key => $table) {
+            $key = str_slug($key);
             foreach ($table as $field) {
-                $form_key = str_slug($key) . "_" . str_slug($field["title"]);
+                $form_key = ($key) . "_" . str_slug($field["title"]);
                 if ($this->$form_key) {
                     $tables[$key][str_slug(str_slug($field['title']))] = getTableFieldArray(json_decode(json_encode($field)), $this->$form_key);
                 }

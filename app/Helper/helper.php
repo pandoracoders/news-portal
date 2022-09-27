@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 
+if (!function_exists("getMonths")) {
+    function getMonths()
+    {
+        return [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ];
+    }
+}
+
 if (!function_exists('wrapByPTag')) {
     function wrapByPTag($str)
     {
