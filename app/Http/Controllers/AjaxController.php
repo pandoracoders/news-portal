@@ -15,9 +15,18 @@ class AjaxController extends Controller
     }
 
 
-    public function getHomePageAjax(){
+    public function getHomePageAjax()
+    {
         return response()->json([
             'data' => getHomePageAjax(),
+        ]);
+    }
+
+
+    function readMoreSection(Article $article)
+    {
+        return response()->json([
+            'readMoreSection' => $article ?  getReadMoreSection($article) : '',
         ]);
     }
 }

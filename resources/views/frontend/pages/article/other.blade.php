@@ -31,11 +31,12 @@
             @include('frontend.pages.article.components.title-section')
 
             <div class="featured-image">
-                <img data-src="{{ $article->image }}" src="{{ asset(("image-placeholder.png")) }}" class="" alt="{{ $article->title }}">
+                <img data-src="{{ $article->image }}" src="{{ asset('image-placeholder.png') }}" class=""
+                    alt="{{ $article->title }}">
             </div>
-            @include("frontend.pages.article.components.table_of_content")
+            @include('frontend.pages.article.components.table_of_content')
             <div class="content-detail">
-                <p>{!! $article->body !!}</p>
+                {!! $article->body !!}
             </div>
         </div>
         <div class="col-lg-4 sidebar-section mt-3">

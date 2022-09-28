@@ -40,6 +40,7 @@ Route::get('tag/{tag:slug}', [FrontendController::class, 'tags'])->name('tags');
 Route::post('category/{category:slug}', [FrontendController::class, 'categoryArticles'])
     ->name('categoryArticles')
     ->withoutMiddleware('csrf');
+
 Route::post('tag/{tag:slug}', [FrontendController::class, 'tagArticles'])
     ->name('tagArticles')
     ->withoutMiddleware('csrf');
@@ -57,4 +58,5 @@ Route::redirect('/backend', 'dashboard', 301)->middleware('auth');
 Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
     Route::get('article/you-may-also-like/{article}', [AjaxController::class, 'youMayAlsoLike'])->name('youMayAlsoLike');
     Route::get('home-page-ajax', [AjaxController::class, 'getHomePageAjax'])->name('getHomePageAjax');
+    Route::get('read-more/{article?}', [AjaxController::class, 'readMoreSection'])->name('readMoreSectionAjax');
 });

@@ -17,6 +17,10 @@
     <meta property="og:article:published_time" content="{{ $article->published_at }}">
 @endpush
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset("frontend/css/splide.min.css") }}">
+@endpush
+
 @section('content')
     @if ($article->tables)
         @include('frontend.pages.article.biography')
@@ -166,5 +170,49 @@
                     })
             }
         }
+    </script>
+
+    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
+
+    <script>
+        // count number of p tag in content-detail div
+        var pTag = document.querySelectorAll('.content-detail p');
+
+        // var pTag = document.querySelectorAll('p');
+        var readMoreSection = Math.round(pTag.length / 2);
+        console.log(readMoreSection);
+        fetch("{{ route('ajax.readMoreSectionAjax', $article->id) }}")
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                // append data below 10th p tag
+                pTag[readMoreSection].insertAdjacentHTML('afterend', res.readMoreSection);
+
+
+
+                var slider = document.querySelector("div.splide");
+                if (slider) {
+                    document.getElementById("slider").style.display = "";
+                    new Splide('.splide', {
+                        type: 'loop',
+                        perPage: 4,
+                        gap: '5px',
+                        autoplay: true,
+                        perMove: 1,
+                        breakpoints: {
+                            '820': {
+                                perPage: 2,
+                                gap: '10px',
+                            },
+                            '480': {
+                                perPage: 1,
+                                gap: '10px'
+                            }
+                        }
+                    }).mount();
+
+                }
+                // document.querySelector('.read-more-section').innerHTML = res.data.readMore;
+            })
     </script>
 @endpush

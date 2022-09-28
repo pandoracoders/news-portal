@@ -55,7 +55,11 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create($request->validated());
+        $article = Article::create($request->validated());
+
+        if ($request->read_more_articles) {
+            $article->readMoreArticles()->sync($request->read_more_articles);
+        }
 
         return redirect()
             ->route('backend.article-view')
@@ -89,6 +93,8 @@ class ArticleController extends Controller
         if ($message) {
             ArticleLogJob::dispatchAfterResponse($article, $message);
         }
+
+
 
         return view($this->path . 'crud', [
             'article' => $article,
@@ -151,6 +157,10 @@ class ArticleController extends Controller
         $article->tags()->sync($request->tags);
         if ($message) {
             ArticleLogJob::dispatch($article, $message, $request->discussion ?? '');
+        }
+
+        if ($request->read_more_articles) {
+            $article->readMoreArticles()->sync($request->read_more_articles);
         }
 
         if ($request->task_status) {

@@ -49,6 +49,7 @@ class ArticleRequest extends FormRequest
     protected function prepareForValidation()
     {
 
+        // dd($this->all());
 
         $category = Category::find($this->category_id);
 

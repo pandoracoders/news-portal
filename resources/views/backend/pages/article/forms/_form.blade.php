@@ -272,9 +272,8 @@
                     <div class="row">
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Read More Articles</label>
-
                             <select class="form-control tag-select" id="read-more" multiple="multiple"
-                                name="articles[]" aria-placeholder="Select Articles">
+                                name="read_more_articles[]" aria-placeholder="Select Articles">
                                 @foreach ($articles as $a)
                                     <option value="{{ $a->id }}" data-image="{{ asset($a->image) }}">
                                         {{ $a->title }}</option>

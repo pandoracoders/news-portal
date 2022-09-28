@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'blade' => true,
+    // 'blade' => true,
 
     "js" => true,
 
