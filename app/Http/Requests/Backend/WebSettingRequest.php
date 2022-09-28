@@ -47,6 +47,7 @@ class WebSettingRequest extends FormRequest
                 "google_analytics_code" => "nullable",
                 "google_tag_manager_code" => "nullable",
                 "google_search_console_code" => "nullable",
+                "gtm_body_code" => "nullable"
             ];
         }
 
