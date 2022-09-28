@@ -97,8 +97,6 @@
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
                 <div id="search-container">
-                    <script async src="https://cse.google.com/cse.js?cx=d615d410296b9481a">
-                    </script>
                         <p class="close-search">X</p>
                     <div id="search-box">
                         <gcse:search enablehistory="false"></gcse:search>

@@ -5,7 +5,7 @@
                 <div class="footer-widget">
                     <div class="footer-logo">
                         <h2>
-                            <a href="{{ url("/") }}">
+                            <a href="{{ url('/') }}">
                                 {{ getSettingValue('website_title') }}
                             </a>
                         </h2>
@@ -31,7 +31,8 @@
         <div class="row copyright-section mt-3">
             <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                 <div class="copyright-text">
-                    <p>&copy; Copyright {{ date('Y') }} <a href="/">{{ getSettingValue('website_title')}}</a>. All Right Reserved</p>
+                    <p>&copy; Copyright {{ date('Y') }} <a
+                            href="/">{{ getSettingValue('website_title') }}</a>. All Right Reserved</p>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6">
@@ -45,7 +46,32 @@
     </div>
 </footer>
 
+{{-- <script async src="https://cse.google.com/cse.js?cx=d615d410296b9481a">
+</script> --}}
+
 <script>
+    function loadScript() {
+        var searchIcon = document.querySelector('#search-label');
+        var overlay = document.querySelector('#search-container')
+        var closeBtn = document.querySelector('.close-search')
+        searchIcon.addEventListener('click', function() {
+            overlay.style.display = "block";
+        })
+        closeBtn.addEventListener('click', function() {
+            overlay.style.display = "none";
+        })
+    }
+
+    // Dynamically import the LazySizes library
+    const script = document.createElement('script');
+    script.src =
+        'https://cse.google.com/cse.js?cx=d615d410296b9481a';
+    document.body.appendChild(script);
+
+    script.addEventListener('load', loadScript, false);
+</script>
+
+{{-- <script>
     var searchIcon = document.querySelector('#search-label');
     var overlay = document.querySelector('#search-container')
     var closeBtn = document.querySelector('.close-search')
@@ -56,4 +82,4 @@
         overlay.style.display = "none";
     })
 
-</script>
+</script> --}}
