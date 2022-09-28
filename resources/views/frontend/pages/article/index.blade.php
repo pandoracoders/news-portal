@@ -18,7 +18,7 @@
 @endpush
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset("frontend/css/splide.min.css") }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/splide.min.css') }}">
 @endpush
 
 @section('content')
@@ -184,15 +184,23 @@
         fetch("{{ route('ajax.readMoreSectionAjax', $article->id) }}")
             .then(res => res.json())
             .then(res => {
-                console.log(res);
-                // append data below 10th p tag
-                pTag[readMoreSection].insertAdjacentHTML('afterend', res.readMoreSection);
+                // remove and replace
+                // get all read more section
+                var readMoreSection = document.querySelectorAll('.readmore');
+                // loop through all read more section
+                for (let index = 0; index < readMoreSection.length; index++) {
+                    // remove all read more section
+                    readMoreSection[index].innerHTML = res.readMoreSection;
+                }
 
-
-
-                var slider = document.querySelector("div.splide");
-                if (slider) {
-                    document.getElementById("slider").style.display = "";
+                var splide = document.querySelectorAll("div.splide");
+                console.log(splide);
+                if (splide.length > 0) {
+                    var slider = document.querySelectorAll("slider");
+                    console.log(slider);
+                    for (let index = 0; index < slider.length; index++) {
+                        slider[index].style.display = "";
+                    }
                     new Splide('.splide', {
                         type: 'loop',
                         perPage: 4,
