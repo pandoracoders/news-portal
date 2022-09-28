@@ -274,8 +274,13 @@
                             <label class="form-label">Read More Articles</label>
                             <select class="form-control tag-select" id="read-more" multiple="multiple"
                                 name="read_more_articles[]" aria-placeholder="Select Articles">
+                                @php
+                                    $read_more_articles = $article->readMoreArticles?->pluck('id')->toArray();
+                                @endphp
                                 @foreach ($articles as $a)
-                                    <option value="{{ $a->id }}" data-image="{{ asset($a->image) }}">
+                                    <option value="{{ $a->id }}"
+                                        {{ in_array($a->id, $read_more_articles ?? []   ) ? 'selected' : '' }}
+                                        data-image="{{ asset($a->image) }}">
                                         {{ $a->title }}</option>
                                 @endforeach
                             </select>
