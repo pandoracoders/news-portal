@@ -19,6 +19,12 @@
                         </textarea>
                     </div>
                     <div class="col-12 mb-2 ">
+                        <label class="form-label">GTM Body Code</label>
+                        <textarea class="form-control" rows="7" name="gtm_body_code" >
+                            {{ $webSetting['gtm_body_code']->value ?? old('gtm_body_code') }}
+                        </textarea>
+                    </div>
+                    <div class="col-12 mb-2 ">
                         <label class="form-label">Google Search Console Code</label>
                         <textarea class="form-control" rows="7" name="google_search_console_code" >
                             {{ $webSetting['google_search_console_code']->value ?? old('google_search_console_code') }}

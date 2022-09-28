@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    {!! getSettingValue('google_tag_manager_code') !!}
     {!! getSettingValue('google_analytics_code') !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +77,7 @@
 </head>
 
 <body>
+    {!! getSettingValue('gtm_body_code') !!}
     @include('frontend.layouts.partials.header')
     <div class="sidebar-overlay"></div>
     <div id="headerAd" class="adver container text-center">
