@@ -130,6 +130,22 @@ class Article extends Model
             ->get();
     }
 
+    public function readMoreArticles()
+    {
+        return $this->belongsToMany(Article::class, ReadMoreArticle::class, 'article_id', 'read_more_article_id')->activeAndPublish();
+    }
+
+    // public function getBodyAttribute($value)
+    // {
+    //     $dom = new DOMDocument();
+    //     $dom->loadHTML($value);
+    //     $images = $dom->getElementsByTagName('img');
+    //     foreach ($images as $image) {
+    //         $image->setAttribute('class', 'img-fluid');
+    //     }
+    //     return $dom->saveHTML();
+    // }
+
     public static function boot()
     {
         parent::boot();
