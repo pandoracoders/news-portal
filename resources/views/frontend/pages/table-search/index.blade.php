@@ -1,15 +1,17 @@
 @php
-function getTitle()
+function getTitle($value)
 {
     $path = explode('/', Request::path())[2];
     switch ($path) {
         case 'birth-year':
         case 'birth-month':
-            return 'Celebrities born in ';
+            return "Celebrities born in <span class='colored'>$value</span>";
         case 'birth-day':
-            return 'Celebrities born on ';
+            return "Celebrities born on <span class='colored'>$value</span>";
+            case 'nationality':
+            return "<span class='colored'>$value</span> Celebrities";
         default:
-            return 'Celebrites of ';
+            return "Celebrites of <span class='colored'>$value</span>";
     }
 }
 @endphp
@@ -29,29 +31,12 @@ function getTitle()
 
 @section('content')
     <main class="container">
-        <!-- BreadCrumb -->
-        <div class="bc">
-            <ul class="breadcrumb-container">
-                <li class="breadcrumb">
-                    <a href="{{ url('/') }}">
-                        <span>Home</span>
-                    </a>
-                </li>
-                ⇢
-                <li class="breadcrumb active">
-                    <span class="text-capitalize">
-                        {{ $value }}
-                    </span>
-                </li>
-            </ul>
-        </div>
+
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">{{ getTitle() }}
-                    <span class="colored">
-                        {{ $value }}
-                    </span>
+                <h1 class="text-capitalize">{!! getTitle($value) !!}
+
                 </h1>
             </div>
         </section>
