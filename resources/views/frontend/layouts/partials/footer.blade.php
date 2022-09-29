@@ -63,7 +63,7 @@
     }
 
     // Dynamically import the LazySizes library
-    setTimeOut(function() {
+    setTimeout(function() {
         const script = document.createElement('script');
         script.src =
             'https://cse.google.com/cse.js?cx=d615d410296b9481a';
