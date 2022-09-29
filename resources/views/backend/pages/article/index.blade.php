@@ -10,6 +10,19 @@
     <link href="{{ asset('backend') }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 5px !important;
+            margin-bottom: 25px !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+
+            background: transparent !important;
+            border: none !important;
+        }
+    </style>
 @endpush
 
 @push('scripts')
@@ -81,10 +94,9 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
 
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
-                                        {{ $task == 'submitted' ? auth()->user()->isWriter ? ucwords($task) : 'Open' : ucwords($task) }}
+                                        {{ $task == 'submitted' ? (auth()->user()->isWriter ? ucwords($task) : 'Open') : ucwords($task) }}
                                         @if ($key != 0)
-                                            <span class="badge badge-primary"
-                                                style="">
+                                            <span class="badge badge-primary" style="">
                                                 {{ array_key_exists($task, $counts) ? $counts[$task]['count'] : 0 }}
                                             </span>
                                         @endif
@@ -97,10 +109,9 @@ if (in_array(auth()->user()->role->title, ['Editor', 'Super Admin'])) {
 
                                 <div class="d-flex align-items-center">
                                     <div class="tab-title">
-                                        {{ $task == 'submitted' ? auth()->user()->isWriter ? ucwords($task) : 'Open' : ucwords($task) }}
+                                        {{ $task == 'submitted' ? (auth()->user()->isWriter ? ucwords($task) : 'Open') : ucwords($task) }}
                                         @if ($key != 0)
-                                            <span class="badge badge-primary"
-                                                style="">
+                                            <span class="badge badge-primary" style="">
                                                 {{ array_key_exists($task, $counts) ? $counts[$task]['count'] : 0 }}
                                             </span>
                                         @endif
