@@ -362,8 +362,9 @@
                                                         @if (str_contains($field->title, 'Month'))
                                                             <select class="form-control"
                                                                 name="{{ str_slug($key) . '_' . str_slug($field->title) }}">
+                                                                <option value="">Select Month</option>
                                                                 @foreach (getMonths() as $month)
-                                                                    <option value="{{ str_slug($month) }}"
+                                                                    <option value="{{($month) }}"
                                                                         {{ $value == str_slug($month) ? 'selected' : '' }}>
                                                                         {{ $month }} </option>
                                                                 @endforeach

@@ -1,7 +1,7 @@
 /* Category section */
 .category-post-container .single-post{
     display: flex;
-    
+
 }
 .category-section .category-post {
     display: flex;
@@ -39,9 +39,9 @@
 
 .category-post .category-post-title {
     padding: 15px 15px 0px 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: rgb(31, 26, 26);
-    font-size: 0.95rem;
+    font-size: 15px;
 
     display: flex !important;
     flex-direction: column !important;

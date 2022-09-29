@@ -149,7 +149,8 @@ if (!function_exists("getReadMoreSection")) {
     function getReadMoreSection(Article $article)
     {
         $articles = $article->readMoreArticles;
-        $readMoreSection = view("frontend.pages.article.components.read-more-articles", compact('articles'))->render();
+
+        $readMoreSection = $articles->count() ? view("frontend.pages.article.components.read-more-articles", compact('articles'))->render() : '';
         return $readMoreSection;
     }
 }

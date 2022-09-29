@@ -196,9 +196,9 @@ h1 {
 
 .sidebar-post .sidebar-post-title h2,
 sidebar-post .sidebar-post-title h2 a {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    font-weight: 700;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -271,9 +271,9 @@ sidebar-post .sidebar-post-title h2 a {
 
 .similar-post-section .similar-post-title {
     padding: 15px 15px 0px 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: rgb(31, 26, 26);
-    font-size: 14px;
+    font-size: 15px;
 
     display: flex !important;
     flex-direction: column !important;

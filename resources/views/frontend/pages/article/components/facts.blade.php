@@ -4,8 +4,10 @@ $ids = $tables->pluck('id')->toArray();
 $allFields = \App\Models\Backend\TableField::whereIn('table_set_id', $ids)->get();
 $articleTable = $article->tables;
 $isBirthdayDisplay = 0;
+$isDeathdayDisplay = 0
 
 // dd($articleTable);
+
 @endphp
 
 @foreach ($tables as $table)
@@ -36,6 +38,26 @@ $isBirthdayDisplay = 0;
                                                 @if (array_key_exists($item, $articleTable[$tableKey] ?? []))
                                                     <a
                                                         href="{{ route('news.search', ['field' => $item, 'value' => $articleTable[$tableKey][$item]['value']]) }}">
+                                                        {{ $articleTable[$tableKey][$item]['value'] }}{{ $loop->remaining == 1 ? ',' : '' }}
+                                                        {{-- second last loop --}}
+
+                                                    </a>
+                                                @endif
+                                            @endforeach
+
+                                        </td>
+                                    </tr>
+                                @endif
+                            @elseif (str_contains($field->title, 'Death'))
+                                @if (!$isDeathdayDisplay++)
+                                    <tr>
+                                        <td class="title">Death</td>
+
+                                        <td class="value">
+                                            @foreach (['death-day', 'death-month', 'death-year'] as $item)
+                                                @if (array_key_exists($item, $articleTable[$tableKey] ?? []))
+                                                    <a
+                                                        href="{{ route('news.search', ['field' => $item, 'value' => $articleTable[$tableKey][$item]['value']]) }}">
                                                         {{ $articleTable[$tableKey][$item]['value'] }}
                                                         {{-- second last loop --}}
                                                         {{ $loop->remaining == 1 ? ',' : '' }}
@@ -46,24 +68,24 @@ $isBirthdayDisplay = 0;
                                         </td>
                                     </tr>
                                 @endif
-                            @else
-                                <tr>
-                                    <td class="title">{{ $field->title }}</td>
-                                    @if ($field->searchable)
-                                        <td class="value">
-                                            <a
-                                                href="{{ route('news.search', ['field' => $fieldKey, 'value' => $articleTable[$tableKey][$fieldKey]['value']]) }}">
-                                                {{ $articleTable[$tableKey][$fieldKey]['value'] }}
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td class="value">{{ $articleTable[$tableKey][$fieldKey]['value'] }}</td>
-                                    @endif
+                                @else
+                                    <tr>
+                                        <td class="title">{{ $field->title }}</td>
+                                        @if ($field->searchable)
+                                            <td class="value">
+                                                <a
+                                                    href="{{ route('news.search', ['field' => $fieldKey, 'value' => $articleTable[$tableKey][$fieldKey]['value']]) }}">
+                                                    {{ $articleTable[$tableKey][$fieldKey]['value'] }}
+                                                </a>
+                                            </td>
+                                        @else
+                                            <td class="value">{{ $articleTable[$tableKey][$fieldKey]['value'] }}</td>
+                                        @endif
 
-                                </tr>
+                                    </tr>
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
                 </tbody>
             </table>
         </div>
