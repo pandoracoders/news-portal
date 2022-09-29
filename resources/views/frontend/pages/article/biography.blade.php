@@ -52,9 +52,7 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                                         </figure>
                                     </div>
                                 </div>
-                                <div class="table-holder">
-
-                                </div>
+                                @include('frontend.pages.article.components.facts')
                             </div>
                         </div>
                         <div class="right-section col-lg-8">

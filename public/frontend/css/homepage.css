@@ -46,8 +46,8 @@
 }
 
 .trending-single .trending-title h2 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -97,8 +97,8 @@
 }
 
 .biography-left .biography-single .biography-title h2 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -160,8 +160,8 @@
 }
 
 .entertainment-left .entertainment-single .entertainment-title h2 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;

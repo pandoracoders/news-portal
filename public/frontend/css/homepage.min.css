@@ -181,7 +181,7 @@ header .navbar .navbar-nav .nav-item .active{background-color:#3A3B3C;border-rad
 .article-date{color:#656565;font-weight:700;padding:5px 0px;font-size:11px;display:inline-block;margin:0;}
 .article-author,.article-author a{color:#656565;font-weight:700;padding:5px 0px;;   margin:0px;font-size:11px;display:inline;}
 .article-author a:hover{color:#00a6ff;}
-#glider .splide__slide .slider-image .slider-title{margin:0;width:100%;padding:0px 5px;font-size:1rem;font-weight:500;display:inline-block;hyphens:auto;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+#glider .splide__slide .slider-image .slider-title{margin:0;width:100%;padding:0px 5px;font-size:15px;font-weight:600;display:inline-block;hyphens:auto;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 #glider .splide__arrows .splide__arrow svg{fill:#111!important;border-color:#313131!important;-webkit-transition:0.2s ease;transition:0.2s ease;}
 #glider .splide__arrows .splide__arrow:hover{background-color:rgb(80, 80, 80)!important;border-color:rgb(80, 80, 80)!important;}
 #glider .splide__arrows .splide__arrow:hover svg{fill:#fff!important;}
@@ -242,13 +242,13 @@ header .navbar .navbar-nav .nav-item .active{background-color:#3A3B3C;border-rad
 .trending-single .image{width:30%;height:30%;margin-right:10px;}
 .trending-single .image_img{border-radius:5px;min-width:100%;max-height:70px;min-height:70px;object-fit:cover;object-position:top;}
 .trending-single .trending-title{width:65%;max-height:70px;min-height:70px;display:flex!important;flex-direction:column!important;justify-content:space-between;flex:1;}
-.trending-single .trending-title h2{font-size:14px;font-weight:500;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.trending-single .trending-title h2{font-size:15px;font-weight:600;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 .biography-left{margin:0;padding:0;}
 .biography-left .biography-single{margin-bottom:15px;padding-left:12px;max-height:70px;min-height:70px;display:flex;}
 .biography-single .image{width:30%;margin-right:10px;overflow:hidden;}
 .biography-left .biography-single .image_img{min-width:100%;max-height:70px;min-height:70px;object-fit:cover;object-position:top;border-radius:5px;}
 .biography-left .biography-single .biography-title{width:65%;max-height:70px;min-height:70px;display:flex!important;flex-direction:column!important;justify-content:space-between;flex:1;}
-.biography-left .biography-single .biography-title h2{font-size:14px;font-weight:500;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.biography-left .biography-single .biography-title h2{font-size:15px;font-weight:600;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
 .biography-right .image_img{border-radius:15px;min-width:100%;min-height:240px;max-height:240px;object-fit:cover;object-position:top;}
 .textover{position:relative;margin-left:0;}
 .textover figcaption{position:absolute;bottom:0;left:0;padding:5px 15px 0 15px;background-color:rgba(0, 0, 0, 0.8);width:100%;color:white;border-bottom-left-radius:15px;border-bottom-right-radius:15px;display:-webkit-box;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical;}

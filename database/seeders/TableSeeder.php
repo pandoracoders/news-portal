@@ -49,6 +49,13 @@ class TableSeeder extends Seeder
                 "created_at" => now(),
                 "updated_at" => now(),
             ],
+            [
+                "title" => "Birth Month",
+                "type" => "text",
+                "searchable" => true,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
 
             [
                 "title" => "Birth Day",
@@ -59,6 +66,13 @@ class TableSeeder extends Seeder
             ],
             [
                 "title" => "Death Year",
+                "type" => "text",
+                "searchable" => false,
+                "created_at" => now(),
+                "updated_at" => now(),
+            ],
+            [
+                "title" => "Death Month",
                 "type" => "text",
                 "searchable" => false,
                 "created_at" => now(),
