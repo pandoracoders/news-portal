@@ -18,6 +18,7 @@ class TableSetRequest extends FormRequest
         return [
             "title" => "required|string|max:255",
             "description" => "nullable|string|max:255",
+
         ];
     }
 
@@ -30,10 +31,11 @@ class TableSetRequest extends FormRequest
                     "id" => $this->field_id[$key] ?? null,
                     "title" => $field,
                     "type" => $this->field_type[$key],
-                    "searchable" => $this->searchable[$key] ?? false,
+                    "searchable" => $this->searchable[$field] ?? false,
                 ]);
             }
         }
+
         $this->merge([
             "table_fields" => $fields,
         ]);
