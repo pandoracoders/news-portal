@@ -1,3 +1,18 @@
+@php
+function getTitle()
+{
+    $path = explode('/', Request::path())[2];
+    switch ($path) {
+        case 'birth-year':
+        case 'birth-month':
+            return 'Celebrities born in ';
+        case 'birth-day':
+            return 'Celebrities born on ';
+        default:
+            return 'Celebrites of ';
+    }
+}
+@endphp
 @extends('frontend.layouts.index')
 {{-- [
     'meta_title' => $author->alias_name,
@@ -33,7 +48,7 @@
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">All Posts for
+                <h1 class="text-capitalize">{{ getTitle() }}
                     <span class="colored">
                         {{ $value }}
                     </span>

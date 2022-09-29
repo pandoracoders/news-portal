@@ -47,7 +47,7 @@ if (!function_exists('getYouMayAlsoLike')) {
 
         $more .= '<div class="heading mt-4 mb-4">';
         $more .= '<div class="category-segment">';
-        $more .= '<span>More on' . $article->category->title . '</span>';
+        $more .= '<span>More on ' . $article->category->title . '</span>';
         $more .= '</div>';
         $more .= '</div>';
         $more .= '<div class="row" id="scroll-content">';

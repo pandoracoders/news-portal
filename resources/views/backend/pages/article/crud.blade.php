@@ -29,7 +29,7 @@
             };
             /* Add a button that opens a window */
             editor.ui.registry.addButton('readmore', {
-                text: 'Add ReadMore',
+                text: 'Add Read More',
                 class: "btn btn-primary",
                 onAction: function() {
                     /* Open window */
@@ -108,7 +108,7 @@
                 input.click();
             },
             // success color
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 100%; } .readmore{ background-color: green; color:white; padding: 10px; margin: 10px 0; }',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 100%; } .readmore{ border: solid 1px #ccc;background-color: #eee; font-size: 17px; font-weight:bold; border-radius:7px; width:35%; color:black; padding: 5px 10px; margin: 10px 0; }',
 
 
             importcss_append: true,
