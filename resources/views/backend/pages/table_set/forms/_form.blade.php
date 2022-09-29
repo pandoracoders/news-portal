@@ -35,7 +35,7 @@
                                 <option value="" disabled>Select Category</option>
                                 @foreach ($categories as $category)
                                     <option
-                                        {{ isset($table_set) && in_array($category->id,$table_set->categories()->pluck('category_id')->toArray()) ? 'selected=selected' : '' }}
+                                        {{ isset($table_set) &&in_array($category->id,$table_set->categories()->pluck('category_id')->toArray())? 'selected=selected': '' }}
                                         value="{{ $category->id }}">{{ $category->title }}
                                     </option>
                                 @endforeach
@@ -113,8 +113,9 @@
                                         </td>
                                         <td>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="searchable[]"
-                                                    value="1" {{ $field->searchable ? 'checked=checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox"
+                                                    name="searchable[{{ $field->title }}]" value="1"
+                                                    {{ $field->searchable ? 'checked=checked' : '' }}>
                                             </div>
                                         </td>
                                         <td>
@@ -173,14 +174,14 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             const select2 = $('#categories').select2({
                 placeholder: 'Select Categories',
                 allowClear: true,
                 // tags: true,
                 // templateResult: formatState,
                 // templateSelection: formatState,
-    
+
             });
         })
 

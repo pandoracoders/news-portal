@@ -81,8 +81,18 @@ class TableSetController extends Controller
      */
     public function update(TableSetRequest $request, TableSet $table_set)
     {
-        $table_set->update($request->validated());
-        $table_set->categories()->sync($request->categories);
+        $table_set->tableSetCategories()->delete();
+        // create new categories
+        foreach ($request->categories ?? [] as $category) {
+            $table_set->tableSetCategories()->create([
+                "category_id" => $category
+            ]);
+        }
+        $table_set->tableFields()->delete();
+
+        foreach ($request->table_fields as $field) {
+            $table_set->tableFields()->updateOrCreate($field);
+        }
         return redirect()->route("backend.table_set-view")->with("success", "TableSet updated successfully.");
     }
 
