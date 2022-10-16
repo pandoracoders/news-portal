@@ -4,7 +4,7 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/splide.min.js" defer></script>
     <script>
         // document.getQuery
     </script>

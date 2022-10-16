@@ -18,7 +18,7 @@
 @endpush
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('frontend/css/splide.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/splide.min.css') }}" media="print" onload="this.media='all'">
 @endpush
 
 @section('content')
@@ -36,16 +36,18 @@
     <script async src="https://platform.twitter.com/widgets.js"></script>
 
     <script>
+        const tblOfContents = document.querySelector('.table-of-contents');
         document.getElementById('collapse-btn').addEventListener('click', function() {
-            console.log('clicked');
             if (this.getAttribute('aria-expanded') == 'true') {
                 this.setAttribute('aria-expanded', 'false');
                 this.classList.add('collapsed');
                 document.getElementById('collapseOne').classList.remove('show');
+                tblOfContents.classList.remove('content-height');
             } else {
                 this.setAttribute('aria-expanded', 'true');
                 this.classList.remove('collapsed');
                 document.getElementById('collapseOne').classList.add('show');
+                tblOfContents.classList.add('content-height')
             }
         });
     </script>
@@ -172,7 +174,7 @@
         }
     </script>
 
-    <script src="{{ asset('frontend') }}/js/splide.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/splide.min.js" defer></script>
 
     <script>
         // count number of p tag in content-detail div

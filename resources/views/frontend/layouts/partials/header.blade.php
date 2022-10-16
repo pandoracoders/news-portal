@@ -17,7 +17,7 @@
             </div>
 
             <a href="{{ url('/') }}" class="navbar-brand d-lg">
-               <img src=" {{ asset(getSettingValue('logo')) }}" height="45" alt="">
+               <img src=" {{ asset(getSettingValue('logo')) }}" height="45" width="150" alt="">
             </a>
 
             @php

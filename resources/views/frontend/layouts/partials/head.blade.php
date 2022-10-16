@@ -14,6 +14,7 @@ $type = isset($type) ? $type : "website";
 @endphp
 
 @stack('head')
+
  <title>{{ Request::url() == url('/') ? (getSettingValue('website_title') . " - " . getSettingValue('slogan')) : ($meta_title . " - " . getSettingValue('website_title') )}}</title>
 
 

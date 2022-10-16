@@ -47,7 +47,7 @@
                                 <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                                     <img src="{{ asset('image-placeholder.png') }}"
                                         data-src="{{ asset($article->image) }}" alt="{{ $article->title }}"
-                                        class="slider-image-img">
+                                        class="slider-image-img" width="190" height="120">
                                 </a>
                                 {{-- <p class="slider-category">
 

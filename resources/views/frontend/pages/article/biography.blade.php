@@ -47,7 +47,7 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                                     <div class="image">
                                         <figure class="m-0">
                                             <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
-                                                class="image_img img-fluid">
+                                                class="image_img img-fluid" width="425" height="300">
 
                                         </figure>
                                     </div>

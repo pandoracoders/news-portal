@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/article.min.css" type="text/css">
+    <link rel="stylesheet" defer href="{{ asset('') }}frontend/css/article.min.css" type="text/css">
 @endpush
 
 
@@ -31,8 +31,8 @@
             @include('frontend.pages.article.components.title-section')
 
             <div class="featured-image">
-                <img data-src="{{ $article->image }}" src="{{ asset('image-placeholder.png') }}" class=""
-                    alt="{{ $article->title }}">
+                <img src="{{ $article->image }}" class=""
+                    alt="{{ $article->title }}" width="750" height="500">
             </div>
             @include('frontend.pages.article.components.table_of_content')
             <div class="content-detail">
