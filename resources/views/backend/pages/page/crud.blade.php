@@ -18,7 +18,7 @@
 
     <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.min.js"></script>
 
-    <script src="https://cdn.tiny.cloud/1/j13mw8eat9x0mct0dhgcxkzjhazjsq0ck1acz86lodyv52w7/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/xbw872gf05l003xyag73l4fuxlcse5ggqre8dxhqd72fmil6/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script>
         tinymce.init({

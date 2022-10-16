@@ -16,7 +16,7 @@
     <!--plugins-->
     <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="{{ asset("backend") }}/assets/plugins/input-tags/js/tagsinput.js"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/xbw872gf05l003xyag73l4fuxlcse5ggqre8dxhqd72fmil6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
         tinymce.init({
