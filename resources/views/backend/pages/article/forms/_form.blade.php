@@ -18,7 +18,8 @@
                                 <hr>
                                 <div class="col-12 mb-2 ">
                                     <label class="form-label">Title *</label>
-                                    <input type="text" {{ isset($article) ? 'readonly=readonly' : '' }}
+                                    <input type="text"
+                                        {{ isset($article) ? (auth()->user()->isWriter ? 'readonly=readonly' : '') : '' }}
                                         class="form-control {{ isset($errors) && $errors->has('title') ? 'is-invalid' : '' }}"
                                         name="title" value="{{ isset($article) ? $article->title : old('title') }}">
                                     @if (isset($errors) && $errors->has('title'))
@@ -27,6 +28,21 @@
                                         </div>
                                     @endif
                                 </div>
+
+                                @if (!auth()->user()->isWriter && !$article->published_at && $article->task_status == 'submitted')
+                                    <div class="col-12 mb-2 ">
+                                        <label class="form-label">Slug *</label>
+                                        <input type="text"
+                                            class="form-control {{ isset($errors) && $errors->has('slug') ? 'is-invalid' : '' }}"
+                                            name="slug" value="{{ isset($article) ? $article->slug : old('slug') }}">
+                                        @if (isset($errors) && $errors->has('slug'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('slug') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
+
 
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Body</label>
@@ -279,7 +295,7 @@
                                 @endphp
                                 @foreach ($articles as $a)
                                     <option value="{{ $a->id }}"
-                                        {{ in_array($a->id, $read_more_articles ?? []   ) ? 'selected' : '' }}
+                                        {{ in_array($a->id, $read_more_articles ?? []) ? 'selected' : '' }}
                                         data-image="{{ asset($a->image) }}">
                                         {{ $a->title }}</option>
                                 @endforeach
@@ -364,7 +380,7 @@
                                                                 name="{{ str_slug($key) . '_' . str_slug($field->title) }}">
                                                                 <option value="">Select Month</option>
                                                                 @foreach (getMonths() as $month)
-                                                                    <option value="{{($month) }}"
+                                                                    <option value="{{ $month }}"
                                                                         {{ $value == str_slug($month) ? 'selected' : '' }}>
                                                                         {{ $month }} </option>
                                                                 @endforeach

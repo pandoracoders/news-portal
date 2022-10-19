@@ -34,7 +34,7 @@ class ArticleDataTable extends DataTable
         $this->user = auth()->user();
         $this->role = $this->user->role->slug;
         $this->showAction = $this->showAction();
-        $this->showLinks = (request("task_status") == "published" || !request("task_status")  ) ? true : false;
+        $this->showLinks = (request("task_status") == "published" || !request("task_status")) ? true : false;
     }
 
     /**
@@ -101,7 +101,7 @@ class ArticleDataTable extends DataTable
             array_push($rawColumns, "action");
         }
 
-        if($this->showLinks){
+        if ($this->showLinks) {
             $datatable->addColumn('incoming', function ($row) {
                 return $row->incoming_link;
             });
@@ -110,14 +110,14 @@ class ArticleDataTable extends DataTable
             });
         }
 
-        if(in_array($this->role , ["super-admin", "editor"]) && $this->showLinks){
+        if (in_array($this->role, ["super-admin", "editor"]) && $this->showLinks) {
             $datatable->addColumn("featured", function ($row) {
 
-                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->is_featured ? 'checked' :'') . " data-url='" . route("backend.article-featured", ["article"=> $row]) . "'/>" : '';
+                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->is_featured ? 'checked' : '') . " data-url='" . route("backend.article-featured", ["article" => $row]) . "'/>" : '';
             });
 
             $datatable->addColumn("editor_choice", function ($row) {
-                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->editor_choice ? 'checked' :'') . " data-url='" . route("backend.article-editor_choice", ["article"=> $row]) . "'/>" : '' ;
+                return $row->task_status == 'published' ? "<input type='checkbox' class='reactive' " . ($row->editor_choice ? 'checked' : '') . " data-url='" . route("backend.article-editor_choice", ["article" => $row]) . "'/>" : '';
             });
 
             array_push($rawColumns, "featured");
@@ -147,9 +147,9 @@ class ArticleDataTable extends DataTable
             $model->where("editor_id", $this->user->id)
                 ->orWhereNull("editor_id");
         }
-        if(request()->search && is_array(request()->search)){
+        if (request()->search && is_array(request()->search)) {
 
-            $model->where('title','like',"%".request()->search['value']."%");
+            $model->where('title', 'like', "%" . request()->search['value'] . "%");
         }
         return $model;
     }
@@ -190,23 +190,23 @@ class ArticleDataTable extends DataTable
             array_push($columns, Column::make("action"));
         }
 
-        if(in_array($this->role , ["super-admin", "editor"]) && $this->showLinks){
+        if (in_array($this->role, ["super-admin", "editor"]) && $this->showLinks) {
             array_push($columns, Column::make("featured"));
             array_push($columns, Column::make("editor_choice"));
         }
 
-        if($this->showLinks){
+        if ($this->showLinks) {
             array_push($columns, Column::make("incoming")
-            ->title('<i class="bi bi-box-arrow-in-down-left" style="font-size:20px"></i>')
-            ->data("incoming")
-            ->class("text-center")
-            ->width(100)
+                ->title('<i class="bi bi-box-arrow-in-down-left" style="font-size:20px"></i>')
+                ->data("incoming")
+                ->class("text-center")
+                ->width(100)
 
-            ->class("text-center"));
+                ->class("text-center"));
             array_push($columns, Column::make("outgoing")
-            ->title('<i class="bi bi-box-arrow-up-right" style="font-size:18px"></i>')
-            ->width(60)
-            ->class("text-center"));
+                ->title('<i class="bi bi-box-arrow-up-right" style="font-size:18px"></i>')
+                ->width(60)
+                ->class("text-center"));
         }
 
 
@@ -241,7 +241,7 @@ class ArticleDataTable extends DataTable
                     class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
                 }
             }
-        } else if ($this->role == "super-admin") {
+        } else if ($this->role == "super-admin" && $row->task_status != "writing") {
             $td = "<a href='" . route('backend.article-edit', $row) . "'
                     class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
         }
