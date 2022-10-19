@@ -15,8 +15,7 @@
                                  <div class="col-4 image">
                                      <figure class="m-0">
                                          <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                             <img src="{{ asset('image-placeholder.png') }}" width="50"
-                                                 height="50" data-src="{{ asset($article->image) }}"
+                                             <img src="{{ asset($article->image) }}"
                                                  alt="{{ $article->title }}" class="image_img">
                                          </a>
                                      </figure>
@@ -51,8 +50,8 @@
                  @foreach ($section['articles'][1] ?? [] as $key => $article)
                      <a class="text-white" href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
                          <figure class="textover">
-                             <img width="50" height="50" src="{{ asset('image-placeholder.png') }}"
-                                 data-src="{{ asset($article->image) }}" alt="{{ $article->title }}"
+                             <img width="50" height="50"
+                                 src="{{ asset($article->image) }}" alt="{{ $article->title }}"
                                  class="image_img">
                              <figcaption>
                                  {{ $article->title }}
@@ -85,8 +84,8 @@
                          <div class="image">
                              <figure class="m-0">
                                  <a href="{{ route('singleArticle', ['slug' => $article->slug]) }}">
-                                     <img width="50" height="50" src="{{ asset('image-placeholder.png') }}"
-                                         data-src="{{ asset($article->image) }}" alt="{{ $article->title }}"
+                                     <img width="50" height="50"
+                                         src="{{ asset($article->image) }}" alt="{{ $article->title }}"
                                          class="image_img">
                                  </a>
                              </figure>
