@@ -18,8 +18,8 @@ class ArticleRequest extends FormRequest
     {
         $required = [
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:articles,slug,' . $this->route("article")->id,
-            'summary' => 'required|string|max:255',
+
+            'summary' => 'required|string',
             'body' => 'required|string',
             "image" => "required_without:id|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'category_id' => 'required|exists:categories,id',
@@ -27,8 +27,8 @@ class ArticleRequest extends FormRequest
 
         $rules =  [
             'title' => 'nullable|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:articles,slug,' . $this->route("article")->id,
-            'summary' => 'nullable|string|max:255',
+
+            'summary' => 'nullable|string|',
             'body' => 'nullable|string',
             // 'image' => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'category_id' => 'nullable|exists:categories,id',
@@ -96,7 +96,6 @@ class ArticleRequest extends FormRequest
                 "tables" => $tables,
                 "tags" => $tags,
                 "category_id" => $category->id,
-                "slug" => $this->slug ?? str_slug($this->route("article")->title),
             ]
         );
     }

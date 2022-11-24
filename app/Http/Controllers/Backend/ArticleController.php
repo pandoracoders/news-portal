@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ArticleRequest;
 use App\Jobs\Backend\ArticleLogJob;
 use App\Models\Backend\Article;
+use App\Models\Seo;
 use App\Services\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -66,6 +69,28 @@ class ArticleController extends Controller
             ->with('success', 'Article created successfully.');
     }
 
+    // Upload image from tinymce inside content
+    public function upload_image(Request $request)
+    {
+        $file = $request->file;
+        $path =  ("uploads/" . date("Y/m/d/"));
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $filename = explode('.', $file->getClientOriginalName())[0];
+        $path = $path . time() . "_" .  $filename . '.webp';
+
+        // Intervention
+        Image::make($file)->resize(450, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('webp', 50)->save(($path));
+
+
+
+        return response()->json(['location' => "/$path"]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,6 +107,7 @@ class ArticleController extends Controller
         $message = '';
         $role = auth()->user()->role->slug;
         $update_data = [];
+
 
         if ($article->task_status == 'submitted' && $role != 'writer') {
             $message = 'Article picked by ' . auth()->user()->name . 'for editing';
@@ -126,6 +152,9 @@ class ArticleController extends Controller
                 ],
             );
         } else {
+            if (!$article->image && $request['task_status'] === 'submitted') {
+                return back()->with('error', 'There is no featured image')->withInput();
+            }
             $articleArray = collect($request->validated())
                 ->except(['tags'])
                 ->toArray();
@@ -138,6 +167,7 @@ class ArticleController extends Controller
                 $message = 'Article is submitted and open for editor';
             }
         } elseif ($request->task_status == 'published') {
+            $articleArray['slug'] = Str::slug($request->title);
             $message = 'Article published by ' . auth()->user()->name;
             if (!$article->published_at) {
                 $articleArray['published_at'] = carbon($request->published_at);
@@ -153,6 +183,11 @@ class ArticleController extends Controller
         }
 
         $article->update(array_filter($articleArray));
+        Seo::where('seoable_id', $request->id)->update([
+            'meta_title' => $request->meta_title ?? '',
+            'meta_description' => $request->meta_description ?? '',
+            'meta_keywords' => $request->meta_keywords ?? ''
+        ]);
 
         $article->tags()->sync($request->tags);
         if ($message) {

@@ -15,9 +15,9 @@ trait SeoTrait
 
     public static function bootSeoTrait()
     {
-        static::created(function ($model) {
-            if (request()->meta_title && request()->meta_description && request()->meta_keywords) {
 
+        static::created(function ($model) {
+           if (request()->meta_title && request()->meta_description && request()->meta_keywords) {
                 $model->seo()->updateOrCreate(
                     [
                         "seoable_id" => $model->id,
@@ -33,16 +33,17 @@ trait SeoTrait
         });
 
         static::updated(function ($model) {
-            if (request()->meta_title && request()->meta_description && request()->meta_keywords) {
+            if (request()->meta_title || request()->meta_description || request()->meta_keywords) {
+
                 $model->seo()->updateOrCreate(
                     [
                         "seoable_id" => $model->id,
                         "seoable_type" => get_class($model),
                     ],
                     [
-                        'meta_title' => request()->meta_title,
-                        'meta_description' => request()->meta_description,
-                        'meta_keywords' => request()->meta_keywords,
+                        'meta_title' => request()->meta_title ?? '',
+                        'meta_description' => request()->meta_description ?? '',
+                        'meta_keywords' => request()->meta_keywords ?? '',
                     ]
                 );
             }

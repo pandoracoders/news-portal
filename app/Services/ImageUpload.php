@@ -8,8 +8,7 @@ class ImageUpload
 {
     public static function upload($file, $path = null, $filename = null)
     {
-
-        $path = $path . "/" ?? ("uploads/" . date("Y/m/d/"));
+        $path = $path ?? ("uploads/" . date("Y/m/d/"));
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
@@ -20,7 +19,12 @@ class ImageUpload
             $path = $path . $filename . '.webp';
         }
         // Intervention
-        Image::make($file)->encode('webp', 90)->save(($path));
+        Image::make($file)->resize(728, 455, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->encode('webp', 60)->save(($path));
         return $path;
     }
 }
+
+

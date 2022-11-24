@@ -17,10 +17,6 @@
     <meta property="og:article:published_time" content="{{ $article->published_at }}">
 @endpush
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('frontend/css/splide.min.css') }}" media="print" onload="this.media='all'">
-@endpush
-
 @section('content')
     @if ($article->tables)
         @include('frontend.pages.article.biography')
@@ -32,10 +28,8 @@
 
 
 @push('scripts')
-    <script async src="//www.instragram.com/embed.js"></script>
-    <script async src="https://platform.twitter.com/widgets.js"></script>
 
-    <script>
+<script>
         const tblOfContents = document.querySelector('.table-of-contents');
         document.getElementById('collapse-btn').addEventListener('click', function() {
             if (this.getAttribute('aria-expanded') == 'true') {
@@ -174,7 +168,7 @@
         }
     </script>
 
-    <script src="{{ asset('frontend') }}/js/splide.min.js" defer></script>
+
 
     <script>
         // count number of p tag in content-detail div
@@ -182,7 +176,6 @@
 
         // var pTag = document.querySelectorAll('p');
         var readMoreSection = Math.round(pTag.length / 2);
-        console.log(readMoreSection);
         fetch("{{ route('ajax.readMoreSectionAjax', $article->id) }}")
             .then(res => res.json())
             .then(res => {
@@ -196,10 +189,8 @@
                 }
 
                 var splide = document.querySelectorAll("div.splide");
-                console.log(splide);
                 if (splide.length > 0) {
                     var slider = document.querySelectorAll("slider");
-                    console.log(slider);
                     for (let index = 0; index < slider.length; index++) {
                         slider[index].style.display = "";
                     }

@@ -63,12 +63,20 @@ Route::group(['prefix' => 'tag', "as" => "tag-"], function () {
 });
 
 
+
 Route::group(['prefix' => 'article', "as" => "article-"], function () {
     Route::get("/{task_status?}", [ArticleController::class, "index"])->name("view");
     Route::get("/create", [ArticleController::class, "create"])->name("create");
     Route::post("/store", [ArticleController::class, "store"])->name("store");
+
+    // For Storing Image of articles TinyMCE
+    Route::post('/upload-content-image', [ArticleController::class, 'upload_image'])->name('upload-image');
+
     Route::get("/edit/{article}", [ArticleController::class, "edit"])->name("edit");
+
     Route::post("/update/{article}", [ArticleController::class, "update"])->name("update");
+
+
     Route::get("/delete/{article}", [ArticleController::class, "destroy"])->name("delete");
     Route::get("/status-update/{article}", [ArticleController::class, "updateStatus"])->name("update_status");
 

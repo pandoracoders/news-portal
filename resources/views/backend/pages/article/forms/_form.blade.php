@@ -21,7 +21,7 @@
                                     <input type="text"
                                         {{ isset($article) ? (auth()->user()->isWriter ? 'readonly=readonly' : '') : '' }}
                                         class="form-control {{ isset($errors) && $errors->has('title') ? 'is-invalid' : '' }}"
-                                        name="title" value="{{ isset($article) ? $article->title : old('title') }}">
+                                        name="title" value="{{ old('title') ? old('title') : ( isset($article) ? $article->title : '' ) }}">
                                     @if (isset($errors) && $errors->has('title'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('title') }}
@@ -29,31 +29,18 @@
                                     @endif
                                 </div>
 
-                                @if (!auth()->user()->isWriter && !$article->published_at && $article->task_status == 'submitted')
-                                    <div class="col-12 mb-2 ">
-                                        <label class="form-label">Slug *</label>
-                                        <input type="text"
-                                            class="form-control {{ isset($errors) && $errors->has('slug') ? 'is-invalid' : '' }}"
-                                            name="slug" value="{{ isset($article) ? $article->slug : old('slug') }}">
-                                        @if (isset($errors) && $errors->has('slug'))
-                                            <div class="invalid-feedback">
-                                                {{ $errors->first('slug') }}
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endif
-
 
                                 <div class="col-12 mb-2">
+
                                     <label for="" class="form-label">Body</label>
-                                    <textarea data-validation="required" name="body" id="editor" class="form-control editor" rows="10">{{ isset($article) ? $article->body : old('body') }}</textarea>
+                                    <textarea data-validation="required" name="body" id="editor" class="form-control editor" rows="10">{{ old('body') ? old('body') : ( isset($article) ? $article->body : '' ) }}</textarea>
                                 </div>
 
                                 <div class="col-12 mb-2">
                                     <label for="" class="form-label">Summary</label>
-                                    <textarea data-validation="required|min:100|max:255" name="summary" class="form-control" rows="5">{{ isset($article) ? $article->summary : old('summary') }}</textarea>
-                                </div>
 
+                                    <textarea data-validation="required|min:100" name="summary" class="form-control" rows="5">{{ old('summary') ? old('summary') : ( isset($article) ? $article->summary : '' ) }}</textarea>
+                                </div>
 
                             </div>
                         </div>
@@ -135,7 +122,7 @@
             <div class="row mb-1" style="position:sticky; top:20rem;">
                 <div>
                     <label for="formFile" class="form-label">Featured Image</label>
-                    <input data-validation="required"
+                    <input
                         class="form-control {{ isset($errors) && $errors->has('image') ? 'is-invalid' : '' }}"
                         type="file" id="formFile" name="image"
                         onchange="document.getElementById('preview-image').src = window.URL.createObjectURL(this.files[0])">
@@ -453,18 +440,17 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-
             $(document).on("click", ".save-post", function() {
-
                 $("#save").trigger("click");
             })
 
 
             $(document).on("click", "#submit", function() {
-                $("#task_status").val('submitted');
                 // check if required validation
-                if (window.formValidation($(this)))
+                if (window.formValidation($(this))){
+                    $("#task_status").val('submitted');
                     $("#save").trigger("click");
+                }
             })
 
             $(document).on("click", "#publish", function() {

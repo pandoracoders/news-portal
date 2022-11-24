@@ -18,6 +18,7 @@ class Article extends Model
 {
     use HasFactory, SeoTrait;
 
+
     protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables', "is_featured", "editor_choice"];
 
     protected $casts = [

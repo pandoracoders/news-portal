@@ -55,58 +55,83 @@
             };
         });
 
+        const image_upload_handler_callback = (blobInfo, progress) => new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '/backend/article/upload-content-image');
+
+            xhr.upload.onprogress = (e) => {
+                progress(e.loaded / e.total * 100);
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 403) {
+                    reject({
+                        message: 'HTTP Error: ' + xhr.status,
+                        remove: true
+                    });
+                    return;
+                }
+
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    reject('HTTP Error: ' + xhr.status);
+                    return;
+                }
+
+                const json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location != 'string') {
+                    reject('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+
+                resolve(json.location);
+            };
+
+            xhr.onerror = () => {
+                reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+            };
+
+            const formData = new FormData();
+            formData.append('file', blobInfo.blob());
+            xhr.send(formData);
+        });
+
+
+
         tinymce.init({
             selector: 'textarea.editor',
+
             plugins: 'readmore preview advlist autolink importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+
             imagetools_cors_hosts: ['picsum.photos'],
             image_caption: true,
-            image_show_caption: true,
+
+
             relative_urls: false,
             convert_urls: false,
             menubar: '',
+
             toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen  preview readmore',
+
             toolbar_sticky: true,
             autosave_ask_before_unload: true,
             autosave_interval: "5s",
             autosave_prefix: "{{ route('backend.article-update', $article->id) }}",
             autosave_restore_when_empty: false,
             autosave_retention: "5s",
-            image_advtab: true,
 
             /* enable title field in the Image dialog*/
             image_title: true,
             /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
+            images_upload_handler: image_upload_handler_callback,
 
-            file_picker_types: 'image',
+
+            // file_picker_types: 'image',
             /* and here's our custom image picker*/
-            file_picker_callback: function(cb, value, meta) {
-                var input = document.createElement('input');
-                input.setAttribute('type', 'file');
-                input.setAttribute('accept', 'image/*');
 
-                input.onchange = function() {
-                    var file = this.files[0];
 
-                    var reader = new FileReader();
-                    reader.onload = function() {
-
-                        var id = 'blobid' + (new Date()).getTime();
-                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                        var base64 = reader.result.split(',')[1];
-                        var blobInfo = blobCache.create(id, file, base64);
-                        blobCache.add(blobInfo);
-
-                        /* call the callback and populate the Title field with the file name */
-                        cb(blobInfo.blobUri(), {
-                            title: file.name
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                };
-
-                input.click();
-            },
             // success color
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 100%; } .readmore{ border: solid 1px #ccc;background-color: #eee; font-size: 17px; font-weight:bold; border-radius:7px; width:35%; color:black; padding: 5px 10px; margin: 10px 0; }',
 
