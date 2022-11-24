@@ -1,10 +1,4 @@
-@extends('frontend.layouts.index', [
-    'meta_title' => $tag->seo?->meta_title ?? $tag->title,
-    'meta_description' => $tag->seo?->meta_title ?? "All the articles on ${$tag->title}",
-    'meta_keyword' => $tag->seo?->meta_keyword ?? getSettingValue('meta_keyword'),
-    'image' => getSettingValue('logo'),
-    'type' => 'website'
-])
+@extends('frontend.layouts.index')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
@@ -20,6 +14,7 @@
                         <span>Home</span>
                     </a>
                 </li>
+                ⇢
                 <li class="breadcrumb active">
                     <span class="text-capitalize">
                         {{ $tag->original_title }}
