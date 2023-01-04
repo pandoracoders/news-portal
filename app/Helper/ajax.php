@@ -4,31 +4,38 @@ use App\Models\Backend\Article;
 use App\Models\Backend\Category;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Php;
 
-if (!function_exists('getYouMayAlsoLike')) {
-    function getYouMayAlsoLike($article)
-
-    {
-        $tables = view("frontend.pages.article.components.facts", compact('article'))->render();
-
-        $keyword = $article->seo->meta_keywords;
+if(!function_exists('getArticles')){
+    function getArticles($originalArticle){
+        $keyword = $originalArticle->seo->meta_keywords;
         $articles = Article::where(function ($q) {
             $q->where('task_status', 'published')->where('status', 1);
-        })
-            ->where('id', '!=', $article->id)
-            ->where('title', 'like', '%' . $keyword . '%')
-            ->limit(8)
-            ->get();
+        })->where('id', '!=', $originalArticle->id)
+        ->where('body', 'like', '%' . $keyword . '%')
+        ->limit(10)
+        ->get();
 
-        if (!$articles->count()) {
+        if ($articles->count() < 10) {
+            $num = 10 - $articles->count();
             // get random articles
-            $articles = Article::where(function ($q) {
+            $extraArticle =  Article::where(function ($q) {
                 $q->where('task_status', 'published')->where('status', 1);
             })
-                ->where('id', '!=', $article->id)
-                ->get()
-                ->random(12);
-        }
+            ->where('id', '!=', $originalArticle->id)
+            ->where('body', 'not like', '%' . $keyword . '%')
+            ->limit($num)
+            ->get();
 
+            $articles = $articles->merge($extraArticle);
+        }
+        return $articles;
+    }
+}
+
+if (!function_exists('getYouMayAlsoLike')) {
+    function getYouMayAlsoLike($originalArticle)
+
+    {
+        $articles = getArticles($originalArticle);
         $youMayAlsoLike = '';
         $youMayAlsoLike .= '<div class="heading">';
         $youMayAlsoLike .= '<div class="category-segment">';
@@ -43,35 +50,41 @@ if (!function_exists('getYouMayAlsoLike')) {
 
         $youMayAlsoLike .= '</div>';
 
-        $more = '';
-
-        $more .= '<div class="heading mt-4 mb-4">';
-        $more .= '<div class="category-segment">';
-        $more .= '<span>More on ' . $article->category->title . '</span>';
-        $more .= '</div>';
-        $more .= '</div>';
-        $more .= '<div class="row" id="scroll-content">';
-
-        // $moreArticles = Article::where('category_id', $article->category->id)
-        //     ->where('id', '!=', $article->id)
-        //     ->whereNotIn('id', $articles->pluck('id')->toArray())
-        //     ->limit(8)
-        //     ->get();
-
-        // foreach ($moreArticles as $article) {
-        //     $more .= view('frontend.pages.article.components.more', compact('article'))->render();
-        // }
-
-        $more .= '</div>';
-
-
         return [
             'youMayAlsoLike' => $youMayAlsoLike,
-            'more' => $more,
-            "tables" => $tables
         ];
     }
 }
+
+if(!function_exists('getMoreArticles')){
+    function getMoreArticles($originalArticle, $page){
+        // More article of same category
+        $articles = getArticles($originalArticle);
+        $moreArticles = Article::where('category_id', $originalArticle->category_id)
+            ->where('task_status','published')
+            ->where('status',1)
+            ->where('id', '!=', $originalArticle->id)
+            ->whereNotIn('id', $articles->pluck('id')->toArray())
+            ->skip(($page-1)*12)
+            ->limit(12)
+            ->orderBy('published_at','desc')
+            ->get();
+
+        $more = '';
+        if($moreArticles->count() > 0){
+            $more .= '<div class="row" id="scroll-content">';
+
+            foreach ($moreArticles as $article) {
+                $more .= view('frontend.pages.article.components.more', compact('article'))->render();
+            }
+
+            $more .= '</div>';
+        }
+
+        return $more;
+    }
+}
+
 
 if (!function_exists('getHomePageAjax')) {
     function getHomePageAjax()

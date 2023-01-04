@@ -14,6 +14,12 @@ class AjaxController extends Controller
         ]);
     }
 
+    public function moreOnCategory(Article $article){
+        $page = request()->page;
+        return response()->json([
+            'data' => getMoreArticles($article,$page),
+        ]);
+    }
 
     public function getHomePageAjax()
     {
