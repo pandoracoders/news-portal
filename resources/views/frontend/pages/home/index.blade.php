@@ -4,9 +4,7 @@
     @include('frontend.assets.css.splide') --}}
      @include('frontend.assets.css.homepage_min')
 @endpush
-@push('schema')
-    {!! $schema !!}
-@endpush
+
 
 @push('scripts')
     @include('frontend.assets.js.splide')
