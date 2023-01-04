@@ -15,10 +15,7 @@ $type = isset($type) ? $type : "website";
 
 @stack('head')
 
- <title>{{ Request::url() == url('/') ? (getSettingValue('website_title') . " - " . getSettingValue('slogan')) : ($meta_title . " - " . getSettingValue('website_title') )}}</title>
-
-
-<meta name="title" content="{{ $meta_title }}">
+ <title>{{ Request::url() == url('/') ? (getSettingValue('website_title') . " - " . getSettingValue('slogan')) : ($meta_title)}}</title>
 
 <meta name="description" content="{{ $meta_description }}">
 <meta name="theme-color" content="#111">
@@ -35,5 +32,5 @@ $type = isset($type) ? $type : "website";
 <meta property="twitter:title" content="{{ $meta_title }}">
 <meta property="twitter:description" content="{{ $meta_description }}">
 <meta property="twitter:domain" content="{{ getSettingValue('website_title') }}">
-<meta property="twitter:image" content=" {{ $image }}">
+<meta property="twitter:image" content="{{ asset($image) }}">
 <link href="{{ Request::url() }}" rel="canonical">

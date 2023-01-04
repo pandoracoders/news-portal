@@ -1,13 +1,33 @@
+@php
+    $parentCategories = [];
+    $childCategories = [];
+    $soloCategories = [];
+
+    foreach ($categories as $category){
+        foreach ($categories as $cat){
+            if ($category->id == $cat->parent_id){
+                array_push($parentCategories, $category);
+                break;
+            }
+        }
+        if($category->parent_id == null){
+            array_push($soloCategories, $category);
+        }else{
+            array_push($childCategories, $category);
+        }
+    }
+    $soloCategories = array_diff($soloCategories, $parentCategories);
+
+@endphp
 <header>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-
             <div class="d-flex">
                 <button class="navbar-toggler btn-menu d-block" id="sidebarBtnOpen" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
+                    <span class="navbar-toggler-icon" style="">
                         <i class="fa-solid fa-align-left menu-icon"></i>
                     </span>
                 </button>
@@ -16,21 +36,20 @@
                 </a>
             </div>
 
-            <a href="{{ url('/') }}" class="navbar-brand d-lg">
-               <img src=" {{ asset(getSettingValue('logo')) }}" height="45" width="150" alt="">
+            <a href="{{ url('/') }}" class="navbar-brand d-lg" style="padding-bottom: 15px">
+               <img src=" {{ asset(getSettingValue('logo')) }}" height="50" width="150" alt="">
             </a>
-
             @php
                 $current_url = isset($article) ? route('singleArticle', ['slug' => $article->category?->slug ?? 'nu']) : Request::url();
             @endphp
 
-            <div class="collapse navbar-collapse d-none d-lg-block" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse d-none d-lg-block menu-items" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto text-uppercase">
                     <li class="nav-item">
                         <a class="nav-link {{ $current_url == url('/') ? 'active' : '' }}"
                             href="{{ url('/') }}">Home</a>
                     </li>
-                    @foreach ($categories as $category)
+                    @foreach ($soloCategories as $category)
                         <li class="nav-item">
                             <a class="nav-link {{ $current_url == route('singleArticle', ['slug' => $category->slug]) ? 'active' : '' }}"
                                 href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
@@ -38,6 +57,30 @@
                             </a>
                         </li>
                     @endforeach
+                    @foreach ($parentCategories as $cat)
+                        <li class="nav-item">
+
+                            <div class="nav-link parent">
+                                {{ $cat->title }} <i style="font-size:18px;" class="fa-solid fa-caret-down">
+                                 </i>
+                                 <ul class="dropdown-list">
+                                    @foreach ($childCategories as $c)
+                                        @if ($cat->id == $c->parent_id)
+                                            <li >
+                                                <a class=" {{ $current_url == route('singleArticle', ['slug' => $c->slug]) ? 'active' : '' }}"
+                                                    href="{{ route('singleArticle', ['slug' => $c->slug]) }}">
+                                                    {{ $c->title }}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+
+
+                        </li>
+                    @endforeach
+
                 </ul>
             </div>
 
@@ -53,12 +96,31 @@
                             href="{{ url('/') }}">Home</a>
                     </li>
 
-                    @foreach ($categories as $category)
+                    @foreach ($soloCategories as $category)
                         <li class="nav-item">
                             <a class="nav-link {{ $current_url == route('singleArticle', ['slug' => $category->slug]) ? 'active' : '' }}"
                                 href="{{ route('singleArticle', ['slug' => $category->slug]) }}">
                                 {{ $category->title }}
                             </a>
+                        </li>
+                    @endforeach
+                    @foreach ($parentCategories as $cat)
+                        <li class="nav-item">
+                            <span id="{{ $cat->slug }}" class="nav-link dropdown-trigger text-uppercase">
+                                {{ $cat->title }} <i style="font-size:18px;" class="fa-solid fa-caret-down"></i>
+                            </span>
+                            <ul class="dropdown-mobile text-uppercase">
+                                @foreach ($childCategories as $c)
+                                    @if ($cat->id == $c->parent_id)
+                                        <li >
+                                            <a class=""
+                                                href="{{ route('singleArticle', ['slug' => $c->slug]) }}">
+                                                {{ $c->title }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </li>
                     @endforeach
                 </ul>
@@ -97,18 +159,14 @@
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
                 <div id="search-container">
-                        <p class="close-search">X</p>
-                    <div id="search-box">
-                        <gcse:search enablehistory="false"></gcse:search>
-                    </div>
+                    <form action="/search/" method="get">
+                        <input type="text" name="q" id="" class="form-control search-box">
+                        <span class="close-search">X</span>
+                    </form>
                 </div>
             </div>
 
         </div>
     </nav>
 </header>
-{{--
-     <div class="search-container" style="">
 
-                </div>
-     --}}

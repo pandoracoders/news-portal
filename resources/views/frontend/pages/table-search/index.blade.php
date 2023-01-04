@@ -1,14 +1,23 @@
 @php
-function getTitle($value)
+function getTitle($field,$value)
 {
     $path = explode('/', Request::path())[2];
-    switch ($path) {
+    switch ($field) {
         case 'birth-year':
+            return "Celebrities born in <span class='colored'>$value</span>";
         case 'birth-month':
             return "Celebrities born in <span class='colored'>$value</span>";
+        case 'birth-place':
+            return "Celebrities from <span class='colored'>$value</span>";
         case 'birth-day':
             return "Celebrities born on <span class='colored'>$value</span>";
-            case 'nationality':
+        case 'death-year':
+            return "Celebrities died in <span class='colored'>$value</span>";
+        case 'death-month':
+            return "Celebrities died in <span class='colored'>$value</span>";
+        case 'death-day':
+            return "Celebrities died on <span class='colored'>$value</span>";
+        case 'nationality':
             return "<span class='colored'>$value</span> Celebrities";
         default:
             return "Celebrites of <span class='colored'>$value</span>";
@@ -25,7 +34,7 @@ function getTitle($value)
 ] --}}
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
+    @include('frontend.assets.css.category_min')
 @endpush
 
 
@@ -35,7 +44,7 @@ function getTitle($value)
 
         <section class="category-div">
             <div class="container category-title">
-                <h1 class="text-capitalize">{!! getTitle($value) !!}
+                <h1 class="text-capitalize">{!! getTitle($field,$value) !!}
 
                 </h1>
             </div>
@@ -52,67 +61,5 @@ function getTitle($value)
 @endsection
 
 @push('scripts')
-    <script>
-        var page = 1;
-        var loading = 0;
-        var extra = 500;
-        window.onscroll = function() {
-            const scrollContent = document.getElementById('scroll-content');
-            if (window.innerHeight + window.scrollY > scrollContent.offsetHeight - extra && loading === 0) {
-                // extra = 0;
-                loading = 1;
-                fetch("{{ url('/') }}".
-                        `page=${page}`, {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                "X-Requested-With": "XMLHttpRequest",
-                                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-                            },
-
-                        })
-                    .then(response => response.json())
-                    .then(d => {
-
-                        if (d && d.length > 0) {
-                            // var r = d.data;
-                            var html = '';
-
-                            for (let index = 0; index < d.length; index++) {
-                                html += `<div class="col-md-6 col-lg-4 mb-1 single-post">`;
-                                html +=
-                                    '<div class="category-post">';
-                                html += '<div class="image">';
-                                html += '<figure class="m-0">';
-                                html += '<a href="' + d[index].url + '">';
-                                html += '<img src="' + d[index].image + '" alt="" class="image_img img-fluid">';
-                                html += '</a>';
-                                html += '</figure>';
-                                html += '</div>';
-                                html +=
-                                    '<div class="category-post-title">';
-                                html += '<div class="title mb-3">';
-                                html += '<a href="' + d[index].url + '">';
-                                html += d[index].title;
-                                html += '</a>';
-                                html += '</div>';
-                                html += '<div class="meta"><p class = "article-date" >' + d[index]
-                                    .published_at + ' | </p>';
-                                html += '<p class="article-author">';
-                                html += '<a href="' + d[index].author.url + '"> ' + d[index].author.name +
-                                    '</a></p>';
-
-                                html += '</div>';
-                                html += '</div>';
-                                html += '</div>';
-                                html += '</div>';
-                            }
-                            scrollContent.insertAdjacentHTML('beforeend', html);
-                            page++;
-                            loading = 0;
-                        }
-                    })
-            }
-        }
-    </script>
+    {{-- @include('frontend.assets.js.category') --}}
 @endpush

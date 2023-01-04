@@ -1,15 +1,11 @@
-@php
-$factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-day', 'death-cause', 'nationality', 'ethnicity', 'father', 'mother', 'siblings', 'profession', 'net-worth', 'height', 'weight', 'body-measurement', 'gender-identity', 'marital-status', 'spouse', 'children'];
-@endphp
-
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/biography.min.css" type="text/css">
+    @include('frontend.assets.css.biography_min')
 @endpush
 
 
 
 <main>
-    <div class="row">
+
         <div class="col-12 biography">
             <div class="row">
                 <div class="col-lg-9 col-md-12 main-content-section">
@@ -28,9 +24,9 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                                 </a>
                             </li>
                             ⇢
-                            <li class="breadcrumb active">
-                                <span>
-                                    {{ $article->slug }}
+                            <li class="breadcrumb active text-capitalize">
+                                <span class="bc-title">
+                                    {{ $article->title }}
                                 </span>
                             </li>
                         </ul>
@@ -46,9 +42,8 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                                 <div class="featured-image">
                                     <div class="image">
                                         <figure class="m-0">
-                                            <img src="{{ asset($article->image) }}" alt="{{ $article->title }}"
-                                                class="image_img img-fluid" width="425" height="300">
-
+                                            <img src="{{ asset($article->image) }}" alt="{{ $article->featured_image_alt_text }}"
+                                                class="image_img" width="425" height="300">
                                         </figure>
                                     </div>
                                 </div>
@@ -74,8 +69,14 @@ $factsOrder = ['full-name', 'popular-name', 'birth-place', 'birth-day', 'death-d
                     </div>
                 </div>
             </div>
+            <div class="heading mt-4 mb-4">
+                <div class="category-segment">
+                    <span>More on  {{$article->category->title}}</span>
+                </div>
+            </div>
             <div class="similar-post-section">
+
             </div>
         </div>
-    </div>
+
 </main>

@@ -1,7 +1,11 @@
 @extends('frontend.layouts.index')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('') }}frontend/css/category.min.css" type="text/css">
+    @include('frontend.assets.css.category_min')
+@endpush
+
+@push('schema')
+    {!! $schema !!}
 @endpush
 
 @section('content')

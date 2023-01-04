@@ -7,16 +7,9 @@
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
-    {{-- @foreach ($static_routes as $url)
-        <url>
-            <loc>{{ route('singleArticle', $url) }}</loc>
-            <lastmod>{{ carbon('2022-2-2')->tz('UTC')->toAtomString() }}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>0.8</priority>
-        </url>
-    @endforeach --}}
 
-    @foreach ($category as $url)
+
+    @foreach ($categories as $url)
         <url>
             <loc>{{ route('singleArticle', $url->slug) }}</loc>
             <lastmod>{{ $url->updated_at->tz('UTC')->toAtomString() }}</lastmod>
@@ -25,14 +18,24 @@
         </url>
     @endforeach
 
-    @foreach ($tags as $url)
-        <url>
-            <loc>{{ route('singleArticle', $url->slug) }}</loc>
-            <lastmod>{{ $url->updated_at->tz('UTC')->toAtomString() }}</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.8</priority>
-        </url>
-    @endforeach
+    <url>
+        <loc>{{ route('singleArticle', $privacy_policy->key) }}</loc>
+        <lastmod>{{ carbon($privacy_policy->updated_at)->tz('UTC')->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{{ route('singleArticle', $contact_us->key) }}</loc>
+        <lastmod>{{ carbon($contact_us->updated_at)->tz('UTC')->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>{{ route('singleArticle', $about_us->key) }}</loc>
+        <lastmod>{{ carbon($about_us->updated_at)->tz('UTC')->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
 
     @foreach ($articles as $url)
         <url>

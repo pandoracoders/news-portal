@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" defer href="{{ asset('') }}frontend/css/article.min.css" type="text/css">
+    @include('frontend.assets.css.article_min')
 @endpush
 
 
@@ -10,29 +10,31 @@
                 <ul class="breadcrumb-container">
                     <li class="breadcrumb">
                         <a href="{{ url('/') }}">
-                            Home
+                            <i class="fa fa-solid fa-home"></i>
                         </a>
                     </li>
                     ⇢
                     <li class="breadcrumb">
-                        <a href="{{ route('singleArticle', $article->category->slug) }}">
-                            {{ $article->category->title }}
+                        <a href="{{ route('singleArticle', $article->category->slug) }}"
+                            class="text-capitalize">
+                            {{ $article->category->slug }}
                         </a>
                     </li>
                     ⇢
-                    <li class="breadcrumb active">
-                        <span class="text-capitalize">
+                    <li class="breadcrumb active text-capitalize">
+                        <span>
                             {{ $article->title }}
                         </span>
                     </li>
                 </ul>
+
             </div>
 
             @include('frontend.pages.article.components.title-section')
 
             <div class="featured-image">
                 <img src="{{ $article->image }}" class=""
-                    alt="{{ $article->title }}" width="750" height="500">
+                alt="{{ $article->featured_image_alt_text }}" width="750" height="500">
             </div>
             @include('frontend.pages.article.components.table_of_content')
             <div class="content-detail">
@@ -48,6 +50,12 @@
             @include('frontend.pages.article.components.tags')
         </div>
     </div>
-    <div class="similar-post-section ">
+    <div class="heading mt-4 mb-4">
+        <div class="category-segment">
+            <span>More on  {{$article->category->title}}</span>
+        </div>
+    </div>
+    <div class="similar-post-section">
+
     </div>
 </main>
