@@ -9,7 +9,8 @@ return [
         "editing",
         "modifying",
         "published",
-        "reviewing"
+        "reviewing",
+        "autopublish"
     ],
     "web_setting_tabs" => ['branding', 'social-media', 'secret', 'seo', 'analytics'],
     "social_media" => [
@@ -48,6 +49,8 @@ return [
         "assign_permission",
         "role-view",
         "role-manage",
+        "autopublish",
+        "assign_task"
     ],
     "writer_permissions" => [
         "category-view",

@@ -84,7 +84,7 @@ function getTitle($str)
 
         function formatState(item) {
             opt = $(item.element);
-            //console.log(opt.);
+
             og = opt.closest('optgroup').attr('label');
             return og + ' | ' + item.text;
         };

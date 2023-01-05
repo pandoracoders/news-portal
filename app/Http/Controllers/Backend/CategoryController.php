@@ -29,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view($this->path . "crud");
+        return view($this->path . "crud", [
+            'parentCategories' => Category::whereNull('parent_id')->get()
+        ]);
     }
 
     /**
@@ -55,7 +57,8 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return view($this->path . "crud", [
-            "category" => $category
+            "category" => $category,
+            'parentCategories' => Category::where('id','!=',$category->id)->whereNull('parent_id')->get()
         ]);
     }
 
@@ -68,6 +71,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+        // dd($request->validated());
         $category->update($request->validated());
         return redirect()->route("backend.category-view")->with("success", "Category updated successfully.");
     }

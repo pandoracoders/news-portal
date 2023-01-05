@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
         $this->merge([
             "slug" => $this->route("user")?->slug ?? str_slug($this->name),
             "id" => $this->route("user")?->id ?? null,
-            "password" => bcrypt($this->password) ?? null,
+            "password" => isset($this->password)? bcrypt($this->password): null,
         ]);
     }
 }

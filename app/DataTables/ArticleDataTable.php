@@ -23,10 +23,12 @@ class ArticleDataTable extends DataTable
         "published",
         "editing",
         "submitted",
+        "autopublish"
     ];
 
     private $editor_hide_condition = [
         "modifying",
+        "autopublish"
     ];
 
     public function __construct()
@@ -39,7 +41,7 @@ class ArticleDataTable extends DataTable
 
     /**
      * Build DataTable class.
-     *
+     *0
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
@@ -68,7 +70,7 @@ class ArticleDataTable extends DataTable
                     $td .= "<span> Editor:</span> <span> <b> {$row->editor?->name} </b> </span><br/>";
                 }
                 if ($row->task_status == "published") {
-                    $td .= "<span> Published:</span> <span> <b> " . carbon($row->published_at)->format("M d,Y H:m") . " </b> </span><br/>";
+                    $td .= "<span> Published:</span> <span> <b> " . carbon($row->published_at). " </b> </span><br/>";
                 }
 
                 return $td;
@@ -135,22 +137,31 @@ class ArticleDataTable extends DataTable
      */
     public function query(Article $model): QueryBuilder
     {
-        $model = $model->orderBy("published_at", "desc")->newQuery();
+        $model = $model->newQuery();
 
         if (request("task_status")) {
-            $model->where("task_status", request("task_status"));
+             $model->where("task_status", request("task_status"));
         }
 
         if ($this->role == "writer") {
             $model->where("writer_id", $this->user->id);
         } elseif ($this->role == "editor") {
-            $model->where("editor_id", $this->user->id)
-                ->orWhereNull("editor_id");
+            if(request("task_status") == "submitted"){
+                $model->where("task_status","submitted");
+            }elseif(request("task_status")==""){
+                $model->where("editor_id", $this->user->id)->orWhere("task_status","submitted");
+            }
+            else{
+                $model->where("editor_id", $this->user->id);
+            }
         }
-        if (request()->search && is_array(request()->search)) {
 
-            $model->where('title', 'like', "%" . request()->search['value'] . "%");
+        if ((request()->search['value'] )) {
+            if ($this->role != "writer") {
+                $model->where('title', 'like', "%" . request()->search['value'] . "%")->orWhere('body','like','%'.request()->search['value'].'%');
+            }
         }
+
         return $model;
     }
 
@@ -205,6 +216,7 @@ class ArticleDataTable extends DataTable
                 ->class("text-center"));
             array_push($columns, Column::make("outgoing")
                 ->title('<i class="bi bi-box-arrow-up-right" style="font-size:18px"></i>')
+                ->data("outgoing")
                 ->width(60)
                 ->class("text-center"));
         }
@@ -241,9 +253,11 @@ class ArticleDataTable extends DataTable
                     class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
                 }
             }
-        } else if ($this->role == "super-admin" && $row->task_status != "writing") {
+        } else if ($this->role == "super-admin" ) {
+           if( $row->task_status == 'published' || $row->task_status == 'submitted' || $this->user->id == $row->writer_id || $this->user->id == $row->editor_id){
             $td = "<a href='" . route('backend.article-edit', $row) . "'
-                    class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
+            class='badge badge-success badge-sm mr-2'> <i class='bi bi-pencil-square'></i> Edit</a>";
+           }
         }
         return $td;
     }

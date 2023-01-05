@@ -44,6 +44,28 @@ class ArticleTitleController extends Controller
         ]);
     }
 
+
+    public function create_and_publish(){
+        return view($this->path . "create_and_publish", [
+            "categories" => \App\Models\Backend\Category::all(),
+        ]);
+    }
+
+    public function start_writing( Request $request){
+        $article = Article::create([
+            "title" => $request->title,
+            "slug" => Str::slug($request->title),
+            "task_status" => 'autopublish',
+            "category_id" => $request->category_id ?? 1, // TODO remove default 1
+            "writer_id" => auth()->user()->id,
+        ]);
+
+
+        ArticleLogJob::dispatchAfterResponse($article, "Article writing by " . auth()->user()->name);
+
+        return redirect()->route("backend.article-edit", ["article" => $article]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

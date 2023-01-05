@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ArticleRequest;
 use App\Jobs\Backend\ArticleLogJob;
 use App\Models\Backend\Article;
+use App\Models\Backend\ArticleLog;
 use App\Models\Seo;
 use App\Services\ImageUpload;
 use Illuminate\Http\Request;
@@ -84,7 +85,7 @@ class ArticleController extends Controller
         // Intervention
         Image::make($file)->resize(450, null, function ($constraint) {
             $constraint->aspectRatio();
-        })->encode('webp', 50)->save(($path));
+        })->encode('webp')->save(($path),50);
 
 
 
@@ -99,6 +100,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $articleLog = ArticleLog::where('article_id',$article->id)->get();
+
         $url = url('/') . '/';
         $articles = Article::whereNotIn('id', [$article->id])
             ->select(DB::raw('title , image, id '))
@@ -127,6 +130,7 @@ class ArticleController extends Controller
             'categories' => \App\Models\Backend\Category::all(),
             'tags' => \App\Models\Backend\Tag::all(),
             'articles' => $articles,
+            'articleLog' => $articleLog
         ]);
     }
 
@@ -139,8 +143,10 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
+
         $message = 'Article saved by ' . auth()->user()->name;
         $published_at = null;
+
 
         if ($request->hasFile('image')) {
             $articleArray = array_merge(
@@ -152,7 +158,7 @@ class ArticleController extends Controller
                 ],
             );
         } else {
-            if (!$article->image && $request['task_status'] === 'submitted') {
+            if (!$article->image && ($request['task_status'] === 'submitted' || $request['task_status'] === 'published')) {
                 return back()->with('error', 'There is no featured image')->withInput();
             }
             $articleArray = collect($request->validated())
@@ -162,7 +168,7 @@ class ArticleController extends Controller
 
         if ($request->task_status == 'submitted') {
             if ($article->editor_id) {
-                $message = 'Article Resubmitted and assign to ' . auth()->user()->name . ' for editing';
+                $message = 'Article Resubmitted and assigned to ' . auth()->user()->name . ' for editing';
             } else {
                 $message = 'Article is submitted and open for editor';
             }
@@ -175,22 +181,40 @@ class ArticleController extends Controller
                 unset($articleArray['published_at']);
             }
         } elseif ($request->task_status == 'modifying') {
-            $message = auth()->user()->name . ' send Article for modification';
+            $message = auth()->user()->name . ' sent Article for modification';
         }
 
         if ($request->task_status == 'submitted' && $article->editor_id) {
             $articleArray['task_status'] = 'editing';
         }
 
-        $article->update(array_filter($articleArray));
-        Seo::where('seoable_id', $request->id)->update([
+
+
+
+        $article->seo()->updateOrCreate(
+            [
+            'seoable_id' => $request->id,
+            'seoable_type' => get_class($article)
+            ],
+            [
             'meta_title' => $request->meta_title ?? '',
             'meta_description' => $request->meta_description ?? '',
             'meta_keywords' => $request->meta_keywords ?? ''
-        ]);
+            ]
+        );
+
+        $article->update(array_filter($articleArray));
+
+        if($article->task_status == 'published'){
+            $schemaObj = getArticleSchema($article);
+            $article->update([
+                'schema' => $schemaObj
+            ]);
+        }
 
         $article->tags()->sync($request->tags);
         if ($message) {
+
             ArticleLogJob::dispatch($article, $message, $request->discussion ?? '');
         }
 

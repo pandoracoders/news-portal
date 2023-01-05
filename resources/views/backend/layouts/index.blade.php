@@ -132,7 +132,6 @@
                             switch (validationName) {
                                 case 'required':
                                     if ($(this).val() == '') {
-                                        console.log('null');
                                         $(this).addClass('is-invalid');
                                         message =
                                             `${name} is required.`;

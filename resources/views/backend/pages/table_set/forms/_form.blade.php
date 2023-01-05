@@ -1,3 +1,19 @@
+@php
+    $parentCategories = [];
+    $childCategories = [];
+    $allCategories = [];
+
+    foreach ($categories as $category){
+        array_push($allCategories, $category);
+        foreach ($categories as $cat){
+            if ($category->id == $cat->parent_id){
+                array_push($parentCategories, $category);
+                break;
+            }
+        }
+    }
+    $writableCategories = array_diff($allCategories, $parentCategories);
+@endphp
 <form class="row g-3" method="POST"
     action="{{ isset($table_set) ? route('backend.table_set-update', ['table_set' => $table_set]) : route('backend.table_set-store') }}"
     enctype="multipart/form-data">
@@ -33,7 +49,7 @@
                             <label class="form-label">Categories *</label>
                             <select name="categories[]" id="categories" class="form-control" multiple="multiple">
                                 <option value="" disabled>Select Category</option>
-                                @foreach ($categories as $category)
+                                @foreach ($writableCategories as $category)
                                     <option
                                         {{ isset($table_set) &&in_array($category->id,$table_set->categories()->pluck('category_id')->toArray())? 'selected=selected': '' }}
                                         value="{{ $category->id }}">{{ $category->title }}

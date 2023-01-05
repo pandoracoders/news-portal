@@ -55,6 +55,8 @@
             };
         });
 
+
+
         const image_upload_handler_callback = (blobInfo, progress) => new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
@@ -102,7 +104,7 @@
         tinymce.init({
             selector: 'textarea.editor',
 
-            plugins: 'readmore preview advlist autolink importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+            plugins: 'readmore preview advlist link importcss searchreplace autosave save directionality code visualblocks visualchars fullscreen image media template codesample table charmap pagebreak nonbreaking anchor insertdatetime lists wordcount help charmap emoticons',
 
             imagetools_cors_hosts: ['picsum.photos'],
             image_caption: true,
@@ -112,7 +114,27 @@
             convert_urls: false,
             menubar: '',
 
-            toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen  preview readmore',
+            toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen table preview readmore',
+
+            link_context_toolbar: true,
+            link_rel_list:[
+                {
+                    title: 'Follow',
+                    value: ''
+                },
+                {
+                    title: 'No Follow',
+                    value: 'nofollow'
+                },
+                {
+                    title: 'Sponsored',
+                    value: 'sponsored'
+                },
+                {
+                    title: 'Combined',
+                    value: 'nofollow sponsored'
+                }
+            ],
 
             toolbar_sticky: true,
             autosave_ask_before_unload: true,
@@ -133,19 +155,19 @@
 
 
             // success color
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 100%; } .readmore{ border: solid 1px #ccc;background-color: #eee; font-size: 17px; font-weight:bold; border-radius:7px; width:35%; color:black; padding: 5px 10px; margin: 10px 0; }',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 95%; } .readmore{ border: solid 1px #ccc;background-color: #eee; font-size: 17px; font-weight:bold; border-radius:7px; width:35%; color:black; padding: 5px 10px; margin: 10px 0; }',
 
 
             importcss_append: true,
 
             template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
             template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-            height: 1000,
+            height: 700,
             image_caption: true,
-            quickbars_selection_toolbar: 'quicklink',
+            quickbars_selection_toolbar: '',
             noneditable_noneditable_class: "mceNonEditable",
             toolbar_mode: 'sliding',
-            contextmenu: "link image imagetools table",
+            contextmenu: "table",
 
         });
     </script>

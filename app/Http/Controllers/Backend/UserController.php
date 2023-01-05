@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\UserRequest;
 use App\Models\Backend\Role;
 use App\Models\Backend\User;
+use App\Services\ImageUpload;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,6 +45,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        if($request->hasFile('avatar')){
+            $request['avatar'] = ImageUpload::upload($request->avatar, "avatar/", str_slug($request->name));
+        }
         $user = User::create(array_filter($request->validated()));
         $user->permission()->updateOrCreate(['role_id' => $request->role_id], ['permissions' => $request->permissions]);
         return redirect()
@@ -75,6 +79,12 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        if($request->hasFile('avatar')){
+            $request['avatar'] = ImageUpload::upload($request->avatar, "avatar/", $user->slug);
+
+        }
+
+
 
         $user->update(array_filter($request->validated()));
         $user->permission()->updateOrCreate(['user_id' => $user->id], ['role_id' => $request->role_id, 'permissions' => $request->permissions]);

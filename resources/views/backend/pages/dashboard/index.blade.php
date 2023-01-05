@@ -21,16 +21,17 @@
         fetch("{{ route('backend.dashboard_table') }}").then(response => response.json()).then(r => {
 
             $("#table-holder").html(r.body);
-            console.log(r.body)
         })
     </script>
 @endpush
 
 
 @section('content')
-    @include("backend.pages.dashboard.components.card")
-    {{-- {{ dd(auth()->user()->role) }} --}}
+{{-- {{ dd(auth()->user()->role) }} --}}
     @if (auth()->user()->role->slug == 'super-admin')
+        @include("backend.pages.dashboard.components.card")
         @include("backend.pages.dashboard.components.stat-table")
+        @else
+        @include("backend.pages.dashboard.components.writers-card")
     @endif
 @endsection

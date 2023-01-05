@@ -25,6 +25,7 @@
                             @endif
                         </div>
 
+
                         <div class="col-12 mb-2 ">
                             <label class="form-label">Email *</label>
                             <input type="text"
@@ -50,7 +51,7 @@
                         </div>
 
                         <div class="col-12 mb-2 ">
-                            <label class="form-label">Alais Name *</label>
+                            <label class="form-label">Alias Name *</label>
                             <input type="text"
                                 class="form-control {{ isset($errors) && $errors->has('alias_name') ? 'is-invalid' : '' }}"
                                 name="alias_name" value="{{ isset($user) ? $user->alias_name : old('alias_name') }}">
@@ -86,6 +87,7 @@
                         </select>
                     </div>
 
+
                     <div class="col-12 mb-2 ">
 
                         <label class="form-label">Permission *</label>
@@ -94,11 +96,17 @@
                             name="permissions[]">
 
                             @foreach ($permissions as $key => $permission)
-                                <option value="{{ $permission }}">
+                                <option {{ isset($user)? (in_array($permission, $user->permission['permissions'] )? "selected":""):"" }} value="{{ $permission }}">
                                     {{ unSlug($permission) }}</option>
                                 </optgroup>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="col-12 mb-2 ">
+
+                        <label class="form-label">Avatar</label>
+
+                        <input type="file" name="avatar" class="form-control">
                     </div>
                 </div>
                 <div class="card">
@@ -147,7 +155,7 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(data) {
-                        console.log(data);
+
                         select2.val(data).trigger('change');
 
                     }
@@ -159,8 +167,8 @@
                 callApi(role_id);
             });
 
-            console.log(select2.val(window.data).trigger('change'));
-            console.log(window.data);
+
+
 
 
         });

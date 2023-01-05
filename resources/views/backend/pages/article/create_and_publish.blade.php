@@ -1,26 +1,186 @@
-@php
+@extends('backend.layouts.index')
 
-    $parentCategories = [];
-    $childCategories = [];
-    $allCategories = [];
 
-    foreach ($categories as $category){
-        array_push($allCategories, $category);
-        foreach ($categories as $cat){
-            if ($category->id == $cat->parent_id){
-                array_push($parentCategories, $category);
-                break;
-            }
-        }
-    }
-    $writableCategories = array_diff($allCategories, $parentCategories);
-@endphp
-<form class="row g-3" method="POST"
+@push('styles')
+    <!--plugins-->
+
+    <link href="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+
+    <link href="{{ asset('backend') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('backend') }}/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ asset('backend/assets/plugins/datetime/jquery.datetimepicker.min.css') }}">
+@endpush
+
+@push('scripts')
+    <!--plugins-->
+    <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+
+    <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend/assets/plugins/datetime/jquery.datetimepicker.full.min.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/xbw872gf05l003xyag73l4fuxlcse5ggqre8dxhqd72fmil6/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.PluginManager.add('readmore', function(editor, url) {
+            var addHtml = function() {
+                editor.insertContent('<div class="readmore"><pre class="">Read More Section</pre></div>');
+            };
+            /* Add a button that opens a window */
+            editor.ui.registry.addButton('readmore', {
+                text: 'Add Read More',
+                class: "btn btn-primary",
+                onAction: function() {
+                    /* Open window */
+                    addHtml();
+                }
+            });
+            /* Adds a menu item, which can then be included in any menu via the menu/menubar configuration */
+            editor.ui.registry.addMenuItem('readmore', {
+                text: 'Read More plugin',
+                onAction: function() {
+                    /* Open window */
+                    addHtml();
+                }
+            });
+            /* Return the metadata for the help plugin */
+            return {
+                getMetadata: function() {
+                    return {
+                        name: 'ReadMore plugin',
+                        url: "{{ url('') }}"
+                    };
+                }
+            };
+        });
+
+
+
+        const image_upload_handler_callback = (blobInfo, progress) => new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '/backend/article/upload-content-image');
+
+            xhr.upload.onprogress = (e) => {
+                progress(e.loaded / e.total * 100);
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 403) {
+                    reject({
+                        message: 'HTTP Error: ' + xhr.status,
+                        remove: true
+                    });
+                    return;
+                }
+
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    reject('HTTP Error: ' + xhr.status);
+                    return;
+                }
+
+                const json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location != 'string') {
+                    reject('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+
+                resolve(json.location);
+            };
+
+            xhr.onerror = () => {
+                reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+            };
+
+            const formData = new FormData();
+            formData.append('file', blobInfo.blob());
+            xhr.send(formData);
+        });
+
+
+
+        tinymce.init({
+            selector: 'textarea.editor',
+
+            plugins: 'readmore preview advlist link importcss searchreplace autosave save directionality code visualblocks visualchars fullscreen image media template codesample table charmap pagebreak nonbreaking anchor insertdatetime lists wordcount help charmap emoticons',
+
+            imagetools_cors_hosts: ['picsum.photos'],
+            image_caption: true,
+
+
+            relative_urls: false,
+            convert_urls: false,
+            menubar: '',
+
+            toolbar: 'blocks code bold italic underline insertfile image media link blockquote alignleft aligncenter alignjustify save numlist bullist charmap fullscreen table preview readmore',
+
+            link_context_toolbar: true,
+            link_rel_list:[
+                {
+                    title: 'Follow',
+                    value: ''
+                },
+                {
+                    title: 'No Follow',
+                    value: 'nofollow'
+                },
+                {
+                    title: 'Sponsored',
+                    value: 'sponsored'
+                },
+                {
+                    title: 'Combined',
+                    value: 'nofollow sponsored'
+                }
+            ],
+
+            toolbar_sticky: true,
+            autosave_ask_before_unload: true,
+            autosave_interval: "5s",
+            autosave_prefix: "{{ route('backend.article-update', $article->id) }}",
+            autosave_restore_when_empty: false,
+            autosave_retention: "5s",
+
+            /* enable title field in the Image dialog*/
+            image_title: true,
+            /* enable automatic uploads of images represented by blob or data URIs*/
+            automatic_uploads: true,
+            images_upload_handler: image_upload_handler_callback,
+
+
+            // file_picker_types: 'image',
+            /* and here's our custom image picker*/
+
+
+            // success color
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px; width: 95%; } .readmore{ border: solid 1px #ccc;background-color: #eee; font-size: 17px; font-weight:bold; border-radius:7px; width:35%; color:black; padding: 5px 10px; margin: 10px 0; }',
+
+
+            importcss_append: true,
+
+            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+            height: 700,
+            image_caption: true,
+            quickbars_selection_toolbar: '',
+            noneditable_noneditable_class: "mceNonEditable",
+            toolbar_mode: 'sliding',
+            contextmenu: "table",
+
+        });
+    </script>
+@endpush
+
+
+@section('content')
+    <form class="row g-3" method="POST"
     action="{{ isset($article) ? route('backend.article-update', ['article' => $article]) : route('backend.article-store') }}"
     enctype="multipart/form-data" id="article_form">
     @csrf
 
-    <input type="hidden" name="task_status" id="task_status">
+
 
     <div class="row">
         @include('error')
@@ -36,7 +196,6 @@
                                 <div class="col-12 mb-2 ">
                                     <label class="form-label">Title *</label>
                                     <input type="text"
-                                        {{ isset($article) ? (auth()->user()->isWriter ? 'readonly=readonly' : '') : '' }}
                                         class="form-control {{ isset($errors) && $errors->has('title') ? 'is-invalid' : '' }}"
                                         name="title" value="{{ old('title') ? old('title') : ( isset($article) ? $article->title : '' ) }}">
                                     @if (isset($errors) && $errors->has('title'))
@@ -68,23 +227,6 @@
                             'meta' => isset($article) ? $article->seo : null,
                         ])
                     </div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="border p-3 rounded mb-2">
-                                        <h6 class="mb-0 text-uppercase">Revisions</h6>
-                                        <hr>
-                                        @foreach ($articleLog as $ar)
-                                            <p>
-                                                <a style="color:#008d7e; font-weight:500; font-size:16px;" href="{{ route('backend.article-revisions', $ar->id) }}">{{ $ar->action }} </a>-&nbsp;<span style="color: #37be2d; font-weight:500; font-size:15px;">{{ $ar->log_at }}</span>
-                                            </p>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -96,41 +238,15 @@
                             <h6 class="mb-0 text-uppercase">Action</h6>
                             <hr>
 
-
-                            @if ($article->discussions)
-                                <a data-bs-toggle="modal" href="#discussion-model" class="back-to-top"
-                                    style="display: inline; bottom:120px; background-color: #de001e">
-                                    <i class="bi bi-chat-dots"></i>
-                                </a>
-                            @endif
-
-                            {{-- <a href="javaScript:;" class="back-to-top save-post" style="display: inline;">
-                                <small style="font-size:14px">Save </small>
-                            </a> --}}
-
                             <button type="submit" class="btn btn-primary btn-block form-submit" id="save">
                                 {{ isset($article) ? 'Update' : 'Save' }}
                             </button>
-                            @if ($article->task_status == 'writing' || $article->task_status == 'modifying' )
-                                <button type="button" class="btn btn-success btn-block form-submit" id="submit">
-                                    Submit
-                                </button>
-                            @elseif($article->task_status == 'autopublish')
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#publish-article">
-                                    Publish
-                                </button>
-                            @elseif(auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#publish-article">
-                                    Publish
-                                </button>
 
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modify-article">
-                                    Modify
-                                </button>
-                            @endif
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#publish-article">
+                                Publish
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -140,9 +256,9 @@
                 <label class="form-label mx-2">Category *</label>
                 <select name="category_id" class="form-control">
                     <option value="" disabled>Select Category</option>
-                    @foreach ($writableCategories as $category)
+                    @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
-                            {{ isset($article_title) && $article_title->category_id == $category->id ? 'selected' : '' }}>
+                            {{ isset($article) && $article->category_id == $category->id ? 'selected' : '' }}>
                             {{ $category->title }}
                         </option>
                     @endforeach
@@ -173,7 +289,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <img height="150" width="300" id="preview-image"
-                                    src="{{ isset($article) ? asset('/uploads/medium/'.$article->image) : '' }}" class="img-fluid"
+                                    src="{{ isset($article) ? asset($article->image) : '' }}" class="img-fluid"
                                     alt="">
                             </div>
                         </div>
@@ -214,7 +330,7 @@
     </div>
     </div>
 
-    @if (auth()->user()->role->slug != 'writer' && $article->task_status == 'editing' || in_array('autopublish', auth()->user()->permission['permissions']))
+    @if (auth()->user()->role->slug != 'writer' && $article->task_status == 'editing')
         <div class="modal fade" id="modify-article" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -463,17 +579,17 @@
             </div>
         </div>
     </div>
-</form>
+    </form>
 
-@push('styles')
+    @push('styles')
     <style>
         .image-parent {
             max-width: 40px;
         }
     </style>
-@endpush
+    @endpush
 
-@push('scripts')
+    @push('scripts')
     <script>
         $(document).ready(function() {
             $(document).on("click", ".save-post", function() {
@@ -500,10 +616,10 @@
             })
         })
     </script>
-@endpush
+    @endpush
 
 
-@push('scripts')
+    @push('scripts')
     <script>
         $(document).ready(function() {
             if (window) {
@@ -635,4 +751,6 @@
             $temp.remove();
         })
     </script>
-@endpush
+    @endpush
+
+@endsection
