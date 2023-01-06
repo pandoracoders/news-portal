@@ -50,7 +50,7 @@ Route::post('author/{author:slug}', [FrontendController::class, 'authorArticles'
 
 Route::get('author/{author:slug}', [FrontendController::class, 'authorArticle'])->name('authorArticle');
 
-Route::get('/news/search/{field}/{value}', [FrontendController::class, 'searchByTableField'])->name('news.search');
+Route::get('/news/search/{field}/{value}', [FrontendController::class, 'searchByTableField'])->name('facts.search');
 
 Route::redirect('/backend', 'dashboard', 301)->middleware('auth');
 

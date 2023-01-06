@@ -210,7 +210,7 @@ function getTableFieldArray($field, $value = null)
             'type' => $field->type,
             'value' => $value,
             'searchable' => $field->searchable,
-            'html' => $value && $field->searchable ? "<a href='" . route('news.search', ['field' => $slug . '-month', 'value' => str_slug($month_day)]) . "'>" . $month_day . '</a>, ' . "<a href='" . route('news.search', ['field' => $slug . '-year', 'value' => str_slug($year)]) . "'>" . $year . '</a>' : $value,
+            'html' => $value && $field->searchable ? "<a href='" . route('facts.search', ['field' => $slug . '-month', 'value' => str_slug($month_day)]) . "'>" . $month_day . '</a>, ' . "<a href='" . route('facts.search', ['field' => $slug . '-year', 'value' => str_slug($year)]) . "'>" . $year . '</a>' : $value,
         ];
     } else {
         return [
@@ -218,7 +218,7 @@ function getTableFieldArray($field, $value = null)
             'type' => $field->type,
             'value' => $value,
             'searchable' => $field->searchable,
-            'html' => $value && $field->searchable ? "<a href='" . route('news.search', ['field' => str_slug($field->title), 'value' => str_slug($value)]) . "'>" . $value . '</a>' : $value,
+            'html' => $value && $field->searchable ? "<a href='" . route('facts.search', ['field' => str_slug($field->title), 'value' => str_slug($value)]) . "'>" . $value . '</a>' : $value,
         ];
     }
 }
