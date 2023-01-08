@@ -4,6 +4,8 @@
 /public/frontend/images
 /public/storage
 /public/uploads
+/public/branding
+/public/avatar
 /storage/*.key
 /vendor
 
