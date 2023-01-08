@@ -203,14 +203,19 @@ class ArticleController extends Controller
             ]
         );
 
+
+
         $article->update(array_filter($articleArray));
 
         if($article->task_status == 'published'){
+
             $schemaObj = getArticleSchema($article);
             $article->update([
-                'schema' => $schemaObj
+               "schema" => $schemaObj
             ]);
         }
+
+
 
         $article->tags()->sync($request->tags);
         if ($message) {
@@ -321,5 +326,14 @@ class ArticleController extends Controller
 
         // dd($article );
         return back()->with('success', "Article " . $article->editor_choice ? 'added to' : 'removed from' . " editor choice list");
+    }
+
+    public function revisions($revision_article){
+        $articleLog = ArticleLog::where('id', $revision_article)->first();
+        $prevLog = ArticleLog::where('article_id', $articleLog->article_id)->where('id', "<", $revision_article)->orderBy('id','desc')->first();
+        return view($this->path . 'revisions', [
+            'articleLog' => $articleLog,
+            'previous' => $prevLog
+        ]);
     }
 }

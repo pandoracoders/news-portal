@@ -6,7 +6,7 @@
                     <h6 class="mb-0 text-uppercase">Meta Data</h6>
                     <hr>
                     <div class="col-12">
-                        <label class="form-label">Meta Ttile</label>
+                        <label class="form-label">Meta Title</label>
                         <input data-validation="required"  type="text"
                             class="form-control {{ isset($errors) && $errors->has('meta_title') ? 'is-invalid' : '' }}"
                             name="meta_title"
@@ -30,7 +30,7 @@
                     </div>
                     {{-- {{ $meta->meta_keywords }} --}}
                     <div class="col-12 mt-2">
-                        <label class="form-label">Meta Kewords</label>
+                        <label class="form-label">Meta Keywords</label>
                         <input type="text"
                             class="form-control {{ isset($errors) && $errors->has('meta_keywords') ? 'is-invalid' : '' }}"
                             data-role="tagsinput" name="meta_keywords" value="{{ old('meta_keywords') ? old('meta_keywords') :  (isset($meta) ? $meta->meta_keywords : '' ) }}" >

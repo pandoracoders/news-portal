@@ -41,7 +41,7 @@ class ArticleLogJob implements ShouldQueue
             "action" => $this->action,
             "task_status" => $this->article->task_status,
             "log_at"=> carbon(),
-            "article" => Article::with(["category", "tags"])->find($this->article->id),
+            "article" => Article::where("id",$this->article->id)->with("category")->select("title","slug","body","category_id")->first(),
             "discussion" => $this->discussion
         ]);
     }

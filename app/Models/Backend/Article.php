@@ -19,14 +19,14 @@ class Article extends Model
     use HasFactory, SeoTrait;
 
 
-    protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables', "is_featured", "editor_choice"];
+    protected $fillable = ['title', 'slug', 'summary', 'body', 'image', 'category_id', 'writer_id', 'editor_id', 'published_at', 'status', 'task_status', 'tables', "is_featured", "editor_choice","schema"];
 
     protected $casts = [
         'tables' => 'array',
         'published_at' => 'datetime',
     ];
 
-    protected $hidden = ['body', 'created_at', 'updated_at', 'deleted_at', 'published_at', 'status', 'task_status', 'tables', 'editor_id'];
+    protected $hidden = [ 'created_at', 'updated_at', 'deleted_at', 'published_at', 'status', 'task_status', 'tables', 'editor_id'];
 
     public function category()
     {

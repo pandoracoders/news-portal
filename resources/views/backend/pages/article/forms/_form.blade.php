@@ -173,7 +173,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <img height="150" width="300" id="preview-image"
-                                    src="{{ isset($article) ? asset('/uploads/medium/'.$article->image) : '' }}" class="img-fluid"
+                                    src="{{ isset($article) ? asset($article->image) : '' }}" class="img-fluid"
                                     alt="">
                             </div>
                         </div>

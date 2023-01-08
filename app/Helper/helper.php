@@ -263,3 +263,70 @@ if (!function_exists('articleTag')) {
         return $tags;
     }
 }
+
+// Age Calculation
+
+function age($birthYear, $birthMonth=null, $birthDay=null, $deathYear=null, $deathMonth=null, $deathDay=null){
+    $months = ['January'=>1, 'February'=>2,'March'=>3,'April'=>4,'May'=>5,'June'=>6,'July'=>7,'August'=>'8','September'=>9,'October'=>10,'November'=>11,'December'=>12 ];
+
+    if (!$deathYear) {
+        $day = carbon()->format('d');
+        $month = carbon()->format('F');
+        $year = carbon()->format('Y');
+
+
+        if(!$birthMonth){
+            return $year - $birthYear;
+        }
+
+        else if($birthMonth && $months[$month] - $months[$birthMonth] > 0){
+            return $year - $birthYear;
+        }
+        else if($birthMonth && $months[$month] - $months[$birthMonth] == 0){
+            if($birthDay){
+                if((int)$day - (int)$birthDay >= 0){
+                    return $year - $birthYear;
+                }
+                else{
+                    return $year - ($birthYear+1);
+                }
+            }
+            else{
+                return $year - $birthYear;
+            }
+        }
+        else{
+            return $year - ($birthYear +1);
+        }
+    }else{
+
+        if(!$deathMonth && !$birthMonth){
+            return $deathYear - $birthYear;
+        }
+
+        if($deathMonth && $months[$deathMonth] - $months[$birthMonth] > 0){
+            return $deathYear - $birthYear;
+        }
+        else if($deathMonth && $months[$deathMonth] - $months[$birthMonth] == 0){
+            if($deathDay){
+                if((int)$deathDay - (int)$birthDay >= 0){
+                    return $deathYear - $birthYear;
+                }
+                else{
+                    return $deathYear - ($birthYear+1);
+                }
+            }
+            else{
+                return $deathYear - $birthYear;
+            }
+        }
+        else if($deathMonth && $months[$deathMonth] - $months[$birthMonth] < 0){
+            return $deathYear - ($birthYear +1);
+        }
+
+
+    }
+
+
+
+}
