@@ -5,6 +5,7 @@
 
 				.instagram-media {
 								margin: 0 auto !important;
+
 				}
 
 				.content-detail a,
@@ -65,14 +66,24 @@
 								object-position: top
 				}
 
+                @media(min-width:520px) and (max-width: 820px){
+                    .biography .main-content-section .left-section .featured-image img {
+                        border-radius: 5px;
+                        min-height: 400px;
+                        width: 100%;
+                        object-fit: cover;
+                        object-position: top
+                    }
+                }
+
 				@media(min-width:825px) {
-								.biography .main-content-section .left-section .featured-image img {
-												border-radius: 5px;
-												height: 300px;
-												width: 100%;
-												object-fit: cover;
-												object-position: top
-								}
+                    .biography .main-content-section .left-section .featured-image img {
+                                    border-radius: 5px;
+                                    height: 300px;
+                                    width: 100%;
+                                    object-fit: cover;
+                                    object-position: top
+                    }
 				}
 
 				.biography .main-content-section .left-section .facts .fact-title {
@@ -91,7 +102,7 @@
 				}
 
 				.content-detail figure {
-								max-width: 470px;
+								max-width: 80%;
 								display: block;
 								margin: 10px auto;
 								text-align: center;
@@ -99,6 +110,13 @@
 								padding: 10px;
 								border-radius: 5px
 				}
+
+                @media(max-width:525px){
+                    .content-detail figure {
+                                    width: 100%;
+                                    margin: 10px 0px;
+                                }
+                }
 
 				.content-detail h2,
 				.content-detail h3,
@@ -181,15 +199,16 @@
 								font-size: .85rem;
 								font-weight: 300;
 								margin: auto;
-								max-width: 450px;
+								width: 95%;
 								text-align: left;
 								font-style: italic
 				}
 
 				.biography .main-content-section .right-section .content-detail img {
-								max-width: 100%;
-								height: auto;
-								margin: auto
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    object-position: top;
 				}
 
 				.social-share {
@@ -218,6 +237,8 @@
 												margin-right: 0
 								}
 				}
+
+
 
 				.social-share .facebook {
 								color: #2374e1
@@ -399,6 +420,14 @@
 								font-size: .7rem
 				}
 
+                .readmore-container{
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    margin: 0px 0px 15px 0px;
+                    padding: 10px;
+                    background: #e9f8fa;
+                }
+
 				.readmore-title,
 				.readmore-title a,
 				.readmore-title a:visited {
@@ -412,15 +441,24 @@
 				}
 
                 .readmore-title{
-                    display: -webkit-box;
-                    overflow: hidden;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical
+                    margin:0px;
+                    padding: 0px;
                 }
 				.readmore-text {
-								margin-left: 8px;
-								font-size: 22px;
-								font-weight: 700;
-								color: #c41111
+                    margin-left: 2px;
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: #c41111;
 				}
+
+                .readmore-image{
+                    display:flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    margin-bottom:10px;
+                }
+                .readmore-image-img{
+                    width: 190px !important;
+                    height: 120px !important;
+                }
 </style>

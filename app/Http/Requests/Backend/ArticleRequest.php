@@ -30,7 +30,8 @@ class ArticleRequest extends FormRequest
 
             'summary' => 'nullable|string|',
             'body' => 'nullable|string',
-            // 'image' => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            'featured_image_alt_text'=>'nullable|string',
+            'image' => "nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             'category_id' => 'nullable|exists:categories,id',
             'writer_id' => 'nullable|exists:users,id',
             'editor_id' => 'nullable|exists:users,id',

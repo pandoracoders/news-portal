@@ -2,10 +2,10 @@
 				const tblOfContents = document.querySelector(".table-of-contents");
 				document.getElementById("collapse-btn").addEventListener("click", function() {
 								"true" == this.getAttribute("aria-expanded") ? (this.setAttribute("aria-expanded", "false"), this.classList
-                                .add("collapsed"), document.getElementById("collapseOne").classList.remove("show"), tblOfContents
-                                .classList.remove("content-height")) : (this.setAttribute("aria-expanded", "true"), this.classList
-                                .remove("collapsed"), document.getElementById("collapseOne").classList.add("show"), tblOfContents
-                                .classList.add("content-height"))
+												.add("collapsed"), document.getElementById("collapseOne").classList.remove("show"), tblOfContents
+												.classList.remove("content-height")) : (this.setAttribute("aria-expanded", "true"), this.classList
+												.remove("collapsed"), document.getElementById("collapseOne").classList.add("show"), tblOfContents
+												.classList.add("content-height"))
 				});
 				var headingList = document.querySelector(".content-detail").querySelectorAll(["h2","h3"]),
 								contentSection = document.querySelector(".list");
@@ -34,13 +34,13 @@
 				} else if ("h6" == headingList[i].localName) {
 								var e = string_to_slug(headingList[i].innerText);
 								contentSection.innerHTML += `<li class="head-6"><a href="#${e}">${headingList[i].innerText}</a></li>`, headingList[
-												i].id = `${e}`
+                                i].id = `${e}`
 				}
 				setTimeout(() => {
 								fetch("{{ route('ajax.youMayAlsoLike', $article->id) }}").then(e => e.json()).then(e => {
-												document.querySelector(".sidebar-section-wrap").innerHTML = e.data.youMayAlsoLike
+                                    document.querySelector(".sidebar-section-wrap").innerHTML = e.data.youMayAlsoLike
 								}).catch(e => {
-												console.log(e)
+                                    console.log(e)
 								})
 				}, 7e3);
 				var page = 1,
@@ -105,4 +105,6 @@
 								var firstScriptTag = document.getElementsByTagName('script')[0];
 								firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 				}
+
+
 </script>

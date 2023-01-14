@@ -2,7 +2,11 @@
 
 return [
     "enable_2fa" => false,
-    "article_limit" => 6,
+    "article_limit" => 8,
+    "homepage_categories" =>[
+        'wiki-bio',
+        'married',
+    ],
     "task_status" => [
         "writing",
         "submitted",

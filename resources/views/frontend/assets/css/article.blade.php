@@ -39,6 +39,8 @@
 												width: 100%;
 												height: 250px
 								}
+
+
 				}
 
 				@media(min-width:825px) {
@@ -65,18 +67,24 @@
 				}
 
 				.content-detail figure {
-								max-width: 470px;
+								width: 80%;
+                                margin: 10px auto;
 								display: block;
-								margin: 10px auto;
 								text-align: center;
 								border: 1px solid #ddd8d8;
 								padding: 10px;
-								border-radius: 5px
+								border-radius: 5px;
 				}
 
+                @media(max-width:525px){
+                    .content-detail figure {
+                                    width: 100%;
+                                    margin: 10px 0px;
+                                }
+                }
+
 				.content-detail figure.image img {
-								max-width: 100%;
-								min-width: 100%
+                    width: 100%;
 				}
 
 				.content-detail figure figcaption {
@@ -84,14 +92,20 @@
 								font-size: .85rem;
 								font-weight: 300;
 								margin: auto;
-								max-width: 450px;
+								width: 95%;
 								text-align: center;
 								font-style: italic
 				}
 
+                .html5-video-player{
+                    height: 450px;
+                }
+
 				.content-detail img {
-								max-width: 100%;
-								height: auto
+								width: 100%;
+								height: auto;
+                                object-fit: cover;
+                                object-position: top
 				}
 
 				.content-detail {
@@ -426,6 +440,14 @@
 								font-weight: 600
 				}
 
+				.readmore-container{
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    margin: 0px 0px 15px 0px;
+                    padding: 10px;
+                    background: #e9f8fa;
+                }
+
 				.readmore-title,
 				.readmore-title a,
 				.readmore-title a:visited {
@@ -439,16 +461,24 @@
 				}
 
                 .readmore-title{
-                    display: -webkit-box;
-                    overflow: hidden;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical
+                    margin:0px;
+                    padding: 0px;
                 }
-
 				.readmore-text {
-								margin-left: 8px;
-								font-size: 22px;
-								font-weight: 700;
-								color: #c41111
+                    margin-left: 2px;
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: #c41111;
 				}
+
+                .readmore-image{
+                    display:flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    margin-bottom:10px;
+                }
+                .readmore-image-img{
+                    width: 190px !important;
+                    height: 120px !important;
+                }
 </style>

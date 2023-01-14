@@ -10,7 +10,9 @@
     @include('frontend.assets.css.category_min')
 @endpush
 
-
+@push('schema')
+    {!! $schema !!}
+@endpush
 
 @section('content')
     <main class="container">

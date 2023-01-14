@@ -26,11 +26,18 @@ class FrontendController extends Controller
 
     public function search(Request $request)
     {
+        $articles = Article::activeAndPublish()->where("title", "like", "%" . $request->q . "%")
+                ->limit(15)
+                ->get();
+        if(count($articles) < 15){
+            $n = 15 - count($articles);
+            $ids = $articles->pluck('id')->toArray();
+            $subArticles = Article::activeAndPublish()->where('body','like','%'.$request->q.'%')->whereNotIn('id',$ids)->limit($n)->get();
+        }
         return view("frontend.pages.search.index", [
-            "article" => Article::activeAndPublish()->where("title", "like", "%" . $request->query . "%")
-                ->orWhere("body", "like", "%" . $request->query . "%")
-                ->limit(8)
-                ->get(),
+            "search_for" => $request->q,
+            "articles" => $articles,
+            "subArticles" => $subArticles
         ]);
     }
 
@@ -50,6 +57,7 @@ class FrontendController extends Controller
         if ($category) {
             return view("frontend.pages.category.index", [
                 "category" => $category,
+                "schema" => getCategorySchema($category)
             ]);
         }
 
@@ -61,6 +69,7 @@ class FrontendController extends Controller
         if ($tag) {
             return view("frontend.pages.tag.index", [
                 "tag" => $tag,
+                "schema" => getTagSchema($tag)
             ]);
         } else {
             return abort(404);
@@ -125,14 +134,32 @@ class FrontendController extends Controller
 
     public function searchByTableField($field, $value)
     {
+        $limit = 12;
+        $today = explode("-",$value);
+        if($field == 'birth' || $field == 'death'){
+            $articles = Article::activeAndPublish()
+            ->with(['category', 'writer'])
+            ->where('task_status', 'published')
+            ->where("tables->quick-facts->$field-month->value", ucfirst($today[0]))
+            ->where("tables->quick-facts->$field-day->value", $today[1])
+            ->limit(config('constants.article_limit', 8))
+            ->get();
+            return view('frontend.pages.table-search.index',[
+                'articles' => $articles,
+                'field' => "$field-day",
+                'value' => $today[0].' '.$today[1]
+            ]);
+        }
 
-        $limit = 9;
+
+
         $page = request()->get("page", 1);
         if (request()->ajax()) {
             $articles = Article::searchJson($field, $value)->activeAndPublish()
                 ->limit($limit)->offset(($page) * $limit)->get();
             return response()->json(ArticleResource::collection($articles), 200);
         }
+
         return view("frontend.pages.table-search.index", [
             "field" => $field,
             "value" => $value,

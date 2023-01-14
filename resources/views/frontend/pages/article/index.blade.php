@@ -7,7 +7,9 @@
 ])
 
 
-
+@push('schema')
+    {!! $article->schema !!}
+@endpush
 
 @push('head')
     <meta name="article:author" content="{{ $article->author->alias_name }}">

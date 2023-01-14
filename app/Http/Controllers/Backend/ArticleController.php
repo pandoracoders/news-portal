@@ -143,7 +143,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, Article $article)
     {
-
+        
         $message = 'Article saved by ' . auth()->user()->name;
         $published_at = null;
 

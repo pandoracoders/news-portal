@@ -122,7 +122,7 @@
 
 				.instagram-media,
 				.twitter-tweet {
-								margin: auto !important
+								margin: auto !important;
 				}
 
 				.meta,
@@ -134,8 +134,9 @@
 
 				.adver img,
 				iframe {
-								width: 100%
-				}
+                    width: 100%;
+                }
+
 
 				html {
 								font-size: 100%;
@@ -1182,8 +1183,25 @@
 
 				header .navbar .navbar-brand img {
 								width: 130px;
-								height: auto
+								height: 40px;
+                                margin-top:10px;
 				}
+
+                @media(max-width: 500px){
+                    header .navbar .navbar-brand img {
+                        width: 130px;
+                        height: 45px;
+                        margin-top:5px;
+				    }
+                }
+
+                @media(min-width: 505px) and (max-width: 820px){
+                    header .navbar .navbar-brand img {
+                        width: 130px;
+                        height: 40px;
+                        margin-top: 10px;
+				    }
+                }
 
 				header .navbar .navbar-nav .nav-item {
 								padding: 0 .5rem

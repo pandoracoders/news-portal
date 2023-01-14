@@ -4,7 +4,9 @@
     @include('frontend.assets.css.splide') --}}
      @include('frontend.assets.css.homepage_min')
 @endpush
-
+@push('schema')
+    {!! getSettingValue('org_schema') !!}
+@endpush
 
 @push('scripts')
     @include('frontend.assets.js.splide')
@@ -20,17 +22,30 @@
             @include('frontend.pages.home.components.slider')
         @endif
 
-        @foreach ($data['category_section'] as $key => $section)
-            @include('frontend.pages.home.components.category-section', [
-                'section' => $section,
+        @if($data['born_today']->count()>0)
+            @include('frontend.pages.home.components.born-today', [
+                'born_today' => $data['born_today']
             ])
-        @endforeach
-        <div id="more-category-section">
-        </div>
+        @endif
 
-        <section id="born-today">
-        </section>
-        <section id="died-today">
-        </section>
+        @if($data['died_today']->count()>0)
+            @include('frontend.pages.home.components.died-today', [
+                'died_today' => $data['died_today']
+            ])
+        @endif
+
+        @include('frontend.pages.home.components.first-section', [
+            'section' => $data['category_articles'][0],
+            'second' => $data['editor_choice']
+
+        ])
+
+        @foreach ($data['category_articles'] as $section)
+            @if ($loop->iteration > 1)
+                @include('frontend.pages.home.components.category-section', [
+                    'section' => $section,
+                ])
+            @endif
+        @endforeach
     </main>
 @endsection

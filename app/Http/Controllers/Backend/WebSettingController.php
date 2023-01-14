@@ -101,9 +101,9 @@ class WebSettingController extends Controller
 
         foreach ($validated as $key => $value) {
             $old =
-                WebSetting::where('key', $key)
-                    ->where('type', request()->type)
-                    ->first() ?? new WebSetting();
+            WebSetting::where('key', $key)
+            ->where('type', request()->type)
+            ->first() ?? new WebSetting();
             if ($value) {
                 $old->fill([
                     'key' => $key,

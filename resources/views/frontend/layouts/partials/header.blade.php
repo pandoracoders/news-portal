@@ -155,7 +155,6 @@
                 </div>
 
         </div>
-
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass" id="search-label"></i>
                 <div id="search-container">

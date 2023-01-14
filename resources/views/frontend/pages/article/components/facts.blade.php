@@ -54,7 +54,7 @@
 
                                                     </a>
 
-                                                    @elseif (!isset($articleTable['birth-day']) && isset($articleTable['birth-month']))
+                                                @elseif (!isset($articleTable['birth-day']) && isset($articleTable['birth-month']))
 
                                                     <a style="color: #4da7df" href="{{ route('facts.search', [$factsFields, $articleTable[$factsFields]['value']]) }}">
                                                         {{ $articleTable['birth-month']['value']}}
@@ -67,8 +67,6 @@
                                                        {{ $articleTable['birth-year']['value']}}
                                                     </a>
                                                 @endif
-
-
                                             @else
 
                                                 {{ $articleTable['birth-month']['value'] }}&nbsp;{{ $articleTable['birth-day']['value'] }},&nbsp;{{ $articleTable['birth-year']['value'] }}

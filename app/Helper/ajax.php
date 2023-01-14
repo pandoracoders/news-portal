@@ -89,72 +89,29 @@ if(!function_exists('getMoreArticles')){
 if (!function_exists('getHomePageAjax')) {
     function getHomePageAjax()
     {
-        $ids = [];
-        $just_published = Article::activeAndPublish()
-            ->with(['category', 'writer'])
-            ->where('task_status', 'published')
-            ->limit(config('constants.article_limit', 8))
-            ->whereNotIn('id', $ids)
-            ->get();
-
-        $ids = array_merge($ids, $just_published->pluck('id')->toArray());
-
-        $category_section = [];
-
-        foreach (Category::where('id', 2)
-            ->where('status', 1)
-            ->get()
-            as $key => $category) {
-            $section['category'] = $category;
-
-            $articles1 = $category
-                ->articles()
-                ->with(['category', 'writer'])
-                ->where('task_status', 'published')
-                ->limit(config('constants.article_limit', 7))
-                ->whereNotIn('id', $ids)
-                ->get();
-
-            $ids = array_merge($ids, $articles1->pluck('id')->toArray());
-
-            $articles2 = $category
-                ->articles()
-                ->with(['category', 'writer'])
-                ->where('task_status', 'published')
-                ->limit(2)
-                ->whereNotIn('id', $ids)
-                ->get();
-            $ids = array_merge($ids, $articles2->pluck('id')->toArray());
-
-            $section['articles'] = [$articles1, $articles2];
-
-            $section['second']['title'] = 'Just Published';
-            $section['second']['articles'] = $just_published;
-        }
-
-        $category_section_html = view('frontend.pages.home.components.category-section', compact('section'))->render();
-
-        $today = carbon()->format('M d');
+        $today = explode(" ",carbon()->format('F d'));
         return [
-            'category_section_html' => $category_section_html,
             'born_today' => view('frontend.pages.home.components.born-today', [
                 'born_today' => Article::activeAndPublish()
-                    ->with(['category', 'writer'])
-                    ->where('task_status', 'published')
-                    ->where('tables->Quick Facts->birthday->value', 'LIKE', "%$today%")
-                    ->limit(config('constants.article_limit', 8))
-                    ->get(),
+                ->with(['category', 'writer'])
+                ->where('task_status', 'published')
+                ->where('tables->quick-facts->birth-month->value', '=', $today[0])
+                ->where('tables->quick-facts->birth-day->value', '=', (int)$today[1])
+                ->limit(config('constants.article_limit', 8))
+                ->get(),
             ])->render(),
             'died_today' => view('frontend.pages.home.components.died-today', [
                 'died_today' => Article::activeAndPublish()
-                    ->with(['category', 'writer'])
-                    ->where('task_status', 'published')
-                    ->where('tables->Quick Facts->death_day->value', 'LIKE', "%$today%")
-                    ->limit(config('constants.article_limit', 8))
-                    ->get(),
+                ->with(['category', 'writer'])
+                ->where('task_status', 'published')
+                ->where('tables->quick-facts->death-month->value', '=', $today[0])
+                ->where('tables->quick-facts->death-day->value', '=', (int)$today[1])
+                ->limit(config('constants.article_limit', 8))
+                ->get(),
             ])->render(),
         ];
     }
+
 }
 
 
